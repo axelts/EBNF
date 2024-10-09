@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: A: The Practice Page</title -->
+	<title>A: The Practice Page</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>A: The Practice Page</h2>
+</header>
+
+<article>
+    <h4 id="the-model">The Model</h4>
+<h4 id="scripting-and-buttons-explained">Scripting and Buttons Explained</h4>
+<hr>
+<p>Execution of the examples in this book is implemented as a
+<a href="module-Practice-Model.html">model</a>
+which represents the state of an example
+and manipulates it,
+e.g., by using the parser generators
+or executing a function produced by
+<a href="module-Base.html#~Action">action methods</a>.</p>
+<p>The model can be controlled by
+scripting with a <a href="https://nodejs.org/en" title="Node.js">Node.js</a> <a href="module-Script.html">program</a>
+or through the graphical interface in the <a href="../?mode=ebnf">Practice Page</a>.</p>
+<h3 id="scripting">Scripting</h3>
+<p><a href="script.js.html"><code>script.js</code></a> is a
+<a href="https://nodejs.org/en" title="Node.js">Node.js</a>
+module which reads command words from standard input, separated by white space,
+and applies them to a current <a href="module-Practice-Model.html"><code>Model</code></a>.
+As such the code of this script illustrates
+how the <a href="module-EBNF.html">EBNF</a> and <a href="module-BNF.html">BNF</a>
+modules are used as parser generators.
+For example</p>
+<pre class="prettyprint source"><code> $ node script.js &lt;&lt; 'end'
+   model eg/02/11.eg       new parse   stack new parse
+   ebnf  tests/02-11a.eg   new parse   stack new parse
+end
+</code></pre>
+<p>creates a <a href="module-Practice-Model.html"><code>Model</code></a>,
+loads the initial texts from an example file,
+represents and checks the grammar and performs syntax analysis
+first with the <a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a> generator implemented by <a href="module-EBNF.html">EBNF</a>
+and next with the <a href="https://en.wikipedia.org/wiki/Simple_LR_parser" title="SLR parser">SLR(1)</a> generator implemented by <a href="module-BNF.html">BNF</a>,
+overwrites some texts using a different file,
+and performs syntax analysis with each generator again.</p>
+<p>The command words have the following effects:</p>
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model</code></td>
+<td>resets all flags and variables</td>
+</tr>
+<tr>
+<td><code>load</code></td>
+<td>resets global strings</td>
+</tr>
+<tr>
+<td><code>ebnf</code>, <code>stack</code>, and <code>bnf</code></td>
+<td>clear all flags and select a parser generator</td>
+</tr>
+<tr>
+<td><code>ebnf</code></td>
+<td>clears all flags and selects the <a href="module-EBNF.html">LL(1) generator</a></td>
+</tr>
+<tr>
+<td><code>greedy</code></td>
+<td>toggles a flag to use the <code>expect()</code> rather than <code>check()</code> algorithm</td>
+</tr>
+<tr>
+<td><code>shallow</code>, <code>deep</code>, and <code>follow</code></td>
+<td>toggle flags to trace the corresponding algorithms</td>
+</tr>
+<tr>
+<td><code>lookahead</code>, <code>parser</code>, and <code>actions</code></td>
+<td>toggle flags to trace the corresponding operations</td>
+</tr>
+<tr>
+<td><code>noargs</code></td>
+<td>toggles a flag to suppress argument count checking for actions</td>
+</tr>
+<tr>
+<td><code>stack</code></td>
+<td>clears all flags and selects the <a href="module-BNF.html">SLR(1) generator</a> <br> using translation from EBNF</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>toggles a flag to insert <code>$error</code> when translating from EBNF</td>
+</tr>
+<tr>
+<td><code>sets</code> and <code>states</code></td>
+<td>toggle flags to add information to the grammar description</td>
+</tr>
+<tr>
+<td><code>bnf</code></td>
+<td>clears all flags and selects the <a href="module-BNF.html">SLR(1) generator</a> <br> using strict BNF</td>
+</tr>
+<tr>
+<td><code>build</code></td>
+<td>toggles a flag to create lists when parsing with the <a href="module-BNF.html">SLR(1) generator</a></td>
+</tr>
+<tr>
+<td><code>new</code></td>
+<td>represents and checks the grammar</td>
+</tr>
+<tr>
+<td><code>scan</code></td>
+<td>performs lexical analysis on the program</td>
+</tr>
+<tr>
+<td><code>parse</code></td>
+<td>performs syntax analysis on the program, calling actions if any</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td>runs the executable, if any</td>
+</tr>
+<tr>
+<td><code>1</code>, <code>10</code>, and <code>100</code></td>
+<td>execute a number of instructions in a stack machine, if any</td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>terminates the script</td>
+</tr>
+</tbody>
+</table>
+<p>Any other word is interpreted as a path to a file from which to load texts.
+<a id='file-format'></a>
+In the file each text is preceded by <code>%%</code> and one of the names
+<code>actions</code>, <code>grammar</code>, <code>output</code>, <code>program</code>, or <code>tokens</code>, enclosed in white space,
+to overwrite the corresponding global string.</p>
+<h2 id="graphical-user-interface">Graphical User Interface</h2>
+<p>The <a href="../?mode=ebnf">Practice Page</a> contains resizable text areas
+which contain grammar rules in the <span class='a-grammar'></span>,
+token definitions as object properties defined in JavaScript
+in the <span class='a-tokens'></span>,
+optionally a class or an object with <a href="module-Base.html#~Action">action methods</a>
+defined in JavaScript in the <span class='a-actions'></span>,
+program text in the <span class='a-program'></span>,
+and output from the model.
+The page also contains buttons which are functionally equivalent
+to most of the <a href="#scripting">scripting</a> command words described above.</p>
+<p>Each text area can be resized by dragging the bottom right corner,
+and all but the output area can be maximized relative to the others
+by clicking on the label near the top right of an area;
+shift-click restores the original layout.</p>
+<p>An alt-, meta-, or command-click on the label of a non-empty text area
+opens a pop-up window containing the text,
+with syntax highlighting by <a href="https://sunlightjs.com" title="Sunlight highlighting">Sunlight</a> for the tokens and actions areas.</p>
+<p>Text in the output area at the bottom can be selected and copied.
+All other text areas can be edited
+and their content is available in <a href="#globals">global variables</a> for programming.</p>
+<p>Button states are reflected in their background color,
+where white indicates that a condition is not set
+or that a function cannot be executed yet.
+Buttons are inactive while a text area has focus.</p>
+<p>The state of the very first button and the color of all buttons indicates
+which grammar notation and parser are used:</p>
+<table>
+<thead>
+<tr>
+<th>button state</th>
+<th>implementation</th>
+<th>parsing technique</th>
+<th>grammar notation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class='t-mode'></span></td>
+<td><a href="module-EBNF.html">EBNF</a></td>
+<td>recursive descent LL(1)</td>
+<td><a href="tutorial-02-grammars.html">EBNF</a></td>
+</tr>
+<tr>
+<td><span class='t-mode stack'></span></td>
+<td><a href="module-BNF.html">BNF</a></td>
+<td>stack-based SLR(1)</td>
+<td><a href="tutorial-02-grammars.html">EBNF</a></td>
+</tr>
+<tr>
+<td><span class='t-mode bnf'></span></td>
+<td><a href="module-BNF.html">BNF</a></td>
+<td>stack-based SLR(1)</td>
+<td>strict <a href="tutorial-10-bottom-up.html">BNF</a></td>
+</tr>
+</tbody>
+</table>
+<p>The label at the top right of each text area indicates which global string
+the text area corresponds to.</p>
+<p>If a <a href="#examples-and-local-storage">stored example</a> is loaded,
+the <span class='c-book'></span> button near the top right of the output area
+connects to this book, near the first reference to the example.
+Otherwise the button connects to this appendix.</p>
+<p>The remaining buttons have the following effects:</p>
+<table>
+<thead>
+<tr>
+<th>button</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class='t-greedy blue'></span></td>
+<td>if set, configures new grammar creation to not use the <a href="module-EBNF-Grammar.html"><code>check()</code></a> algorithm, i.e., to suppress checking for ambiguity; the recursive descent parser will be greedy</td>
+</tr>
+<tr>
+<td><span class='t-shallow blue'></span></td>
+<td>if set, configures new grammar creation to trace the <a href="module-EBNF-Grammar.html"><code>shallow()</code></a> algorithm and display the resulting sets</td>
+</tr>
+<tr>
+<td><span class='t-deep blue'></span></td>
+<td>if set, configures new grammar creation to trace the <a href="module-EBNF-Grammar.html"><code>deep()</code></a> algorithm and display the resulting sets</td>
+</tr>
+<tr>
+<td><span class='t-follow blue'></span></td>
+<td>if set, configures new grammar creation to trace the <a href="module-EBNF-Grammar.html"><code>follow()</code></a> algorithm and display the resulting sets</td>
+</tr>
+<tr>
+<td><span class='t-error green'></span></td>
+<td>if set, configures new grammar creation to insert <code>$error</code> alternatives when translating braces to BNF; likely to cause shift/reduce conflicts (which are usually benign)</td>
+</tr>
+<tr>
+<td><span class='t-sets green'></span><br><span class='t-sets red'></span></td>
+<td>if set, displays the lookahead sets when a BNF grammar is processed</td>
+</tr>
+<tr>
+<td><span class='t-states green'></span><br><span class='t-states red'></span></td>
+<td>if set, displays the states when a BNF grammar is processed</td>
+</tr>
+<tr>
+<td><span class='c-new'></span></td>
+<td>represents and checks a <code>Grammar</code> and assigns it to <code>g</code>; all but white space in the <span class='a-grammar'></span> is significant</td>
+</tr>
+<tr>
+<td><span class='c-scan'></span></td>
+<td>applies the scanner created from <code>g</code>, if any, to <code>program</code>; output is a list of <a href="module-Base-Tuple.html">tuples</a></td>
+</tr>
+<tr>
+<td><span class='t-lookahead'></span></td>
+<td>if set, traces scanner progress during parsing</td>
+</tr>
+<tr>
+<td><span class='t-parser'></span></td>
+<td>if set, traces parsing <code>program</code></td>
+</tr>
+<tr>
+<td><span class='t-actions'></span></td>
+<td>if set, traces calls to <code>actions</code>, if any, while parsing <code>program</code></td>
+</tr>
+<tr>
+<td><span class='t-noargs'></span></td>
+<td>if set, suppresses argument count checking for actions while parsing <code>program</code></td>
+</tr>
+<tr>
+<td><span class='t-build red'></span></td>
+<td>if set, adds an observer to collect input into lists when parsing with a <a href="module-BNF.html">BNF</a> grammar</td>
+</tr>
+<tr>
+<td><span class='c-parse'></span></td>
+<td>applies the parser created from <code>g</code>, if any, to <code>program</code>; output can contain nested lists of terminals or results of actions; a function will be assigned to <code>run</code></td>
+</tr>
+<tr>
+<td><span class='c-run'></span></td>
+<td>executes <code>run</code>, if any, and displays the result</td>
+</tr>
+<tr>
+<td><span class='c-1'></span>, <span class='c-10'></span>, and <span class='c-100'></span></td>
+<td>execute and trace a number of instructions in the <a href="tutorial-b-machine.html">stack machine</a>, if any</td>
+</tr>
+</tbody>
+</table>
+<h3 id="globals">Globals</h3>
+<p>Constructing a <a href="module-Practice-Model.html"><code>Model</code></a> creates some global variables
+which operations on the <a href="module-Practice-Model.html"><code>Model</code></a> will affect.
+A question mark after a type below indicates that the global will not be
+overwritten if it already exists.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>actions</code></td>
+<td><code>string</code></td>
+<td>defines the class and <a href="module-Base.html#~Action">action methods</a> to be called by a parser</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><code>Grammar</code></td>
+<td>represents <code>grammar</code> if not <code>null</code></td>
+</tr>
+<tr>
+<td><code>grammar</code></td>
+<td><code>string</code></td>
+<td>rules of a grammar, argument for the construction of <code>g</code></td>
+</tr>
+<tr>
+<td><code>newOutput</code></td>
+<td><code>function</code>?</td>
+<td>displays it's arguments, blank-separated and marked as a new section</td>
+</tr>
+<tr>
+<td><code>program</code></td>
+<td><code>string</code></td>
+<td>should be a sentence conforming to <code>grammar</code>, argument for recognition</td>
+</tr>
+<tr>
+<td><code>prompt</code></td>
+<td><code>function</code>?</td>
+<td>displays a prompt string, returns input or a default string, else error</td>
+</tr>
+<tr>
+<td><code>puts</code></td>
+<td><code>function</code>?</td>
+<td>displays it's arguments, blank-separated</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td><code>function</code></td>
+<td><code>null</code> or an executable compiled from <code>program</code> by the <code>actions</code>;<br>a stack machine has two arguments, other executables have none</td>
+</tr>
+<tr>
+<td><code>tokens</code></td>
+<td><code>string</code></td>
+<td>defines an object with pattern properties defining the tokens used in <code>grammar</code> and compiled into <code>g</code>. A property with an empty key overwrites white space as text to be skipped in <em>both</em>, <code>grammar</code> and <code>program</code></td>
+</tr>
+</tbody>
+</table>
+<p>The parser generator modules and the modules with classes from the examples
+are also available through global variables.</p>
+<p><code>tokens</code> are evaluated when <code>grammar</code> is processed by a parser generator.
+<code>actions</code> are evaluated and used, if available, when a <code>program</code> is parsed.
+Errors are reported to the output area.
+Malicious content should be avoided...</p>
+<h3 id="examples-and-local-storage">Examples and Local Storage</h3>
+<p><a href="../eg">Many examples are available</a> and can be loaded into the <a href="../?mode=ebnf">Practice Page</a>
+using a search string, e.g., from the following list:</p>
+<table>
+<thead>
+<tr>
+<th>search string</th>
+<th>example explained</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../?eg=interpret"><code>?eg=interpret</code></a></td>
+<td><a href="tutorial-06-compile.html#immediate-evaluation">interpret arithmetic expressions with numbers.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=compile"><code>?eg=compile</code></a></td>
+<td><a href="tutorial-06-compile.html#functional-evaluation">compile arithmetic expressions into functions.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=postfix"><code>?eg=postfix</code></a></td>
+<td><a href="tutorial-06-compile.html#stack-evaluation">compile arithmetic expressions into postfix.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=stack"><code>?eg=stack</code></a></td>
+<td><a href="tutorial-06-compile.html#stack-evaluation">compile arithmetic expressions for a stack machine.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=little"><code>?eg=little</code></a></td>
+<td><a href="tutorial-06-compile.html#control-structures">compile a little language for a stack machine.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=little_fn"><code>?eg=little_fn</code></a></td>
+<td><a href="tutorial-06-compile.html#functional-programming">compile a little language into functions.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=typing"><code>?eg=typing</code></a></td>
+<td><a href="tutorial-07-features.html#type-checking-by-interpretation">compile a typed little language for a stack machine.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=recursion"><code>?eg=recursion</code></a></td>
+<td><a href="tutorial-07-features.html#functions">compile mutually recursive functions.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=functions"><code>?eg=functions</code></a></td>
+<td><a href="tutorial-07-features.html#local-variables">compile functions with parameters and local variables.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=scopes"><code>?eg=scopes</code></a></td>
+<td><a href="tutorial-07-features.html#block-scopes">compile block scopes.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=nesting"><code>?eg=nesting</code></a></td>
+<td><a href="tutorial-07-features.html#nested-functions">compile nested functions.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=first_glob"><code>?eg=first_glob</code></a></td>
+<td><a href="tutorial-08-functions.html#global-first-order-functions">compile global first-order functions.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=fn_parameter"><code>?eg=fn_parameter</code></a></td>
+<td><a href="tutorial-08-functions.html#functions-as-argument-values">compile nested functions as parameters.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=first"><code>?eg=first</code></a></td>
+<td><a href="tutorial-08-functions.html#nested-first-order-functions">compile first-order functions.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=curry"><code>?eg=curry</code></a></td>
+<td><a href="tutorial-08-functions.html#nested-first-order-functions">currying.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=compose"><code>?eg=compose</code></a></td>
+<td><a href="tutorial-08-functions.html#nested-first-order-functions">function composition.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=bootstrap"><code>?eg=bootstrap</code></a></td>
+<td><a href="tutorial-09-bootstrap.html#bootstrap-example">compile the EBNF parser generator.</a></td>
+</tr>
+<tr>
+<td><a href="../?eg=extend"><code>?eg=extend</code></a></td>
+<td><a href="tutorial-09-bootstrap.html#extending">extend EBNF notation.</a></td>
+</tr>
+</tbody>
+</table>
+<p>With an <code>eg=</code> parameter the search string
+can select any file with an extension <code>.eg</code>
+<a href="../eg/">in the folder <code>eg</code></a> and subfolders,
+relative to the page. If the search fails
+the <a href="../?mode=ebnf">Practice Page</a> is reset and contains brief hints
+as to the use of the different text areas.</p>
+<p>Additionally, the search string can contain a <code>mode=</code> parameter
+with the values <code>ebnf</code>, <code>stack</code>, or <code>bnf</code>
+corresponding to the command words <a href="#scripting">described above</a>.</p>
+<p>If possible, the current state of the text areas is saved in <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" title="local storage">local storage</a> with
+the key <code>EBNF/state</code> once the practice page loses visibility.</p>
+<p>This state is normally reloaded once the practice page is visible again.
+It is destroyed if the search string is invalid.</p>
+<p>Stored examples and local storage use the <a href="#file-format">file format described above</a>.</p>
+<h3 id="a-note-on-eval()">A Note on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a></h3>
+<p>The <a href="../?mode=ebnf">Practice Page</a> critically depends on the use of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a>
+and thus can fail if destructive text is entered into the text areas.</p>
+<p><code>tokens</code> and <code>actions</code> are compiled with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval?.()</code></a>.
+Interestingly, the executable <code>run</code> is not — because it is created
+by the compiled <code>actions</code>.</p>
+<p>The rules for specifying <code>grammar</code> could be changed to require that tokens
+be specified as part of the grammar specification,
+e.g., as assignments of pattern strings to token names
+before or after the grammar rules.
+This would eliminate the need for the <span class='a-tokens'></span>.</p>
+<p>However the <a href="module-Base.html#~Action">action methods</a> themselves
+have to be compiled from the text in the <span class='a-actions'></span>
+before they can be called during parsing.
+Once they are compiled with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval?.()</code></a> — just before parsing —
+they can be called during parsing to create any kind of JavaScript data.
+This, specifically, includes functions.
+The executable <code>run</code> is the result of the actions during parsing
+and as such is a function created by the actions,
+i.e., it needs no further compilation.</p>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

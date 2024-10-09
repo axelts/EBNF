@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  	<title> Introduction to Compiler Construction • Practice </title>
+		
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>window.jQuery || document.write('<script src="doc/jquery-3.6.4.min.js"><\/script>')</script>
+    <script type='module' src='modules/index.js'></script>
+		<style> 
+      @media screen {
+        body { 
+  				--red: #ec5800; --green: #50c878; --blue: rgb(41, 98, 217);
+  				--font-size: calc(min(max(2vh, 7pt), 11pt));
+          --font-family: Consolas, Inconsolata, Monaco, "Courier New", monospace;
+  			}
+      
+  			/* vertical layout */
+        body          { margin: 0.5em 0; }
+        #id-grammar   { height: 23vh; }
+        #id-tokens    { height: 6vh; }
+        .buttons      { height: 3vh; }
+        #id-actions   { height: 23vh; }
+        #id-program   { height: 9vh; }
+        #id-output    { height: 20vh; }
+			
+  			/* horizontal layout */
+        textarea { display: block; color: rgb(51, 51, 51); }
+  			textarea,
+  			.buttons { 
+          width: 90vw; min-width: 90vw; max-width: 90vw; margin: 0.4em auto;
+        }
+        .button,
+  			.trace1,
+  			.trace2,
+  			.details {
+  				display: inline-block;
+  				border-radius: 10px; padding: 2px 0.5em; margin: 0 0.25em;
+          white-space: nowrap; overflow: hidden; text-overflow: clip;
+        }
+  			.buttons { display: flex; justify-content: center; }
+  			#id-greedy,
+  			#id-error,
+  			#id-new,
+        #id-build,
+  			#id-parse,
+  			#id-run { margin-left: 1em; }
+
+  			/* text areas */
+        textarea { font-size: var(--font-size); font-family: var(--font-family); }
+        .frame { position: relative; width: 90vw; margin: auto; }
+        .label {
+          position: absolute; top: -0.5em; left: 80vw; padding: 2px; z-index: 1;
+          font-size: 8pt; font-family: var(--font-family); background: white; cursor: ns-resize;
+        }
+        a.label {
+          border-radius: 7px; padding: 2px 4px; cursor: default;
+          text-decoration: none; font-weight: bold;
+        }
+  			.ebnf  .label  { color: var(--blue); }
+        .stack .label  { color: var(--green); }
+        .bnf   .label  { color: var(--red); }
+  			.ebnf  a.label { color: white; background: var(--blue); }
+        .stack a.label { color: white; background: var(--green); }
+        .bnf   a.label { color: white; background: var(--red); }
+			
+  			/* buttons */
+  			.button,
+  			.trace1,
+  			.trace2,
+  			.details { 
+  				font-size: var(--font-size); font-family: sans-serif; line-height: 2vh;
+  			}
+  			.button { border-width: thin; border-style: solid; }
+  			.ebnf .button  { border-color: var(--blue); }
+  			.stack .button { border-color: var(--green); }
+  			.bnf .button   { border-color: var(--red); }
+
+  			/* button names */
+        .ebnf  #id-mode::before       { content: "descent"; }
+        .stack #id-mode::before       { content: "stack-based"; }
+        .bnf   #id-mode::before       { content: "bnf"; }
+
+        .ebnf  #id-greedy::before     { content: "no check"; }
+  			.stack #id-greedy,
+  			.bnf   #id-greedy             {  display: none; }
+			
+  			.ebnf  #id-error              { display: none; }
+        .stack #id-error::before      { content: "insert $error"; }
+  			.bnf  #id-error    	          { display: none; }
+
+        .ebnf  .trace1::before        { content: "trace:"; }
+  			.stack .trace1,
+  			.bnf   .trace1                { display: none; }
+			
+        .ebnf  #id-tShallow::before   { content: "shallow"; }
+        .stack #id-tShallow,
+        .bnf   #id-tShallow					  { display: none; }
+
+        .ebnf  #id-tDeep::before      { content: "deep"; }
+        .stack #id-tDeep,
+        .bnf   #id-tDeep					    { display: none; }
+			
+        .ebnf  #id-tFollow::before    { content: "follow"; }
+        .stack #id-tFollow,
+        .bnf   #id-tFollow					  { display: none; }
+
+  			.ebnf  .details               { display: none; }
+  			.stack .details::before,
+  			.bnf   .details::before       { content: "details:"; }
+
+        .ebnf  #id-dSets					    { display: none; }
+        .stack #id-dSets::before,
+  			.bnf   #id-dSets::before      { content: "sets"; }
+			
+        .ebnf  #id-dStates				    { display: none; }
+        .stack #id-dStates::before,
+  			.bnf   #id-dStates::before    { content: "states"; }
+
+  						 #id-new::before        { content: "new grammar"; }
+			
+  						 #id-scan::before       { content: "scan"; }
+						 
+  						 .trace2::before        { content: "trace:"; }
+  						 #id-tLookahead::before { content: "lookahead"; }
+  						 #id-tParser::before    { content: "parser"; }
+  						 #id-tActions::before   { content: "actions"; }
+  						 #id-tNoargs::before    { content: "no args"; }
+						 
+        .ebnf	 #id-build,
+  			.stack #id-build              { display: none; }
+  			.bnf   #id-build::before      { content: "build lists"; }
+						 
+  						 #id-parse::before      { content: "parse"; }
+  						 #id-run::before        { content: "run"; }
+  						 #id-1::before          { content: "1"; }
+  						 #id-10::before         { content: "10"; }
+  						 #id-100::before        { content: "100"; }
+						 
+  		  /* button state */
+        .button.ok { cursor: pointer !important; }
+
+        .ebnf  .button,
+  			.ebnf  .button.toggle.ok    { background: transparent; color: var(--blue); cursor: default; }
+        .ebnf  .button.ok,
+  			.ebnf  .button.toggle.ok.on { background: var(--blue); color: white; }
+			
+        .stack .button,
+  			.stack .button.toggle.ok    { background: transparent; color: var(--green); cursor: default; }
+        .stack .button.ok,
+  			.stack .button.toggle.ok.on { background: var(--green); color: white; }
+			
+        .bnf   .button,
+  			.bnf   .button.toggle.ok    { background: transparent; color: var(--red); cursor: default; }
+        .bnf   .button.ok,
+  			.bnf   .button.toggle.ok.on { background: var(--red); color: white; }
+      }
+    </style>
+  </head>
+	<body>
+	  <form class='ebnf' autocomplete='off'>
+	    <div class='frame'><span class='label'> grammar </span>
+	      <textarea class='inputs' id='id-grammar'> grammar rules </textarea>
+	    </div>
+	    <div class='frame'><span class='label'> tokens </span>
+	      <textarea class='inputs' id='id-tokens'> { /* token definitions */ } </textarea>
+			</div>
+	    <div class='buttons'>
+	      <div id='id-mode' class='button'></div>
+	      <div id='id-greedy' class='toggle button'></div>
+	      <div id='id-error' class='toggle button'></div>
+				<div class='trace1'></div>
+				<div class='details'></div>
+				<div id='id-tShallow' class='toggle button'></div>
+				<div id='id-tDeep' class='toggle button'></div>
+				<div id='id-tFollow' class='toggle button'></div>
+				<div id='id-dSets' class='toggle button'></div>
+				<div id='id-dStates' class='toggle button'></div>
+	      <div id='id-new' class='button'></div>
+	    </div>
+	    <div class='frame'><span class='label'> actions </span>
+	      <textarea class='inputs' id='id-actions'> class Actions { /* methods to construct executable */ } </textarea>
+	    </div>
+	    <div class='buttons'>
+	      <div id='id-scan' class='button'></div>
+				<div class='trace2'></div>
+        <div id='id-tLookahead' class='toggle button'></div>
+        <div id='id-tParser' class='toggle button'></div>
+        <div id='id-tActions' class='toggle button'></div>
+        <div id='id-tNoargs' class='toggle button'></div>
+        <div id='id-build' class='toggle button'></div>
+	      <div id='id-parse' class='button'></div>
+	      <div id='id-run' class='button'></div>
+	      <div id='id-1' class='button'></div>
+	      <div id='id-10' class='button'></div>
+	      <div id='id-100' class='button'></div>
+	    </div>
+	    <div class='frame'><span class='label'> program </span>
+	      <textarea class='inputs' id='id-program'> program sentence </textarea>
+	    </div>
+	    <div class='frame'><a id='id-book' class='label'> book </a>
+	      <textarea readonly id='id-output'> output from 'puts()' </textarea>
+	    </div>
+	  </form>
+	</body>
+</html>

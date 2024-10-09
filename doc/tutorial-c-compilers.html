@@ -1,0 +1,2538 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: C: The One-Pass Compilers</title -->
+	<title>C: The One-Pass Compilers</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>C: The One-Pass Compilers</h2>
+</header>
+
+<article>
+    <h4 id="the-method-browser">The Method Browser</h4>
+<h4 id="rules-and-actions">Rules and Actions</h4>
+<h4 id="symbol-table">Symbol Table</h4>
+<hr>
+<p><a href="tutorial-b-machine.html">Appendix B</a> summarized the different versions of
+the stack machine.
+This appendix contains tables which index the stack machine compilers for the little language
+developed in chapters <a href="tutorial-06-compile.html">six</a>, <a href="tutorial-07-features.html">seven</a>, and <a href="tutorial-08-functions.html">eight</a>.
+The table entries are linked to the examples, to the documentation, and from there to the sources.</p>
+<p>These compilers generate code during recognition, i.e., in the action methods.
+The action classes extend from <a href="../?eg=06/10">example 6/10</a>
+(<a href="module-Six-Arithmetic10.html"><code>Arithmetic10</code></a>)
+to <a href="../?eg=06/11">example 6/11</a> (<a href="module-Six-Control11.html"><code>Control11</code></a>),
+<a href="../?eg=07/04">7/4</a> (<a href="module-Seven-Functions04.html"><code>Functions04</code></a>),
+<a href="../?eg=07/06">7/6</a> (<a href="module-Seven-Parameters06.html"><code>Parameters06</code></a>),
+and <a href="../?eg=07/09">7/9</a> (<a href="module-Seven-Blocks09.html"><code>Blocks09</code></a>).</p>
+<p>To implement nested functions
+<a href="../?eg=07/13">example 7/13</a> defines the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Seven-Nest13.html"><code>Nest13</code></a>
+to extend <a href="module-Seven-Blocks09.html"><code>Blocks09</code></a>
+and support function definitions at greater depth — which requires a <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link">static link</a>.</p>
+<p>To implement global first-order functions
+<a href="../?eg=08/01">example 8/1</a> defines the mix-in <a href="module-Eight-Global01.html"><code>Global01</code></a>
+to extend <a href="module-Seven-Blocks09.html"><code>Blocks09</code></a>
+and primarily support type checking with function types
+for variables, functions, parameters, and argument values.</p>
+<p>To implement nested functions as argument values
+<a href="../?eg=08/08">example 8/8</a> defines the mix-in <a href="module-Eight-Pass08.html"><code>Pass08</code></a>
+to extend <a href="module-Seven-Blocks09.html"><code>Blocks09</code></a> and <a href="module-Seven-Nest13.html"><code>Nest13</code></a>;
+the language forbids using functions and results or variables with function values.</p>
+<p>Finally, to implement nested first-order functions,
+<a href="../?eg=08/14">example 8/14</a> defines the mix-in <a href="module-Eight-First14.html"><code>First14</code></a>
+to extend the implementation in <a href="../?eg=08/01">example 8/1</a>
+and support dynamic memory management for frames.</p>
+<h3 id="the-method-browser-1">The Method Browser</h3>
+<p>The <a href="../methods.html">method browser</a> can be used to study the evolution
+of the action classes and methods and, in particular,
+to see where a method is first defined.</p>
+<p>By default it will load the sources of the implementation of the little language
+in chapters six through eight, but <code>file</code> parameters can be used in a search string
+to load JavaScript files from the <code>modules</code> directory.</p>
+<p>Patterns are used to extract module, class or mix-in, and method names,
+and the source text of the methods.
+The patterns assume a particular coding style, mostly based on white space and nesting.</p>
+<p>The names are displayed in a table with columns for modules, classes or mix-ins,
+methods, and nested methods.
+Names can be selected by clicking in each column.
+Multiple selections within a column are considered alternatives,
+selections across columns must all be satisfied.
+A column without selections is a wildcard.</p>
+<p>Selected names have a darker blue background,
+names that could be added to a selection have a lighter blue background.</p>
+<p>Each column can be scrolled vertically.
+If the mouse hovers over a column (indicated by a focus border)
+a keypress will scroll to names with the corresponding initial
+and the <em>delete</em> key will clear all selections in the column.</p>
+<p>A combination of names selects methods which can be displayed,
+sorted alphabetically by method name, or by class or mix-in.
+A single method is displayed as soon as it is selected.</p>
+<p>An initial selection can be defined by specifying one or more <code>module</code>,
+<code>item</code>, <code>method</code>, and <code>op</code> parameters in a search string for the page.
+A <code>show</code> parameter requests immediate display of the selection.</p>
+<p><code>op</code> refers to <em>nested methods</em>, i.e., methods within classes
+which are nested into top-level classes, e.g., the classes
+which are used to represent types, variables, and functions
+in the implementation of the little language.
+The nested methods are also located by patterns based on coding style.</p>
+<h3 id="grammar-rules-and-actions">Grammar Rules and Actions</h3>
+<p>This table shows how the grammar rules and actions are defined or overridden.
+Numbers reference the example where a rule was used
+and ⊕ references action method definitions or overrides.</p>
+<table>
+<thead>
+<tr>
+<th>rules<br><div style='width: 28em;'></div></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list: stmt [{ ';' stmt }];</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>prog: stmts;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#prog">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>prog: [ vars ] funs;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#prog">⊕</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>prog: [ typedcls ] [ vars ] funs;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#prog">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#typedcls">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>typedcl: Name '(' [ types ] ')' [ ':' typename ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#typedcl">⊕</a></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>typedcl: Name '(' [ types ] ')' [ ':' number' ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#typedcl">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>types: typename [{ ',' typename }];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#types">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>typename: Name | 'number';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#typename">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vars: 'var' names ';';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vars: 'var' varname [{ ',' varname }] ';';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>varname: Name [ ':' type ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#varname">⊕</a></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td><a href="module-Eight-First14.html#varname">⊕</a></td>
+</tr>
+<tr>
+<td><code>varname: Name;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>type: Name | 'number';  </code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#type">⊕</a></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>names: Name [{ ',' Name }];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#names">⊕</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>funs: { fun };</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fun: head [ 'begin' stmts 'end' ] ';';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#fun">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fun: head parms [ block ] ';';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#fun">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>head: 'function' Name;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#head">⊕</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td><a href="module-Seven-Nest13.html#head">⊕</a></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>parms: '(' [ names ] ')';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#parms">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>parms: '(' [ names ] ')' [ ':' Name ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#parms">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>block: 'begin' [ vars ] stmts 'end';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>block: begin [ vars ] stmts 'end';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#block">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>block: begin body 'end';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td><a href="module-Seven-Nest13.html#block">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>begin: 'begin';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#begin">⊕</a></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>body: [ vars ] [ funs ] stmts;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>stmts: stmt [{ ';' stmt }];</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>stmt: sum;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#stmt">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>stmt: assign | print | loop | select;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#stmt">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>stmt: assign | print | return | loop | select;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>stmt: assign | print | return | block | loop | select;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>assign: Name '=' sum;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#assign">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>assign: Name [ '=' sum ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#assign">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>assign: symbol action;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#assign">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>action: store | call;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>store: '=' sum;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#store">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#store">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td><a href="module-Eight-First14.html#store">⊕</a></td>
+</tr>
+<tr>
+<td><code>call: args;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>call: { args };</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td><a href="module-Eight-First14.html#call">⊕</a></td>
+</tr>
+<tr>
+<td><code>args: '(' [ sums ] ')';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#args">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#args">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>print: 'print' sums;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#print">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#print">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sums: sum [{ ',' sum }];</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#sums">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#sums">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>return: 'return' [ sum ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#return">⊕</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#return">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td><a href="module-Eight-First14.html#return">⊕</a></td>
+</tr>
+<tr>
+<td><code>loop: While cmp Do stmts 'od';</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#loop">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>loop: While cmp Do [ vars ] stmts 'od';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#loop">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>loop: While cmp Do body 'od';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td><a href="module-Seven-Nest13.html#loop">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>While: 'while';</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#While">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Do: 'do';</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#Do">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#Do">⊕</a></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>select: 'if' cmp Then stmts [ Else stmts ] 'fi';</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#select">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>select: 'if' cmp then [ else ] 'fi';</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#select">⊕</a></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>then: Then [ [ vars ] stmts ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#then">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>then: Then [ body ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>else: Else [ vars ] stmts ;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#else">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>else: Else body ;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td><a href="module-Seven-Nest13.html#else">⊕</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Then: 'then';</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#Then">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#Then">⊕</a></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Else: 'else';</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#Else">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="module-Seven-Blocks09.html#Else">⊕</a></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>cmp: sum rel;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#cmp">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>rel: eq | ne | gt | ge | lt | le;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>eq: '=' sum;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#eq">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#eq">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ne: '&lt;&gt;' sum;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#ne">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#ne">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>gt: '&gt;' sum;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#gt">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#gt">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ge: '&gt;=' sum;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#ge">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#ge">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>lt: '&lt;' sum;</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#lt">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#lt">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>le: '&lt;=' sum;   </code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td><a href="module-Six-Control11.html#le">⊕</a></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#le">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sum: 'let' Name '=' sum | product [{ add | subtract }];</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#sum">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sum: product [{ add | subtract }];</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#sum">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>add: '+' product;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#add">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#add">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>subtract: '-' product;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#subtract">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#subtract">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>product: signed [{ multiply | divide }];</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#product">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>multiply: '*' signed;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#multiply">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#multiply">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>divide: '/' signed;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#divide">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#divide">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>signed: [ '-' ] term;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#signed">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#signed">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>term: input | number | name | '(' sum ')';</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#term">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>input: 'input' [ Number ];</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#input">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#input">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>number: Number;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#number">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#number">⊕</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>name: Name;</code></td>
+<td><a href="../?eg=06/10">6/10</a></td>
+<td><a href="module-Six-Arithmetic10.html#name">⊕</a></td>
+<td><a href="../?eg=06/11">6/11</a></td>
+<td></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="module-Seven-Functions04.html#name">⊕</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>name: symbol [ args ];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#name">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>name: symbol [{ args }];</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="module-Eight-Global01.html#name">⊕</a></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>symbol: Name;</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="module-Seven-Parameters06.html#symbol">⊕</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="symbol-table-entries">Symbol Table Entries</h3>
+<p>Symbol table entries have a common base class <a href="module-Seven-Functions04_Symbol.html"><code>Symbol</code></a>
+which ensures that every symbol has a <code>name</code>
+and can reference the <code>owner</code>, i.e., the action class which defines the symbol's class;
+therefore,
+the symbol classes are <a href="https://en.wikipedia.org/wiki/Inner_class" title="inner class">inner classes</a> of an action class as the <code>owner</code>.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" title="getter">Getters</a> in the action classes are used to access the symbol classes
+because getters can be overwritten in subclasses
+to silently return extended symbol classes.
+It should be noted, however, that a reference to a getter can be confused
+with a reference to a method with the same name,
+i.e., given the class definition</p>
+<pre class="prettyprint source"><code>class X {
+  get x () { /* ... */ }
+  x () { /* ... */ }
+}
+</code></pre>
+<p>the reference <code>(new X()).x</code> is ambiguous;
+e.g.,
+the <a href="https://nodejs.org/en" title="Node.js">Node.js</a> JavaScript compiler will return the method function
+and not note an error.</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th><a href="module-Seven-Functions04_Symbol.html"><code>Symbol</code></a></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.owner</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>outer class' object</td>
+</tr>
+<tr>
+<td><code>.name</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>symbol's name</td>
+</tr>
+</tbody>
+</table>
+<h3 id="variables">Variables</h3>
+<p>Variable descriptions have a common base class <a href="module-Seven-Functions04_Var.html"><code>Var</code></a>
+which is extended by the various action classes.
+The table links the properties of the descriptions
+to the classes and examples where they are defined or overridden.
+<code>()</code> indicates a method.
+<code>+</code> indicates that an override references <code>super</code>.</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th><a href="module-Seven-Functions04_Var.html"><code>Var</code></a></th>
+<th><a href="module-Seven-Parameters06_Var.html"><code>Var</code></a></th>
+<th></th>
+<th><a href="module-Seven-Nest13_Var.html"><code>Var</code></a></th>
+<th><a href="module-Eight-Global01_Var.html"><code>Var</code></a></th>
+<th><a href="module-Eight-Pass08_Var.html"><code>Var</code></a></th>
+<th><a href="module-Eight-First14_Var.html"><code>Var</code></a></th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.addr</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>memory address or offset</td>
+</tr>
+<tr>
+<td><code>.depth</code></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>(static) level</td>
+</tr>
+<tr>
+<td><code>.type</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>variable's type</td>
+</tr>
+<tr>
+<td><code>.load()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td>generates <code>Load*</code></td>
+</tr>
+<tr>
+<td><code>.storeOk()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td>+<a href="../?eg=08/08">8/8</a></td>
+<td></td>
+<td><code>true</code> unless <code>store()</code> is in error</td>
+</tr>
+<tr>
+<td><code>.store()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td>generates <code>Store*</code></td>
+</tr>
+<tr>
+<td><code>.call()</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>generates <code>Call*</code></td>
+</tr>
+<tr>
+<td><code>.toString()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td>+<a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>text representation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="functions">Functions</h3>
+<p>Function descriptions have a common base class <a href="module-Seven-Functions04_Fun.html"><code>Fun</code></a>
+which is extended by the various action classes.
+The table links the properties of the descriptions
+to the classes and examples where they are defined or overridden.
+<code>[]</code> indicates that a property is a list.
+<code>()</code> indicates a method.
+<code>+</code> indicates that an override references <code>super</code>.</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th><a href="module-Seven-Functions04_Fun.html"><code>Fun</code></a></th>
+<th><a href="module-Seven-Parameters06_Fun.html"><code>Fun</code></a></th>
+<th><a href="module-Seven-Blocks09_Fun.html"><code>Fun</code></a></th>
+<th><a href="module-Seven-Nest13_Fun.html"><code>Fun</code></a></th>
+<th><a href="module-Eight-Global01_Fun.html"><code>Fun</code></a></th>
+<th><a href="module-Eight-Pass08_Fun.html"><code>Fun</code></a></th>
+<th><a href="module-Eight-First14_Fun.html"><code>Fun</code></a></th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.start</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>false</code> or code address</td>
+</tr>
+<tr>
+<td><code>.calls[]</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>slots for <code>Call*</code></td>
+</tr>
+<tr>
+<td><code>.returns[]</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>slots for <code>Branch</code> exit</td>
+</tr>
+<tr>
+<td><code>.parms</code></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>number of parameters</td>
+</tr>
+<tr>
+<td><code>.addr</code></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>result value offset</td>
+</tr>
+<tr>
+<td><code>.locals</code> get/set</td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>maps local names to descriptions</td>
+</tr>
+<tr>
+<td><code>.size</code> get/set</td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>next address in frame</td>
+</tr>
+<tr>
+<td><code>.blocks[]</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>.locals</code>/<code>.size</code> stack</td>
+</tr>
+<tr>
+<td><code>.frameSize</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>frame size</td>
+</tr>
+<tr>
+<td><code>.depth</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>(static) level</td>
+</tr>
+<tr>
+<td><code>.scope</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>block containing definition</td>
+</tr>
+<tr>
+<td><code>.type</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>function's type</td>
+</tr>
+<tr>
+<td><code>.loads[]</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>slots for <code>Push*</code></td>
+</tr>
+<tr>
+<td><code>.entry()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td>+<a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>sets <code>start</code>, reserves <code>Entry</code></td>
+</tr>
+<tr>
+<td><code>.undo()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td>+<a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>undoes <code>entry()</code></td>
+</tr>
+<tr>
+<td><code>.setParms()</code></td>
+<td></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td>+<a href="../?eg=07/13">7/13</a></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td>sets <code>.parms</code> <code>.addr</code>, types</td>
+</tr>
+<tr>
+<td><code>.call()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>+<a href="../?eg=08/08">8/8</a></td>
+<td>+<a href="../?eg=08/14">8/14</a></td>
+<td>generates <code>Call*</code></td>
+</tr>
+<tr>
+<td><code>.return()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>generates <code>Branch</code> exit</td>
+</tr>
+<tr>
+<td><code>.storeOk()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td>+<a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td><code>true</code> unless <code>store()</code> is in error</td>
+</tr>
+<tr>
+<td><code>.store()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td>generates <code>Store*</code> result, types</td>
+</tr>
+<tr>
+<td><code>.load()</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td>+<a href="../?eg=08/08">8/8</a></td>
+<td>+<a href="../?eg=08/14">8/14</a></td>
+<td>generates <code>Push*</code></td>
+</tr>
+<tr>
+<td><code>.push()</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>pushes <code>.blocks[]</code></td>
+</tr>
+<tr>
+<td><code>.pop()</code></td>
+<td></td>
+<td></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td>+<a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td>pops <code>.blocks[]</code>, sets frame size</td>
+</tr>
+<tr>
+<td><code>.end()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td></td>
+<td>+<a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td>+<a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>fixes forward references, <code>exit()</code></td>
+</tr>
+<tr>
+<td><code>.exit()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td></td>
+<td><a href="../?eg=08/08">8/8</a></td>
+<td><a href="../?eg=08/14">8/14</a></td>
+<td>generates <code>Entry</code>, <code>Exit</code>, <code>Return</code></td>
+</tr>
+<tr>
+<td><code>.toString()</code></td>
+<td><a href="../?eg=07/04">7/4</a></td>
+<td><a href="../?eg=07/06">7/6</a></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td>+<a href="../?eg=07/13">7/13</a></td>
+<td>+<a href="../?eg=08/01">8/1</a></td>
+<td></td>
+<td></td>
+<td>text representation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="blocks">Blocks</h3>
+<p>A <a href="module-Seven-Blocks09_Block.html"><code>Block</code></a> represents a scope of names
+to support block structure.</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th><a href="module-Seven-Blocks09_Block.html"><code>Block</code></a></th>
+<th></th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.locals</code></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td>maps names in scope to descriptions</td>
+</tr>
+<tr>
+<td><code>.size</code></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td>next address in scope</td>
+</tr>
+<tr>
+<td><code>.toString()</code></td>
+<td><a href="../?eg=07/09">7/9</a></td>
+<td></td>
+<td>text representation</td>
+</tr>
+<tr>
+<td><code>.bypass</code></td>
+<td></td>
+<td><a href="../?eg=07/13">7/13</a></td>
+<td>address of branch bypassing functions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="types">Types</h3>
+<p>There is just one type description class <a href="module-Eight-Global01_Type.html"><code>Type</code></a>
+and there is a separate, global symbol table <a href="module-Eight-Global01.html#typeSymbols"><code>typeSymbols</code></a>
+for types to allow matching of functions and types on their names.
+Two type values have reserved names: <a href="module-Eight-Global01.html#numberType"><code>number</code></a> describes number values
+and,
+for convenience,
+<a href="module-Eight-Global01.html#mainType"><code>main</code></a> describes a function without arguments which returns a number.</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th><a href="module-Eight-Global01_Type.html"><code>Type</code></a></th>
+<th>usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.parms[]</code></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><code>null</code> or list of parameter types</td>
+</tr>
+<tr>
+<td><code>.returns</code></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><code>null</code> or result type</td>
+</tr>
+<tr>
+<td><code>.isFun</code></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td><code>true</code> if function type</td>
+</tr>
+<tr>
+<td><code>.toString()</code></td>
+<td><a href="../?eg=08/01">8/1</a></td>
+<td>text representation</td>
+</tr>
+</tbody>
+</table>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

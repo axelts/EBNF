@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width">
+  	<title> Method Browser </title>
+    <link rel="stylesheet" type="text/css" href="doc/sunlight.default.css">
+    <script src="doc/sunlight-all-min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+      const fatal = message => {
+        alert(message); throw new Error(message);
+      }         // terminates with message
+      
+      // validate coding style:
+      //   select a module, "show by class", cut and paste into new file
+      //   use "opendiff" to compare module source and result of "show by class".
+      // defaulted parameters are likely to cause a recognition problem
+      
+      const pat = {
+        fileName:        /^modules\/[A-Za-z0-9]+\.js$/,
+        
+        jsdocComment:    /^  \/\*\*(?:[^*]|\*[^/])+\*\//,
+        startComment:    /^\s*\/\*/,
+        endComment:      /\*\/\s*$/,
+        
+        preModuleName:   /^[\s*]+@module /,
+        moduleName:      /^[A-Z][a-z]+$/,
+        
+        preClassName:    /^class\s+/,
+        preMixinName:    /^const\s+/,
+        postItemName:    /\s.*/,
+        // itemName: class/mix-in
+        // superName: class itemName extends (itemName(?:\.itemName)?)
+        itemName:        /^[A-Z]+[a-z]+(?:[0-9][0-9]|_[A-Z][A-Za-z]+)?$/,
+        superName: /^class\s+[A-Z]+[a-z]+(?:[0-9][0-9]|_[A-Z][A-Za-z]+)?\s+extends\s+([A-Z]+[a-z]+(?:[0-9][0-9]|_[A-Z][A-Za-z]+)(?:\.[A-Z]+[a-z]+(?:[0-9][0-9]|_[A-Z][A-Za-z]+)?)?)/,
+        endItem:         /^}/,
+        
+        startMethod:     /^  (?:[gs]et )?[_a-zA-Z][_a-zA-Z]+ \((?:[-_a-zA-Z0-9, .=]|\(\))*\) {/,
+        preMethod:       /^  /,
+        postMethod:      / \(.*\)\s+{.*/,
+        methodName:      /^(?:[gs]et )?[_a-zA-Z][_a-zA-Z]+$/,
+        endMethod:       /^  }/,
+        
+        startOp:         /^      (?:[gs]et )?[_a-zA-Z][_a-zA-Z]+ \((?:[-_a-zA-Z0-9, .=]|\(\))*\) {/,
+        preOp:           /^      /,
+        postOp:          / \(.*\)\s+{.*/,
+        opName:          /^(?:[gs]et )?[_a-zA-Z][_a-zA-Z]+$/,
+        endOp:           /^      }/,
+      };                     // extractor patterns (heuristic, match coding style)
+
+      const clips = [];                      // elements are all Clip objects
+
+      const modules = new Map();             // maps module names to ModuleName objects
+      const items = new Map();               // maps item names to ItemName objects
+      const methods = new Map();             // maps method names to MethodNme objects
+      const ops = new Map();                 // maps nested method names, e.g., in get Var, to OpName objects
+      
+      const map = {
+        modules: modules, items: items, methods: methods, ops: ops
+      };                      // maps name to map, e.g., map['modules']
+      
+      class Clip {
+        constructor (module, item, method, op, lines) {
+          this.module = module.name;
+          this.item = item.name;
+          this.method = method.name;
+          this.op = op ? op.name : false;
+          this.lines = lines;
+          this.lines.unshift(
+            `// ${this.module}.${this.item}.${this.method}` + (this.op ? `.${this.op}` : '') +
+            (item.superClass ? ` // ${this.module}.${this.item} extends ${item.superClass}` : '')
+          );
+          clips.push(this);
+        }
+        
+        test (moduleNames, itemNames, methodNames, opNames) {
+          const test = (name, names) => !names.length || (name && names.includes(name));
+          return test(this.module, moduleNames) &&
+            test(this.item, itemNames) &&
+            test(this.method, methodNames) &&
+            (!this.op && !opNames.length || this.op && opNames.includes(this.op));
+        }
+        
+        toString () { return this.lines.join('\n'); }
+      }                        // contains lines from one (nested) method
+
+      class Module {
+        items = new Map();  // maps name to Item
+        name;               // import * as [name] from...
+        
+        constructor (text) {
+          let comment = false;                                    // skip state
+          const lines = text.replaceAll('\r', '').split(/\n/).    // turn into lines
+            map(line => !pat.jsdocComment.test(line) ? line :     // remove leading /** comment */
+              line.replace(pat.jsdocComment, '').replace(/^\s+/, '  ')).
+            filter(line => {                                      // remove /** comments
+              if (pat.startComment.test(line)) comment = true;
+              if (comment) {
+                if (pat.preModuleName.test(line)) return true;    // preserve module name
+                if (pat.endComment.test(line)) comment = false;
+                return false; 
+              }
+              return true;
+            });
+//console.debug(lines) // uncomment and compare to input file
+
+          lines.forEach((line, n) => {                            // analyze lines
+            if (pat.preModuleName.test(line)) {                   // set this.name
+              if (this.name) throw new Error(`name already set: ${this.name}`);
+              this.name = line.replace(pat.preModuleName, '');
+              if (!pat.moduleName.test(this.name)) throw new Error(`${this.name}: invalid Module name`);
+              if (modules.has(this.name)) throw new Error(`${this.name}: duplicate Module`);
+              modules.set(this.name, null);
+//console.log(this.name)
+            }
+
+            else if (pat.preClassName.test(line))                 // collect classes
+              new Item(this, 'class', pat.preClassName, pat.postItemName, lines.slice(n));
+
+            else if (pat.preMixinName.test(line))                 // collect mixins
+              new Item(this, 'mixin', pat.preMixinName, pat.postItemName, lines.slice(n));
+          });
+          if (!this.name) throw new Error('Module has no name');
+        }
+      }                      // describes/parses one module from one file      
+      class Item {
+        module;               // Module
+        type;                 // class or mixin
+        name;                 // class or mixin name
+        superClass;           // superclass name, if any
+        methods = new Map();  // maps [get|set] name to Method
+        
+        constructor (module, type, pre, post, lines) {
+          this.module = module;
+          this.type = type;
+
+          this.name = lines[0].replace(pre, '').replace(post, '');
+          if (!pat.itemName.test(this.name)) throw new Error(`${this.module.name} ${this.name}: invalid Item name`);
+          if (module.items.has(this.name)) throw new Error(`${this.module.name} ${this.name}: duplicate Item`);
+          this.module.items.set(this.name, this);
+          
+          if (this.type == 'class') {
+            const test = pat.superName.exec(lines[0]);
+            if (test) this.superClass = test[1].includes('.') ? test[1] : this.module.name +  '.' + test[1];
+          }
+//console.log(`${this.name} extends ${this.superClass ? this.superClass : 'none'}`);
+
+          try {                                                   // truncate lines
+            lines.forEach((line, n) => {
+              if (pat.endItem.test(line)) { lines.length = n + 1; throw ''; }
+              if (pat.startMethod.test(line))                     // getter setter method
+                new Method(this, pat.preMethod, pat.postMethod, pat.endMethod, lines.slice(n));
+            });
+            throw new Error(`${this.module.name} ${this.name}: invalid Item`);
+          } catch (e) { if (e instanceof Error) throw e; }
+
+          items.set(this.name, null);
+        }
+      }                        // describes/parses a class or mixin
+      class Method {
+        item;               // Item
+        name;               // [get|set] name
+        clip;
+        
+        constructor (item, pre, post, end, lines) {
+          this.item = item;
+          
+          this.name = lines[0].replace(pre, '').replace(post, '');
+          if (!pat.methodName.test(this.name))
+            throw new Error(`${this.item.module.name} ${this.item.name} ${this.name}: invalid Method name`);
+          
+          if (/}/.test(lines[0]))
+            lines.length = 1;
+          else
+            try {
+              lines.forEach((line, n) => {
+                if (end.test(line)) { lines.length = n + 1; throw ''; }
+                if (pat.startOp.test(line))                       // nested getter setter method
+                  new Op(this, pat.preOp, pat.postOp, pat.endOp, lines.slice(n));
+              });
+              throw new Error(`${this.item.module.name} ${this.item.name} ${this.name}: invalid Method`);
+            } catch (e) { if (e instanceof Error) throw e; }
+          
+          this.clip = new Clip(this.item.module, this.item, this, null, lines);
+          methods.set(this.name, null);
+//console.debug(this.clip.toString())
+        }
+      }                      // describes/parses a getter/setter/method, creates/owns clip
+      class Op {
+        method;             // Method
+        name;               // [get|set] name
+        clip;
+        
+        constructor (method, pre, post, end, lines) {
+          this.method = method;
+          
+          this.name = lines[0].replace(pre, '').replace(post, '');
+          if (!pat.opName.test(this.name))
+            throw new Error(`${this.method.item.module.name} ${this.method.item.name} ${this.method.name} ${this.name}: invalid Op name`);
+          
+          if (/}/.test(lines[0]))
+            lines.length = 1;
+          else
+            try {
+              lines.forEach((line, n) => {
+                if (end.test(line)) { lines.length = n + 1; throw ''; }
+              });
+              throw new Error(`${this.method.item.module.name} ${this.method.item.name} ${this.method.name} ${this.name}: invalid Op`);
+            } catch (e) { if (e instanceof Error) throw e; }
+          
+          this.clip = new Clip(this.method.item.module, this.method.item, this.method, this, lines);
+          ops.set(this.name, null);
+//console.debug(this.clip.toString())
+        }
+      }                          // describes/parses a nested getter/setter/method, creates/owns clip
+      
+      class Name {
+        divs;                                 // container div id= modules|items|methods|ops class=list
+        div;                                  // this div/name
+        name;
+        #selected = false;                    // true iff div/name class='selected' (exclusive!)
+        get selected () { return this.#selected; }
+        set selected (value) {
+          if (this.#selected = !!value)
+            this.div.addClass('selected');
+          else
+            this.div.removeClass('selected');
+        }
+        #possible = false;                    // true class='possible' i.e., allowed by other selections
+        get possible () { return this.#possible; }
+        set possible (value) {
+          if (this.#possible = !!value)
+            this.div.addClass('possible');
+          else
+            this.div.removeClass('possible');
+        }
+                
+        constructor (divs, div) {
+          this.divs = divs;
+          this.div = div;
+          this.name = div.text();
+          div.on('click', () => this.click());
+        }
+        click () {
+          this.selected = !this.selected;     // toggle and display
+          this.div.get(0).scrollIntoView();   // mostly for URL parameters
+          if (count() == 1) show(); else clear();
+
+          const moduleNames = Array.from(modules.values()).filter(name => name.selected).map(name => name.name),
+            itemNames = Array.from(items.values()).filter(name => name.selected).map(name => name.name),
+            methodNames = Array.from(methods.values()).filter(name => name.selected).map(name => name.name),
+            opNames = Array.from(ops.values()).filter(name => name.selected).map(name => name.name);
+          
+          let possibles = clips.filter(clip => clip.test([], itemNames, methodNames, opNames)).
+            reduce((set, clip) => (set.add(clip.module), set), new Set());
+          modules.forEach((div, name) => div.possible = possibles.has(name));
+          
+          possibles = clips.filter(clip => clip.test(moduleNames, [], methodNames, opNames)).
+            reduce((set, clip) => (set.add(clip.item), set), new Set());
+          items.forEach((div, name) => div.possible = possibles.has(name));
+        
+          possibles = clips.filter(clip => clip.test(moduleNames, itemNames, [], opNames)).
+            reduce((set, clip) => (set.add(clip.method), set), new Set());
+          methods.forEach((div, name) => div.possible = possibles.has(name));
+    
+          possibles = clips.filter(clip => clip.test(moduleNames, itemNames, methodNames,
+            Array.from(ops.values()).map(name => name.name))).
+            reduce((set, clip) => (clip.op && set.add(clip.op), set), new Set());
+          ops.forEach((div, name) => div.possible = possibles.has(name));
+        }                        // toggles the selection, shows possibles
+      }                        // base class of controllers, one for each <div>name
+      class ModuleName extends Name {
+        constructor(div) { 
+          super($('#modules'), div);
+          if (!modules.has(this.name)) fatal(`${this.name}: no such module`);
+          modules.set(this.name, this);
+        }
+      }     // selects module name in #modules
+      class ItemName extends Name { 
+        constructor (div) {
+          super($('#items'), div);
+          if (!items.has(this.name)) fatal(`${this.name}: no such class or mix-in`);
+          items.set(this.name, this);
+        }
+      }      // selects item name in #items
+      class MethodName extends Name {
+        constructor (div) {
+          super($('#methods'), div);
+          if (!methods.has(this.name)) fatal(`${this.name}: no such method`);
+          methods.set(this.name, this);
+        }
+      }     // selects method name in #methods
+      class OpName extends Name {
+        constructor (div) {
+          super($('#ops'), div);
+          if (!ops.has(this.name)) fatal(`${this.name}: no such nested method`);
+          ops.set(this.name, this);
+        }
+      }         // selects nested method name in #ops
+      
+      const cmp = (a, b) => {
+        a = a.toLowerCase(); b = b.toLowerCase();
+        return a < b ? -1 : b < a ? 1 : 0
+      };            // compare strings in dictionary order
+      const setup = () => {
+        let div;
+        Array.from(modules.keys()).reduce(
+          (list, name) => (new ModuleName(div = $('<div/>').text(name)), list.append(div)), $('#modules').empty()
+        );            // fill the columns
+        Array.from(items.keys()).sort(cmp).reduce(
+          (list, name) => (new ItemName(div = $('<div/>').text(name)), list.append(div)), $('#items').empty()
+        );
+        Array.from(methods.keys()).sort(cmp).reduce(
+          (list, name) => (new MethodName(div = $('<div/>').text(name)), list.append(div)), $('#methods').empty()
+        );
+        Array.from(ops.keys()).sort(cmp).reduce(
+          (list, name) => (new OpName(div = $('<div/>').text(name)), list.append(div)), $('#ops').empty()
+        );
+        
+        $('#none, #show, #by-class').                     // animate focus for "buttons"
+          on('mouseenter', function () { $(this).trigger('focus'); }).
+          on('mouseexit', function () { $(this).trigger('blur'); }).
+          on('click', function () {
+            switch ($(this).attr('id')) {
+            case 'none':
+              modules.forEach(name => name.selected = name.possible = false);
+              items.forEach(name => name.selected = name.possible = false);
+              methods.forEach(name => name.selected = name.possible = false);
+              ops.forEach(name => name.selected = name.possible = false);
+              clear();
+              count();
+              return;
+            case 'show':
+              show(true);
+              return;
+            case 'by-class':
+              show();
+              return;
+            }
+          });                 // execute "buttons"
+
+        $('#modules, #items, #methods, #ops').            // animate focus for columns
+          on('mouseenter', function () { $(this).trigger('focus'); }).
+          on('mouseexit', function () { $(this).trigger('blur'); }).
+          on('keypress', function (event) {
+            const where = $(this).attr('id'),
+            ch = String.fromCharCode(event.charCode).toLowerCase();
+
+            if (ch == '\b') {                // DEL: deselect a column
+              map[where].forEach(name => name.selected = name.possible = false);
+              clear();
+              count();
+              return;
+            }
+            
+            if (/[_a-z]/.test(ch))           // initial: scroll to it
+              try {
+                $(this).find('div').each(function () {
+                  if ($(this).text().charAt(0).toLowerCase() >= ch) {
+                    $(this).get(0).scrollIntoView();
+                    throw '';
+                  }
+                });
+                $(this).find('div:first-child').get(0).scrollIntoView();
+              } catch (e) { return; }
+          });         // execute key press per column
+      };              // creates views and controllers
+      const selection = () => {
+        const moduleNames = Array.from(modules.values()).filter(name => name.selected).map(name => name.name),
+          itemNames = Array.from(items.values()).filter(name => name.selected).map(name => name.name),
+          methodNames = Array.from(methods.values()).filter(name => name.selected).map(name => name.name),
+          opNames = Array.from(ops.values()).filter(name => name.selected).map(name => name.name),
+          selection = clips.filter(clip => clip.test(moduleNames, itemNames, methodNames, opNames));
+//console.debug('selection', moduleNames, itemNames, methodNames, opNames)
+//console.log(selection.map(clip => clip.toString()))
+        return selection;
+      };          // returns "selected" clips
+      const clear = () => {
+        $('.sunlight-container').remove();
+      };              // clears code display
+      const count = () => {
+        const count = selection().length;
+        $('#count').text(` ${count} `);
+        return count;
+      };              // displays number and returns size of selection
+      const show = (byMethod) => {
+        count();
+        const text = (!byMethod ? selection() : 
+            selection().sort((a, b) => a.op && b.op ? cmp(a.op, b.op) : cmp(a.method, b.method))
+          ).map(clip => clip.toString()).join('\n\n');
+        clear();
+        if (text.length) {
+          $('body').append(
+            $('<pre/>').attr('id', 'code').addClass('sunlight-highlight-javascript').text(text)
+          );
+          new Sunlight.Highlighter({
+            lineNumbers: true,
+            tabWidth: 2
+          }).highlightNode(document.getElementById('code'));
+        }
+      };       // clears code displays and displays selection(), if any
+      
+                                             // main program, defaults are optional
+      const run = (moduleList = [], itemList = [], methodList = [], opList = [], show1 = null) => {
+        setup();
+        
+        const init = (list, map) => list.forEach(name => { if (name = map.get(name)) name.click(); });
+        init(moduleList, modules);
+        init(itemList, items);
+        init(methodList, methods);
+        init(opList, ops);
+        
+        if (count() == 1 || show1) show();
+      };
+
+      $(function () {
+        const params = new URLSearchParams(window.location.search);
+        
+        let files = params.getAll('file');
+        if (!files.length)
+          files = [ 'modules/06.js', 'modules/07.js', 'modules/08.js' ];
+        files.forEach(file => { if (!pat.fileName.test(file)) throw new Error(`${file}: bad file name`); });
+                  
+        const load = urls =>                         // recursively load urls, then run()
+          $.ajax({
+            url:      urls.shift(),
+            success:  text => { 
+              new Module(text); urls.length ? load(urls) : run(params.getAll('module'),
+                params.getAll('item'), params.getAll('method'), params.getAll('op'), params.get('show'));
+            }, 
+            dataType: 'text'
+          });        
+        load(files);
+      });                  // on ready load default list of module files
+    </script>
+    <style>
+      @media screen {
+        .header { top: 0px; width: 100%; position: sticky; z-index: 10; background: white; }
+        .header table { margin: auto; }
+        .header table th { padding: 5px 1em; }
+        .header table .list { 
+          font-family: monospace; font-size: smaller;
+          min-height: 5em; max-height: 5em; overflow: scroll; border: thin solid lightgray; 
+        }
+        .header table .list div { padding-left: 5px; margin-right: 0.5em; }
+        .header table .list div.selected { background: lightskyblue !important; }
+        .header table .list div.possible { background: lavender; }
+        .header table td span { font-family: monospace; font-size: smaller; }
+        #none, #show, #by-class { border: thin solid lightgray; padding: 3px; border-radius: 5px; }
+        #count { border: thin solid transparent; padding: 3px; font-size: smaller; }
+        .header table hr { color: lightgray; }
+        #code { margin: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class='header'>
+      <table>
+        <tr>
+          <th> module </th>
+          <th> class or mix-in </th>
+          <th> method </th>
+          <th> nested method </th>
+          <th> </th>
+        </tr>
+        <tr>
+          <td> <div id='modules' class='list' tabindex='1'> </div> </td>
+          <td> <div id='items' class='list' tabindex='2'> </div> </td>
+          <td> <div id='methods' class='list' tabindex='3'> </div> </td>
+          <td> <div id='ops' class='list' tabindex='4'> </div> </td>
+          <td style='line-height: 1.5'>
+            <span id='show' tabindex='6'> show </span><span id='count'></span><span id='by-class' tabindex='7'> by class or mix-in </span> <br>
+            <span id='none' tabindex='5'> deselect </span>
+          </td>
+        </tr>
+      </table>
+      <hr>
+    </div>
+  </body>
+</html>
