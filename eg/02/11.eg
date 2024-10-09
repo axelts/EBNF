@@ -1,0 +1,8 @@
+%% output
+  This grammar recognizes a sum or difference of one or more numbers.
+%% grammar
+  sum: Number [{ '+' Number | '-' Number }];
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  12 - 345 + 6789

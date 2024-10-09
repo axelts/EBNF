@@ -1,0 +1,426 @@
+%% output
+  Compile nested functions into stack machine code.
+  Block structure. Declare before use.
+
+  Factorial with an inner helper function.
+  
+  Add a 'trace' variable to see which names belong to which scope.
+  Trace execution to see which variable is accessed using the display and when.
+
+Expected output:
+  1
+  0 1
+  1
+  1 1
+  2
+  2 2
+  3
+  3 6
+  4
+  4 24
+  5
+  5 120
+  0
+%% program
+  function factorial (n) begin
+    var f, calls;
+    function factorial (n) begin
+      calls = calls + 1;
+      if n <= 1 then return 1 fi;
+      factorial = n * factorial(n - 1)
+    end;
+    if n >= 0 then
+      f = factorial(n);
+      print calls;
+      return f
+    fi
+  end;
+  
+  function main (n) begin
+    while n <= 5 do
+      print n, factorial(n);
+      n = n + 1
+    od
+  end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')';
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator
+    class Machine13 extends Seven.Machine06 {
+      /** Data memory for nested functions.
+          @class @extends super.Memory
+          @property {number} dp - display (static link) pointer.
+          @property {number[]} frames - [remove]: unused.
+          @property {function} toString() - [replace]: uses `dp`. */
+      get Memory () {
+        return this.#Memory ??= class extends super.Memory {
+          dp = 0;                      // display (static link) pointer
+          // frames[] is no longer used
+          
+          toString () {
+            let fp = this.fp,                   // begin of (top) frame
+              to = this.length,                   // end of (top) frame
+              dp = this.dp,                              // static link
+              output = []; 
+            do {
+              if (!dp) fp = 0;                          // global frame
+              output.unshift(`${fp}:[ ${this.slice(fp, to).
+                map(slot => this.mapSlot(slot)).join(' ')} ]`);
+              to = fp;               // end and begin of previous frame
+              fp = this[dp - 2];              // previous frame pointer
+              dp = this[dp - 1];                // previous static link
+            } while (to);
+            return output.join(' ');
+          }
+        };
+      }
+      #Memory;
+    
+      /** `stack: ... arguments old-pc
+          -> ... arguments old-pc old-fp old-dp result display locals` */
+      Entry (parms, depth, size) {
+        return memory => {
+          const locals = size - parms - 4 - depth,   // local variables
+            fp = memory.length - parms - 1,         // new frame's base
+            dp = memory.length + 2;             // new display's bottom
+                                         // push old-fp, old-dp, result
+          memory.push(memory.fp, memory.dp, 0); 
+          if (depth > 1) memory.push(           // push part of display
+            ... memory.slice(memory.dp + 1, memory.dp + depth) );
+          memory.push(fp);                     // push new frame's base
+          if (locals)                    // push local variables if any
+            memory.push(... Array(locals).fill(0));
+          memory.fp = fp;                           // new dynamic link
+          memory.dp = dp;                       // new display's bottom
+        };
+      }
+    
+      /** `stack: ... arguments old-pc old-fp old-dp result display locals
+          -> ... result old-pc` */
+      Exit (memory) {
+    
+        const fp = memory.fp,        // current frame, i.e., @arguments
+          dp = memory.dp;             // current display, i.e., @result
+        memory.fp = memory[dp - 2];                   // restore old-fp
+        memory.dp = memory[dp - 1];                   // restore old-dp
+                                        // pop frame, push old-pc result
+        memory.splice(fp, Infinity, memory[dp], memory[dp - 3]);
+      }
+      
+      /** `stack: ... -> ... frame[depth][addr]` */
+      LoadDP (addr, depth) {
+        return memory =>
+          memory.push(memory[memory[memory.dp + depth] + addr]);
+      }
+    
+      /** `stack: ... val -> ... val | frame[depth][addr]: val` */
+      StoreDP (addr, depth) {
+        return memory => 
+          memory[memory[memory.dp+depth] + addr] = memory.at(-1);
+      }
+    }
+
+    // the actions (mixin)
+    const Nest13 = superclass => class extends superclass {
+      /** List of inner to outer nested frames, `null` at end.
+          @instance
+          @memberof module:Seven~Nest13 */
+      get functs () { return this.#functs; }  // current function stack
+      #functs = [ null ];
+    
+      /** Replace: manage stack of functions
+          @instance
+          @memberof module:Seven~Nest13 */
+      get funct () { return this.functs[0]; }
+      set funct (sym) {
+        if (sym) this.functs.unshift(sym);             // push function  
+        else this.functs.shift();                       // pop function
+      }
+    
+      constructor (parser, machine = new Machine13()) {
+        super(parser, machine);
+      }
+    
+      /** Describes a global or nested variable in {@linkcode module:Seven-Nest13 Nest13}.
+          @instance
+          @memberof module:Seven~Nest13
+          @class @extends super.Var
+          @property {number} depth - [extend] `>=1`: nested.
+          @property {function} load() - [replace] use `depth`.
+          @property {function} store() - [replace] use `depth`
+          @property {function} toString() - [replace] show `depth`. */
+      get Var () { return this.#Var ??= class extends super.Var {
+          load () {                         // [replace] load by depth
+            if (!this.depth)                                  // global
+              this.owner.machine.gen('Load', this.addr);
+            else if (this.depth+1 != this.owner.functs.length)// nested
+              this.owner.machine.gen('LoadDP', this.addr, this.depth);
+            else                                               // local
+              this.owner.machine.gen('LoadFP', this.addr);
+          }
+          store () {                       // [replace] store by depth
+            if (!this.depth)                                  // global
+              this.owner.machine.gen('Store', this.addr);
+            else if (this.depth+1 != this.owner.functs.length)// nested
+              this.owner.machine.gen('StoreDP', this.addr, this.depth);
+            else                                               // local
+              this.owner.machine.gen('StoreFP', this.addr);
+          }
+          toString () {
+            if (!this.depth) return `${this.name} at ${this.addr}`;
+            else return `${this.name} at ${this.addr}d${this.depth}`;
+          }
+        };
+      }
+      #Var;
+      
+      /** Returns new `Var` at next local/global address.
+          @instance
+          @memberof module:Seven~Nest13 */
+      _alloc (name) {
+        if (this.funct)                        // create local variable
+          return new this.Var(this, name, this.funct.size ++,
+            this.funct.depth);
+        else                                  // create global variable
+          return new this.Var(this, name, this.size ++, 0);
+      }  
+    
+      /** Describes a nested function with block structure in {@linkcode module:Seven-Nest13 Nest13}.
+          @instance
+          @memberof module:Seven~Nest13
+          @class @extends super.Fun
+          @property {number} depth - length of static link
+          @property {undefined|Block} scope - `.locals` contains `this`
+          @property {function} entry() - [extend] create bypass
+          @property {function} setParms() - [extend] room for display
+          @property {function} storeOk() - [replace] consider outer functions
+          @property {function} store() - [replace] consider `depth`
+          @property {function} pop() - [extend] check for undefined functions
+          @property {function} exit() - [replace] use `depth`, fix bypass
+          @property {function} toString () - [extend] display depth */
+      get Fun () { return this.#Fun ??= class extends super.Fun {
+          depth;        // length of static link, 1 for global function
+    
+          constructor (owner, name) {   // sets depth from owner.functs
+            super(owner, name);
+            this.depth = owner.functs.length;        // functs[.. null]
+          }
+    
+          entry () {                   // [extend] make room for bypass
+            if (this.depth > 1) {                    // nested function
+                                      // remember where this is defined
+              this.scope = this.owner.funct.blocks[0];
+              if (typeof this.scope.bypass == 'undefined')
+                this.scope.bypass =      // make room for bypass branch
+                  this.owner.machine.code.push(null) - 1;
+            }
+            super.entry();
+          }
+          setParms () { // frame: parms, old-pc, old-fp, old-dp, result
+            super.setParms();
+            this.addr = this.size ++;         // insert slot for old-dp
+            this.size += this.depth;         // leave slots for display
+          }
+          storeOk () {            // [replace] consider outer functions
+            if (this.owner.functs.some(f => f == this)) return true;
+            this.owner.parser.error(`${this.name}: ` +
+              `assigned to outside function`);
+            return false;
+          }
+          store () {                        // [replace] consider depth
+            if (this == this.owner.funct)                      // local
+              this.owner.machine.gen('StoreFP', this.addr);
+            else                                      // outer function
+              this.owner.machine.gen('StoreDP', this.addr, this.depth);
+          }
+          pop () {            // [extend] check for undefined functions
+            this.owner._check_defs(this.locals);
+            super.pop();
+          }
+          exit () {               // [replace] uses depth, fixes bypass
+            this.owner.machine.code[this.start] =
+              this.owner.machine.ins('Entry', this.parms,
+                this.depth, this.frameSize);
+            this.owner.machine.gen('Exit');      // needs no parms info
+            const end = this.owner.machine.gen('Return');
+            if (this.scope)                    // need to repair bypass
+              this.owner.machine.code[this.scope.bypass] =
+                this.owner.machine.ins('Branch', end);
+          }    
+          toString () {                     // [extend] display depth
+            return super.toString() + ` depth ${this.depth}`;
+          }
+        };
+      }
+      #Fun;
+    
+      /** Describes a block of nested symbols.
+          @instance
+          @memberof module:Seven~Nest13
+          @class Block extends super.Block
+          @property {undefined|number} bypass - address of branch to bypass nested function definitions */
+    
+      /** Replace: searches blocks, functions, and global.
+          @instance
+          @memberof module:Seven~Nest13 */
+      _find (name, report) {
+        let sym;
+        try {
+          this.functs.forEach(funct => {   // loop inner to outer funct
+            if (funct)                     // loop inner to outer block
+              funct.blocks.forEach(block => {
+                sym = block.locals.get(name);
+                if (typeof sym != 'undefined') throw sym;
+              });
+          });
+          return sym = this.symbols.get(name);                // global
+        } catch (sym) {                             // found in a block
+          if (sym instanceof Error) throw sym;      // shouldn't happen
+          return sym;
+        } finally {
+          if (report && !sym)
+              this.parser.error(`${name}: undefined`);
+        }
+      }
+    
+      // prog: [ vars ] funs;
+      // vars: 'var' names ';';
+      // names: Name [{ ',' Name }];
+      // funs: { fun };
+      // fun: head parms [ block ] ';';
+    
+      /** `head: 'function' Name;` returns function symbol.
+          @instance
+          @memberof module:Seven~Nest13 */
+      head (_, name) {
+        let sym = this._find(name);
+        try {
+          if (sym instanceof this.Fun) {
+            if (sym.depth >= this.functs.length) {  // same nesting level
+              if (typeof sym.start != 'number') throw true;    // forward
+              this.parser.error(`${name}: duplicate`);
+            }                      // else define at deeper nesting level
+          } else if (sym instanceof this.Var &&     // same nesting level
+                       sym.depth >= this.functs.length - 1) 
+            this.parser.error(`${name}: used as variable and function`);
+          sym = this._dcl(new this.Fun(this, name));       // (re-)define
+        } catch (e) { throw e;                        // shouldn't happen
+        } finally {
+          sym.entry();                // generate code for function entry
+          return this.funct = sym;                         // in function
+        }
+      }
+      
+      // parms: '(' [ names ] ')';
+      
+      /** `block: begin body 'end';` [inherit].
+          @instance
+          @memberof module:Seven~Nest13 */
+      block (b, body, e) { super.block(b, undefined, undefined, e); }
+    
+      // begin: 'begin';
+      // body: [ vars ] [ funs ] stmts;
+      // stmts: stmt [{ ';' stmt }];
+      // stmt: assign | print | return | block | loop | select;
+      // assign: symbol action;
+      // action: store | call;
+      // store: '=' sum;
+      // call: args;
+      // args: '(' [ sums ] ')';
+      // print: 'print' sums;
+      // sums: sum [{ ',' sum }];
+      // return: 'return' [ sum ];
+    
+      /** `loop: While cmp Do body 'od';` [inherit]
+          @instance
+          @memberof module:Seven~Nest13 */
+      loop (While, cmp, Do, body, od) {
+        super.loop(While, cmp, Do, undefined, undefined, od);
+      }
+    
+      // While: 'while';
+      // Do: 'do';
+      // select: 'if' cmp then [ else ] 'fi';
+      // then: Then [ body ];
+      
+      /** `else: Else body;` [inherit]
+          @instance
+          @memberof module:Seven~Nest13 */
+      else (e, b) { return super.else(e, undefined, undefined); }
+    
+      // Then: 'then';
+      // Else: 'else';
+      // cmp: sum rel;
+      // rel: eq | ne | gt | ge | lt | le;
+      // eq: '=' sum;
+      // ne: '<>' sum;
+      // gt: '>' sum;
+      // ge: '>=' sum;
+      // lt: '<' sum;
+      // le: '<=' sum;
+      // sum: product [{ add | subtract }];
+      // add: '+' product;
+      // subtract: '-' product;
+      // product: signed [{ multiply | divide }];
+      // multiply: '*' signed;
+      // divide: '/' signed;
+      // signed: [ '-' ] term;
+      // term: input | number | name | '(' sum ')';
+      // input: 'input' [ Number ];
+      // number: Number;
+      // name: symbol [ args ];
+      // symbol: Name;
+    };
+
+    return Nest13(Seven.Blocks09);
+  })()

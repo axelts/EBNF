@@ -1,0 +1,9 @@
+%% output
+  This grammar recognizes a sum of two numbers.
+  'sum' creates a list.
+%% grammar
+  sum: Number '+' Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  1 + 2

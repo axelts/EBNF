@@ -1,0 +1,117 @@
+%% output
+  Compile nested first-order functions into stack machine code.
+  Local variables, blocks. Declare before use. Functions as parameters only.
+
+  Nested function with a closure requires display [see 8/08].
+  
+  Expected output:
+    1 1
+    2 8
+    3 27
+    4 64
+    5 125
+    10 1000
+    9 729
+    8 512
+    7 343
+    6 216
+    0
+%% program
+  type loop (number, number, number, Calc);
+  type Calc (number): number;
+  type Printer (Calc);
+
+  function square (x): Calc begin square = x * x end;
+  function cube (x): Calc begin cube = x * x * x end;
+  
+  function loop (from, to, step, calc) begin
+  
+    function up (calc): Printer begin
+      while from <= to do
+        print from, calc(from);
+        from = from + step
+      od
+    end;
+    
+    function down (calc): Printer begin
+      while from >= to do
+        print from, calc(from);
+        from = from + step
+      od
+    end;
+    
+    if step < 0 then down(calc)
+    else
+      if step = 0 then to = from; step = 1 fi;
+      up(calc)
+    fi
+  end;
+    
+  function main () begin
+    var which;
+
+    function calc (x): Calc begin
+      if which > 0 then return square(x) fi;
+      return cube(x)
+    end;
+
+    which = input 0; loop(1, 5, 1, calc); loop(10, 6, -1, calc)
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' 'number' ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name;
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  Eight.Pass08(Eight.Global01(Seven.Nest13(Seven.Blocks09)))

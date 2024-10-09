@@ -1,0 +1,29 @@
+%% output
+  Error recovery in successive non-empty lists.
+  
+  Which of the four strategies fails?
+  Set 'actions': what is recognized in each case?
+%% grammar
+  sentence: '1' as  bs  ';';
+  sentence: '2' aes bs  ';';
+  sentence: '3' as  bes ';';
+  sentence: '4' aes bes ';';
+  sentence: $error;
+
+  as:  'a';
+  as:  as 'a';
+  
+  aes: 'a';
+  aes: $error;
+  aes: aes 'a';
+  aes: aes $error;
+
+  bs:  'b';
+  bs:  bs 'b';
+  
+  bes: 'b';
+  bes: $error;
+  bes: bes 'b';
+  bes: bes $error;
+%% program
+  1 b a b a;

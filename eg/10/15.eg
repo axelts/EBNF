@@ -1,0 +1,15 @@
+%% output
+  Error recovery in a non-empty list.
+  
+  Remove or move rule 2 or rule 5 and check the reduce/reduce conflict.
+  Try any input (including none): there is no "irrecoverable error".
+  Remove the rules containing '$error' to see the "irrecoverable error".
+%% grammar
+  sentence: some;
+  sentence: $error;
+  some: 'a';
+  some: some 'a';
+  some: $error;
+  some: some $error;
+%% program
+  b

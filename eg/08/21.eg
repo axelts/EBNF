@@ -1,0 +1,156 @@
+%% output
+  Compile nested first-order functions into stack machine code.
+  Local variables, blocks. Declare before use. Dynamic memory management.
+      
+  Evaluating an arithmetic expression.
+  Replicates the function composition used in example 6/07.
+  The result functions f(memory) and g(memory) evaluate (x + 1) / (y - 2) * 3
+  where 'memory' contains x * 10 + y
+  
+  Output
+    0 0 -1.5 -1.5
+    2 1 -9 -9
+    4 3 15 15
+    0
+%% program
+  type value (number): number, leaf (number): value;
+  type operator (value): operation, operation (value): value;
+  type compose (value, operation): value;
+
+  var trace;
+  
+  function num (n): leaf begin
+    function value (ignore) begin value = n end;
+    num = value
+  end;
+
+  function name (index): leaf begin
+    function value (memory) begin 
+      var n; n = 0;
+      while memory > 10 do memory = memory - 10; n = n + 1 od;
+      if index > 0 then value = memory else value = n fi
+    end;
+    name = value
+  end;
+
+  function add (rvalue): operator begin
+    function operation (lvalue) begin
+      function value (memory) begin
+        value = lvalue(memory) + rvalue(memory)
+      end;
+      operation = value
+    end;
+    add = operation
+  end;
+
+  function sub (rvalue): operator begin
+    function operation (lvalue) begin
+      function value (memory) begin
+        value = lvalue(memory) - rvalue(memory)
+      end;
+      operation = value
+    end;
+    sub = operation
+  end;
+
+  function multiply (rvalue): operator begin
+    function operation (lvalue) begin
+      function value (memory) begin 
+        value = lvalue(memory) * rvalue(memory)
+      end;
+      operation = value
+    end;
+    multiply = operation
+  end;
+
+  function divide (rvalue): operator begin
+    function operation (lvalue) begin
+      function value (memory) begin
+        value = lvalue(memory) / rvalue(memory)
+      end;
+      operation = value
+    end;
+    divide = operation
+  end;
+
+  function compose (lvalue, roperation) begin
+    compose = roperation(lvalue)
+  end;
+
+  function main () begin
+    var x: value, y: value, f: value, g: value;
+    trace = -1;
+    x = name(0);
+    y = name(1);
+    f = multiply(num(3))(divide(sub(num(2))(y))(add(num(1))(x)));
+    g = compose(
+          compose(
+            compose(x, add(num(1))), 
+            divide(
+              compose(y, sub(num(2))))),
+          multiply(num(3)));
+
+            
+    print x(0),   y(0), f(0),  g(0);
+    print x(21), y(21), f(21), g(21);
+    print x(43), y(43), f(43), g(43)
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' typename ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name [ ':' type ];
+  type: Name | 'number';
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: { args };
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [{ args }];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  Eight.First14(Eight.Global01(Seven.Nest13(Seven.Blocks09)))

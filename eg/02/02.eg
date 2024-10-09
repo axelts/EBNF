@@ -1,0 +1,9 @@
+%% output
+  This grammar recognizes a sum of exactly two numbers.
+  Numbers are sequences of one or more digits.
+%% grammar
+  sum: Number '+' Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  12 + 345 + 6789

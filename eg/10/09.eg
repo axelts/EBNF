@@ -1,0 +1,20 @@
+%% output
+  Unary minus.
+  
+  Expected Output: 1
+  Remove the precedence clause...
+%% grammar
+  %left '-';
+  
+  expr:     subtract | minus | number;
+  subtract: expr '-' expr;
+  minus:    '-' expr;
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  -1 -- 2
+%% actions
+  class Actions09 extends Ten.Actions07 {
+    minus (x, a) { return - a; }
+  }

@@ -1,0 +1,14 @@
+%% output
+  Reduce/reduce conflict.
+  
+  Click on 'parse' to see that a single 'Number' can be recognized.
+  Move the last rule so that it is the second rule and 'parse' again...
+%% grammar
+  expression: condition;
+  expression: Number;
+  condition: sum '<' sum;
+  sum: Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  0

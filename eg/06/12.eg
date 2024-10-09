@@ -1,0 +1,133 @@
+%% output
+  Compile a little language into a JavaScript function.
+  Check out the intermediate steps using 'trace actions'.
+  
+  Expected output: 18
+%% program
+  x = input 36; y = input 54;
+  while x <> y do
+    if x > y then x = x - y
+    else y = y - x
+    fi
+  od;
+  print x
+%% grammar
+  prog:     stmts;
+  stmts:    stmt [{ ';' stmt }];
+  stmt:     assign | print | loop | select;
+  assign:   Name '=' sum;
+  print:    'print' sums;
+  sums:     sum [{ ',' sum }];
+  loop:     'while' cmp 'do' stmts 'od';
+  select:   'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
+  cmp:      sum rel;
+  rel:      eq | ne | gt | ge | lt | le;
+  eq:       '=' sum;
+  ne:       '<>' sum;
+  gt:       '>' sum;
+  ge:       '>=' sum;
+  lt:       '<' sum;
+  le:       '<=' sum;   
+  sum:      product [{ add | subtract }];
+  add:      '+' product;
+  subtract: '-' product;
+  product:  signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide:   '/' signed;
+  signed:   [ '-' ] term;  
+  term:     input | number | name | '(' sum ')';
+  input:    'input' [ Number ];
+  number:   Number;
+  name:     Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  class Functions12 extends Six.Functions07 {
+    /** `prog: stmts;` returns executable */
+    prog (stmts) { return () => stmts({ }); }
+  
+    /** `stmts: stmt [{ ';' stmt }];` returns fct */
+    stmts (stmt, many) {
+      return (many ? many[0] : []).
+        reduce((left, list) => 
+          memory => (left(memory), list[1][0](memory)), stmt[0]);
+    }
+  
+    // stmt:     assign | print | loop | select;
+  
+    /** `assign: Name '=' sum;` returns fct */
+    assign (name, e, sum) {
+      return memory => memory[name] = sum(memory);
+    }
+  
+    /** `print: 'print' sums;` returns function */
+    print (p, sums) {
+      return memory => puts(... sums.map(fct => fct(memory)));
+    }
+  
+    /** `sums: sum [{ ',' sum }];` returns list of functions */
+    sums (sum, many) {
+      return [ sum ].concat(many ? many[0].map(seq => seq[1]) : []);
+    }
+  
+    /** `loop: 'while' cmp 'do' stmts 'od';` returns fct */
+    loop (w, cmp, d, stmts, o) {
+      return memory => { while (cmp(memory)) stmts(memory); };
+    }
+  
+    /** `select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';` returns fct */
+    select (i, cmp, t, stmts, opt, f) { 
+      return opt ?
+        (memory => cmp(memory) ? stmts(memory) : opt[1](memory)) :
+        (memory => { if (cmp(memory)) stmts(memory); });
+    }
+    
+    /** `cmp: sum rel;` returns fct */
+    cmp (sum, rel) { return memory => rel[0](sum)(memory); }
+  
+    // rel:      eq | ne | gt | ge | lt | le;
+  
+    /** `eq: '=' expr;` returns fct for composition */
+    eq (_, right) {
+      return left => memory => left(memory) == right(memory);
+    }
+    
+    /** `ne: '<>' expr;` returns fct for composition */
+    ne (_, right) {
+      return left => memory => left(memory) != right(memory);
+    }
+  
+    /** `gt: '>' expr;` returns fct for composition */
+    gt (_, right) {
+      return left => memory => left(memory) > right(memory);
+    }
+  
+    /** `ge: '>=' expr;` returns fct for composition */
+    ge (_, right) {
+      return left => memory => left(memory) >= right(memory);
+    }
+  
+    /** `lt: '<' expr;` returns fct for composition */
+    lt (_, right) {
+      return left => memory => left(memory) < right(memory);
+    }
+  
+    /** `le: '<=' expr;` returns fct for composition */
+    le (_, right) {
+      return left => memory => left(memory) <= right(memory);
+    }
+  
+    /** `sum: product [{ add | subtract }];` returns fct */
+    sum (product, many) { return this.product(product, many); }
+  
+    // add:      '+' product;
+    // subtract: '-' product;
+    // product:  signed [{ multiply | divide }];
+    // multiply: '*' signed;
+    // divide:   '/' signed;
+    // signed:   [ '-' ] term;
+    // term:     input | number | name | '(' sum ')';
+    // input:    'input' [ Number ];
+    // number:   Number;
+    // name:     Name;
+  }

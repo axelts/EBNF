@@ -1,0 +1,11 @@
+%% output
+  This grammar recognizes a sum of two or more numbers.
+  'sum' creates a list, braces create a list of lists, 'more' creates an extra list, 'term' creates a list.
+%% grammar
+  sum: Number { more };
+  more: '+' term;
+  term: Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  1 + 2

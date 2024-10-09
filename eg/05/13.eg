@@ -1,0 +1,25 @@
+%% output
+  This grammar accepts inputs starting with the word 'literal',
+  optionally followed by either 'maybe' or 'not' and an exclamation mark,
+  and either of those followed by a number [same as 5/12].
+  Simpler actions to drill down to the number.
+%% grammar
+  rules: { rule };
+  rule: 'literal' [ maybe | not ];
+  maybe: 'maybe' Number;
+  not:   'not' '!' Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  literal maybe 1 literal not ! 2
+%% actions
+  class Actions {
+    // rule: 'literal' [ maybe | not ];
+    rule (literal, opt) { if (opt) puts(opt[0]); }
+
+    // maybe: 'maybe' Number;   // returns Number value
+    maybe (m, number) { return parseInt(number, 10); }
+    
+    // not: 'not' '!' Number;   // returns Number value
+    not (n, exclamation, number) { return parseInt(number, 10); }
+  }

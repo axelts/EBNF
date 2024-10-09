@@ -1,0 +1,15 @@
+%% output
+   EBNF Grammar's Grammar.
+   
+   Copy the grammar into the program area and let it recognize itself.
+%% grammar
+  grammar: { rule };
+  rule:    Token ':' alt ';';
+  alt:     seq [{ '|' seq }];
+  seq:     { lit | ref | opt | some };
+  lit:     Lit;
+  ref:     Token;
+  opt:     '[' alt ']';
+  some:    '{' alt '}';
+%% tokens
+  EBNF.Grammar.terminals

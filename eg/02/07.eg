@@ -1,0 +1,10 @@
+%% output
+  This grammar recognizes a sum of one or more numbers.
+  Unfortunately, right recursion corresponds to right associativity.
+%% grammar
+  sum: Number [ more ];
+  more: '+' sum;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  12 + 345 + 6789

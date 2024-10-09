@@ -1,0 +1,15 @@
+%% output
+  This grammar recognizes one or more sums or differences of one or more numbers [see 4/02].
+  Numbers can be signed and can be decimal, hexadecimal, or octal.
+  This grammar is not ambiguous because semicolon is used for termination.
+%% grammar
+  sums: { sum ';' };
+  sum: term [{ more }];
+  more: '+' term | '-' term;
+  term: [ '+' | '-' ] Number | '(' sum ')';
+%% tokens
+  { Number: /[1-9][0-9]*|0[xX][0-9a-fA-F]+|0[0-7]*/ }
+%% program
+  1 - (2 + - 3);
+  4 + 0x5;
+  - 6 - 07;

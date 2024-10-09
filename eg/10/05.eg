@@ -1,0 +1,53 @@
+%% output
+  Immediate evaluation of arithmetic expressions.
+  
+  Expected Output: 2
+%% grammar
+  sum:      product | add | subtract;
+  add:      sum '+' product;
+  subtract: sum '-' product;
+  product:  factor | multiply | divide;
+  multiply: product '*' factor;
+  divide:   product '/' factor;
+  factor:   power | term;
+  power:    term '**' factor;
+  term:     number | '(' sum ')';
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+   1 + 2*3 - 45/(1 + 2**3**2 / 4**3)
+%% actions
+  class Actions {
+    // sum: product | add | subtract;
+    sum (value) { return value; }
+   
+    // add: sum '+' product;
+    add (sum, x, product) { return sum + product; }
+    
+    // subtract: sum '-' product;
+    subtract (sum, x, product)  { return sum - product; }
+
+    // product: factor | multiply | divide;
+    product (value) { return value; }
+    
+    // multiply: product '*' factor;
+    multiply (product, x, factor) { return product * factor; }
+
+    // divide: product '/' factor;
+    divide (product, x, factor) { return product / factor; }
+    
+    // factor: power | term;
+    factor (value) { return value; }
+    
+    // power: term '**' factor;
+    power (term, x, factor) { return term ** factor; }
+    
+    // term: number | '(' sum ')';
+    term (... arg) {
+      return arg.length > 1 ? arg[1] : arg[0];
+    }
+    
+    // number: Number;
+    number (number) { return parseInt(number, 10); }
+  }

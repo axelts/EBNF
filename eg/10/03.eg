@@ -1,0 +1,11 @@
+%% output
+  Shift/reduce conflict: dangling 'else'.
+%% grammar
+  statement: 'if' Number statement;
+  statement: 'if' Number statement 'else' statement;
+  statement: Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  if 1
+    if 2 3 else 4

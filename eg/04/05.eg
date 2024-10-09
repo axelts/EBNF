@@ -1,0 +1,13 @@
+%% output
+  The 'dangling else' issue [see 2/04].
+  This grammar has a problem; toggle 'greedy' to get past the ambiguity error.
+  Does 'else d' belong to 'if a' or to 'if b'?   
+%% grammar
+  stmt: Text | if;
+  if: 'if' Text 'then' stmt [ 'else' stmt ];
+%% tokens
+  { Text: /[a-z]+/ }
+%% program
+  if a then
+    if b then c
+    else d

@@ -1,0 +1,17 @@
+%% output
+  This grammar recognizes arithmetic expressions [see 2/12].
+  The first rule recognizes one or more expressions, separated by commas.
+  The grammar uses no tokens and recognizes individual digit literals instead.
+  Note that here single digits can be separated by white space.
+%% grammar
+  list: sum [{ ',' sum }];
+  sum: product [{ '+' product | '-' product }];
+  product: signed [{ '*' signed | '/' signed }];
+  signed: [ '-' | '+' ] term;
+  term: Number | '(' sum ')';
+  Number: { '0' | '1' | '2' | '3' | '4' 
+          | '5' | '6' | '7' | '8' | '9' };
+%% program
+  1 + 2 * 3 / (4 - 5) - (6 + 7),
+  -1 2 3,
+  -4 * -(5 + 3)

@@ -1,0 +1,14 @@
+%% output
+  EBNF structures in EBNF: one or more sequences.
+  Output:
+    [ 
+      [
+        [ 'a' [ 'b' ] 'c' ]
+        [ 'a'   null  'c' ]
+      ] 
+    ]
+%% grammar
+  some: { 'a' [ 'b' ] 'c' };
+%% program
+  a b c
+  a c

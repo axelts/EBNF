@@ -1,0 +1,26 @@
+%% output
+  BNF rule precedence in EBNF.
+  
+  Expected Output: -3
+  How can '-1 -- 2 ---- 4' evaluate to '5' rather than '-7'?
+%% grammar
+  %right Number;
+  %left '-';
+
+  expr: expr '-' expr | 
+        '-' expr %prec Number |
+        Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  -1 -- 2
+%% actions
+  class Actions {
+    expr (... arg) {
+      switch (arg.length) {
+      case 3: return arg[0] - arg[2];
+      case 2: return - arg[1];
+      case 1: return parseInt(arg[0], 10);
+      }
+    }
+  }

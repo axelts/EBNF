@@ -1,0 +1,25 @@
+%% output
+  EBNF Grammar's Grammar, using different literals.
+%% grammar
+  grammar: { rule };
+  rule:    Token 'is' alt 'end';
+  alt:     seq [{ 'or' seq }];
+  seq:     { lit | ref | opt | some };
+  lit:     Lit;
+  ref:     Token;
+  opt:     'maybe' alt 'end';
+  some:    'do' alt 'end';
+%% tokens
+  {
+    Lit:   /\\./,
+    Token: /[A-Za-z]+/
+  }
+%% program
+  grammar is do rule end end
+  rule    is Token \: alt \; end
+  alt     is seq maybe do \| seq end end end
+  seq     is do lit or ref or opt or some end end
+  lit     is Lit end
+  ref     is Token end
+  opt     is \[ alt \] end
+  some    is \{ alt \} end

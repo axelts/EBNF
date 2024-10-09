@@ -1,0 +1,59 @@
+%% output
+  Grammar for a comma-separated list of arithmetic expressions with variables.
+  Compile an arithmetic expression into a JavaScript function.
+  First step: evaluate variable names [see 6/04].
+  
+  Output: 3 -6 -12
+%% grammar
+  list: sum [{ ',' sum }];
+  sum: 'let' Name '=' sum | product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product:  signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: number | name | '(' sum ')';
+  number: Number;
+  name: Name;
+%% tokens
+  {
+    Number: /0|[1-9][0-9]*/,
+    Name: /[a-z]+/
+  }
+%% program
+  let x = 3,
+  (x + 1) / (y - 2) * 3,
+  y + (x + 1) / ((let y = 1) - 2) * 3
+%% actions
+  class Functions05 extends Six.Eval04 {
+    #parser;                                    // for error messages
+    get parser () { return this.#parser; }
+  
+    constructor (parser) { super(); this.#parser = parser; }
+    
+    // list: sum [{ ',' sum }];
+    
+    /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+    // arg          [1]      [3]   [0]     [1]
+    sum (... arg) {
+      if (arg.length < 4) return this.parser.call(this, super.sum, arg[0], arg[1]);
+      if (!this.memory) this.memory = { };
+      return this.memory[arg[1]] = arg[3];
+    }
+    
+    // add: '+' product;
+    // subtract: '-' product;
+    // product:  signed [{ multiply | divide }];
+    // multiply: '*' signed;
+    // divide: '/' signed;
+    // signed: [ '-' ] term;
+    // term: number | name | '(' sum ')';
+    // number: Number;
+  
+    /** `name: Name;` returns value or `0` */
+    name (name) {
+      if (!this.memory) this.memory = { };
+      return name in this.memory ? this.memory[name] : 0;
+    }
+  }

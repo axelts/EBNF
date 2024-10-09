@@ -1,0 +1,16 @@
+%% output
+  EBNF structures in BNF: one or more sequences with optional elements.
+  Output:
+    [ 
+      [ [ 'a' [ 'b' ] 'c' ] ]
+      [ 'a' [  ] 'c' ]
+    ]
+%% grammar
+  some: seq;
+  some: some seq;  
+  seq: 'a' opt 'c';
+  opt: 'b';
+  opt: ;
+%% program
+  a b c
+  a c

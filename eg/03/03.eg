@@ -1,0 +1,14 @@
+%% output
+  Overlapping patterns.
+  
+  Press 'new grammar' and then 'scan' to see that '2.3' does not get recognized.
+  Rename 'Real' to 'Float' (in grammar and tokens) to use the pattern before 'Int'. 
+%% grammar
+  examples:  { Int | Real };
+%% tokens
+  {
+    Int: /0|[1-9][0-9]*/,
+    Real: /(?:0|[1-9][0-9]*)\.[0-9]*/  // should be first!
+  }
+%% program
+  1 2.3

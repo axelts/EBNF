@@ -1,0 +1,328 @@
+%% output
+  Compile nested first-order functions into stack machine code.
+  Local variables, blocks. Declare before use. Functions as parameters only.
+
+  Function as argument value [see 8/01].
+  
+  Expected output:
+    1 1
+    2 4
+    3 9
+    4 16
+    5 25
+    10 1000
+    9 729
+    8 512
+    7 343
+    6 36
+    0
+%% program
+  type loop (number, number, number, Calc);
+  type Calc (number): number;
+  type Printer (Calc);
+
+  function square (x): Calc begin square = x * x end;
+  function cube (x): Calc begin cube = x * x * x end;
+  
+  function loop (from, to, step, calc) begin
+  
+    function up (calc): Printer begin
+      while from <= to do
+        print from, calc(from);
+        from = from + step
+      od
+    end;
+    
+    function down (calc): Printer begin
+      while from >= to do
+        print from, calc(from);
+        from = from + step
+      od
+    end;
+    
+    if step < 0 then down(calc)
+    else
+      if step = 0 then to = from; step = 1 fi;
+      up(calc)
+    fi
+  end;
+    
+  function main () begin
+    loop(1, 5, 1, square);
+    loop(10, 7, -1, cube);
+    loop(6, 7, 0, square)
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' 'number' ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name;
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator (mixin)
+    const Machine08 = superclass => class extends superclass {
+      /** `stack: ... arguments dp old-pc  
+          -> ... arguments old-pc old-fp old-dp result display locals`
+          @param {number} args - size of argument values.
+          @param {number} depth - number of display entries.
+          @param {number} vars - size of local variables.
+          @instance
+          @memberof module:Eight~Machine08 */
+      Entry (args, depth, vars) {
+        return memory => {
+          const fp = memory.length - args - 2,        // next memory.fp
+            dp = memory.splice(-1, 1, memory.pop(),    // retain old-pc
+                   memory.fp, memory.dp, 0  // push fp, dp, result slot
+              )[0];                         // extract incoming display
+          memory.fp = fp;                           // new frame's base
+          memory.dp = memory.length - 1;          // new display's base
+                                 // copy incoming display up to depth-1
+          memory.push(... memory.slice(dp + 1, dp + depth),
+            memory.fp,                              // append new frame
+            ... Array(vars).fill(0));     // initialize local variables
+        };
+      }
+      /** `stack: ... arguments old-pc old-fp old-dp result display locals
+          -> ... result old-pc`
+          @param {number} args - size of argument values.
+          @instance
+          @memberof module:Eight~Machine08 */
+      Exit (args) {
+        return memory => {
+          const fp = memory.fp;                        // current frame
+          memory.splice(fp, args,             // remove argument values
+            memory[fp + args + 3]);                    // insert result      
+                               // restore old fp dp, free rest of frame
+          [ memory.fp, memory.dp ] = memory.splice(fp + 2, Infinity);
+        };
+      }
+      /** `stack: ... -> ... dp`
+          @instance
+          @memberof module:Eight~Machine08 */
+      PushDP (memory) {
+        memory.push(memory.dp);
+      }
+    };
+
+    // the actions (mixin)
+    const Pass08 = superclass => class extends superclass {
+      /** Describes a variable in {@linkcode module:Eight~Pass08 Pass08}
+          @class @extends super.Var
+          @instance
+          @memberof module:Eight~Pass08
+          @property {function} load() - [replace] for function slots.
+          @property {function} storeOk(type) - [extend] false for function value.
+    */
+      get Var () { return this.#Var ??= class extends super.Var {
+          
+          load () {       // [replace] load two slots for function type
+            const load = addr => {
+              if (!this.depth)                                // global
+                this.owner.machine.gen('Load', addr);
+              else if (this.depth+1 != this.owner.functs.length)
+                                                              // nested
+                this.owner.machine.gen('LoadDP', addr, this.depth);
+              else this.owner.machine.gen('LoadFP', addr);     // local
+            };
+            load(this.addr);              // top:value or below:display
+            if (this.type.isFun) load(this.addr + 1);  // + top:address
+          }
+          
+          storeOk (type) {    // [extend] read-only function parameters
+            if (this.type?.isFun) {
+              this.owner.parser.error(`${this.name}: read only parameter`);
+              return false;
+            }
+            return super.storeOk(type);      
+          }
+        };
+      }
+      #Var;
+    
+      /** Describes a function in {@linkcode module:Eight~Pass08 Pass08}.
+          @class @extends super.Fun
+          @instance
+          @memberof module:Eight~Pass08
+          @property {number} parms - [replace] memory slots for arguments.
+          @property {function} setParms() - [replace] function values take 2 slots.
+          @property {function} call() - [extend] `PushDP`, `Call(addr)`.
+          @property {function} load() - [extend] `PushDP`, `Push(start)`.
+          @property {function} exit() - [replace] `Entry`, `Exit`. */
+      get Fun () { return this.#Fun ??= class extends super.Fun {
+    
+          setParms (name) {           // [replace] sets parameter types
+            try {
+              const type = this.owner.typeSymbols.get(name);
+              if (!type) throw `${name}: not a type`;
+              if (!type.isFun) throw `${name}: not a function type`;
+              if (this.type && this.type != type)
+                throw `${name} ${this.name}: ` +
+                  `previously declared as ${this.type.name}`;
+              if (type.parms.length != this.locals.size)
+                throw `${name} ${this.name} arguments: expects ` +
+                  `${type.parms.length}, receives ${this.locals.size}`;
+              this.type = type;
+              this.size = 0;          // parameter addresses start at 0
+              let n = 0;              // Map.forEach does not provide n
+              this.locals.forEach(parm => {
+                parm.addr = this.size ++;      // set parameter address
+                parm.type = type.parms[n ++];     // set parameter type
+                if (parm.type.isFun) ++ this.size; // function argument
+              });
+              this.parms = this.size;                 // argument slots
+              this.size += 3;        // room for old pc, old fp, old dp
+              this.addr = this.size;               // address of result
+              this.size += 1 + this.depth;  // room for result, display
+            } catch (e) {
+              if (e instanceof Error) throw e;      // shouldn't happen
+              this.owner.parser.error(e);            // report an error
+            }
+          }
+          
+          call () {                       // [extend] generate 'PushDP'
+            this.owner.machine.gen('PushDP'); super.call();
+          }
+          
+          load () {                       // [extend] generate 'PushDP'
+            this.owner.machine.gen('PushDP'); super.load();
+          }
+          
+          exit () {                    // [replace] new 'Entry', 'Exit'
+            this.owner.machine.code[this.start] =
+              this.owner.machine.ins('Entry', this.parms,  // arguments
+                this.depth,                  // display, variable slots
+                this.frameSize - (this.parms + 4 + this.depth));
+            this.owner.machine.gen('Exit', this.parms);
+            const end = this.owner.machine.gen('Return');
+            if (this.scope)                    // need to repair bypass
+              this.owner.machine.code[this.scope.bypass] =
+                this.owner.machine.ins('Branch', end);
+          }    
+        };
+      }
+      #Fun;
+    
+      constructor (parser, machine) {
+        super(parser, machine ?? new (Machine08(Eight.Machine01(Seven.Machine13)))());
+      }
+    
+      /** [Replace] Need `PushDP` for `main`.
+          @param {Fun} main - describes `main()`.
+          @instance
+          @memberof module:Eight~Pass08 */
+      _startup (main) {
+        for (let p = 0; p < main.parms; ++ p)  // push arguments if any
+          this.machine.gen('Push', 0);
+        this.machine.gen('PushDP');             // push display pointer
+        this.machine.gen('Call', main.start);     // call main function
+        this.machine.gen('Print', 1);                  // print and pop
+      }  
+    
+      // prog: [ typedcls ] [ vars ] funs;
+      // typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+      // typedcl: Name '(' [ types ] ')' [ ':' 'number' ];
+      // types: typename [{ ',' typename }];
+      // typename: Name | 'number';
+      // vars: 'var' varname [{ ',' varname }] ';';
+      // varname: Name;
+      // funs: { fun };
+      // fun: head parms [ block ] ';';
+      // head: 'function' Name;
+      // parms: '(' [ names ] ')' [ ':' Name ];
+      // names: Name [{ ',' Name }];
+      // block: begin body 'end';
+      // body: [ vars ] [ funs ] stmts;
+      // begin: 'begin';
+      // stmts: stmt [{ ';' stmt }];
+      // stmt: assign | print | return | block | loop | select;
+      // assign: symbol action;
+      // action: store | call;
+      // store: '=' sum;
+      // call: args;
+      // args: '(' [ sums ] ')';
+      // print: 'print' sums;
+      // sums: sum [{ ',' sum }];
+      // return: 'return' [ sum ];  
+      // loop: While cmp Do body 'od';
+      // While: 'while';
+      // Do: 'do';
+      // select: 'if' cmp then [ else ] 'fi';
+      // then: Then [ body ];
+      // else: Else body;
+      // Then: 'then';
+      // Else: 'else';
+      // cmp: sum rel;
+      // rel: eq | ne | gt | ge | lt | le;
+      // eq: '=' sum;
+      // ne: '<>' sum;
+      // gt: '>' sum;
+      // ge: '>=' sum;
+      // lt: '<' sum;
+      // le: '<=' sum;
+      // sum: product [{ add | subtract }];
+      // add: '+' product;
+      // subtract: '-' product;
+      // product: signed [{ multiply | divide }];
+      // multiply: '*' signed;
+      // divide: '/' signed;
+      // signed: [ '-' ] term;
+      // term: input | number | name | '(' sum ')';
+      // input: 'input' [ Number ];
+      // number: Number;
+      // name: symbol [ args ];
+      // symbol: Name;
+    };
+
+    return Pass08(Eight.Global01(Seven.Nest13(Seven.Blocks09)));
+  })()

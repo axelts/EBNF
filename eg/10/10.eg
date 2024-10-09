@@ -1,0 +1,19 @@
+%% output
+  Unary minus with (lower) rule precedence.
+  
+  Expected Output: -3
+  Interchange the precedence rules and run again.
+%% grammar
+  %right Number;
+  %left '-';
+
+  expr:     subtract | minus | number;
+  subtract: expr '-' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  -1 -- 2
+%% actions
+  Ten.Actions09

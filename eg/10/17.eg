@@ -1,0 +1,73 @@
+%% output
+  Error recovery in typical iteration constructs [see 10/16].
+  Collect rule usage.
+  Set 'no args' to ignore argument count errors.
+%% grammar
+  example: ;
+  example: example 'many' many ';';
+  example: example 'some' some ';';
+  example: example 'list' list ';';
+  many: ;
+  many: many 'm';
+  many: many $error;
+  some: 's';
+  some: some 's';
+  some: $error;
+  some: some $error;
+  list: 'l';
+  list: list ',' 'l';
+  list: $error;
+  list: list $error;
+  list: list $error 'l';
+%% program
+  many;
+  many m m;
+  many A;
+  many B m;
+  many m C m;
+  many m D m E;
+
+  some s s;
+  some F;
+  some G s;
+  some s H s;
+  some s s I;
+
+  list l;
+  list l, l;
+  list l,;
+  list J;
+  list l K;
+  list l L l;
+  list l, M;
+  list l, N l;
+  list l, O,;
+  list l, P, l;
+  list l, Q, l,;
+%% actions
+  class Actions {
+    example (example, tag, rules) {
+      if (!(typeof example == 'string')) return '';     // example: ;
+      return `${example}${tag} ${rules.join(' ')}\n`; // example: ...
+    }
+    
+    many (many, m) {
+      if (!many) return [ 5 ];                             // many: ;
+      many.push(m == 'm' ? 6 : 7); return many;    // many: many 'm';
+    }
+    
+    some (some, s) {
+      if (some == 's') return [ 8 ];                    // some: 's';
+      if (!some) return [ 10 ];                      // some: $error;
+      some.push(s == 's' ? 9 : 11); return some;   // some: some 's';
+    }
+      
+    list (list, comma, l) {
+      if (list == 'l') return [ 12 ];                   // list: 'l';
+      if (!list) return [ 14 ];                      // list: $error;
+      if (comma == ',') list.push(13);         // list: list ',' 'l';
+      else if (l == 'l') list.push(16);     // list: list $error 'l';
+      else list.push(15);                       // list: list $error;
+      return list;
+    }
+  }

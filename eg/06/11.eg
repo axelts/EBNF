@@ -1,0 +1,226 @@
+%% output
+  Compile a little language into stack machine code.
+  Step through the program.
+  Append 'trace = -1;' to the first line of the program
+  and see the interpreter trace the first two statements.
+  
+  Expected output: 18
+%% program
+  x = input 36; y = input 54;
+  while x <> y do
+    if x > y then x = x - y
+    else y = y - x
+    fi
+  od;
+  print x
+%% grammar
+  prog:     stmts;
+  stmts:    stmt [{ ';' stmt }];
+  stmt:     assign | print | loop | select;
+  assign:   Name '=' sum;
+  print:    'print' sums;
+  sums:     sum [{ ',' sum }];
+  loop:     While cmp Do stmts 'od';
+  While:    'while';
+  Do:       'do';
+  select:   'if' cmp Then stmts [ Else stmts ] 'fi';
+  Then:     'then';
+  Else:     'else';
+  cmp:      sum rel;
+  rel:      eq | ne | gt | ge | lt | le;
+  eq:       '=' sum;
+  ne:       '<>' sum;
+  gt:       '>' sum;
+  ge:       '>=' sum;
+  lt:       '<' sum;
+  le:       '<=' sum;   
+  sum:      product [{ add | subtract }];
+  add:      '+' product;
+  subtract: '-' product;
+  product:  signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide:   '/' signed;
+  signed:   [ '-' ] term;  
+  term:     input | number | name | '(' sum ')';
+  input:    'input' [ Number ];
+  number:   Number;
+  name:     Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator
+    class Machine11 extends Six.Machine10 {
+      /** Returns trace function, if any */
+      trace (address) {
+        if (address === true)                    // unconditional trace
+          return (memory, pc) =>            // traces instruction at pc
+            puts(memory.toString(), pc+':', this.code[pc].toString());
+        if (typeof address == 'number') // address of control variable?
+          return (memory, pc) => {          // traces instruction at pc
+            if (memory[address] >= 0) // variable at addr non-negative?
+              puts(memory.toString(), pc+':', this.code[pc].toString());
+          };
+      }
+    
+      /** Data memory.
+          @class extends Array
+          @property {number} pc - program counter.
+          @property {boolean} continue - true if execution can be continued.
+          @property {function} toString() - represents as text. */
+      get Memory () { return this.#Memory ??= class extends Array {
+          toString () { return '[ ' + this.join(' ') + ' ]'; }
+        };
+      }
+      #Memory;
+      
+      /** Returns stack machine executable */
+      run (size, startAddr = 0, traceAddr) {
+        let t;                      // [closure] trace function, if any
+        const StackMachine = (memory, steps) => {
+          if (!memory) {                                 // initialize?
+            if (steps) t = this.trace(true);  // steps? permanent trace
+            else {                           // no steps: don't suspend
+              t = this.trace(traceAddr); steps = Infinity;
+            }
+            memory = new this.Memory(size).fill(0);    // create memory
+            memory.pc = startAddr;        // initialize program counter
+            t && puts(memory.toString());             // initial memory
+          }
+          while (steps -- && memory.pc < this.code.length) {  // steps?
+            const pc = memory.pc ++;         // advance program counter
+            this.code[pc](memory);            // execute at previous pc
+            t && t(memory, pc);           // trace executed instruction
+          }
+          memory.continue = memory.pc < this.code.length;     // again?
+          return memory;
+        };
+        return (memory, steps) => StackMachine(memory, steps);
+      }
+      
+      /** `stack: ... -> ... | pc: a` */                   Branch (a) {
+        return memory => memory.pc = a;
+      }
+      /** `stack: ... bool -> ... | pc: !bool? a` */        Bzero (a) {
+        return memory => { if (!memory.pop()) memory.pc = a; }
+      }
+      /** `stack: ... a b -> ... a == b` */               Eq (memory) {
+        memory.splice(-2, 2, memory.at(-2) == memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a >= b` */               Ge (memory) {
+        memory.splice(-2, 2, memory.at(-2) >= memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a > b` */                Gt (memory) {
+        memory.splice(-2, 2, memory.at(-2) > memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a <= b` */               Le (memory) {
+        memory.splice(-2, 2, memory.at(-2) <= memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a < b` */                Lt (memory) {
+        memory.splice(-2, 2, memory.at(-2) < memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a != b` */               Ne (memory) {
+        memory.splice(-2, 2, memory.at(-2) != memory.at(-1));
+      }
+      /** `stack: ... n*val -> ...` */                      Print (n) {
+        return memory => puts(... memory.splice(- n));
+      }
+    }
+
+    // the actions
+    class Control11 extends Six.Arithmetic10 {
+      constructor (parser, machine = new Machine11()) {
+        super(parser, machine);
+      }
+      
+      /** `prog: stmts;` returns executable */
+      prog (_) {
+        const size = this.symbols.size,          // number of variables
+          traceAddr = this.symbols.get('trace'); // if a variable named
+        if (typeof traceAddr != 'undefined') {     // ...'trace' exists
+          puts(this.machine.toString());                   // show code
+          this.symbols.forEach(              // show variable addresses
+            (addr, name) => puts(`${name} at ${addr}`)
+          );
+          puts('stack starts at', size);
+        }
+        return this.machine.run(size, 0, traceAddr);   // stack machine
+      }
+      
+      // stmts:    stmt [{ ';' stmt }];
+    
+      /** `stmt: assign | print | loop | select;` [replace] no op */
+      stmt (stmt) { }
+    
+      /** `assign: Name '=' sum;` stores and pops stack */
+      assign (name, e, s) {
+        this.machine.gen('Store', this._alloc(name));
+        this.machine.gen('Pop');
+      }
+    
+      /** `print: 'print' sums;` */
+      print (_, sums) { this.machine.gen('Print', sums); }
+    
+      /** `sums: sum [{ ',' sum }];` returns number of values */
+      sums (sum, many) { return 1 + (many ? many[0].length : 0); }
+      
+      /** `loop: While cmp Do stmts 'od';` */
+      loop (While, _, Do, s, o) {
+        const od = this.machine.gen('Branch', While);
+        this.machine.code[Do] = this.machine.ins('Bzero', od);
+      }
+    
+      /** `While: 'while';` returns address for branch to `while` */
+      While (w) { return this.machine.code.length; }
+    
+      /** `Do: 'do';` returns address of slot for bzero to `od` */
+      Do (d) { return this.machine.code.push(null) - 1; }
+    
+      /** `select: 'if' cmp Then stmts [ Else stmts ] 'fi';` */
+      select (i, c, Then, s, Else, f) {
+        const fi = this.machine.code.length;         // address of 'fi'
+        if (Else) {
+          Else = Else[0];               // address after branch to 'fi'
+          this.machine.code[Then] = this.machine.ins('Bzero', Else);
+          this.machine.code[Else - 1] = this.machine.ins('Branch', fi);     
+        } else
+          this.machine.code[Then] = this.machine.ins('Bzero', fi);
+      }
+    
+      /** `Then: 'then';` returns address for bzero to `else` `fi` */
+      Then (t) { return this.machine.code.push(null) - 1; }
+    
+      /** `Else: 'else';` creates slot for branch to `fi`,
+          returns address of `else` */
+      Else (e) { return this.machine.code.push(null); }
+    
+      // cmp:      sum rel;
+      // rel:      eq | ne | gt | ge | lt | le;
+    
+      /** `eq: '=' sum;` */   eq () { this.machine.gen('Eq'); } 
+    
+      /** `ne: '<>' sum;` */  ne () { this.machine.gen('Ne'); }
+      
+      /** `gt: '>' sum;` */   gt () { this.machine.gen('Gt'); }
+    
+      /** `ge: '>=' sum;` */  ge () { this.machine.gen('Ge'); }
+    
+      /** `lt: '<' sum;` */   lt () { this.machine.gen('Lt'); }
+       
+      /** `le: '<=' sum;` */  le () { this.machine.gen('Le'); }
+    
+      // sum:      product [{ add | subtract }];
+      // add:      '+' product;
+      // subtract: '-' product;
+      // product:  signed [{ multiply | divide }];
+      // multiply: '*' signed;
+      // divide:   '/' signed;
+      // signed:   [ '-' ] term;
+      // term:     input | number | name | '(' sum ')';
+      // input:    'input' [ Number ];
+      // number:   Number;
+      // name:     Name;
+    }
+
+    return Control11;
+  })()

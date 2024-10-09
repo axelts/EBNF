@@ -1,0 +1,86 @@
+%% output
+  Represent a comma-separated list of arithmetic expressions as a tree [see 6/01].
+  
+  Import the actions as 'Eleven.Build_RD(Eleven.Build)' from the built-in module 'Eleven'
+  and recompile.
+  
+  Output:
+    [ 'list' 
+      [ 'number' 1 ]  [ 'number' 2 ] [ 'number' 3 ] ...
+      [ 'multiply' 
+        [ 'minus' [ 'number' 4 ] ]
+        [ 'minus' [ 'add' [ 'number' 5 ] [ 'number' 3 ] ] ] ] ]
+%% program
+  1, 2, (3), 2 / 3 * 4, 2 / (3*4),
+  1 + 2 * 3 / (4 - 5) - (6 + 7),
+  -123,
+  -4 * -(5 + 3)
+%% grammar
+  list: sum [{ ',' sum }];
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;  
+  term: number | '(' sum ')';
+  number: Number;
+%% tokens
+  { Number: /0|[1-9][0-9]*/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // base class for tree building
+    class Build {
+      // Sets the property 
+      constructor (parser) { this.parser = parser; }
+    
+      // Tags node with source position as .lineno if available. 
+      _lineno (node) {
+        if (this.parser.current && this.parser.current.lineno)
+          node.lineno = this.parser.current.lineno;
+        return node;
+      }
+    }
+
+    // methods corresponding to the grammar rules
+    const Build_RD = superclass => class extends superclass {
+      // list: sum [{ ',' sum }]; returns [ 'list' sum ... ]
+      list (sum, many) {
+        return [ 'list', sum ].concat(many ? many[0].map(alt => alt[1]) : []);
+      }
+    
+      // sum: product [{ add | subtract }]; returns tree
+      sum (product, many) { return (many ? many[0] : []).
+        reduce((sum, alt) => (alt[0][1] = sum, alt[0]), product);
+      }
+    
+      // add: '+' product; returns [ 'add' null product ]
+      add (x, right) { return [ 'add', null, right ]; }
+    
+      // subtract: '-' product; returns [ 'subtract' null product ]
+      subtract (x, right) { return [ 'subtract', null, right ]; }
+    
+      // product: signed [{ multiply | divide }]; returns tree
+      product (signed, many) { return (many ? many[0] : []).
+        reduce((product, alt) => (alt[0][1] = product, alt[0]), signed);
+      }
+    
+      // multiply: '*' signed; returns [ 'multiply' null signed ]
+      multiply (x, right) { return [ 'multiply', null, right ]; }
+    
+      // divide: '/' signed; returns [ 'divide' null signed ]
+      divide (x, right) { return [ 'divide', null, right ]; }
+    
+      // signed: [ '-' ] term; returns term or [ 'minus' term ]
+      signed (minus, term) { return minus ? [ 'minus', term ] : term; }
+    
+      // term: number | name | '(' sum ')'; returns tree
+      term (...val) { return val.length == 1 ? val[0] : val[1] }
+    
+      // number: Number; returns [ 'number' number ]
+      number (number) { return [ 'number', parseInt(number, 10) ]; }
+    };
+
+    return Build_RD(Build);
+  }) ()

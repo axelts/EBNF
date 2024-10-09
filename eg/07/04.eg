@@ -1,0 +1,367 @@
+%% output
+  Compile functions into stack machine code.
+  Declare before use, no parameters, no local variables.
+  
+  Check that '99' is not printed at the end.
+  Add a variable 'trace' to show code and trace execution.
+  
+  Expected output: 18 18
+%% program
+  var x, y;
+  function fa;
+  function fb;
+  
+  function main begin
+    x = input 36; y = input 54;
+    fa; print x;
+    x = 90; y = 72;
+    return fb; print 99
+  end;
+
+  function fa begin
+    if x = y then return x fi;
+    if x > y then x = x - y else y = y - x fi;
+    fa = fb
+  end;
+
+  function fb begin
+    if x = y then fb = x else 
+      if x > y then x = x - y else y = y - x fi;
+      fb = fa
+    fi
+  end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head [ 'begin' stmts 'end' ] ';';
+  head: 'function' Name;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | loop | select;
+  assign: Name [ '=' sum ];
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp Then stmts [ Else stmts ] 'fi';
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator
+    class Machine04 extends Six.Machine11 {
+      /** `stack: ... -> ... old-pc | pc: addr` */
+      Call (addr) { 
+        return memory => (memory.push(memory.pc), memory.pc = addr);
+      }
+      /** `stack: ... old-pc -> ,,, 0 old-pc` */
+      Entry (memory) { 
+        memory.splice(-1, 0, 0);
+      }
+      /** `stack: ... old-pc -> ... | pc: old-pc` */
+      Return (memory) { 
+        memory.pc = memory.pop(); 
+      }
+      /** `stack: ... x old-pc result -> ... result old-pc result` */
+      ReturnValue (memory) { 
+        memory.splice(-3, 1, memory.at(-1)); 
+      }    
+    }
+
+    // the actions
+    class Functions04 extends Six.Control11 {
+      /** Manages next (global) variable address */
+      get size () { return this.#size; }
+      set size (size) { this.#size = size; }
+      #size = 0;
+      
+      /** Describes current function */
+      get funct () { return this.#funct; }
+      set funct (sym) { this.#funct = sym; }
+      #funct;
+    
+      /** (Inner) base class for symbol descriptions.
+          @class
+          @property {module:Seven~Functions04} owner - outer class.
+          @property {string} name - variable or function name. */
+      get Symbol () { return this.#Symbol ??= class {
+          owner;                                   // surrounding class         
+          name;                               // variable/function name
+        
+          constructor (owner, name) {
+            this.owner = owner; this.name = name; 
+          }
+        };
+      }
+      #Symbol;
+    
+      /** Describes a variable.
+          @class @extends Symbol
+          @property {number} addr - memory address.
+          @property {function} load() - generates load instruction.
+          @property {function} storeOk() - always true.
+          @property {function} store() - generates store instruction.
+          @property {function} toString() - represents as text. */
+      get Var () { return this.#Var ??= class extends this.Symbol {
+          addr;                                       // memory address
+      
+          constructor (owner, name, addr) {
+            super(owner, name); this.addr = addr;
+          }
+          load () {                        // generate load instruction
+            this.owner.machine.gen('Load', this.addr);
+          }
+          storeOk () { return true; }       // always permit assignment
+          store () {                      // generate store instruction
+            this.owner.machine.gen('Store', this.addr);
+          }
+          toString () { return `${this.name} at ${this.addr}`; }
+        };
+      }
+      #Var;
+    
+      /** Describes a function.
+          @class @extends Symbol
+          @property {boolean|number} start - code address.
+          @property {number[]} calls - slots to insert `Call`.
+          @property {number[]} returns - slots to insert branch to exit.
+          @property {function} entry() - generates preamble code.
+          @property {function} undo() - undoes `entry()`.
+          @property {function} call() - generates `Call` instruction.
+          @property {function} return() - generates branch to exit.
+          @property {function} storeOk() - true if allowed to store.
+          @property {function} store() - generates store instruction.
+          @property {function} end() - fixes `calls`/`returns`, `exit()`.
+          @property {function} exit() - generates postamble code.
+          @property {function} toString() - represents as text. */
+      get Fun () { return this.#Fun ??= class extends this.Symbol {
+          start = false;                  // start address, not yet set
+          calls = [];                    // forward references to entry
+          returns = [];                   // forward references to exit
+        
+          entry () { // defines start address, arranges slot for result
+            this.start = this.owner.machine.gen('Entry') - 1;
+          }  
+          undo () {               // ends a declaration, undoes entry()
+            this.owner.machine.code.length = this.start;
+            this.start = false;
+          }  
+          call () {    // create Call or save address for slot for Call
+            if (typeof this.start == 'number')
+              this.owner.machine.gen('Call', this.start);
+            else
+              this.calls.push(this.owner.machine.code.push(null) - 1);
+          }
+          return () {           // create slot for Branch, save address
+            this.returns.push(this.owner.machine.code.push(null) - 1);
+          }
+          storeOk () {                     // ok to store result value?
+            if (this == this.owner.funct) return true;
+            this.owner.parser.error(`${this.name}: ` +
+                `assigned to outside function`);
+            return false;
+          }
+          store () {              // store top of stack as result value
+            this.owner.machine.gen('ReturnValue');
+          }
+          end () {          // resolve calls and returns if any, exit()
+            const call = this.owner.machine.ins('Call', this.start);
+            this.calls.forEach(c => this.owner.machine.code[c] = call);
+            this.calls.length = 0;
+    
+            const br = this.owner.machine.ins('Branch',
+              this.owner.machine.code.length);
+            this.returns.forEach(c => this.owner.machine.code[c] = br);
+            this.returns.length = 0;
+            this.exit();
+          }
+          exit () {      // generates code to return from function call
+            this.owner.machine.gen('Return');
+          }    
+          toString () {
+            return `function ${this.name} start ${this.start}`;
+          }
+        };
+      }
+      #Fun;
+      
+      constructor (parser, machine = new Machine04()) {
+        super(parser, machine);
+      }
+    
+      /** Returns symbol description for name, if any */
+      _find (name, report) {
+        const sym = this.symbols.get(name);
+        if (report && !sym) this.parser.error(`${name}: undefined`);
+        return sym;
+      }
+      
+      /** (Re-)defines and returns `sym`, cannot be undefined */
+      _dcl (sym, report) {
+        if (report && this.symbols.get(sym.name))
+          this.parser.error(`${sym.name}: duplicate`);
+        this.symbols.set(sym.name, sym);
+        return sym;
+      }
+      
+      /** Returns new `Var` at next global address. */
+      _alloc (name) { return new this.Var(this, name, this.size ++); }
+      
+      /** Flags undefined functions, returns main if defined */ 
+      _check_defs (map) {
+        let main = undefined;
+        map.forEach(sym => {
+          if (sym instanceof this.Fun)
+            if (typeof sym.start != 'number')
+              this.parser.error(`${sym.name}: undefined function`);
+            else if (sym.name == 'main')
+              main = sym;
+        });
+        return main;
+      }
+    
+      /** Generates `Call` to `main.start` and `Print` result
+          @param {Fun} main - describes `main()`. */
+      _startup (main) {
+        this.machine.gen('Call', main.start);     // call main function
+        this.machine.gen('Print', 1);                  // print and pop
+      }
+    
+      /** `prog: [ vars ] funs;` returns executable */
+      prog (v, f) {
+        const main = this._check_defs(this.symbols),  // flag undefined
+          startAddr = this.machine.code.length,      // at startup code
+          trace = this._find('trace'),  // does variable 'trace' exist?
+          traceAddr = trace instanceof this.Var ? trace.addr : false;
+        if (main) this._startup(main);         // generate call to main
+        else this.parser.error('main: undefined');
+        if (traceAddr !== false) {                 // if 'trace' exists
+          puts(this.machine.toString());                  // show code,
+          this.symbols.forEach(s => puts(s.toString()));    // symbols,
+          puts('stack starts at', this.size);   // variable memory size
+          if (main) puts('execution starts at', startAddr);
+        }
+        return this.machine.run(this.size, startAddr, traceAddr);
+      }
+    
+      // vars: 'var' names ';';
+    
+      /** `names: Name [{ ',' Name }];` defines new variables,
+          returns number of names */
+      names (name, some) {
+         const dcl = name => this._dcl(this._alloc(name), true);
+         dcl(name);
+         if (some) some[0].forEach(list => dcl(list[1]));
+         return 1 + (some ? some[0].length : 0);
+      }
+    
+      // funs: { fun };
+    
+      /** `fun: head [ 'begin' stmts 'end' ] ';';` */
+      fun (head, opt, _) {
+        if (opt) head.end();            // function definition: wrap up
+        else head.undo();   // function declaration: discard entry code
+        this.funct = null;                           // not in function
+      }
+    
+      /** `head: 'function' Name;` returns function symbol */
+      head (f, name) {
+        let sym = this._find(name);
+        if (! (sym instanceof this.Fun)) {
+          if (sym instanceof this.Var)
+            this.parser.error(`${name}: used as variable and function`);
+          sym = this._dcl(new this.Fun(this, name));
+        }
+        if (typeof sym.start == 'number') {
+          this.parser.error(`${name}: duplicate`);
+          sym = this._dcl(new this.Fun(this, name));           // patch
+        }
+        sym.entry();                // generate code for function entry
+        return this.funct = sym;                         // in function
+      }
+    
+      // stmts: stmt [{ ';' stmt }];
+      // stmt: assign | print | return | loop | select;
+    
+      /** `assign: Name [ '=' sum ];` */
+      assign (name, sum) {
+        const sym = this._find(name, true);
+        if (sym) {
+          if (sym instanceof this.Var)
+            if (sum && sym.storeOk()) sym.store();   // variable = sum
+            else this.parser.error(`${name}: cannot call a variable`);
+          else if (!sum) sym.call();                   // function call
+          else if (sym.storeOk()) sym.store();        // function = sum
+          this.machine.gen('Pop');                       // clear stack
+        }
+      }
+    
+      // print: 'print' sums;
+      // sums: sum [{ ',' sum }];
+    
+      /** `return: 'return' [ sum ];` */
+      return (r, sum) {
+        if (sum && this.funct.storeOk())
+          (this.funct.store(), this.machine.gen('Pop'));
+        this.funct.return();
+      }
+    
+      // loop: While cmp Do stmts 'od';
+      // While: 'while';
+      // Do: 'do';
+      // select: 'if' cmp Then stmts [ Else stmts ] 'fi';
+      // Then: 'then';
+      // Else: 'else';
+      // cmp: sum rel;
+      // rel: eq | ne | gt | ge | lt | le;
+      // eq: '=' sum;
+      // ne: '<>' sum;
+      // gt: '>' sum;
+      // ge: '>=' sum;
+      // lt: '<' sum;
+      // le: '<=' sum;
+      // sum: product [{ add | subtract }];
+      // add: '+' product;
+      // subtract: '-' product;
+      // product: signed [{ multiply | divide }];
+      // multiply: '*' signed;
+      // divide: '/' signed;
+      // signed: [ '-' ] term;
+      // term: input | number | name | '(' sum ')';
+      // input: 'input' [ Number ];
+      // number: Number;
+    
+      /** `name: Name;` */
+      name (name) {
+        const sym = this._find(name, true);
+        if (sym instanceof this.Fun) sym.call();
+        else if (sym) sym.load();
+      }
+    }
+
+    return Functions04;
+  })()

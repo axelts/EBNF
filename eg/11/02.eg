@@ -1,0 +1,84 @@
+%% output
+  Represent an arithmetic expression as a tree using a precedence table [see 6/07].
+  Use the stack-based parser.
+  
+  Output with actions:
+    [ 'subtract' 
+      [ 'add' [ 'number' 1 ] 
+              [ 'multiply' [ 'minus' [ 'number' 2 ] ] [ 'number' 3 ] ] ] 
+      [ 'divide' [ 'number' 45 ] 
+                 [ 'add' [ 'number' 1 ] 
+                         [ 'divide' [ 'power' [ 'number' 2 ] 
+                                              [ 'power' [ 'number' 3 ] [ 'number' 2 ] ] ]
+                                    [ 'power' [ 'number' 4 ] [ 'number' 3 ] ] ] ] ] ]
+
+  Output without actions:
+    [ [ [ [ [ [ '1' ] ]
+            '+' 
+            [ [ [ [ '-' [ [ '2' ] ] ] ] '*' [ [ '3' ] ] ] ] ] ]
+        '-' 
+        [ [ [ [ '45' ] ]
+            '/' 
+            [ '(' [ [
+                      [ [ '1' ] ] 
+                      '+' 
+                      [ [ [ [ [ [ '2' ] ] 
+                              '**' 
+                              [ [ [ [ '3' ] ] 
+                                  '**' 
+                                  [ [ '2' ] ] ] ] ] ]
+                          '/' 
+                          [ [ [ [ '4' ] ]
+                              '**' 
+                              [ [ '3' ] ] ] ] ] ] ] ] ')' ] ] ] ] ]
+%% program
+   1 + -2*3 - 45/(1 + 2**3**2 / 4**3)
+%% grammar
+  %left '+' '-';
+  %left '*' '/';
+  %right '**';
+  %right Number;
+
+  expr:     add | subtract | multiply | divide | power 
+            | minus | '(' expr ')' | number;
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // methods corresponding to the grammar rules
+    const Build_Number = superclass => class extends superclass {
+      // expr: add | ... | '(' expr ')' | number; returns tree
+      expr (...values) { return values.length > 1 ? values[1] : values[0]; }
+    
+      // add: expr '+' expr; returns [ 'add' a b ]
+      add (a, x, b) { return this._lineno([ 'add', a, b ]); }
+    
+      // subtract: expr '-' expr; returns [ 'subtract' a b ]
+      subtract (a, x, b) { return this._lineno([ 'subtract', a, b ]); }
+    
+      // multiply: expr '*' expr; returns [ 'multiply' a b ]
+      multiply (a, x, b) { return this._lineno([ 'multiply', a, b ]); }
+    
+      // divide: expr '/' expr; returns [ 'divide' a b ]
+      divide (a, x, b) { return this._lineno([ 'divide', a, b ]); }
+    
+      // power: expr '**' expr; returns [ 'power' a b ]
+      power (a, x, b) { return this._lineno([ 'power', a, b ]); }
+    
+      // minus: '-' expr; returns [ 'minus' b ]
+      minus (x, b) { return this._lineno([ 'minus', b ]); }
+    
+      // number: Number; returns [ 'number' number ]
+      number (number) { return this._lineno([ 'number', parseInt(number, 10) ]); }
+    };
+
+    // builder for expressions
+    return Build_Number(Eleven.Build);
+  }) ()

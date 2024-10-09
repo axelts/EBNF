@@ -1,0 +1,9 @@
+%% output
+  Simple state table.
+  Left-recursion, two alternatives with the same lookahead.
+%% grammar
+  root: 'a';
+  root: 'a' 'b';
+  root: root 'c';
+%% program
+  a b c c

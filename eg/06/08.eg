@@ -1,0 +1,53 @@
+%% output
+  Grammar for one arithmetic expression with variables.
+  Actions to translate into postfix notation.
+  
+  Output: x 1 add input 2 minus subtract divide 3 multiply
+%% grammar
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% program
+  (x + 1) / (input - -2) * 3
+%% actions
+  class Postfix08 {
+    // sum: product [{ add | subtract }];
+    
+    /** `add: '+' right;` */
+    add (_, r) { puts('add'); }
+  
+    /** `subtract: '-' right;` */
+    subtract (_, r) { puts('subtract'); } 
+    
+    // product: signed [{ multiply | divide }];
+  
+    /** `multiply: '*' right;` */
+    multiply (_, r) { puts('multiply'); }
+  
+    /** `divide: '/' signed;` */
+    divide (_, r) { puts('divide'); } 
+  
+    /** `signed: [ '-' ] term;` */
+    signed (minus, t) {  if (minus) puts('minus'); }
+  
+    // term: input | number | name | '(' sum ')';
+  
+    /** `input: 'input' [ Number ];` */
+    input (i, n) { puts('input'); }
+  
+    /** `number: Number;` */
+    number (number) { puts(number); }
+  
+    /** `name: Name;` */
+    name (name) { puts(name); } 
+  }

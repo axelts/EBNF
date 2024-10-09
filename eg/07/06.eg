@@ -1,0 +1,372 @@
+%% output
+  Compile functions into stack machine code.
+  Parameters and local variables, declare before use.
+
+  Expected output: 18 18
+%% program
+  function euclid (x,y) begin
+    if x > y then return euclid(x-y, y) fi;
+    if y > x then return euclid(x, y-x) fi;
+    euclid = x
+  end;
+
+  function main () begin
+    print euclid(input 36, input 54);
+    main = euclid(90, 72)
+  end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')';
+  block: 'begin' [ vars ] stmts 'end';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp Then stmts [ Else stmts ] 'fi';
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator
+    class Machine06 extends Seven.Machine04 {
+      /** Data memory for frames.
+          @class @extends super.Memory
+          @property {number} fp - frame pointer.
+          @property {number[]} frames - list of number of parameters,
+            in reverse order of dynamic link.
+          @property {function} mapSlot() - shows one slot
+          @property {function} toString() - [replace] shows frames. */
+      get Memory () {
+        return this.#Memory ??= class extends super.Memory {
+          fp = 0;                           // global frame starts at 0
+          frames = [ 0 ];   // toString(): list of number of parameters
+          
+          toString () {
+            let fp = this.fp,                   // begin of (top) frame
+              to = this.length;                   // end of (top) frame
+            return this.frames.map((parms, n) => {
+              try {
+                return `${fp}:[ ${this.slice(fp, to).
+                  map(slot => this.mapSlot(slot)).join(' ')} ]`;
+              } catch (e) { throw e;                // shouldn't happen
+              } finally {
+                to = fp;             // end and begin of previous frame
+                if (n == this.frames.length-1) fp = 0;       // globals
+                else fp = this[fp + parms + 1];       // previous frame
+              }
+            }).reverse().join(' ');
+          }
+          
+          mapSlot (slot) {                   // hook to interpret slots
+            return typeof slot == 'undefined' ? 'undefined' : slot;
+          }
+        };
+      }
+      #Memory;
+    
+      /** `stack: ... arguments old-pc
+          -> ... arguments old-pc old-fp result locals` */
+      Entry (parms, size) { 
+        return memory => {
+          const locals = size - parms - 3,           // local variables
+            fp = memory.length - parms - 1;         // new frame's base
+          memory.push(memory.fp, 0);             // push old-fp, result
+          if (locals)                   // push local variables, if any
+            memory.push(... Array(locals).fill(0));
+          memory.fp = fp;                           // new dynamic link
+          memory.frames.unshift(parms);  // push frames stack for trace      
+        };
+      } 
+    
+      /** `stack: ... arguments old-pc old-fp result locals
+          -> ... result old-pc` */
+      Exit (parms) {  
+        return memory => {
+          const fp = memory.fp;                        // current frame
+          memory.fp = memory[fp + parms + 1];   // restore dynamic link
+          memory.splice(fp, Infinity,  // pop frame, push result old-pc
+            memory[fp + parms + 2], memory[fp + parms]);
+          memory.frames.shift();            // pop frames stack (trace)
+        };
+      }
+      
+      /** `stack: ... -> ... frame[addr]` */
+      LoadFP (addr) {
+        return memory => memory.push(memory[memory.fp + addr]);
+      }
+    
+      /** `stack: ... val -> ... val | frame[addr]: val` */
+      StoreFP (addr) {
+        return memory => memory[memory.fp + addr] = memory.at(-1);
+      }
+    }
+
+    // the actions
+    class Parameters06 extends Seven.Functions04 {
+      /** Describes a global or local variable.
+          @class @extends super.Var
+          @property {number} depth - 0: global, 1: local.
+          @property {function} load() - [replace] global/local.
+          @property {function} store() - [replace] global/local. */
+      get Var () { return this.#Var ??= class extends super.Var {
+          depth;                               // 0: global, else local
+          
+          constructor (owner, name, addr, depth) {
+            super(owner, name, addr); this.depth = depth;
+          }
+          load () {                        // generate load instruction
+            if (this.depth)                                    // local
+              this.owner.machine.gen('LoadFP', this.addr);
+            else                                              // global
+              this.owner.machine.gen('Load', this.addr);
+          }
+          store () {                      // generate store instruction
+            if (this.depth)                                    // local
+              this.owner.machine.gen('StoreFP', this.addr);
+            else                                              // global
+              this.owner.machine.gen('Store', this.addr);
+          }
+          toString () {
+            return `${this.name} at ${this.depth ? '+' : ''}${this.addr}`;
+          }
+        };
+      }
+      #Var;
+      
+      /** Describes a function with parameters and local variables.
+          @class @extends super.Fun
+          @property {number} parms - number of parameters.
+          @property {number} addr - offset of function result slot in frame.
+          @property {Map} locals - maps names to local variables.
+          @property {number} size - size of frame.
+          @property {function} entry() - [replace] slot for `Entry`.
+          @property {function} setParms() - captures number of parameters, starts frame.
+          @property {function} undo() - [extend] also reset locals.
+          @property {function} store() - [replace] use `StoreFP`.
+          @property {function} exit() - [replace] fill `Entry`, `Exit`. */
+      get Fun () { return this.#Fun ??= class extends super.Fun {
+          parms;                                // number of parameters
+          addr;              // offset of function result slot in frame
+          #locals = new Map();      // maps local names to descriptions
+          get locals () { return this.#locals; }
+          set locals (locals) { this.#locals = locals; }
+          #size = 0;                        // next address, frame size
+          get size () { return this.#size; }
+          set size (size) { this.#size = size; }
+          
+          entry () {  // defines start address, arranges slot for Entry
+            this.start = this.owner.machine.code.push(null) - 1;
+          }  
+          setParms () {         // frame: parms, old-pc, old-fp, result
+            if (typeof this.parms != 'undefined' 
+                && this.parms != this.size)
+              this.owner.parser.error(`${this.name} parameters: ` +
+                `previously ${this.parms}, now ${this.size}`);
+            this.parms = this.size;         // set number of parameters
+            this.size += 2;         // leave room for old pc and old fp
+            this.addr = this.size ++;          // leave slot for result
+          }
+          undo () {
+            this.locals = new Map();             // undefine parameters
+            this.size = 0;            // reset next address, frame size
+            super.undo();
+          }
+          store () {                                   // use `StoreFP`
+            this.owner.machine.gen('StoreFP', this.addr);
+          }
+          exit () {           // fills Entry, generates Exit and Return
+            this.owner.machine.code[this.start] =
+              this.owner.machine.ins('Entry', this.parms, this.size);
+            this.owner.machine.gen('Exit', this.parms);
+            this.owner.machine.gen('Return');
+          }    
+          toString () {
+            const names = [];
+            this.locals.forEach(sym => names.push(sym.name));
+            return `function ${this.name} start ${this.start} ` +
+              `parms ${this.parms} size ${this.size} ` +
+              `[ ${names.join(' ')} ]`;
+          }
+        };
+      }
+      #Fun;
+      
+      /** Manages a stack of contexts for assign or call to a name */
+      get context () {
+        if (this.#contexts.length) return this.#contexts.at(-1);
+        throw 'no context';                              //can't happen
+      }
+      set context (context) {            // push a value, pop with null
+        if (context) this.#contexts.push(context);
+        else this.#contexts.pop();
+      }
+      #contexts = [];
+    
+      constructor (parser, machine = new Machine06()) {
+        super(parser, machine);
+      }
+    
+      /** Replace: returns new `Var` at next local/global address. */
+      _alloc (name) {
+        if (this.funct)                      // create local variable
+          return new this.Var(this, name, this.funct.size ++, 1);
+        else                                // create global variable
+          return new this.Var(this, name, this.size ++, 0);
+      }  
+    
+      /** Extend: checks local then global map, returns `sym` */
+      _find (name, report) {
+        let sym;
+        if (this.funct && (sym = this.funct.locals.get(name)))
+          return sym;                                          // local
+        return super._find(name, report);                     // global
+      }
+    
+      /** Replace: sets innermost map, returns `sym` */
+      _dcl (sym, report) {
+        const map = this.funct ? this.funct.locals : this.symbols;
+        
+        if (report && map.get(sym.name))
+          this.parser.error(`${sym.name}: duplicate`);
+        map.set(sym.name, sym);
+        return sym;
+      }
+      
+      /** [Extend] Push 0 for `main` parameters.
+          @param {Fun} main - describes `main()`. */
+      _startup (main) {
+        for (let p = 0; p < main.parms; ++ p)
+          this.machine.gen('Push', 0);
+        super._startup(main);
+      }
+      
+      // prog: [ vars ] funs;
+      // vars: 'var' names ';';
+      // names: Name [{ ',' Name }];
+      // funs: { fun };
+    
+      /** `fun: head parms [ block ] ';';` */
+      fun (head, parms, opt, _) { super.fun(head, opt); }
+    
+      // head: 'function' Name;
+    
+      /** `parms: '(' [ names ] ')';` */
+      parms (lp, names, rp) { this.funct.setParms(); }
+    
+      // block: 'begin' [ vars ] stmts 'end';
+      // stmts: stmt [{ ';' stmt }];
+      // stmt: assign | print | return | loop | select;
+    
+      /** `assign: symbol action;` codes `Pop`, pops context */
+      assign (symbol, action) {
+        this.machine.gen('Pop'); this.context = null;    // pop context
+      }
+    
+      // action: store | call;
+    
+      /** `store: '=' sum;` expects context, codes assignment */
+      store (_, sum) {
+        if (this.context.symbol.storeOk())
+          this.context.symbol.store();
+      }
+    
+      // call: args;
+    
+      /** `args: '(' [ sums ] ')';` expects context, codes call */
+      args (lp, sums, rp) {
+        const sym = this.context.symbol,            // to apply args to
+          nargs = sums ? sums[0] : 0;                 // # of arguments
+        if (!(sym instanceof this.Fun))
+          this.parser.error(`${sym.name}: not a function`);
+        else if (nargs != sym.parms)
+          this.parser.error(`${sym.name} arguments: ` +
+            `expected ${sym.parms}, specified ${nargs}`);
+        else
+          sym.call();                                  // call function
+      }
+      
+      // print: 'print' sums;
+      // sums: sum [{ ',' sum }];
+      // return: 'return' [ sum ];
+      // loop: While cmp Do stmts 'od';
+      // While: 'while';
+      // Do: 'do';
+      // select: 'if' cmp Then stmts [ Else stmts ] 'fi';
+      // Then: 'then';
+      // Else: 'else';
+      // cmp: sum rel;
+      // rel: eq | ne | gt | ge | lt | le;
+      // eq: '=' sum;
+      // ne: '<>' sum;
+      // gt: '>' sum;
+      // ge: '>=' sum;
+      // lt: '<' sum;
+      // le: '<=' sum;
+      // sum: product [{ add | subtract }];
+      // add: '+' product;
+      // subtract: '-' product;
+      // product: signed [{ multiply | divide }];
+      // multiply: '*' signed;
+      // divide: '/' signed;
+      // signed: [ '-' ] term;
+      // term: input | number | name | '(' sum ')';
+      // input: 'input' [ Number ];
+      // number: Number;
+      
+      /** `name: symbol [ args ];` codes variable load, pops context */
+      name (sym, args) {
+        if (!args)
+          if (sym instanceof this.Fun)
+            this.parser.error(`${sym.name}: no argument list`);
+          else
+            sym.load();                           // variable reference
+        this.context = null;                             // pop context
+      }
+      
+      /** `symbol: Name;` pushes context, returns symbol */
+      symbol (name) {
+        let sym = this._find(name, true);
+        if (!sym) sym = this._dcl(this._alloc(name));          // patch
+        this.context = { symbol: sym };      // push symbol description
+        return sym;
+      }
+    }  
+
+    return Parameters06;
+  })()

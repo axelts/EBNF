@@ -1,0 +1,631 @@
+%% output
+  Compile global first-order functions into stack machine code.
+  Local variables, blocks. Declare before use.
+    
+  Function as argument and result value.
+  Unfortunately, the loop range is stored in global variables.
+  
+  Expected Output
+    1 1
+    2 4
+    3 9
+    4 16
+    5 25
+    10 1000
+    9 729
+    8 512
+    7 343
+    6 36
+    0
+%% program
+  type Calc (number): number;
+  type Printer (Calc);
+  type loop (number, number, number): Printer;
+
+  var from, to, step;
+
+  function square (x): Calc begin square = x * x end;
+  function cube (x): Calc begin cube = x * x * x end;
+
+  function up (calc): Printer begin
+    var f;
+    f = from;
+    while f <= to do
+      print f, calc(f);
+      f = f + step
+    od
+  end;
+
+  function down (calc): Printer begin
+    var f;
+    f = from;
+    while f >= to do
+      print f, calc(f);
+      f = f + step
+    od
+  end;
+
+  function loop (f, t, s) begin
+    loop = up; from = f; to = t; step = s;
+    if step < 0 then loop = down
+      else if step = 0 then to = f; step = 1 fi
+    fi
+  end;
+
+  function main () begin
+    loop (1, 5, 1) (square);
+    loop (10, 7, -1) (cube);
+    loop (6, 7, 0) (square)
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' typename ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name [ ':' type ];
+  type: Name | 'number';
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin [ vars ] stmts 'end';
+  begin: 'begin';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: { args };
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do [ vars ] stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ [ vars ] stmts ];
+  else: Else [ vars ] stmts;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [{ args }];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator (mixin)
+    const Machine01 = superclass => class extends superclass {
+      /** `stack: ... addr -> ... old-pc | pc: addr`
+          @instance
+          @memberof module:Eight~Machine01 */
+      CallValue (memory) {
+        memory.pc = memory.splice(-1, 1, memory.pc)[0];
+      }
+      /** `stack: ... x-len n*val -> ... n*val x-len`
+          @instance
+          @memberof module:Eight~Machine01 */
+      Rotate (n, len = 1) {
+        return memory => memory.push(... memory.splice(- n - len, len));
+      }
+    };
+
+    // the actions (mixin)
+    const Global01 = superclass => class extends superclass {
+      /** Describes a type.
+          @class @extends super.Symbol
+          @instance
+          @memberof module:Eight~Global01
+          @property {?Array<String|Type>} parms - null for scalar, else list of parameter types.
+          @property {String|Type} returns - null or result type.
+          @property {Boolean} isFun - `true` if function type.
+          @property {function} toString() - represents as text. */
+      get Type () { return this.#Type ??= class extends super.Symbol {
+          parms = [];   // list of parameter types, `null` for 'number'
+          returns;                                // result type if any
+          get isFun () { return this.parms !== null; }
+    
+          constructor (owner, name, parms, returns) {
+            super(owner, name);
+            this.parms = parms; this.returns = returns;
+          }
+          toString () {
+            const name = t => typeof t == 'string' ? t : t.name;
+            return `type ${this.name}` +
+              (!this.isFun ? '' :
+                `(${this.parms.map(name).join(', ')})` +
+                  (this.returns ? `: ${name(this.returns)}` : ''));
+          }
+        };
+      }
+      #Type;
+    
+      /** Type table, maps names to descriptions.
+          @instance
+          @memberof module:Eight~Global01 */
+      get typeSymbols () { return this.#typeSymbols; }
+      #typeSymbols = new Map();
+    
+      /** Predefined type descriptor for `number`.
+          @constant {Type}
+          @instance
+          @memberof module:Eight~Global01 */
+      get numberType () { return this.#numberType; }
+      #numberType;
+    
+      /** Predefined type descriptor for `main (): number`.
+          @constant {Type}
+          @instance
+          @memberof module:Eight~Global01 */
+      get mainType () { return this.#mainType; }
+      #mainType;
+    
+      /** Describes a function in {@linkcode module:Eight~Global01 Global01}.
+          @class @extends super.Fun
+          @instance
+          @memberof module:Eight~Global01
+          @property {Type} type - function's type.
+          @property {number[]} loads - slots to insert `Push start`.
+          @property {function} setParms() - [replace] set/check types.
+          @property {function} load() - generates `Push(start)`.
+          @property {function} storeOk() - [extend] check type.
+          @property {function} end() - [extend] fixes `loads`
+          @property {function} toString() - [extend] shows type, if any. */
+      get Fun () { return this.#Fun ??= class extends super.Fun {
+          type;                                      // function's type
+          loads = [];                     // forward references to push
+          
+          setParms (name) {           // [replace] sets parameter types
+            this.parms = this.locals.size;   // may be wrong, see below
+            this.size += 2;         // leave room for old pc and old fp
+            this.addr = this.size ++;          // leave slot for result
+            try {
+              const type = this.owner.typeSymbols.get(name);
+              if (!type) throw `${name}: not a type`;
+              if (!type.isFun) throw `${name}: not a function type`;
+              if (this.type && this.type != type)
+                throw `${name} ${this.name}: ` +
+                  `previously declared as ${this.type.name}`;
+              if (type.parms.length != this.locals.size)
+                throw `${name} ${this.name} arguments: expects ` +
+                  `${type.parms.length}, receives ${this.locals.size}`;
+              this.type = type;
+              let n = 0;              // Map.forEach does not provide n
+              this.locals.forEach(parm => parm.type = type.parms[n ++]);
+            } catch (e) {
+              if (e instanceof Error) throw e;      // shouldn't happen
+              this.owner.parser.error(e);            // report an error
+            }
+          }
+          load () {                           // generates 'Push start'
+            if (typeof this.start == 'number')
+              this.owner.machine.gen('Push', this.start);
+            else
+              this.loads.push(this.owner.machine.code.push(null) - 1);
+          }
+          storeOk (type) {                      // [extend] checks type
+            try {
+              if (this.type.returns) {        // return value expected?
+                if (!type)                          // no return value?
+                  throw `must return ${this.type.returns}`;
+                else if (this.type.returns != type)      // wrong type?
+                  throw `expects ${this.type.returns}, not ${type}`;
+              } else if (type)            // return value not expected?
+                throw  `doesn't return a value`;
+              return super.storeOk();               // inside function?
+            } catch (e) {
+              if (e instanceof Error) throw e;      // shouldn't happen
+              this.owner.parser.error(`${this.name}: ${e}`);
+              return false;
+            }
+          }
+          end () {                           // [extend] resolves loads
+            const push = this.owner.machine.ins('Push', this.start);
+            this.loads.forEach(p => this.owner.machine.code[p] = push);
+            this.loads.length = 0;
+            super.end();
+          }
+          toString () {                  // [extend] shows type, if any
+            return this.type ? `${this.type.name} ${super.toString()}` :
+              super.toString();
+          }
+        };
+      }
+      #Fun;
+    
+      /** Describes a variable in {@linkcode module:Eight~Global01 Global01}.
+          @class @extends super.Var
+          @instance
+          @memberof module:Eight~Global01
+          @property {Type} type - variable's type.
+          @property {function} storeOk() - [replace] check type.
+          @property {function} call() - code call to value
+          @property {function} toString() - [extend] show type, if any. */
+      get Var () { return this.#Var ??= class extends super.Var {
+          type;                                      // variable's type
+    
+          storeOk (type) {                      // [replace] check type
+            if (this.type == type) return true;
+            this.owner.parser.error(`${this.name}: ` +
+                `expects ${this.type}, not ${type}`);
+            return false;
+          }
+          
+          call () { this.load(); this.owner.machine.gen('CallValue'); }
+          
+          toString () {                   // [extend] show type, if any
+            return this.type ? `${this.type.name} ${super.toString()}` :
+              super.toString();
+          }
+        };
+      }
+      #Var;
+    
+      constructor (parser, machine) {
+        super(parser, machine ?? new (Machine01(Seven.Machine06))());
+        this.typeSymbols.set('number',
+          this.#numberType = new this.Type(this, 'number', null, null));
+        this.typeSymbols.set('main',
+          this.#mainType =
+            new this.Type(this, 'main', [ ], this.numberType));
+      }
+    
+      /** `prog: [ typedcls ] [ vars ] funs;`
+          @instance
+          @memberof module:Eight~Global01 */
+      prog (t, v, f) { return this.parser.call(this, super.prog, t, f); }
+    
+      /** `typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };` checks and translates the types
+          @instance
+          @memberof module:Eight~Global01 */
+      typedcls (some) {
+        this.typeSymbols.forEach(sym => {  // check and translate types
+          if (sym.isFun) {                       // avoid non-functions
+            const check = name => { // return type description for name
+              const type = this.typeSymbols.get(name);
+              if (type) return type;
+              this.parser.error(`${name}: not a type`);
+              return this.numberType;                          // patch
+            };
+            sym.parms = sym.parms.map(check);     // convert to symbols
+            if (typeof sym.returns == 'string') 
+              sym.returns = check(sym.returns);
+          }
+        });
+      }
+    
+      /** `typedcl: Name '(' [ types ] ')' [ ':' typename ];` declares
+          @instance
+          @memberof module:Eight~Global01 */
+      typedcl (name, lp, types, rp, returns) {
+        if (this.typeSymbols.get(name))
+          this.parser.error(`${name}: duplicate type`);
+        else
+          this.typeSymbols.set(name, new this.Type(this, name,
+            types ? types[0] : [], returns ? returns[1] : null));
+      }
+    
+      /** `types: typename [{ ',' typename }];` returns list
+          @instance
+          @memberof module:Eight~Global01 */
+      types (typename, many) {
+        return [ typename ].
+          concat(many ? many[0].map(list => list[1]) : []);
+      }
+    
+      /** `typename: Name | 'number';` returns name or 'number'
+          @instance
+          @memberof module:Eight~Global01 */
+      typename (name) { return name; }
+    
+      // vars: 'var' varname [{ ',' varname }] ';';
+    
+      /** `varname: Name [ ':' type ];` declares the name.
+          Can be used with one or two arguments, defaults to `number`.
+          @instance
+          @memberof module:Eight~Global01 */
+      varname (...arg) {
+        let [ name, type ] = arg;
+        type = type ? type[1] : this.numberType;
+        this._dcl(this._alloc(name), true).type = type;
+      }
+    
+      /** `type: Name | 'number';` returns type symbol
+          @instance
+          @memberof module:Eight~Global01 */
+      type (name) {
+        const type = this.typeSymbols.get(name);
+        if (type) return type;
+        this.parser.error(`${name}: not a type`);
+        return this.numberType;
+      }
+    
+      // names: Name [{ ',' Name }];
+      // funs: { fun };
+      // fun: head parms [ block ] ';';
+      // head: 'function' Name;
+    
+      /** `parms: '(' [ names ] ')' [ ':' Name ];` declares
+          @instance
+          @memberof module:Eight~Global01 */
+      parms (lp, names, rp, name) {   // funtion's name is default type
+        this.funct.setParms(name ? name[1] : this.funct.name);
+      }
+    
+      // block: begin [ vars ] stmts 'end';
+      // begin: 'begin';
+      // stmts: stmt [{ ';' stmt }];
+      // stmt: assign | print | return | block | loop | select;
+      // assign: symbol action;
+      // action: store | call;
+    
+      /** `store: '=' sum;` expects context, codes assignment
+          @instance
+          @memberof module:Eight~Global01 */
+      store (_, sum) {
+        if (this.context.symbol.storeOk(sum))
+          this.context.symbol.store();
+      }
+    
+      // call: { args };
+    
+      /** `args: '(' [ sums ] ')';` codes call, chains context
+          @instance
+          @memberof module:Eight~Global01 */
+      args (lp, sums, rp) {
+        const args = sums === null ? [ ] : sums[0];    // list of types
+        const type = 'type' in this.context ?   // chained call if true
+          this.context.type : this.context.symbol.type;
+        try {
+          if (!type) throw 'too many argument lists';
+          if (!type.isFun) throw 'not a function';
+          if (type.parms.length != args.length)
+            throw `arguments: ${type.parms.length} expected, ` +
+              `${args.length} specified`;
+          const errors = [];
+          type.parms.forEach(
+            (parm, n) => { if (parm != args[n]) errors.push(
+              `argument ${n+1} is ${args[n].toString()}, ` +
+              `not ${parm.toString()}`
+            ); });
+          if (errors.length) throw errors.join('; ');    
+          if ('type' in this.context) {                 // chained call
+            this._lift(args);   // move function address past arguments
+            this.machine.gen('CallValue');     // call address on stack
+          } else this.context.symbol.call();  // call function/variable 
+        } catch (e) {
+          if (e instanceof Error) throw e;         // should not happen
+          this.parser.error(`call to ${this.context.symbol.name}: ${e}`);
+        }
+        this.context.type = type ? type.returns : null;  // result type
+      }
+      
+      /** Move function address past arguments to the top of the stack.
+          @param {Type[]} args - list of argument types.
+          @instance
+          @memberof module:Eight~Global01 */
+      _lift (args) {
+        if (args.length) this.machine.gen('Rotate', args.length);
+      }
+    
+      /** `print: 'print' sums;` checks types
+          @instance
+          @memberof module:Eight~Global01 */
+      print (p, sums) {
+        if (!sums.every(sum => sum == this.numberType))
+          this.parser.error('can only print numbers');
+        this.parser.call(this, super.print, p, sums.length);
+      }
+    
+      /** `sums: sum [{ ',' sum }];` returns list of types
+          @instance
+          @memberof module:Eight~Global01 */
+      sums (sum, many) {
+        return [ sum ].
+          concat(many ? many[0].map(list => list[1]) : []);
+      }
+    
+      /** `return: 'return' [ sum ];`
+          @instance
+          @memberof module:Eight~Global01 */
+      return (_, sum) {
+        if (this.funct.storeOk(sum ? sum[0] : null))
+          if (sum)
+            (this.funct.store(), this.machine.gen('Pop'));
+        this.funct.return();
+      }
+    
+      // loop: While cmp Do [ vars ] stmts 'od';
+      // While: 'while';
+      // Do: 'do';
+      // select: 'if' cmp then [ else ] 'fi';
+      // then: Then [ [ vars ] stmts ];
+      // else: Else [ vars ] stmts;
+      // Then: 'then';
+      // Else: 'else';
+    
+      /** `cmp: sum rel;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      cmp (sum, _) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot compare ${sum.toString()}`);
+      }
+    
+      // rel: eq | ne | gt | ge | lt | le;
+    
+      /** `eq: '=' sum;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      eq (_, sum) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot apply '=' to ${sum.toString()}`);
+        else this.parser.call(this, super.eq);
+      } 
+    
+      /** `ne: '<>' sum;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      ne (_, sum) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot apply '<>' to ${sum.toString()}`);
+        else this.parser.call(this, super.ne);
+      } 
+    
+      /** `gt: '>' sum;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      gt (_, sum) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot apply '>' to ${sum.toString()}`);
+        else this.parser.call(this, super.gt);
+      } 
+    
+      /** `ge: '>=' sum;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      ge (_, sum) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot apply '>=' to ${sum.toString()}`);
+        else this.parser.call(this, super.ge);
+      } 
+    
+      /** `lt: '<' sum;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      lt (_, sum) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot apply '<' to ${sum.toString()}`);
+        else this.parser.call(this, super.lt);
+      } 
+    
+      /** `le: '<=' sum;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      le (_, sum) {
+        if (sum != this.numberType)
+          this.parser.error(`cannot apply '<=' to ${sum.toString()}`);
+        else this.parser.call(this, super.le);
+      } 
+    
+      /** `sum: product [{ add | subtract }];` returns product
+          @instance
+          @memberof module:Eight~Global01 */
+      sum (product, many) {
+        if (many && product != this.numberType)
+          this.parser.error(`cannot apply '+' or '-' ` +
+            `to ${product.toString()}`);
+        return product;  
+      }
+    
+      /** `add: '+' product;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      add (_, product) {
+        if (product != this.numberType)
+          this.parser.error(`cannot apply '+' to ${product.toString()}`);
+        else this.parser.call(this, super.add);
+      }
+    
+      /** `subtract: '-' product;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      subtract (_, product) {
+        if (product != this.numberType)
+          this.parser.error(`cannot apply '-' to ${product.toString()}`);
+        else this.parser.call(this, super.subtract);
+      }
+    
+      /** `product: signed [{ multiply | divide }];` returns signed
+          @instance
+          @memberof module:Eight~Global01 */
+      product (signed, many) {
+        if (many && signed != this.numberType)
+          this.parser.error(`cannot apply '*' or '/' ` +
+            `to ${signed.toString()}`);
+        return signed;  
+      }
+    
+      /** `multiply: '*' signed;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      multiply (_, signed) {
+        if (signed != this.numberType)
+          this.parser.error(`cannot apply '*' to ${signed.toString()}`);
+        else this.parser.call(this, super.multiply);
+      }
+    
+      /** `divide: '/' signed;` checks for number
+          @instance
+          @memberof module:Eight~Global01 */
+      divide (_, signed) {
+        if (signed != this.numberType)
+          this.parser.error(`cannot apply '/' to ${product.toString()}`);
+        else this.parser.call(this, super.divide);
+      }
+    
+      /** `signed: [ '-' ] term;` checks for number, returns term 
+          @instance
+          @memberof module:Eight~Global01 */
+      signed (minus, term) {
+        if (minus && term != this.numberType)
+          this.parser.error(`cannot apply '-' to ${term.toString()}`);
+        else this.parser.call(this, super.signed, minus, term);
+        return term;
+      }
+    
+      /** `term: input | number | name | '(' sum ')';` returns type
+          @instance
+          @memberof module:Eight~Global01 */
+      term (...val) { return val.length > 1 ? val[1] : val[0]; }
+    
+      /** `input: 'input' [ Number ];` returns `this.numberType
+          @instance
+          @memberof module:Eight~Global01 */
+      input (i, number) {
+        this.parser.call(this, super.input, i, number); return this.numberType;
+      }
+    
+      /** `number: Number;` returns `this.numberType`
+          @instance
+          @memberof module:Eight~Global01 */
+      number (number) { 
+        this.parser.call(this, super.number, number); return this.numberType;
+      }
+    
+      /** `name: symbol [{ args }];`
+          @instance
+          @memberof module:Eight~Global01 */
+      name (sym, args) {
+        const context = this.context; this.context = null;
+        if (args) return context.type;
+        sym.load();
+        return sym.type;
+      }
+    
+      // symbol: Name;
+    };
+
+    return Global01(Seven.Blocks09);
+  })()

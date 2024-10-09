@@ -1,0 +1,14 @@
+%% output
+  Overlapping patterns [see 3/03].
+  
+  Press 'new grammar' and then 'scann' to see that '2.3' now gets recognized
+  because 'Float' is used in the scan pattern before 'Int'. 
+%% grammar
+  examples:  { Int | Float };
+%% tokens
+  {
+    Int: /0|[1-9][0-9]*/,
+    Float: /(?:0|[1-9][0-9]*)\.[0-9]*/  // should be first!
+  }
+%% program
+  1 2.3

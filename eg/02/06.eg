@@ -1,0 +1,10 @@
+%% output
+  This grammar recognizes a sum of one or more numbers [see 02/05].
+  This time "sum" is left-recursive.
+%% grammar
+  sum: b;
+  b: Number | sum '+' Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  12 + 345 + 6789

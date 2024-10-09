@@ -1,0 +1,148 @@
+%% output
+  Interpret a little language [see 11/04].
+  Euclid's Algorithm [see 6/12].
+  
+  Add a top-level 'run' rule to interpret immediately.
+  Remove the 'dump' rule and correct the 'main' rule to avoid displaying the tree.
+  Add '/./' to the call to 'Main' to trace interpretation.
+  Or add 'trace = /./;' as a property to any of the visitor mix-ins.
+  
+  Tree:
+    [ 'stmts' 
+      [ 'assign' 'x' [ 'number' 36 ] ]
+      [ 'assign' 'y' [ 'number' 54 ] ]
+      [ 'loop' [ 'ne' [ 'name' 'x' ] [ 'name' 'y' ] ] 
+        [ 'select' [ 'gt' [ 'name' 'x' ] [ 'name' 'y' ] ]
+          [ 'assign' 'x' [ 'subtract' [ 'name' 'x' ] [ 'name' 'y' ] ] ]
+          [ 'assign' 'y' [ 'subtract' [ 'name' 'y' ] [ 'name' 'x' ] ] ] ] ] 
+      [ 'print' [ 'name' 'x' ] ] ]
+  
+  Output: 18
+%% program
+  x = 36; y = 54;
+  while x <> y do
+    if x > y 
+      then x = x - y
+      else y = y - x fi od; 
+  print x
+%% grammar
+  %nonassoc '=' '<>' '>' '>=' '<' '<=';
+  %left     '+' '-';
+  %left     '*' '/';
+  %right    '**';
+  %right    Number;
+
+  main:     dump;
+  dump:     stmts;
+  stmts:    stmt [{ ';' stmt }];
+  stmt:     assign | print | loop | select;
+  assign:   Name '=' expr;
+  print:    'print' expr [{ ',' expr }];
+  loop:     'while' expr 'do' stmts 'od';
+  select:   'if' expr 'then' stmts [ 'else' stmts ] 'fi';
+  
+  expr:     eq | ne | gt | ge | lt | le
+            | add | subtract | multiply | divide | power
+            | minus | '(' expr ')' | number | name;
+            
+  eq:       expr '=' expr;
+  ne:       expr '<>' expr;
+  gt:       expr '>' expr;
+  ge:       expr '>=' expr;
+  lt:       expr '<' expr;
+  le:       expr '<=' expr;
+  
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+  name:     Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // mix-in with comparison evaluation
+    const Eval_Cmps = superclass => class extends superclass {
+      // [ 'eq' a b ]; returns Boolean.
+      eq (node) { return this.visit(node[1]) == this.visit(node[2]); }
+    
+      // [ 'ne' a b ]; returns Boolean.
+      ne (node) { return this.visit(node[1]) != this.visit(node[2]); }
+    
+      // [ 'gt' a b ]; returns Boolean.
+      gt (node) { return this.visit(node[1]) >  this.visit(node[2]); }
+    
+      // [ 'ge' a b ]; returns Boolean.
+      ge (node) { return this.visit(node[1]) >= this.visit(node[2]); }
+    
+      // [ 'lt' a b ]; returns Boolean.
+      lt (node) { return this.visit(node[1]) <  this.visit(node[2]); }
+    
+      // [ 'le' a b ]; returns Boolean.
+      le (node) { return this.visit(node[1]) <= this.visit(node[2]); }
+    };
+
+    // mix-in with statements evaluation
+    const Eval_Stmts = superclass => class extends superclass {
+    
+      // [ 'stmts' stmt ... ]
+      stmts (node) { node.slice(1).forEach(stmt => this.visit(stmt)); }
+    
+      // [ 'print' value ... ]
+      print (node) { puts(...node.slice(1).map(value => this.visit(value))); }
+    
+      // [ 'loop' cond stmt ]
+      loop (node) { while (this.visit(node[1])) this.visit(node[2]); }
+    
+      // [ 'select' cond then else? ]
+      select (node) {
+        if (this.visit(node[1])) this.visit(node[2]);
+        else if (node.length > 3) this.visit(node[3]);
+      }
+    };
+
+    // mix-in with symbol table
+    const Symbols = superclass => class extends superclass {
+      // Creates the Map for symbol descriptions or gets it from the previous processor.
+      constructor (prev, ... more) {
+        super(prev, ... more);
+        this.symbols = prev?.symbols ?? new Map ();
+      }
+      
+      // Returns a name's description, if necessary creates it.
+      _alloc (name) {
+        let symbol = this.symbols.get(name);         // check if exists
+        if (!symbol)                             // create with ordinal
+          this.symbols.set(name,
+            symbol = { ord: this.symbols.size + 1 });
+        return symbol;
+      }
+    };
+
+    // mix-in with name evaluation
+    const Eval_Names = superclass => class extends superclass {
+      // [ 'name' name ] returns the stored value.
+      name (node) {
+        const symbol = this._alloc(node[1]);
+        if (!('value' in symbol)) symbol.value = 0;
+        return symbol.value;
+      }
+    
+      // [ 'assign' name value ]
+      assign (node) { this._alloc(node[1]).value = this.visit(node[2]); }
+    };
+
+    // builder and interpreter-visitor
+    return Eleven.Main(Eleven.Build_Stmts(
+                         Eleven.Build_Names(
+                           Eleven.Build_Cmps(
+                             Eleven.Build_Number(Eleven.Build)))),
+                       Eval_Stmts(
+                         Eval_Names(
+                           Symbols(
+                             Eval_Cmps(
+                               Eleven.Eval_Number(Eleven.Visit))))));
+  }) ()

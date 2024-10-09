@@ -1,0 +1,153 @@
+%% output
+  Grammar for a semicolon-separated list of arithmetic expressions [see 6/07].
+  Actions for evaluation using a simulated stack machine.
+  
+  Expected output: 4 7.5 7.5
+%% grammar
+  list: stmt [{ ';' stmt }];
+  stmt: sum;
+  sum: 'let' Name '=' sum | product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% program
+  let x = let y = input 4; (x + 1) / (y - 2) * 3;
+  y + ((let y = 2) + 1) / (x - 2) + y
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator
+    class Machine09 {
+      code = [ ];                             // holds the instructions
+      
+      /** Represents `code` as text */
+      toString () {
+        return this.code.map((f, n) => n + ': ' + f).join('\n');
+      }
+    
+      /** Creates stack machine */
+      run (memorySize) {
+        return () => {
+          const memory = Array(memorySize).fill(0);    // create memory
+          this.code.forEach(code => code(memory));           // execute
+          return memory;
+        };
+      }
+    }
+
+    // the actions
+    class Arithmetic09 {
+      #parser;                                    // for error messages
+      get parser () { return this.#parser; }
+      #machine;                                    // handles execution
+      get machine () { return this.#machine; }
+      #symbols = new Map();    // symbol table, maps names to addresses
+      get symbols () { return this.#symbols; }
+      
+      constructor (parser, machine = new Machine09 ()) {
+        this.#parser = parser;
+        this.#machine = machine;
+      }
+    
+      /** Returns memory address for name */
+      _alloc (name) {
+        let addr = this.symbols.get(name);               // known name?
+        if (typeof addr == 'undefined')      
+          this.symbols.set(name,                            // new name
+            addr = this.symbols.size);       // allocate, starting at 0
+        return addr;
+      }
+    
+      /** `list: stmt [{ ';' stmt }];` */
+      list (s, many) {
+        puts(this.machine.toString());                     // show code
+        this.symbols.forEach(                         // show variables
+          (value, name) => puts(name, 'at', value));
+        const size = this.symbols.size;          // number of variables
+        puts('stack starts at', size);
+        return this.machine.run(size);                 // stack machine
+      }
+    
+      /** `stmt: sum;` */
+      stmt (s) {                                // print and clear stack
+        this.machine.code.push(memory => puts(memory.pop()));
+      }
+      
+      /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+      sum (...val) {
+        if (val.length < 4) return;
+        const addr = this._alloc(val[1]);
+        this.machine.code.push(memory => memory[addr] = memory.at(-1));
+      }
+    
+      /** `add: '+' right;` */
+      add (_, r) { 
+        this.machine.code.push(
+          memory => memory.splice(-2, 2, memory.at(-2) + memory.at(-1))
+        );
+      }
+    
+      /** `subtract: '-' right;` */
+      subtract (_, r) {
+        this.machine.code.push(
+          memory => memory.splice(-2, 2, memory.at(-2) - memory.at(-1))
+        );
+      }
+      
+      // product: signed [{ multiply | divide }];
+    
+      /** `multiply: '*' right;` */
+      multiply (_, r) { 
+        this.machine.code.push(
+          memory => memory.splice(-2, 2, memory.at(-2) * memory.at(-1))
+        );
+      }
+      
+      /** `divide: '/' signed;` */
+      divide (_, r) {
+        this.machine.code.push(
+          memory => memory.splice(-2, 2, memory.at(-2) / memory.at(-1))
+        );
+      }
+    
+      /** `signed: [ '-' ] term;` */
+      signed (minus, t) { 
+        if (minus)
+          this.machine.code.push(
+            memory => memory.splice(-1, 1, -memory.at(-1))
+          );
+      }
+    
+      // term: input | number | name | '(' sum ')';
+    
+      /** `input: 'input' [ Number ];` */
+      input (_, number) {
+        const dflt = String(number !== null ? number[0] : 0);
+        this.machine.code.push(
+          memory => memory.push(parseInt(prompt('input', dflt), 10))
+        );
+      }
+    
+      /** `number: Number;` */
+      number (number) { 
+        const result = parseInt(number, 10);
+        this.machine.code.push(memory => memory.push(result));
+      }
+    
+      /** `name: Name;` */
+      name (name) {
+        const addr = this._alloc(name);
+        this.machine.code.push(memory => memory.push(memory[addr]));
+      }
+    }
+
+    return Arithmetic09;
+  })()

@@ -1,0 +1,156 @@
+%% output
+  Type checking for integers vs. strings using a grammar.
+  Euclid's algorithm with conversions [see 6/12].
+ 
+  Errors:
+    Arithmetic must use 'number' values.
+    Assignment must use 'string' values.
+    Most important: String comparison can go wrong.
+    
+  Output: 18 once six(!) errors are repaired.
+%% program
+  x = input 'x' '36'; y = input 'y' '       54';
+  while x <> y do
+    if x > y then 
+      x = x - y 
+    else
+      y = y - x 
+    fi
+  od;
+  print '\'gcd\': ' x
+%% grammar
+  prog: stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | loop | select;
+  assign: Name '=' stringSum;
+  print: 'print' sums;
+  sums: stringSum [{ ',' stringSum }];
+  loop: 'while' cmp 'do' stmts 'od';
+  select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
+  cmp: sum rel | stringSum stringRel;
+
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed:[ '-' ] term;
+  term: number | '(' sum ')' | 'number' stringTerm;
+  number: Number;
+
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;
+
+  stringSum: stringTerm [{ stringTerm }];
+  stringTerm: string | name | input | 'string' term;
+  string: String;
+  name: Name;
+  input: 'input' String String;
+
+  stringRel: stringEq | stringNe | stringGt | stringGe | stringLt | stringLe;
+  stringEq: '=' stringSum;
+  stringNe: '<>' stringSum;
+  stringGt: '>' stringSum;
+  stringGe: '>=' stringSum;
+  stringLt: '<' stringSum;
+  stringLe: '<=' stringSum;     
+%% tokens
+  {
+    Number: /0|[1-9][0-9]*/,
+    String: /'(?:[^'\\]|\\['\\])+'/,
+    Name: /[a-z]+/
+  }
+%% actions
+class TCheck01 extends Six.Functions12 {
+  /** Removes quotes and backslash */
+  _unq (s) { 
+    return  s.slice(1,-1).replace(/\\([\\'])/g, "$1");
+  }
+  
+  // prog: stmts;
+  // stmts: stmt [{ ';' stmt }];
+  // stmt: assign | print | loop | select;
+  // assign: Name '=' stringSum;
+  // print: 'print' sums;
+  // sums: stringSum [{ ',' stringSum }];
+  // loop: 'while' cmp 'do' stmts 'od';
+  // select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
+  // cmp: sum rel | stringSum stringRel;
+  // sum: product [{ add | subtract }];
+  // add: '+' product;
+  // subtract: '-' product;
+  // product: signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide: '/' signed;
+  // signed:[ '-' ] term;
+
+  /** `term: number | '(' sum ')' | 'number' stringTerm;` returns `fct:term` */
+  // term: number | '(' sum ')' | 'number' stringTerm;
+  //       [0]          [1]                [1]
+  term (...val) {
+    switch (val.length) {
+    case 1: return val[0];
+    case 3: return val[1];
+    case 2: return memory => parseInt(val[1](memory), 10);
+    }
+  }
+  
+  // number: Number;
+  // rel: eq | ne | gt | ge | lt | le;
+  // eq: '=' sum;
+  // ne: '<>' sum;
+  // gt: '>' sum;
+  // ge: '>=' sum;
+  // lt: '<' sum;
+  // le: '<=' sum;
+
+  /** `stringSum: stringTerm [{ stringTerm }];` returns fct */
+  stringSum (term, many) {
+    const c = (a, b) => memory => a(memory) + b(memory);
+    return (many ? many[0] : []).
+      reduce((sum, list) => c(sum, list[0]), term);
+  }
+
+  /** `stringTerm: string | name | input | 'string' term;` */
+  //               [0]      [0]    [0]              [1]
+  stringTerm (...val) {
+    return val.length == 1 ? val[0] :
+      memory => String(val[1](memory));
+  }
+
+  /** `string: String;` returns fct */
+  string (s) { return () => this._unq(s); }
+  
+  // name: Name;
+
+  /** `input: 'input' String String;` [replace] returns fct */
+  input (i, prmpt, dflt) {
+    return () => prompt(this._unq(prmpt), this._unq(dflt));
+  }
+  
+  // stringRel: stringEq | stringNe | stringGt | stringGe | stringLt | stringLe;
+
+  /** `stringEq: '=' stringSum;` returns fct for composition */
+  stringEq (_, right) { return this.parser.call(this, super.eq, _, right); }
+
+  /** `stringNe: '<>' stringSum;` returns fct for composition */
+  stringNe (_, right) { return this.parser.call(this, super.ne, _, right); }
+  
+  /** `stringGt: '>' stringSum;` returns fct for composition */
+  stringGt (_, right) { return this.parser.call(this, super.gt, _, right); }
+  
+  /** `stringGe: '>=' stringSum;` returns fct for composition */
+  stringGe (_, right) { return this.parser.call(this, super.ge, _, right); }
+  
+  /** `stringLt: '<' stringSum;` returns fct for composition */
+  stringLt (_, right) { return this.parser.call(this, super.lt, _, right); }
+  
+  /** `stringLe: '<=' stringSum;` returns fct for composition */
+  stringLe (_, right) { return this.parser.call(this, super.le, _, right); }
+}

@@ -1,0 +1,260 @@
+%% output
+  Semantic analysis for strong int|float|string typing.
+  Euclid's algorithm with conversions [see 7/01].
+     
+  Output: 18.
+%% program
+  int x, y;
+  x = int (input 'x' '36');
+  y = int (input 'y' '54');
+  while x <> y do
+    if x > y then 
+      x = x - y 
+    else
+      y = y - x 
+    fi
+  od;
+  print '\'gcd\': ' + x
+%% grammar
+  prog: [{ decl ';' }] stmts;
+  decl: type Name [{ ',' Name }];
+  type: 'int' | 'float' | 'string';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | loop | select;
+  assign: Name '=' sum;
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  loop: 'while' cmp 'do' stmts 'od';
+  select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | int | float | string | name
+        | 'int' term | 'float' term | 'string' term
+        | '(' sum ')';
+  input: 'input' String String;
+  int: Int;
+  float: Float;
+  string: String;
+  name: Name;
+%% tokens
+  {
+    Float: /(?:0|[1-9][0-9]*)\.[0-9]*/,  // must be first!
+    Int: /0|[1-9][0-9]*/,
+    String: /'(?:[^'\\]|\\['\\])+'/,
+    Name: /[a-z]+/
+  }
+%% actions
+  class TCheck02 extends Seven.TCheck01 {
+    /** For error messages */
+    get parser () { return this.#parser; }
+    #parser;
+    /** Symbol table, maps names to types */
+    get symbols () { return this.#symbols; }
+    #symbols; 
+    /** For symbolic computing with types */
+    get stack () { return this.#stack; }
+    #stack = [ ];
+    
+    constructor (parser, symbols = new Map()) {
+      super();
+      this.#parser = parser;
+      this.#symbols = symbols;
+    }
+  
+    /** Returns type of name, message if undefined */
+    _type (name) {
+      const type = this.symbols.get(name);
+      if (type) return type;
+      this.parser.error(name + ': undeclared');   // return undefined
+    }
+  
+    /** Converts `fct:from` into `fct:to` if needed */
+    _cast (fct, from, to) {
+      switch (`${to} <- ${from}`) {
+      default:
+        this.parser.error('impossible cast from', from, 'to', to);
+  
+      case 'int <- int': case 'float <- float':
+      case 'string <- string': case 'float <- int':
+        return fct;
+  
+      case 'int <- float':
+        return memory => Math.round(fct(memory));
+  
+      case 'int <- string':
+        return memory => parseInt(fct(memory), 10);
+  
+      case 'float <- string':
+        return memory => parseFloat(fct(memory));
+  
+      case 'string <- int': case 'string <- float':
+        return memory => String(fct(memory));
+      }
+    }
+  
+    /** `prog: [{ decl ';' }] stmts;` returns executable */
+    prog (many, stmts) { return this.parser.call(this, super.prog, stmts); }
+    
+    /** `decl: type Name [{ ',' Name }];` */
+    decl (type, name, many) {
+      [ name ].concat(many ? many[0].map(list => list[1]) : []).
+        forEach(name => {
+          if (this.symbols.has(name))
+            this.parser.error(`${name}: duplicate`);
+          this.symbols.set(name, type[0]);
+        });
+    }
+  
+    // type: 'int' | 'float' | 'string';
+    // stmts: stmt [{ ';' stmt }];
+    // stmt: assign | print | loop | select;
+  
+    /** `assign: Name '=' sum;` returns fct */
+    assign (name, _, sum) {
+      const type = this._type(name),
+        r = this.stack.pop();
+      if (type != r)
+          this.parser.error(`assigning ${r} to ${type} ${name}`);
+      return this.parser.call(this, super.assign, name, _, sum);
+    }
+  
+    /** `print: 'print' sums;` returns fct, string arguments only */
+    print (p, sums) { 
+      if (! this.stack.splice(- sums.length, sums.length).
+              every(type => type == 'string'))
+        this.parser.error('can only print strings');
+      return this.parser.call(this, super.print, p, sums);
+    }
+  
+    /** `printAny: 'print' sums;` returns fct */
+    printAny (p, sums) {     // implicitly casts non-string arguments
+      sums.reverse().map((sum, n) => {         // check each argument
+        const type = this.stack.pop();      // requires reverse order
+        if (type != 'string') {
+          sum = this._cast(sum, type, 'string');  // apply conversion
+          puts(`print argument ${sums.length - n} was ${type}`);
+        }
+        return sum;                             // returns fct:string
+      }).reverse();
+      return this.parser.call(this, super.print, p, sums);
+    }
+  
+    // sums: sum [{ ',' sum }];
+  
+    /** `cmp: sum rel;` returns fct */
+    cmp (sum, rel) {
+      const [ l, r ] = this.stack.splice(-2, 2);
+      if ((l == 'string' || r == 'string') && l != r)
+        this.parser.error('must compare strings to strings');
+      return this.parser.call(this, super.cmp, sum, rel);
+    }
+    
+    // rel: eq | ne | gt | ge | lt | le;
+    // eq: '=' sum;
+    // ne: '<>' sum;
+    // gt: '>' sum;
+    // ge: '>=' sum;
+    // lt: '<' sum;
+    // le: '<=' sum;
+    // sum: product [{ add | subtract }];
+  
+    /** `add: '+' product;` returns `fct:string|int|float` */
+    add (_, right) {
+      const [ l, r ] = this.stack.splice(-2, 2);
+      this.stack.push(l == 'string' || r == 'string' ? 'string' :
+          l == 'int' && r == 'int' ? 'int' : 'float');
+      return this.parser.call(this, super.add, _, right);
+    }
+    
+    /** `subtract: '-' product;` returns `fct:int|float` */
+    subtract (_, right) {
+      const [ l, r ] = this.stack.splice(-2, 2);
+      if (l == 'string' || r == 'string')
+        this.parser.error("cannot apply '-' to string");
+      this.stack.push(l == 'int' && r == 'int' ? 'int' : 'float');
+      return this.parser.call(this, super.subtract, _, right);
+    }
+    
+    // product: signed [{ multiply | divide }];
+  
+    /** `multiply: '*' signed;` returns `fct:int|float` */
+    multiply (_, right) {
+      const [ l, r ] = this.stack.splice(-2, 2);
+      if (l == 'string' || r == 'string')
+        this.parser.error("cannot apply '*' to string");
+      this.stack.push(l == 'int' && r == 'int' ? 'int' : 'float');
+      return this.parser.call(this, super.multiply, _, right);
+    }
+  
+    /** `divide: '/' signed;` returns `fct:float` */
+    divide (_, right) {
+      const [ l, r ] = this.stack.splice(-2, 2);
+      if (l == 'string' || r == 'string')
+        this.parser.error("cannot apply '/' to string");
+      this.stack.push('float');
+      return this.parser.call(this, super.divide, _, right);
+    }
+  
+    /** `signed: [ '-' ] term;` returns `fct:term` */
+    signed (minus, term) {
+      if (minus && this.stack.at(-1) == 'string')
+        this.parser.error("cannot apply '-' to string");
+      return this.parser.call(this, super.signed, minus, term);
+    }
+  
+    /** `term: int | float | string | name | input  
+               | 'int' term | 'float' term | 'string' term  
+               | '(' sum ')';` returns `fct:term` */
+    // term: int | float | string | name | input
+    //       [0]
+    //     | 'int' term | 'float' term | 'string' term
+    //       [0]   [1]
+    //     | '(' sum ')';
+    //           [1]
+    term (...val) {
+      switch (val.length) {
+      case 1: return val[0];
+      case 3: return val[1];
+      }
+      const to = val[0], from = this.stack.pop();
+      this.stack.push(to);
+      return this._cast(val[1], from, to);
+    }
+  
+    /** `input: 'input' String String;` returns `fct.string` */
+    input (i, prmt, dflt) {
+      this.stack.push('string'); return this.parser.call(this, super.input, i, prmt, dflt);
+    }
+  
+    /** `int: Int;` returns `fct:int` */
+    int (int) { this.stack.push('int'); return this.parser.call(this, super.number, int); }
+  
+    /** `float: Float;` returns `fct:float` */
+    float (float) {
+      this.stack.push('float'); return () => parseFloat(float);
+    }
+  
+    /** `string: String;` returns `fct:string` */
+    string (string) {
+      this.stack.push('string'); return this.parser.call(this, super.string, string);
+    }
+  
+    /** `name: Name;`  returns `fct:_type(name)` */
+    name (name) {
+      this.stack.push(this._type(name));
+      return this.parser.call(this, super.name, name);
+    }
+  }

@@ -1,0 +1,14 @@
+%% output
+  Token pattern partially overlapping a literal.
+  
+  Press 'new grammar' and then 'scan' to see that 'Formula1' does not get recognized
+  because 'Name' is used in the scan pattern before 'Formula1'. 
+  
+  To fix, make 'Name' alphanumeric, i.e., /[A-Za-z][A-Za-z0-9]*/
+%% grammar
+  examples: Name | Number | 'Formula1';
+%% tokens
+  { Name: /[A-Za-z]+/, Number: /[0-9]+/ }
+%% program
+  Formula 1
+  Formula1

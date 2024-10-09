@@ -1,0 +1,9 @@
+%% output
+  This grammar tries to recognize a sum of up to three numbers.
+  Unfortunately, the grammar is ambiguous.
+%% grammar
+  sum: Number | Number '+' Number | Number '+' Number '+' Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  12 + 345 + 6789

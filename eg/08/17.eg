@@ -1,0 +1,92 @@
+%% output
+  Compile nested first-order functions into stack machine code.
+  Local variables, blocks. Declare before use. Dynamic memory management.
+      
+  Nesting puzzle.
+  
+  Expected Output
+    202 54
+    301 36
+    100 90
+    400 52 162 13.5 
+    0 
+%% program
+  type F (), Fr (): number, Fv (number), Fvr (number): number, Ffr (Fr): number;
+  var add: F, sub: Fvr, mul: Fvr, div: Fvr;
+  function a (a): Fv begin
+    function b (): Fr begin var x, y;
+      function c (x): Fvr begin
+        function a ():  F   begin print 100, x + y end;
+        function s (s): Fvr begin return x - s end;
+        function m (m): Fvr begin return x * m end;
+        function d (d): Fvr begin return x / d end;
+        add = a; sub = s; mul = m; div = d;
+        y = input 36; c = x
+      end;
+      x = input 54; print 200 + a, c(x); b = y
+    end;
+    function d (d): Ffr begin a = 2 * a; return d() end;
+    print 300 + a, d(b)
+  end;
+  function main () begin
+    a(1); add(); print 400, sub(2), mul(3), div(4)
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' typename ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name [ ':' type ];
+  type: Name | 'number';
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: { args };
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [{ args }];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  Eight.First14(Eight.Global01(Seven.Nest13(Seven.Blocks09)))

@@ -1,0 +1,7 @@
+%% output
+  This is the very first example: a grammar that will recognize the sum of 1 and 2.
+%% grammar
+  sum: '1' '+' '2';
+%% tokens
+%% program
+  1 + 2

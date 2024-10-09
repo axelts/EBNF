@@ -1,0 +1,10 @@
+%% output
+  This grammar recognizes sums and differences of two or more numbers.
+  Note the difference between self-defining literals and tokens defined with patterns.
+  Press 'new Grammar()' and then 'scanner()' to see how input is broken apart.
+%% grammar
+  sum: Number { '+' Number | '-' Number };
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  12 - 345 + 6789

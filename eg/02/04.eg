@@ -1,0 +1,11 @@
+%% output
+  This grammar recognizes a sums of one to three numbers.
+  The grammar is not ambiguous, but sums have to be prefixed with 'a', 'b', or 'c'.
+%% grammar
+  sum: 'a' Number
+       | 'b' Number '+' Number
+       | 'c' Number '+' Number '+' Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  c 12 + 345 + 6789

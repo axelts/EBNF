@@ -1,0 +1,15 @@
+%% output
+  This is a typical grammar for arithmetic expressions.
+  The first rule recognizes one or more expressions, separated by commas.
+%% grammar
+  list: sum [{ ',' sum }];
+  sum: product [{ '+' product | '-' product }];
+  product: signed [{ '*' signed | '/' signed }];
+  signed: [ '-' | '+' ] term;
+  term: Number | '(' sum ')';
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  1 + 2 * 3 / (4 - 5) - (6 + 7),
+  -123,
+  -4 * -(5 + 3)

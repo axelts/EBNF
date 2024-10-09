@@ -1,0 +1,28 @@
+%% output
+  This grammar accepts a list of semicolon-terminated items.
+  An item consists of a prefix followed by a number.
+  See how to drill down to the numbers.
+%% grammar
+  list: { item ';' };
+  item: dec | hex;
+  dec: 'dec' Decimal;
+  hex: 'hex' ref;
+  ref: Hex;
+%% tokens
+  { Decimal: /[0-9]+/, Hex: /[0-9a-fA-F]+/ }
+%% program
+  dec 10;
+  hexBad;
+  dec 20;
+%% actions
+  class Actions14 {
+    /** `dec: 'dec' Decimal ';';` returns value */
+    dec (_, decimal) { return parseInt(decimal, 10); }
+  
+    /** `hex: 'hex' ref ';';` returns value */
+    hex (_, ref) { return parseInt(ref[0], 16); }
+    
+    /** `item: dec | hex;` returns `[ value ]`  
+        `list: { item ';' };` displays value ... */
+    list (some) { puts(... some.map(list => list[0][0])); }
+  }

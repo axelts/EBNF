@@ -1,0 +1,89 @@
+%% output
+  Compile nested first-order functions into stack machine code.
+  Local variables, blocks. Declare before use. Functions as parameters only.
+
+  Euclid's algorithm [see 7/14], avoids non-positive arguments.
+  
+  Expected output: 0 18
+%% program
+  type euclid (number, number): number;
+  type Runner (Run): number, Run (number): number;
+  
+  function euclid(x, y) begin
+    function run (run): Runner begin return run(y) end;
+    
+    if x > 0 then
+      if y > 0 then
+      
+        function euclid (y): Run begin
+          euclid = x;
+          if x > y then x = x - y; euclid = euclid(y) fi;
+          if y > x then euclid = euclid(y-x) fi
+        end;
+        
+        return run(euclid)   
+      fi
+    fi
+  end;
+  
+  function main () begin
+    print euclid(-36, -54); main = euclid(input 36, input 54)
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' 'number' ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name;
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  Eight.Pass08(Eight.Global01(Seven.Nest13(Seven.Blocks09)))

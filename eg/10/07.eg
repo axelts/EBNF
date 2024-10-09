@@ -1,0 +1,48 @@
+%% output
+  Immediate evaluation of arithmetic expressions using precedence table.
+  
+  Use the stack-based parser.
+  Remove the precedence table to see the conflicts.
+  Test associativity: '1 - 2 + 3' and '2 ** 2 ** 2 ** 2'.
+%% grammar
+  %left '+' '-';
+  %left '*' '/';
+  %right '**';
+
+  expr:     add | subtract | multiply | divide | power
+            | '(' expr ')' | number;
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+   1 + 2*3 - 45/(1 + 2**3**2 / 4**3)
+%% actions
+  class Actions07 {
+    /** `expr: add | subtract | ... | '(' expr ')' | number;` */
+    expr (... arg) {
+      return arg.length > 1 ? arg[1] : arg[0];
+    }
+    
+    /** `add: expr '+' expr;` */
+    add (a, x, b) { return a + b; }
+    
+    /** `subtract: expr '-' expr;` */
+    subtract (a, x, b) { return a - b; }
+    
+    /** `multiply: expr '*' expr;` */
+    multiply (a, x, b) { return a * b; }
+    
+    /** `divide:   expr '/' expr;` */
+    divide   (a, x, b) { return a / b; }
+    
+    /** `power:    expr '**' expr;` */
+    power    (a, x, b) { return a ** b; }
+    
+    /** `number:   Number;` */
+    number   (number)  { return parseInt(number, 10); }
+  }

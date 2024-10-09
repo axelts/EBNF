@@ -1,0 +1,16 @@
+%% output
+  Conflict-free "dangling else" using rule precedence.
+  
+  Use 'trace' to see that the inner 'if' is reduced with 'else'.
+  Change '%right' to '%left' to see that 'else' cannot be recognized.
+%% grammar
+  %right 'else';
+
+  statement: 'if' Number statement %prec 'else';
+  statement: 'if' Number statement 'else' statement;
+  statement: Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  if 1
+    if 2 3 else 4

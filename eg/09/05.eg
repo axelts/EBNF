@@ -1,0 +1,43 @@
+%% output
+  Extending the EBNF Grammar's Grammar.
+  New top-level rule?
+
+  Unfortunately, 'Seq' does not allow 'Alt' as descendant.
+%% grammar
+  grammar: { rule };
+  rule:    Token ':' alt ';';
+  alt:     seq [{ '|' seq }];
+  seq:     { lit | ref | opt | some | parens };
+  lit:     Lit;
+  ref:     Token;
+  opt:     '[' alt ']';
+  some:    '{' alt '}';
+  parens:  '(' alt ')';
+%% tokens
+  EBNF.Grammar.terminals
+%% program
+  sum: Number [{ ( '+' | '-' ) Number }];
+%% actions
+  class Actions extends EBNF.Actions {
+    // create new grammar for rules in program area
+    constructor () {
+      super(new EBNF.Grammar({ Number: /[0-9]+/ }));
+      this.g.config.log = puts;          // send log to output area
+    }
+    
+    // grammar: { rule };
+    grammar (some) {
+      this.g.check();                          // check new grammar
+      puts(this.g.toString());               // display new grammar
+        
+      // executable uses new grammar to parse a sum
+      return () => this.g.parser().parse('1 + 2 - 3');
+    }
+    
+    seq (some) { return super.seq(some, null); }  // dummy argument
+
+    // parens: '(' alt ')';
+    parens (lp, alt, rp) {              // returns the alternatives
+      return alt;
+    }
+  }

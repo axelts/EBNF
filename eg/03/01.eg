@@ -1,0 +1,36 @@
+%% output
+  Regular Expressions 101.
+  Not all of these tokens can be used together...
+%% grammar
+  examples:  { literal | token };
+  literal:   'if' | 'then' | 'else' 
+             | '+' | '-' | '<' | '<=' | '\'' | '\\';
+  token:     ShellVar | Signed | Name | Number | String
+             | JavaScript | Pascal | C;
+%% tokens
+  {
+          AnyChar: /./,
+            Digit: /[0-9]/,
+           Letter: /[a-z]/,
+          Special: /[!-/:-@[-`{-~]/,
+         ShellVar: /\$[0-9]/,
+        ShellVar2: /\$[0-9]\s\$[0-9]/,
+           Signed: /[-+][0-9]+/,
+             Name: /[a-zA-Z][a-zA-Z0-9]*/,
+    NameAndNumber: /\s*[a-zA-Z][a-zA-Z0-9]*\s+[-+]?[0-9]+\s*/,
+           Number: /[1-9][0-9]*|0[xX][0-9a-fA-F]+|0[0-7]*/,
+        BadNumber: /0[0-7]*|[1-9][0-9]*|0[xX][0-9a-fA-F]+/,
+           String: /'(?:\\['\\\n]|[^'\\\n])+'/,
+       JavaScript: /\/\/[^\n]*(?:\n|$)/,
+           Pascal: /{[^}]*}/,
+                C: /\/\*(?:[^*]|\*+[^/*])*\*+\//
+  }
+%% program
+  if then else + - < <=  '' \
+  $1 +345 -567 atYourService 0 017 123 0xabc
+  '\'' '++' '\
+  ' // this is a JavaScript comment
+  { this is a Pascal
+    comment }
+  /**/ /* these are C * comments ***/
+  // at the end of input

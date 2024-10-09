@@ -1,0 +1,45 @@
+%% output
+  Bootstrapping the parser generator.
+%% grammar
+  grammar: { rule };
+  rule:    Token ':' alt ';';
+  alt:     seq [{ '|' seq }];
+  seq:     { lit | ref | opt | some };
+  lit:     Lit;
+  ref:     Token;
+  opt:     '[' alt ']';
+  some:    '{' alt '}';
+%% program
+  grammar: { rule };
+  rule:    Token ':' alt ';';
+  alt:     seq [{ '|' seq }];
+  seq:     { lit | ref | opt | some };
+  lit:     Lit;
+  ref:     Token;
+  opt:     '[' alt ']';
+  some:    '{' alt '}';
+%% tokens
+  EBNF.Grammar.terminals
+%% actions
+  class Actions extends EBNF.Actions {  // modify top-level action
+    static count = 0;                   // count created grammars
+
+    constructor () {                    // create next grammar
+      super(new EBNF.Grammar(EBNF.Grammar.terminals));
+      this.g.count = ++ Actions.count;
+    }
+    
+    grammar (some) { 
+      this.g.check();                   // check next grammar
+      puts(this.g.toString());          // display next grammar
+      puts('count', this.g.count);      // display it's count
+      
+      // executable uses next grammar to parse it's own rules
+      return () => this.g.parser().parse(
+        this.g.count % 2 ? program : grammar, Actions);
+    }
+    
+    seq (some) { // parent expects some and optional level
+      return super.seq(some, null);
+    }
+  }

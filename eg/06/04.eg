@@ -1,0 +1,49 @@
+%% output
+  Grammar for a comma-separated list of arithmetic expressions.
+  Actions to immediately evaluate the expressions.
+  
+  Output: 1 2 3 2.66 0.166 -18 -123 32
+%% grammar
+  list:     sum [{ ',' sum }];
+  sum:      product [{ add | subtract }];
+  add:      '+' product;
+  subtract: '-' product;
+  product:  signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide:   '/' signed;
+  signed:   [ '-' ] term;  
+  term:     number | '(' sum ')';
+  number:   Number;
+%% tokens
+  { Number: /0|[1-9][0-9]*/ }
+%% program
+  1, 2, (3), 2 / 3 * 4, 2 / (3*4),
+  1 + 2 * 3 / (4 - 5) - (6 + 7),
+  -123,
+  -4 * -(5 + 3)
+%% actions
+  class Eval04 extends Six.Eval03 {
+    /** `list: sum [{ ',' sum }];` */
+    list (sum, many) {
+      puts(sum);
+      if (many) many[0].forEach(seq => puts(seq[1]));
+    }
+  
+    /** `sum: product [{ add | subtract }];` */
+    sum (product, many) {
+      return this.product(product, many);
+    }
+  
+    /** `add: '+' product;` */
+    add (_, right) { return left => left + right; }
+  
+    /** `subtract: '-' product;` */
+    subtract (_, right) { return left => left - right; }
+  
+    // product:  signed [{ multiply | divide }];
+    // multiply: '*' signed;
+    // divide:   '/' signed;
+    // signed:   [ '-' ] term;
+    // term:     number | '(' sum ')';
+    // number:   Number;
+  }

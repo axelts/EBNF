@@ -1,0 +1,66 @@
+%% output
+  Semantic analysis for strong int|float|string typing.
+  
+  Repair nine semantic errors in the program to produce
+  the expected output:
+    3 4.3
+    24 2.34
+    4.6 1.5 4.34
+    22.3
+    ok
+    3
+    4
+  
+  Change the rule name 'print' to 'printAny'...
+%% program
+  int i; float r; string s;
+  i = 1; r = 2.3; s = '4'; i = 's'; i = r; i = int r;
+  print i + 1, i + r;
+  print i + s, i - (r + s), (r + s) - i;
+  print i * r, (i + 1) / 2, (i + r + s) - s;
+  print string i + r;
+  if i < r then print 'ok' fi;
+  while i < s do i = i + 1; print string i od
+%% grammar
+  prog: [{ decl ';' }] stmts;
+  decl: type Name [{ ',' Name }];
+  type: 'int' | 'float' | 'string';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | loop | select;
+  assign: Name '=' sum;
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  loop: 'while' cmp 'do' stmts 'od';
+  select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | int | float | string | name
+        | 'int' term | 'float' term | 'string' term
+        | '(' sum ')';
+  input: 'input' String String;
+  int: Int;
+  float: Float;
+  string: String;
+  name: Name;
+%% tokens
+  {
+    Float: /(?:0|[1-9][0-9]*)\.[0-9]*/,  // must be first!
+    Int: /0|[1-9][0-9]*/,
+    String: /'(?:[^'\\]|\\['\\])+'/,
+    Name: /[a-z]+/
+  }
+%% actions
+  Seven.TCheck02

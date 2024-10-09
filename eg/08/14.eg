@@ -1,0 +1,461 @@
+%% output
+  Compile nested first-order functions into stack machine code.
+  Local variables, blocks. Declare before use. Dynamic memory management.
+
+  Function as argument, variable, and result value [see 8/08].
+  
+  Expected output:
+    1 1
+    2 4
+    3 9
+    4 16
+    5 25
+    1 1
+    2 8
+    3 27
+    4 64
+    5 125
+    0
+%% program
+  type loop (number, number, number): Printer,
+       Printer (Calc),
+       Calc (number): number;
+
+  function main () begin
+    function square (x): Calc begin square = x * x end;
+    function cube (x): Calc begin cube = x * x * x end;
+
+    function loop (from, to, step) begin
+      function up (calc): Printer begin
+        var f;
+        f = from;
+        while f <= to do print f, calc(f); f = f + step od
+      end;
+      loop = up;
+      
+      if step < 0 then
+        function down (calc): Printer begin
+          var f;
+          f = from;
+          while f >= to do print f, calc(f); f = f + step od
+        end;      
+        loop = down
+      else
+        if step = 0 then to = from; step = 1 fi
+      fi
+    end;
+
+    begin var printer: Printer;
+      printer = loop(1, 5, 1); printer(square); printer(cube)
+    end
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' typename ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name [ ':' type ];
+  type: Name | 'number';
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: { args };
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [{ args }];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator (mixin)
+    const Machine14 = superclass => class extends superclass {
+      /** Data memory for nested functions as arguments
+          @class @extends super.Memory
+          @instance
+          @memberof module:Eight~Machine14
+          @property {?Array} fp - current frame
+          @property {number} dp - no longer used
+          @property {number} id - current tag for frames (trace)
+          @property {number} newId - new tag for frames (trace)
+          @property {?Array} dirty - changed frame (trace)
+          @property {function} toString() - [replace] interpret `dirty` frame */
+      get Memory () {
+        return this.#Memory ??= class extends super.Memory {
+          get newId () { ++ this.#id; return this.id; }
+          get id () {          // returns a letter or a sequence number
+            return this.#id <= 26 ? String.fromCharCode(96 + this.#id) :
+              this.#id <= 52 ? String.fromCharCode(64 + this.#id - 26) :
+              String(this.#id - 52);
+          }
+          #id = 0;                                  // current uniqe id
+          dirty = null;                        // frame to be displayed
+                                                        // no frame yet
+          constructor (...args) { super(...args); this.fp = null; }
+          
+          toString () {      // [replace] global memory and dirty frame
+            const dump = slot =>
+              slot === null ? 'null' :
+              slot instanceof Array ?
+                'id' in slot ? `${slot.id}:[]` : '[?]' :
+              slot;
+            let result = 'mem:[ ' + this.map(dump).join(' ') + ' ] ' +
+                         `fp: ${dump(this.fp)}`;
+            if (this.dirty) {
+              result += ` ${this.dirty.id}:[ ` +
+                          this.dirty.map(dump).join(' ') + ' ]';
+              this.dirty = null;
+            }
+            return result;
+          }
+        };
+      }
+      #Memory;
+    
+      /** `stack: ... arguments fp old-pc  
+          -> ... | frame: old-pc old-fp display result arguments locals`
+          @param {number} args - size of argument values.
+          @param {number} depth - number of display entries.
+          @param {number} result - size of result value.
+          @param {number} vars - size of local variables.
+          @instance
+          @memberof module:Eight~Machine14 */
+      Entry (args, depth, result, vars) {
+        return memory => {
+          const frame = [ memory.pop(), memory.fp ];  // old-pc, old-fp
+          frame.id = memory.newId;                   // label new frame
+          if (depth > 1)     // push (part of) incoming display, if any
+            frame.push(... memory.pop().slice(1 + 1, 1 + depth));
+          else memory.pop();                               // pop frame
+          frame.push(frame);                   // push new frame's base
+          frame.push(... Array(result).fill(0));   // push result value
+          if (args)                          // move arguments to frame
+            frame.push(... memory.splice(- args, Infinity));
+          if (vars)                           // create local variables
+            frame.push(... Array(vars).fill(0));
+          memory.dirty = memory.fp = frame;                   // new fp
+        };
+      }
+      
+      /** `stack: ... | frame: old-pc old-fp display result ...  
+          -> ... result old-pc | fp: old-fp | frame unchanged`
+          @param {number} depth - number of display entries.
+          @param {number} result - size of result value.
+          @instance
+          @memberof module:Eight~Machine14 */
+      Exit (depth, result) {
+        return memory => {
+          memory.push(                                   // push result
+            ... memory.fp.slice(2 + depth, 2 + depth + result),
+            memory.fp[0]);                               // push old pc
+          memory.fp = memory.fp[1];               // set previous frame
+        };
+      }
+    
+      /** `stack: ... -> ... frame[depth][addr]`
+          @instance
+          @memberof module:Eight~Machine14 */
+      LoadGC (addr, depth) {
+        return memory => memory.push(memory.fp[1 + depth][addr]);
+      }
+    
+      /** `stack: ... val -> ... val | frame[depth][addr]: val`
+          @instance
+          @memberof module:Eight~Machine14 */
+      StoreGC (addr, depth) {
+        return memory =>
+          (memory.dirty = memory.fp[1 + depth])[addr] = memory.at(-1);
+      }
+    
+      /** `stack: ... -> ... fp`
+          @instance
+          @memberof module:Eight~Machine14 */
+      PushFP (memory) {
+        memory.push(memory.fp);
+      }
+    };
+
+    // the actions (mixin)
+    const First14 = superclass => class extends superclass {
+      /** Describes a variable in {@linkcode module:Eight~First14 First14}.
+          @class @extends super.Var
+          @instance
+          @memberof module:Eight~First14
+          @property {function} load() - [replace] local/global and function slots
+          @property {function} store() - [replace] local/global and function slots */
+      get Var () { return this.#Var ??= class extends super.Var {
+          load () {               // [replace] garbage-collected frames
+            const load = addr => {
+              if (this.depth)                                  // local
+                this.owner.machine.gen('LoadGC', addr, this.depth);
+              else                                            // global
+                this.owner.machine.gen('Load', addr);
+            };
+            load(this.addr);              // top:value or below:display
+            if (this.type.isFun) load(this.addr + 1);  // + top:address
+          }
+                
+          store () {              // [replace] garbage-collected frames
+            const store = addr => {
+              if (this.depth)                                  // local
+                this.owner.machine.gen('StoreGC', addr, this.depth);
+              else                                            // global
+                this.owner.machine.gen('Store', addr);
+            };
+            if (this.type.isFun) {
+              store(this.addr + 1);                      // top:address
+              this.owner.machine.gen('Rotate', 1);
+              store(this.addr);                        // below:display
+              this.owner.machine.gen('Rotate', 1);
+            } else store(this.addr);                       // top:value 
+          }
+        };
+      }
+      #Var;
+      
+      /** Describes a function in {@linkcode module:Eight~First14 First14}.
+          @class @extends super.Fun
+          @instance
+          @memberof module:Eight~First14
+          @property {number} parms - [replace] memory slots for arguments.
+          @property {function} setParms() - [replace] function values take 2 slots
+            similar to {@linkcode module:Eight~Pass08#Fun Pass08.Fun.setParms()}.
+          @property {function} call() - [extend] `PushFP`, `Call(addr)`.
+          @property {function} load() - [extend] `PushFP`, `Push(start)`.
+          @property {function} store() - [replace] `StoreGC`.
+          @property {function} exit() - [replace] `Entry`, `Exit`. */
+      get Fun () { return this.#Fun ??= class extends super.Fun {
+        
+          setParms (name) {           // [replace] sets parameter types
+            try {
+              const type = this.owner.typeSymbols.get(name);
+              if (!type) throw `${name}: not a type`;
+              if (!type.isFun) throw `${name}: not a function type`;
+              if (this.type && this.type != type)
+                throw `${name} ${this.name}: ` +
+                  `previously declared as ${this.type.name}`;
+              if (type.parms.length != this.locals.size)
+                throw `${name} ${this.name} arguments: expects ` +
+                  `${type.parms.length}, receives ${this.locals.size}`;
+              this.type = type;
+              this.size = 2 + this.depth;      // old-pc old-fp display
+              this.addr = this.size ++;                       // result
+              if (this.type.returns && this.type.returns.isFun)
+                ++ this.size;                        // function result
+              this.parms = this.size;             // begin of arguments
+              let n = 0;              // Map.forEach does not provide n
+              this.locals.forEach(parm => {
+                parm.addr = this.size ++;      // set parameter address
+                parm.type = type.parms[n ++];     // set parameter type
+                if (parm.type.isFun)
+                   ++ this.size;                   // function argument
+              });
+              this.parms = this.size - this.parms;    // argument slots
+            } catch (e) {
+              if (e instanceof Error) throw e;      // shouldn't happen
+              this.owner.parser.error(e);            // report an error
+            }
+          }
+        
+          call () {                       // [extend] generate 'PushFP'
+            this.owner.machine.gen('PushFP'); super.call();
+          }
+          
+          load () {                       // [extend] generate 'PushFP'
+            this.owner.machine.gen('PushFP'); super.load();
+          }
+          
+          store () {              // [replace] garbage-collected frames
+            const store = addr =>
+              this.owner.machine.gen('StoreGC', addr, this.depth);
+            if (this.type.returns && this.type.returns.isFun) {
+              store(this.addr + 1);                      // top:address
+              this.owner.machine.gen('Rotate', 1);
+              store(this.addr);                        // below:display
+              this.owner.machine.gen('Rotate', 1);
+            } else store(this.addr);                       // top:value 
+          }
+    
+          exit () {                    // [replace] new 'Entry', 'Exit'
+            const result =
+              this.type.returns && this.type.returns.isFun ? 2 : 1;
+            this.owner.machine.code[this.start] =
+              this.owner.machine.ins('Entry', this.parms,  // arguments
+                this.depth, result,          // display, result, locals
+                this.frameSize - (2 + this.depth + result + this.parms));
+            this.owner.machine.gen('Exit', this.depth, result);
+            const end = this.owner.machine.gen('Return');
+            if (this.scope)                    // need to repair bypass
+              this.owner.machine.code[this.scope.bypass] =
+                this.owner.machine.ins('Branch', end);
+          }    
+        };
+      }
+      #Fun;
+    
+      constructor (parser, machine) {
+        super(parser, machine ?? new (Machine14(Eight.Machine01(Seven.Machine13)))());
+      }
+    
+      /** [Replace] Need `PushFP` for `main`.
+          @param {Fun} main - describes `main()`.
+          @instance
+          @memberof module:Eight~First14 */
+      _startup (main) {
+        for (let p = 0; p < main.parms; ++ p)  // push arguments if any
+          this.machine.gen('Push', 0);
+        this.machine.gen('PushFP');               // push frame pointer
+        this.machine.gen('Call', main.start);     // call main function
+        if (!main.type.returns?.isFun)      // only print number result
+          this.machine.gen('Print', 1);                // print and pop
+      }  
+    
+      // prog: [ typedcls ] [ vars ] funs;
+      // typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+      // typedcl: Name '(' [ types ] ')' [ ':' typename ];
+      // types: typename [{ ',' typename }];
+      // typename: Name | 'number';
+      // vars: 'var' varname [{ ',' varname }] ';';
+      
+      /** `varname: Name [ ':' type ];` [extend] two slots for function value.
+          @instance
+          @memberof module:Eight~First14 */
+      varname (name, type) {
+        super.varname(name, type);       // create single slot variable
+        if (type?.[1].isFun)             // add slot for function value
+          if (this.funct) this.funct.size ++;                  // local
+          else this.size ++;                                  // global
+      }
+      
+      // type: Name | 'number';
+      // funs: { fun };
+      // fun: head parms [ block ] ';';
+      // head: 'function' Name;
+      // parms: '(' [ names ] ')' [ ':' Name ];
+      // names: Name [{ ',' Name }];
+      // block: begin body 'end';
+      // body: [ vars ] [ funs ] stmts;
+      // begin: 'begin';
+      // stmts: stmt [{ ';' stmt }];
+      // stmt: assign | print | return | block | loop | select;
+      // assign: symbol action;
+      // action: store | call;
+      
+      /** `store: '=' sum;` [extend] pops extra slot for function value.
+          @instance
+          @memberof module:Eight~First14 */
+      store (_, sum) {
+        super.store(_, sum);
+        if (sum.isFun) this.machine.gen('Pop');
+      }
+      
+      /** `call: { args };` pops extra slot for function value.
+          @instance
+          @memberof module:Eight~First14 */
+      call (_) {
+        if (this.context.type && this.context.type.isFun)
+          this.machine.gen('Pop');
+      }
+      
+      // args: '(' [ sums ] ')';
+    
+      /** [replace] need two slots for function argument and value.
+          @param {Type[]} args - list of argument types.
+          @instance
+          @memberof module:Eight~First14 */
+      _lift (args) {
+        if (args.length)
+          this.machine.gen('Rotate',
+            args.reduce(
+              (length, type) => length + (type.isFun ? 2 : 1), 0),
+            2);
+      }
+      
+      // print: 'print' sums;
+      // sums: sum [{ ',' sum }];
+    
+      /** `return: 'return' [ sum ];` [extend] pops extra slot for function value.
+          @instance
+          @memberof module:Eight~First14 */
+      return (_, sum) {
+        if (this.funct.storeOk(sum ? sum[0] : null))
+          if (sum) {
+            this.funct.store();
+            this.machine.gen('Pop');
+            if (sum[0].isFun) this.machine.gen('Pop');
+          }
+        this.funct.return();
+      }
+      
+      // loop: While cmp Do body 'od';
+      // While: 'while';
+      // Do: 'do';
+      // select: 'if' cmp then [ else ] 'fi';
+      // then: Then [ body ];
+      // else: Else body;
+      // Then: 'then';
+      // Else: 'else';
+      // cmp: sum rel;
+      // rel: eq | ne | gt | ge | lt | le;
+      // eq: '=' sum;
+      // ne: '<>' sum;
+      // gt: '>' sum;
+      // ge: '>=' sum;
+      // lt: '<' sum;
+      // le: '<=' sum;
+      // sum: product [{ add | subtract }];
+      // add: '+' product;
+      // subtract: '-' product;
+      // product: signed [{ multiply | divide }];
+      // multiply: '*' signed;
+      // divide: '/' signed;
+      // signed: [ '-' ] term;
+      // term: input | number | name | '(' sum ')';
+      // input: 'input' [ Number ];
+      // number: Number;
+      // name: symbol [{ args }];
+      // symbol: Name;
+    };
+
+    return First14(Eight.Global01(Seven.Nest13(Seven.Blocks09)))
+  })()

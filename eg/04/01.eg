@@ -1,0 +1,12 @@
+%% output
+  This grammar recognizes a sum or difference of one or more numbers.
+  The first rule recognizes one or more expressions, separated by commas.
+  Numbers can be signed and can be decimal, hexadecimal, or octal.
+%% grammar
+  sum: term [{ more }];
+  more: '+' term | '-' term;
+  term: [ '+' | '-' ] Number | '(' sum ')';
+%% tokens
+  { Number: /[1-9][0-9]*|0[xX][0-9a-fA-F]+|0[0-7]*/ }
+%% program
+  1 - (2 + - 3)

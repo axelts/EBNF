@@ -1,0 +1,114 @@
+%% output
+  Compile arithmetic expressions into stack machine code [see 11/03].
+  
+  Add a top-level 'run' rule to execute the stack machine immediately.
+  Insert a 'dump' rule between 'compile' and 'expr' to display the tree.
+  Add '/./' to the call to 'Compile' to trace code generation and display the code.
+
+  Output: -10
+%% program
+   1 + -2*3 - 45/(1 + 2**3**2 / 4**3)
+%% grammar
+  %left     '+' '-';
+  %left     '*' '/';
+  %right    '**';
+  %right    Number;
+ 
+  compile:  expr;
+  expr:     add | subtract | multiply | divide | power
+            | minus | '(' expr ')' | number;
+          
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+%% tokens
+  { Number: /0|[1-9][0-9]*/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // mix-in with top-level action, runs visitor(s) and returns stack machine
+    const Compile = (superclass, ...args) => class extends superclass {
+      // Create and apply all visitors, return executable.
+      compile (tree) {
+        const [lastVisitor, lastTree, trace] = this._doVisits(tree, args);
+        lastVisitor.visit(lastTree, trace);
+        if (trace) puts(lastVisitor.machine.toString());
+        return lastVisitor.executable;
+      }
+    };
+
+    // base class to generate stack machine code
+    class Code extends Eleven.Visit {
+      // Stack machine generator class. 
+      get Machine () { return this.#Machine ??= Six.Machine10; }
+      #Machine;
+      
+      // Extended stack machine instructions. 
+      get Instructions () {
+        return this.#Instructions ??= superclass => superclass;
+      }
+      #Instructions;
+      
+      // Stack machine generator. 
+      get machine () { 
+        return this.#machine ??= new (this.Instructions(this.Machine)) ();
+      }
+      #machine;
+      
+      // The executable. 
+      get executable () { return this.machine.run(0); }
+      
+      // Eleven.Visits the subtrees and generates an instruction.
+      _postfix (node, op) {
+        node.slice(1).forEach(node => this.visit(node));
+        return this.machine.gen(op);
+      }
+    }
+
+    // mix-in to generate stack machine code for expressions
+    const Code_Number = superclass => class extends superclass {
+      // Power instruction. 
+      get Instructions () {
+        return this.#Instructions ??=
+          superclass => class extends super.Instructions(superclass) {
+            // stack: ... a b -> ... a**b 
+            Power (memory) {
+              memory.splice(-2, 2, memory.at(-2) ** memory.at(-1));
+            }
+          }; 
+      }
+      #Instructions;
+      // [ 'add' a b ]
+      add (node) { return this._postfix(node, 'Add'); }
+    
+      // [ 'subtract' a b ]
+      subtract (node) { return this._postfix(node, 'Subtract'); }
+    
+      // [ 'multiply' a b ]
+      multiply (node) { return this._postfix(node, 'Multiply'); }
+    
+      // [ 'divide' a b ]
+      divide (node) { return this._postfix(node, 'Divide'); }
+    
+      // [ 'power' a b ]
+      power (node) { return this._postfix(node, 'Power'); }
+    
+      // [ 'minus' a ]
+      minus (node) { return this._postfix(node, 'Minus'); }
+    
+      // [ 'number' a ]
+      number (node) {
+        if (typeof node[1] != 'number')
+          this._error(node.lineno, "'number' non-number");
+        return this.machine.gen('Push', node[1]);
+      }
+    };
+
+    // builder and code generator for arithmetic expressions
+    return Compile(
+             Eleven.Main(Eleven.Build_Number(Eleven.Build)),
+             Code_Number(Code));
+  }) ()

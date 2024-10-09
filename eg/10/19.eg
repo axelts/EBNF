@@ -1,0 +1,43 @@
+%% output
+  Error recovery in EBNF [see 10/17].
+  
+  How much input is accepted by recursive descent?
+  Remove '| $error' and check again.
+  How much input is accepted by the stack-based parser?
+  Set 'insert $error' and check again.
+  Which legal input for [10/17] is not accepted?
+%% grammar
+  examples: { example };
+  example: many | some | list | $error;
+  many: 'many' [{ 'm' }] ';';
+  some: 'some' { 's' } ';';
+  list: 'list' 'l' { ',' 'l' } ';';
+%% program
+  many;
+  many m m;
+  many A;
+  many B m;
+  many m C m;
+  many m D m E;
+
+  some s s;
+  some F;
+  some G s;
+  some s H s;
+  some s s I;
+
+  list l;
+  list l, l;
+  list l,;
+  list J;
+  list l K;
+  list l L l;
+  list l, M;
+  list l, N l;
+  list l, O,;
+  list l, P, l;
+  list l, Q, l,;
+%% actions
+  class Actions {
+    example (e) { puts('example', g.dump(e)); }
+  }

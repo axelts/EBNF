@@ -1,0 +1,27 @@
+%% output
+  EBNF to BNF translations of { x }.
+  
+  First, remove the empty alternative for 'ebnf6'.
+  
+  Output:
+  [ 
+    [ 'ebnf'  [ [ 'a' [ 'b' ] 'c' ]   [ 'a'  null   'c' ] ] ] 
+    [ 'bnf' [ [ [ 'a' [ 'b' ] 'c' ] ] [ 'a' [ 'b' ] 'c' ] ] ]
+  ]
+  
+  The explicit rule     ebnf4:  ebnf5;  creates an extra list.
+  The translated rule  $ebnf4: $ebnf5;  does not.
+%% grammar
+  cases: ebnf bnf;
+  
+  ebnf:  'ebnf' { 'a' [ 'b' ] 'c' };
+
+  bnf:   'bnf' ebnf4;
+
+  ebnf4: ebnf5 | ebnf4 ebnf5;
+  ebnf5: 'a' ebnf6 'c';
+
+  ebnf6: | 'b';
+%% program
+  ebnf a b c a   c
+  bnf  a b c a b c

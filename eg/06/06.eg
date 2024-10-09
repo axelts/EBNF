@@ -1,0 +1,54 @@
+%% output
+  Grammar for one arithmetic expression with variables and input.
+  Compile an arithmetic expression into a JavaScript function.
+  Second step: compile numbers and variable names [see 6/05].
+
+  The function returned by 'sum' might need a symbol table as argument.
+  Add a start rule 'run: sum;' and an action 'run (sum) { return () => sum({ x: 3 }); }'.
+  Then try things like a single number or name, or either enclosed in parentheses.
+  
+  Output (with 'run'): 3
+%% grammar
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% program
+  input 3
+%% actions
+  class Functions06 extends Six.Functions05 {
+    // sum: product [{ add | subtract }];
+    // add: '+' product;
+    // subtract: '-' product;
+    // product: signed [{ multiply | divide }];
+    // multiply: '*' signed;
+    // divide: '/' signed;
+    // signed: [ '-' ] term;
+    // term: input | number | name | '(' sum ')';
+  
+    /** `input: 'input' [ Number ];` returns fct */
+    input (_, number) {
+      const dflt = String(number !== null ? number[0] : 0);
+      return () => parseInt(prompt('input', dflt), 10);
+    }
+  
+    /** `number: Number;` returns fct */
+    number (number) {
+      const result = parseInt(number, 10);
+      return () => result;
+    }
+  
+    /** `name: Name;` returns fct */
+    name (name) {
+      return memory => name in memory ? memory[name] : 0;
+    }
+  }

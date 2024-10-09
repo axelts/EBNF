@@ -1,0 +1,313 @@
+%% output
+  Compile a strongly typed little language into stack machine code [see 11/08].
+  Euclids Algorithm [see [7/02].
+  
+  Add '/./' to the call to 'Compile' to trace code generation and dump code.
+  Press '100' or add a non-negative variable 'trace' to trace execution.
+  
+  Output:
+    > memory = run(null, 100)
+    [ 0 0 0 ]
+    [ 0 0 0 '' ] 0: memory => this.Push('')(memory)
+    [ '' 0 0 '' ] 1: memory => this.Store(0)(memory)
+    [ '' 0 0 ] 2: memory => this.Pop(memory)
+    [ '' 0 0 false ] 3: memory => this.Push(false)(memory)
+    [ '' 0 false false ] 4: memory => this.Store(2)(memory)
+    [ '' 0 false ] 5: memory => this.Pop(memory)
+    [ '' 0 false '36' ] 6: memory => this.InputString('x', '36')(memory)
+    [ '36' 0 false '36' ] 7: memory => this.Store(0)(memory)
+    [ '36' 0 false ] 8: memory => this.Pop(memory)
+      ...
+    [ '18' 18 true 'Greatest common divisor:' ] 48: memory => this.Push('Greatest common divisor:')(memory)
+    [ '18' 18 true 'Greatest common divisor:' '18' ] 49: memory => this.Load(0)(memory)
+    Greatest common divisor: 18
+    [ '18' 18 true ] 50: memory => this.Print(2)(memory)
+    [ '18' 18 true ]
+%% program
+  x = input 'x' '36'; y = input 'y' '54'; string x; number y;
+  eq = x = y; bool eq;
+  while not eq do
+    if (number) x > y then
+      x = x - y
+    else
+      y = y - x 
+    fi;
+    eq = x = y
+  od;
+  print 'Greatest common divisor:', x
+%% grammar
+  %left     'or';
+  %left     'and';
+  %nonassoc '=' '<>' '>' '>=' '<' '<=';
+  %left     '+' '-';
+  %left     '*' '/';
+  %right    '**';
+  %right    Number;
+
+  compile:  block;
+  block:    item [{ ';' item }];
+  item:     dcl | stmt;
+  dcl:      type Name [{ ',' Name }];
+    
+  stmts:    stmt [{ ';' stmt }];
+  stmt:     assign | print | loop | select;
+  assign:   Name '=' expr;
+  print:    'print' expr [{ ',' expr }];
+  loop:     'while' expr 'do' stmts 'od';
+  select:   'if' expr 'then' stmts [ 'else' stmts ] 'fi';
+
+  expr:     or | and | eq | ne | gt | ge | lt | le
+            | add | subtract | multiply | divide | power
+            | minus | not | len | cast | input
+            | number | name | bool | string | '(' expr ')';
+
+  or:       expr 'or' expr;
+  and:      expr 'and' expr;
+
+  eq:       expr '=' expr;
+  ne:       expr '<>' expr;
+  gt:       expr '>' expr;
+  ge:       expr '>=' expr;
+  lt:       expr '<' expr;
+  le:       expr '<=' expr;   
+
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+
+  minus:    '-' expr %prec Number;
+  not:      'not' expr %prec Number;
+  len:      'len' expr %prec Number;
+  cast:     '(' type ')' expr %prec Number;
+  type:     'bool' | 'number' | 'string';
+
+  input:    'input' [ String String ];  
+  number:   Number;
+  name:     Name;
+  bool:     'true' | 'false';
+  string:   String;
+%% tokens
+  { 
+    Number: /0|[1-9][0-9]*/, 
+    Name:   /[a-z]+/,
+    String: /'(?:\\['\\\n]|[^'\\\n])*'/
+  }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // mix-in to generate code for Boolean expressions
+    const Code_Bool = superclass => class extends superclass {
+      // [Override] Add IfTrue, IfFalse, and Not.
+      get Instructions () {
+        return this.#Instructions ??=
+          superclass => class extends super.Instructions(superclass) {
+            // stack: ... bool -> ... bool | pc: bool? a 
+            IfTrue (a) {
+              return memory => { if (memory.at(-1)) memory.pc = a; };
+            }
+            // stack: ... bool -> ... bool | pc: !bool? a 
+            IfFalse (a) {
+              return memory => { if (!memory.at(-1)) memory.pc = a; };
+            }
+            // stack: ... a -> ... !a 
+            Not (memory) { memory.splice(-1, 1, !memory.at(-1)); }
+          };
+      }
+      #Instructions;
+    
+      // [ 'or' a b ]
+      or (node) {
+        this.visit(node[1]);                        //    push a
+        const x = this.machine.code.push(null) - 1; // x: IfTrue y
+        this.machine.gen('Pop');                    //    pop a
+        const y = this.visit(node[2]);              //    push b
+                                                    // y:
+        this.machine.code[x] = this.machine.ins('IfTrue', y); // fixup
+        return y;
+      }
+    
+      // [ 'and' a b ]
+      and (node) {
+        this.visit(node[1]);                        //    push a
+        const x = this.machine.code.push(null) - 1; // x: IfFalse y
+        this.machine.gen('Pop');                    //    pop a
+        const y = this.visit(node[2]);              //    push b
+                                                    // y:
+        this.machine.code[x] = this.machine.ins('IfFalse', y); // fixup
+        return y;
+      }
+    
+      // [ 'not' b ]
+      not (node) { return this._postfix(node, 'Not'); }
+    
+      // [ 'bool' value ]
+      bool (node) {
+        if (typeof node[1] != 'boolean')
+          throw `[ 'bool' ${node[1]} ]: not boolean`;
+        return this.machine.gen('Push', node[1]);
+      }
+    };
+
+    // mix-in to generate code for input and string expressions
+    const Code_String = superclass => class extends superclass {
+      // Convert raw to literal string. Only escapes single quote, newline, backslash; see {@link module:Base~Tuple#escape}.
+      _escape (s) { return `'${s.replace(/['\n\\]/g, '\\$&')}'`; }
+    
+      // [Override] Show strings in memory.
+      get Machine () {
+        const escape = this._escape.bind(this);
+        return this.#Machine ??= class extends super.Machine {
+            // Show strings in memory. 
+            get Memory () {
+                return this.#Memory ??= class extends super.Memory {
+                  toString () {
+                    return '[ ' + this.map(
+                        v => typeof v == 'string' ? escape(v) : v
+                      ).join(' ') + ' ]';
+                  }
+                };
+            }
+            #Memory;
+          };
+      }
+      #Machine;
+    
+      // [Override] Add  InputString, Concat, and Len.
+      get Instructions () {
+        return this.#Instructions ??=
+          superclass => class extends super.Instructions(superclass) {
+            // stack: ... a b -> ... a+b 
+            Concat (memory) {
+              memory.splice(-2, 2, memory.at(-2) + memory.at(-1));
+            }
+            // stack: ... a -> ... a.length 
+            Len (memory) { 
+              memory.splice(-1, 1, memory.at(-1).length);
+            }
+            // stack: ... -> ... val 
+            InputString (prmpt, dflt) { 
+              return memory => memory.push(prompt(prmpt, dflt));
+            }
+          };
+      }
+      #Instructions;
+        
+      // [ 'input' prompt? default? ] returns next code address.
+      input (node) {
+        return this.machine.gen('InputString',
+          this._escape(node[1] ?? "''"), this._escape(node[2] ?? "''"));
+      }
+    
+      // [ 'concat' a b ]
+      concat (node) { return this._postfix(node, 'Concat'); }
+      // [ 'len' b ] returns number.
+      len (node) { return this._postfix(node, 'Len'); }
+    
+      // [ 'string' value ] returns string.
+      string (node) {
+        if (typeof node[1] != 'string')
+          throw `[ 'string' ${node[1]} ]: not string`;
+        return this.machine.gen('Push', this._escape(node[1]));
+      }
+    };
+    
+    // mix-in to generate cast instruction
+    const Code_Cast = superclass => class extends superclass {
+      // [Override] Add  Cast.
+      get Instructions () {
+        return this.#Instructions ??=
+          superclass => class extends super.Instructions(superclass) {
+            // stack: ... a -> ... cast a 
+            Cast (to, from) {
+              let cast;
+              switch (to + '-' + from) {
+              case 'bool-number':   cast = x => !!x; break;
+              case 'bool-string':   cast = x => /^\s*true\s*$/i.test(x); break;
+              case 'number-bool':
+              case 'number-string': cast = Number; break;
+              case 'string-bool':
+              case 'string-number': cast = String; break;
+              default: throw `Cast ${to} ${from}: illegal cast`;
+              }
+              return memory => 
+                memory.splice(-1, 1, cast(memory.at(-1)));
+            }
+          };
+      }
+      #Instructions;
+    
+      // [ 'cast' type b ]
+      cast (node) {
+        this.visit(node[2]);
+        return this.machine.gen('Cast', `'${node[1]}'`, `'${node[2].type}'`);
+      }
+    };
+    
+    // mix-in to generate code for variables
+    const Code_Names = superclass => class extends superclass {
+      // [ 'name' name ]
+    
+      name (node) {
+        return this.machine.gen('Load', this._alloc(node[1]).ord - 1);
+      }
+    
+      // [ 'assign' name value ] returns next code address.
+      assign (node) {
+        this.visit(node[2]);
+        this.machine.gen('Store', this._alloc(node[1]).ord - 1);
+        return this.machine.gen('Pop');
+      }
+    };
+
+    // mix-in to generate code for `block` and `dcl`
+    const Code_Dcl = superclass => class extends superclass {
+      // [ 'block' dcl ... stmt ... ] visits all.
+      block (node) {
+        return node.slice(1).reduce((end, node) => this.visit(node), 0);
+      }
+      
+      // [ 'dcl' type name ...] allocate, initializes bool and string.
+      dcl (node) {
+        return node.slice(2).reduce((end, name) => {
+          const addr = this._alloc(name).ord - 1;
+          switch (node[1]) {
+          case 'number': return this.machine.code.length;
+          case 'bool':   this.machine.gen('Push', false); break;
+          case 'string': this.machine.gen('Push', "''"); break;
+          }
+          this.machine.gen('Store', addr);
+          return this.machine.gen('Pop');
+        }, 0);
+      }
+    };
+
+    // builder, type checker, and code generator for a typed little language
+    return Eleven.Compile(Eleven.Main(Eleven.Build_Dcl(
+                            Eleven.Build_Stmts(
+                              Eleven.Build_Names(
+                                Eleven.Symbols(
+                                  Eleven.Build_Cast(
+                                    Eleven.Build_String(
+                                      Eleven.Build_Bool(
+                                        Eleven.Build_Cmps(
+                                          Eleven.Build_Number(Eleven.Build)))))))))),
+                          Eleven.Check_Dcl(
+                            Eleven.Check_Stmts(
+                              Eleven.Check_Names(
+                                Eleven.Symbols(
+                                  Eleven.Check_Cast(
+                                    Eleven.Check_String(
+                                      Eleven.Check_Bool(
+                                        Eleven.Check_Cmps(
+                                          Eleven.Check_Number(Eleven.Check))))))))),
+                          Code_Dcl(
+                            Eleven.Code_Stmts(
+                              Eleven.Code_Names(
+                                Code_Cast(
+                                  Code_String(
+                                    Code_Bool(
+                                     Eleven.Code_Cmps(
+                                       Eleven.Symbols(
+                                         Eleven.Code_Number(Eleven.Code))))))))));
+  }) ()

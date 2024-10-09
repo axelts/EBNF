@@ -1,0 +1,41 @@
+%% output
+  Grammar for a comma-separated list of arithmetic expressions [see 6/01].
+  Actions to immediately evaluate the expressions.
+  First step: evaluate numbers and terms, output result.
+%% grammar
+  list:     sum [{ ',' sum }];
+  sum:      product [{ add | subtract }];
+  add:      '+' product;
+  subtract: '-' product;
+  product:  signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide:   '/' signed;
+  signed:   [ '-' ] term;  
+  term:     number | '(' sum ')';
+  number:   Number;
+%% tokens
+  { Number: /0|[1-9][0-9]*/ }
+%% program
+  1, 2, (3)
+%% actions
+  class Eval02 {
+    // list:     sum [{ ',' sum }];
+    
+    /** `sum: product [{ add | subtract }];` */
+    sum (product, many) { puts(g.dump(product)); }
+  
+    // add:      '+' product;
+    // subtract: '-' product;
+    // product:  signed [{ multiply | divide }];
+    // multiply: '*' signed;
+    // divide:   '/' signed;
+  
+    /** `signed: [ '-' ] term;` */
+    signed (minus, term) { return minus ? - term : term; }
+  
+    /** `term: number | '(' sum ')';` */
+    term (...val) { return val.length == 1 ? val[0] : val[1]; }
+  
+    /** `number: Number;` */
+    number (number) { return parseInt(number, 10); }
+  }

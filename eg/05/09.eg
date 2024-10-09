@@ -1,0 +1,24 @@
+%% output
+  This grammar recognizes one or more non-whitespace characters.
+  Uncomment different action methods to modify the lists built by default.
+%% grammar
+  chars: { char };
+  char: Char;
+%% tokens
+  { Char: /./ }
+%% program
+  ein.Esel.lese.nie!
+%% actions
+  class Actions {
+    // uncomment one of these
+    char (ch) { return ch; }
+    // char (ch) { return /^[a-zA-Z]$/.test(ch) ? ch : ' '; }
+    
+    // uncomment one of these
+    // chars (some) { return some.reduce((result, list) => result += list[0], ''); }
+    chars (some) { 
+      return some.reduceRight((rev, list) => rev += list[0], '');
+    }
+    // chars (some) { return some.map(list => list[0]); }
+    // chars (some) { return some.map(list => list[0]).join(''); }
+  }

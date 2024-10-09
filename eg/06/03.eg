@@ -1,0 +1,44 @@
+%% output
+  Grammar for a comma-separated list of arithmetic expressions.
+  Actions to immediately evaluate the expressions.
+  Second step: evaluate multiplication and division [see 6/02].
+  
+  Output: 1 2.66 12 NaN
+%% grammar
+  list:     sum [{ ',' sum }];
+  sum:      product [{ add | subtract }];
+  add:      '+' product;
+  subtract: '-' product;
+  product:  signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide:   '/' signed;
+  signed:   [ '-' ] term;  
+  term:     number | '(' sum ')';
+  number:   Number;
+%% tokens
+  { Number: /0|[1-9][0-9]*/ }
+%% program
+  1, 2 / 3 * 4, 2 / (3*4)
+%% actions
+  class Eval03 extends Six.Eval02 {
+    // list:     sum [{ ',' sum }];
+    // sum:      product [{ add | subtract }];
+    // add:      '+' product;
+    // subtract: '-' product;
+  
+    /** `product: signed [{ multiply | divide }];` */
+    product (signed, many) {
+      return (many ? many[0] : [ ]).
+        reduce((product, list) => list[0](product), signed);
+    }
+  
+    /** `multiply: '*' signed;` */
+    multiply (_, right) { return left => left * right; }
+  
+    /** `divide: '/' signed;` */
+    divide (_, right) { return left => left / right; }
+  
+    // signed:   [ '-' ] term;
+    // term:     number | '(' sum ')';
+    // number:   Number;
+  }

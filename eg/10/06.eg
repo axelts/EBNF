@@ -1,0 +1,14 @@
+%% output
+  Immediate evaluation of arithmetic expressions.
+  Short but full of conflicts...
+%% grammar
+  expr:     add | subtract | multiply | divide | power
+            | '(' expr ')' | number;
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }

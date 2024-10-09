@@ -1,0 +1,82 @@
+%% output
+  Compile functions into stack machine code.
+  Block structure. Declare before use.
+
+  Define the global variable 'trace' to show scopes.
+  
+  Expected output:
+    100 0 4 0
+    200 5 2
+    300 10 20 3
+    100 0 40 0
+    200 50 2
+    400 1 2 3
+    0
+    0: [ 0 2 3 ]
+%% program
+  var a, b, c;
+  function f (x);
+  function d (d) begin var x; print 100, a, d, x end;
+  function e (a) begin print 200, a, b end;
+  function f (a) begin
+    a = 1; b = 2; c = 3; d(4); e(5);
+    begin var a, b; 
+      a = 10; b = 20; 
+      print 300, a, b, c; d(40); e(50)
+    end;
+    print 400, a, b, c  
+  end;
+  function main () begin c = 5; f(6) end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')';
+  block: begin body 'end';
+  begin: 'begin';
+  body: [ vars ] [ funs ] stmts;
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do body 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ body ];
+  else: Else body;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  Seven.Nest13(Seven.Blocks09)

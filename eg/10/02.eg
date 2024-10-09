@@ -1,0 +1,43 @@
+%% output
+  BNF Grammar's Grammar.
+  Bootstrap.
+%% grammar
+  grammar:        rules;
+  rules:          rule;
+  rules:          rules rule;
+  rule:           Name ':' symbols ';';
+  symbols:        ;
+  symbols:        symbols name;
+  symbols:        symbols lit;
+  name:           Name;
+  lit:            Lit;
+%% tokens
+  BNF.Grammar.terminals
+%% program
+  grammar:        rules;
+  rules:          rule;
+  rules:          rules rule;
+  rule:           Name ':' symbols ';';
+  symbols:        ;
+  symbols:        symbols name;
+  symbols:        symbols lit;
+  name:           Name;
+  lit:            Lit;
+%% actions
+  class Actions extends BNF.Actions {   // modify top-level action
+    static count = 0;                   // count created grammars
+
+    constructor () {                    // create next grammar
+      super(new BNF.Grammar(BNF.Grammar.terminals));
+      this.g.count = ++ Actions.count;
+    }
+    
+    grammar (rules) { 
+      this.g.check(this.g.rules[1].nt); // check next grammar
+      puts(this.g.toString());          // display next grammar
+      puts('count', this.g.count);      // display it's count
+      
+      // executable uses next grammar to parse it's own rules
+      return () => this.g.parser().parse(program, Actions);
+    }
+  }  

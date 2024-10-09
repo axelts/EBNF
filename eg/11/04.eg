@@ -1,0 +1,132 @@
+%% output
+  Represent a little language as a tree.
+  Euclid's Algorithm [see 6/11].
+  
+  Output:
+    [ 'stmts' 
+      [ 'assign' 'x' [ 'number' 36 ] ]
+      [ 'assign' 'y' [ 'number' 54 ] ]
+      [ 'loop' [ 'ne' [ 'name' 'x' ] [ 'name' 'y' ] ] 
+        [ 'select' [ 'gt' [ 'name' 'x' ] [ 'name' 'y' ] ]
+          [ 'assign' 'x' [ 'subtract' [ 'name' 'x' ] [ 'name' 'y' ] ] ]
+          [ 'assign' 'y' [ 'subtract' [ 'name' 'y' ] [ 'name' 'x' ] ] ] ] ] 
+      [ 'print' [ 'name' 'x' ] ] ]
+%% program
+  x = 36; y = 54;
+  while x <> y do
+    if x > y 
+      then x = x - y
+      else y = y - x fi od; 
+  print x
+%% grammar
+  %nonassoc '=' '<>' '>' '>=' '<' '<=';
+  %left     '+' '-';
+  %left     '*' '/';
+  %right    '**';
+  %right    Number;
+
+  stmts:    stmt [{ ';' stmt }];
+  stmt:     assign | print | loop | select;
+  assign:   Name '=' expr;
+  print:    'print' expr [{ ',' expr }];
+  loop:     'while' expr 'do' stmts 'od';
+  select:   'if' expr 'then' stmts [ 'else' stmts ] 'fi';
+  
+  expr:     eq | ne | gt | ge | lt | le
+            | add | subtract | multiply | divide | power
+            | minus | '(' expr ')' | number | name;
+            
+  eq:       expr '=' expr;
+  ne:       expr '<>' expr;
+  gt:       expr '>' expr;
+  ge:       expr '>=' expr;
+  lt:       expr '<' expr;
+  le:       expr '<=' expr;
+  
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+  name:     Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // mix-in with statements and list building
+    const Build_Stmts = superclass => class extends superclass {
+    
+      // stmts: stmt [{ ';' stmt }]; returns stmt or [ 'stmts' stmt ... ]
+      stmts (stmt, many) { 
+        return many == null ? stmt :
+          this._lineno([ 'stmts', 
+            ...many[0].reduce(
+              (stmts, alt) => { stmts.push(alt[1]); return stmts; },
+              [ stmt ])
+          ]);
+      }
+    
+      // stmt: print | ...; returns tree
+      stmt (stmt) { return stmt; }
+    
+      // print: 'print' expr [{ ',' expr }]; returns [ 'print' expr ... ]
+      print (x, expr, many) {
+        return this._lineno([ 'print', 
+          ...(many ? many[0] : [ ]).reduce(
+            (exprs, alt) => { exprs.push(alt[1]); return exprs; }, 
+            [ expr ])
+        ]);
+      }
+    
+      // loop: 'while' expr 'do' stmts 'od'; returns [ 'loop' expr stmts ]
+      loop (w, expr, d, stmts, o) { 
+        return this._lineno([ 'loop', expr, stmts ]);
+      }
+    
+      // select: 'if' expr 'then' stmts [ 'else' stmts ] 'fi'; returns [ 'select' expr left right? ]
+      select (i, expr, t, left, opt, f) {
+        const result = this._lineno([ 'select', expr, left ]);
+        if (opt) result.push(opt[1]); return result;
+      }
+    };
+
+    // mix-in with name building
+    const Build_Names = superclass => class extends superclass {
+      // assign: Name '=' expr; returns [ 'assign' name expr ]
+      assign (name, x, expr) {
+        return this._lineno([ 'assign', name, expr ]);
+      }
+    
+      // name: Name; returns [ 'name' name ]
+      name (name) { return this._lineno([ 'name', name ]); }
+    };
+        
+    // mix-in with comparisons
+    const Build_Cmps = superclass => class extends superclass {
+      // eq: expr '=' expr; returns [ 'eq' a b ]
+      eq (a, x, b) { return this._lineno([ 'eq', a, b ]); }
+    
+      // ne: expr '<>' expr; returns [ 'ne' a b ]
+      ne (a, x, b) { return this._lineno([ 'ne', a, b ]); }
+    
+      // gt: expr '>' expr; returns [ 'gt' a b ]
+      gt (a, x, b) { return this._lineno([ 'gt', a, b ]); }
+    
+      // ge: expr '>=' expr; returns [ 'ge' a b ]
+      ge (a, x, b) { return this._lineno([ 'ge', a, b ]); }
+    
+      // lt: expr '<' expr; returns [ 'lt' a b ]
+      lt (a, x, b) { return this._lineno([ 'lt', a, b ]); }
+    
+      // le: expr '<=' expr; returns [ 'le' a b ]
+      le (a, x, b) { return this._lineno([ 'le', a, b ]); }
+    };
+
+    // builder for expressions and statements
+    return Build_Stmts(
+             Build_Names(
+               Build_Cmps(
+                 Eleven.Build_Number(Eleven.Build))));
+  }) ()

@@ -1,0 +1,173 @@
+%% output
+  Interpret an arithmetic expression [see 11/02].
+  
+  Remove the 'run' rule to create an executable.
+  Remove the 'dump' rule to avoid displaying the tree.
+  Add '/./' to the call to 'Main' to trace interpretation.
+  
+  Output:
+    [ 'subtract' 
+      [ 'add' 
+        [ 'number' 1 ].1
+        [ 'multiply' [ 'minus' [ 'number' 2 ].1 ].1 [ 'number' 3 ].1 ].1 ].1 
+      [ 'divide' 
+        [ 'number' 45 ].1 
+        [ 'add' 
+          [ 'number' 1 ].1 
+            [ 'divide' 
+              [ 'power' 
+                [ 'number' 2 ].1 
+                [ 'power' [ 'number' 3 ].1 [ 'number' 2 ].1 ].1 ].1 
+              [ 'power' [ 'number' 4 ].1 [ 'number' 3 ].1 ].1 ].1 ].1 ] ]
+    -10
+%% program
+   1 + -2*3 - 45/(1 + 2**3**2 / 4**3)
+%% grammar
+  %left '+' '-';
+  %left '*' '/';
+  %right '**';
+  %right Number;
+
+  run:      main;
+  main:     dump;
+  dump:     expr;
+  expr:     add | subtract | multiply | divide | power 
+            | minus | '(' expr ')' | number;
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // base class with visitor methods
+    class Visit {
+      trace = false;      // RegExp selects tags to display
+      errors = 0;         // counts calls to _error()
+    
+      // Displays and counts an error message. 
+      _error (lno, ... s) {
+        if (typeof lno == 'number' && lno > 0) lno = `line ${lno}:`;
+        else lno = s.splice(0, 1)[0];
+        puts(`error ${++ this.errors}: ${lno}`, ... s);
+      }
+    
+      // Recursively checks tree tags, throws an error if there is a problem.
+      _tree (node) {                  // recursively validates a tree
+        if (!(node instanceof Array)) return;
+        if (!node.length) throw 'empty node';
+        if (typeof node[0] != 'string') throw 'node tag is not a string';
+        if (!node[0].length) throw 'empty node tag';
+        if (node[0] == 'visit') throw "'visit' cannot be a tag";
+        if (typeof this.constructor.prototype[node[0]] != 'function')
+          throw node[0] + ': unknown node tag';
+        node.slice(1).forEach(node => this._tree(node));
+      }
+    
+      // Creates a deep display of a node.
+      _dump (node, shallow = -1) {    // recursively dumps a tree
+        if (!(node instanceof Array))
+          switch (typeof node) {
+          case 'boolean':
+          case 'number': return node;
+          case 'string': return "'" + node.replace(/(['\\\n])/g, "\\$1") + "'";
+          default:       return typeof node;
+          }
+    
+        let result = '[ ' + (!shallow ? this._dump(node[0]) :
+          node.map(item => this._dump(item, shallow - 1)).join(' ')) + ' ]';
+        if ('lineno' in node) result += '.' + node.lineno;
+        if ('type' in node) result += ':' + node.type;
+        return result;
+      }
+    
+      // Visits a (valid!) tree node, returns either node itself or the result of calling tag as method for an array.
+      visit (node, trace) {
+        if (trace instanceof RegExp) this.trace = trace;
+        // not a list: return it
+        if (!(node instanceof Array)) return node;
+        // visit
+        let result;
+        const show = this.trace instanceof RegExp &&
+          this.trace.test(node[0]) ? this._dump(node, 0) : false;
+        try {
+          return result = this.constructor.prototype[node[0]].call(this, node);
+        } finally {
+          if (show) puts(show, 'returns', this._dump(result, 1));
+        }
+      }
+    }
+    
+    // mix-in for expression evaluation
+    const Eval_Number = superclass => class extends superclass {
+      // [ 'add' a b ]; returns Number
+      add (node) { return this.visit(node[1]) + this.visit(node[2]); }
+    
+      // [ 'subtract' a b ]; returns Number
+      subtract (node) { return this.visit(node[1]) - this.visit(node[2]); }
+    
+      // [ 'multiply' a b ]; returns Number
+      multiply (node) { return this.visit(node[1]) * this.visit(node[2]); }
+    
+      // [ 'divide' a b ]; returns Number
+      divide (node) { return this.visit(node[1]) / this.visit(node[2]); }
+    
+      // [ 'power' a b ]; returns Number
+      power (node) { return this.visit(node[1]) ** this.visit(node[2]); }
+    
+      // [ 'minus' a ]; returns Number
+      minus (node) { return - this.visit(node[1]); }
+    
+      // [ 'number' a ]; returns Number
+      number (node) { return this.visit(node[1]); }
+    };
+
+    // mix-in with top-level action, runs visitor(s)
+    const Main = (superclass, ...args) => class extends superclass {
+      // Create and apply all but the last visitor, check the last.
+      _doVisits (tree, args) {
+        let trace;                     // (first) trace pattern, if any
+        const visitors = args.filter(arg => {        // remove patterns
+            if (!(arg instanceof RegExp)) return true;
+            if (!trace) trace = arg;
+            return false;
+          }),
+          tail = visitors.splice(-1, 1);        // last visitor, others
+        if (!tail.length) throw 'main: no visitors';
+        let caller;          // each visitor is constructed with caller 
+        [tree, caller] = visitors.reduce(([tree, caller], Visitor) => {
+          const visitor = new Visitor (caller);  // create next visitor
+          visitor._tree(tree);                         // validate tree
+          tree = visitor.visit(tree, trace);                   // visit
+          if (trace) { puts(visitor._dump(tree)); }    // trace, if any
+          if (visitor.errors) throw `${visitor.errors} error(s)`;
+          return [tree, visitor];            // done; next visit if any
+        }, [tree, this]);                // first caller is the builder
+        const lastVisitor = new tail[0](caller); // last visitor object
+        lastVisitor._tree(tree);                       // validate tree
+        return [ lastVisitor, tree, trace ];
+      }
+    
+      // main: tree; return the checked last visit as a function.
+      main (tree) {
+        let [lastVisitor, lastTree, trace] = this._doVisits(tree, args);
+        return () => lastVisitor.visit(lastTree, trace);
+      }
+    
+      // dump: tree; Display and return the tree.
+      dump (tree) {
+        puts(new Visit()._dump(tree));
+        return tree;
+      }
+    
+      // run: funct; Execute the function and return the result.
+      run (funct) { return funct(); }
+    };
+    
+    // builder and interpreter
+    return Main(Eleven.Build_Number(Eleven.Build), Eval_Number(Visit));
+  }) ()

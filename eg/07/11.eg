@@ -1,0 +1,78 @@
+%% output
+  Compile functions into stack machine code.
+  Very risky abuse of nested blocks.
+
+  Set 'trace = -1' to stop execution tracing.
+
+  Expected output: 18 
+%% program
+  var trace;
+  function euclid (x,y) begin
+    if x > y then 
+      var gt; gt = euclid(x-y, y) 
+    else 
+      var lt;
+      if y > x then lt = euclid(x, y-x)
+      else return x
+      fi
+    fi;
+    begin var common; print common; euclid = common end
+  end;
+  
+  function main (x, y) begin
+    x = input 54; y = input 36;
+    return euclid(x, y)
+  end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')';
+  block: begin [ vars ] stmts 'end';
+  begin: 'begin';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do [ vars ] stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ [ vars ] stmts ];
+  else: Else [ vars ] stmts;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  Seven.Blocks09
+  

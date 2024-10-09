@@ -1,0 +1,10 @@
+%% output
+  This grammar recognizes a sum of one or two numbers.
+  'sum' creates a list, brackets create null or a list, 'term' creates a list.
+%% grammar
+  sum: term [ '+' term ];
+  term: Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  1 + 2

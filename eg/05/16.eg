@@ -1,0 +1,29 @@
+%% output
+  This grammar accepts a list of comma-separated items, see [5/15].
+  An item consists of a prefix followed by a number.
+  See how to process the numbers.
+%% grammar
+  list: item [{ ',' item }];
+  item: dec | hex;
+  dec: 'dec' Decimal;
+  hex: 'hex' ref;
+  ref: Hex;
+%% tokens
+  { Decimal: /[0-9]+/, Hex: /[0-9a-fA-F]+/ }
+%% program
+  dec 10, hex Bad, dec 20
+%% actions
+  class Actions16 extends Five.Actions14 {
+    // convoluted solution
+    // list (item, many) {
+    //   return item.concat(many ? many[0].map(list => list[1][0]) : []).
+    //     reduce((sum, value) => sum + value, 0);
+    // }    
+  
+    /** `item: dec | hex;` returns `[ value ]`  
+        `list: [{ ',' item }];` returns `value +...` */
+    list (item, many) {
+      return (many ? many[0] : []).reduce(
+        (result, list) => result += list[1][0], item[0]); 
+    }
+  }

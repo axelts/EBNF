@@ -1,0 +1,235 @@
+%% output
+  Compile functions into stack machine code.
+  Block structure. Declare before use.
+  
+  Define the global variable 'trace' to show scopes.
+  
+  Output: 0 1 1 2 0 3 3 4 2 99
+%% program
+  var trace;
+  function main (x) begin
+        var a;    print x; x = 1; print x;
+  begin var b;    print x; x = 2; print x end;
+  begin var c, x; print x; x = 3; print x; main = 99 end;
+  begin var d, x; print x; x = 4; print x end;
+                  print x
+  end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')';
+  block: begin [ vars ] stmts 'end';
+  begin: 'begin';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do [ vars ] stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ [ vars ] stmts ];
+  else: Else [ vars ] stmts;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  class Blocks09 extends Seven.Parameters06 {
+    /** Describes a function with block structure.
+        @class @extends super.Fun
+        @property {Block[]} blocks - block stack, [0] is innermost
+        @property {number} frameSize - must replace `size`           
+        @property {Map} locals - [replace] delegate to blocks
+        @property {number} size - [replace] delegate to blocks
+        @property {function} push() - add a block
+        @property {function} pop() - end a block, maintain size
+        @property {function} end() - [extend] pop last block
+        @property {function} exit() - [replace] use `frameSize` */
+    get Fun () { return this.#Fun ??= class extends super.Fun {
+        frameSize = 0;        // because this.size is local to blocks            
+        blocks;                // block stack, [0] is innermost block
+        get locals () { return this.blocks[0].locals; }
+        set locals (locals) {
+          try { return this.blocks[0].locals = locals; }
+          catch (e) { console.trace(e); throw e; } }
+        get size () { return this.blocks[0].size; }
+        set size (size) { return this.blocks[0].size = size; }
+        
+        constructor (owner, name) {        // creates outermost block
+          super(owner, name);
+          this.blocks = [ new this.owner.Block(0) ];
+        }
+        push () {           // add block, start in encompassing block
+          this.blocks.unshift(
+            new this.owner.Block(this.blocks[0].size)
+          );
+        }      
+        pop () {         // remove block, maintain maximum frame size
+          this.frameSize =
+            Math.max(this.frameSize, this.blocks[0].size);
+          if (this.owner.symbols.get('trace')               // trace?
+                instanceof this.owner.Var)
+            puts(this.blocks[0].toString());
+          this.blocks.shift();
+        }
+        end () {                    // [extend] pop outermost block
+          this.pop(); super.end();
+        }
+        exit () {                        // [replace] uses frameSize
+          this.owner.machine.code[this.start] =
+            this.owner.machine.ins('Entry', this.parms, this.frameSize);
+          this.owner.machine.gen('Exit', this.parms);
+          this.owner.machine.gen('Return');
+        }    
+        toString () {         // [replace] no symbols, show frameSize
+          return `function ${this.name} start ${this.start} ` +
+            `parms ${this.parms} frame size ${this.frameSize}`;
+        }
+      };
+    }
+    #Fun;     
+  
+    /** Describes a block of nested symbols.
+        @class
+        @property {Map} locals - maps names to descriptions.
+        @property {number} size - next variable address in block.
+        @property {function} toString() - describes as text. */
+    get Block () { return this.#Block ??= class {
+        locals = new Map();    // maps names in block to descriptions
+        size;                       // next variable address in block
+  
+        constructor (size) { this.size = size; }
+  
+        toString () {
+          const names = [];
+          this.locals.forEach(sym => names.push(sym.toString()));
+          return `block [ ${names.join(', ')} ]`;
+        }
+      };
+    }
+    #Block;
+    
+    /** Replace: searches innermost to outermost blocks and global */
+    _find (name, report) {
+      let sym;
+      try {
+        if (this.funct)                  // loop inner to outer block
+          this.funct.blocks.forEach(block => {
+            sym = block.locals.get(name);
+            if (typeof sym != 'undefined') throw sym;
+          });
+        return sym = this.symbols.get(name);                // global
+      } catch (sym) {                             // found in a block
+        if (sym instanceof Error) throw sym;      // shouldn't happen
+        return sym;
+      } finally {
+        if (report && !sym)
+            this.parser.error(`${name}: undefined`);
+      }
+    }
+  
+    // prog: [ vars ] funs;
+    // vars: 'var' names ';';
+    // names: Name [{ ',' Name }];
+    // funs: { fun };
+    // fun: head parms [ block ] ';';
+    // head: 'function' Name;
+    // parms: '(' [ names ] ')';
+  
+    /** `block: begin [ vars ] stmts 'end';` */
+    block (b, v, s, e) { this.funct.pop(); }
+  
+    /** `begin: 'begin';` */
+    begin (b) { this.funct.push(); }
+  
+    // stmts: stmt [{ ';' stmt }];
+    // stmt: assign | print | return | block | loop | select;
+    // assign: symbol action;
+    // action: store | call;
+    // store: '=' sum;
+    // call: args;
+    // args: '(' [ sums ] ')';
+    // print: 'print' sums;
+    // sums: sum [{ ',' sum }];
+    // return: 'return' [ sum ];
+  
+    /** `loop: While cmp Do [ vars ] stmts 'od';` */
+    loop (While, c, Do, v, s, o) {
+      this.funct.pop(); super.loop(While, c, Do);
+    }
+    
+    // While: 'while';
+  
+    /** `Do: 'do';` */
+    Do () { this.funct.push(); return super.Do(); }
+  
+    /** `select: 'if' cmp then [ else ] 'fi';` */
+    select(i, c, t, e, f) {
+      // select: 'if' cmp Then stmts [ Else stmts ] 'fi';
+      super.select(i, c, t, false, e);
+    }
+  
+    /** `then: Then [ [ vars ] stmts ];` */
+    then (t, opt) { this.funct.pop(); return t; }
+  
+    /** `else: Else [ vars ] stmts;` */
+    else (e, v, s) { this.funct.pop(); return e; }
+  
+    /** `Then: 'then';` */
+    Then (t) { this.funct.push(); return super.Then(); }
+  
+    /** `Else: 'else';` */
+    Else (e) { this.funct.push(); return super.Else(); }
+  
+    // cmp: sum rel;
+    // rel: eq | ne | gt | ge | lt | le;
+    // eq: '=' sum;
+    // ne: '<>' sum;
+    // gt: '>' sum;
+    // ge: '>=' sum;
+    // lt: '<' sum;
+    // le: '<=' sum;
+    // sum: product [{ add | subtract }];
+    // add: '+' product;
+    // subtract: '-' product;
+    // product: signed [{ multiply | divide }];
+    // multiply: '*' signed;
+    // divide: '/' signed;
+    // signed: [ '-' ] term;
+    // term: input | number | name | '(' sum ')';
+    // input: 'input' [ Number ];
+    // number: Number;
+    // name: symbol [ args ];
+    // symbol: Name;
+  }

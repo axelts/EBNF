@@ -1,0 +1,96 @@
+%% output
+  Compile global first-order functions into stack machine code.
+  Local variables, blocks. Declare before use.
+  
+  Function composition.
+  Unfortunately, 'a' and 'b' cannot be closed over.
+  
+  Expected output:
+    0 2
+    2 2
+    0
+%% program
+  type Binary (number, number): number,
+    Ternary (number, number, number): number,
+    Compose (Binary, Binary): Ternary;
+
+  var a: Binary, b: Binary;
+
+  function add (x, y): Binary begin return x + y end;
+  function sub (x, y): Binary begin return x - y end;
+  
+  function sum (x, y, z): Ternary;
+  
+  function compose (aa, bb): Compose begin
+    a = aa; b = bb; return sum
+  end;
+  
+  function sum (x, y, z): Ternary begin
+    return b(a(x, y), z)
+  end;
+  
+  function main () begin
+    print compose(add, sub)(1, 2, 3), compose(sub, add)(1, 2, 3);
+    begin var as: Ternary, sa: Ternary;
+      as = compose(add, sub); sa = compose(sub, add);
+      print as(1, 2, 3), sa(1, 2, 3)
+    end
+  end;
+%% grammar
+  prog: [ typedcls ] [ vars ] funs;
+  typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };
+  typedcl: Name '(' [ types ] ')' [ ':' typename ];
+  types: typename [{ ',' typename }];
+  typename: Name | 'number';
+  vars: 'var' varname [{ ',' varname }] ';';
+  varname: Name [ ':' type ];
+  type: Name | 'number';
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')' [ ':' Name ];
+  names: Name [{ ',' Name }];
+  block: begin [ vars ] stmts 'end';
+  begin: 'begin';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | block | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: { args };
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do [ vars ] stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp then [ else ] 'fi';
+  then: Then [ [ vars ] stmts ];
+  else: Else [ vars ] stmts;
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [{ args }];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[A-Za-z]+/ }
+%% actions
+  Eight.Global01(Seven.Blocks09)

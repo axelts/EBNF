@@ -1,0 +1,96 @@
+%% output
+  Compile functions into stack machine code.
+  Parameters and local variables, declare before use.
+  Mutually recursive functions, two versions of Euclid's algorithm.
+  Check out that the global variable values don't change.
+
+  Expected output:
+    10
+    1 18
+    18
+    20 36 54
+    2 18
+    1 36
+    30
+    0
+%% program
+  var x, y, depth;
+  function b (a, b);
+
+  function a (x, y) begin var c, d;
+    c = x - y; d = y - x;
+    if c <> 0 then
+      if x > y then a = b(c, y)
+      else a = b(x, d)
+      fi
+    else return x
+    fi
+  end;
+
+  function b (x, y) begin
+    depth = depth + 1;
+    if x = y then b = x
+    else
+      if x > y then x = x - y
+      else y = y - x
+      fi;
+      b = a(x, y)
+    fi;
+    print depth, x;
+    depth = depth - 1
+  end;
+
+  function main () begin
+    print 10; x = input 36; y = input 54; print a(x, y);
+    print 20, x, y; b(x, y);
+    print 30; return; print 999
+  end;
+%% grammar
+  prog: [ vars ] funs;
+  vars: 'var' names ';';
+  names: Name [{ ',' Name }];
+  funs: { fun };
+  fun: head parms [ block ] ';';
+  head: 'function' Name;
+  parms: '(' [ names ] ')';
+  block: 'begin' [ vars ] stmts 'end';
+  stmts: stmt [{ ';' stmt }];
+  stmt: assign | print | return | loop | select;
+  assign: symbol action;
+  action: store | call;
+  store: '=' sum;
+  call: args;
+  args: '(' [ sums ] ')';
+  print: 'print' sums;
+  sums: sum [{ ',' sum }];
+  return: 'return' [ sum ];
+  loop: While cmp Do stmts 'od';
+  While: 'while';
+  Do: 'do';
+  select: 'if' cmp Then stmts [ Else stmts ] 'fi';
+  Then: 'then';
+  Else: 'else';
+  cmp: sum rel;
+  rel: eq | ne | gt | ge | lt | le;
+  eq: '=' sum;
+  ne: '<>' sum;
+  gt: '>' sum;
+  ge: '>=' sum;
+  lt: '<' sum;
+  le: '<=' sum;   
+  sum: product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: symbol [ args ];
+  symbol: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  Seven.Parameters06

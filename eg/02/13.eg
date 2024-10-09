@@ -1,0 +1,11 @@
+%% output
+  These are typical examples for (nested) lists.
+%% grammar
+  terminated: { [ separated ] ';' }; 
+  separated:  element [{ ',' element }];
+  element:    Number | enclosed;
+  enclosed:   '(' [ separated ] ')';
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  ( (1,2), 3, (()) ); ;

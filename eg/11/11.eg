@@ -1,0 +1,169 @@
+%% output
+  Compile a little language into stack machine code [see 11/04].
+  Euclids Algorithm [see [6/11].
+
+  Execution is traced while a variable 'trace' is non-negative.
+  
+  Add a top-level 'run' rule to execute the stack machine immediately.
+  Add '/./' to the call to 'Compile' to trace code generation and display the code.
+  
+  Default Output: 18
+%% program
+  trace = -1;
+  x = 36; y = 54;
+  while x <> y do
+    if x > y then
+      trace = 1; x = x - y; trace = -1
+    else y = y - x
+    fi
+  od;
+  print x
+%% grammar
+  %nonassoc '=' '<>' '>' '>=' '<' '<=';
+  %left     '+' '-';
+  %left     '*' '/';
+  %right    '**';
+  %right    Number;
+
+  compile:  stmts;
+  stmts:    stmt [{ ';' stmt }];
+  stmt:     assign | print | loop | select;
+  assign:   Name '=' expr;
+  print:    'print' expr [{ ',' expr }];
+  loop:     'while' expr 'do' stmts 'od';
+  select:   'if' expr 'then' stmts [ 'else' stmts ] 'fi';
+  
+  expr:     eq | ne | gt | ge | lt | le
+            | add | subtract | multiply | divide | power
+            | minus | '(' expr ')' | number | name;
+            
+  eq:       expr '=' expr;
+  ne:       expr '<>' expr;
+  gt:       expr '>' expr;
+  ge:       expr '>=' expr;
+  lt:       expr '<' expr;
+  le:       expr '<=' expr;
+  
+  add:      expr '+' expr;
+  subtract: expr '-' expr;
+  multiply: expr '*' expr;
+  divide:   expr '/' expr;
+  power:    expr '**' expr;
+  minus:    '-' expr %prec Number;
+  number:   Number;
+  name:     Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // mix-in to generate stack machine code for comparisons
+    const Code_Cmps = superclass => class extends superclass {
+      // [Override] Use Six.Machine11.
+      get Machine () { return this.#Machine ??= Six.Machine11; }
+      #Machine;
+    
+      // [Override] The executable, checks for trace variable.
+      get executable () { 
+        const trace = this.symbols.get('trace');
+        return this.machine.run(this.symbols.size, 0,
+          trace ? trace.ord - 1 : false);
+      }
+    
+      // [ 'eq' a b ]
+      eq (node) { return this._postfix(node, 'Eq'); }
+    
+      // [ 'ne' a b ]
+      ne (node) { return this._postfix(node, 'Ne'); }
+    
+      // [ 'gt' a b ]
+      gt (node) { return this._postfix(node, 'Gt'); }
+    
+      // [ 'ge' a b ]
+      ge (node) { return this._postfix(node, 'Ge'); }
+    
+      // [ 'lt' a b ]
+      lt (node) { return this._postfix(node, 'Lt'); }
+    
+      // [ 'le' a b ]
+      le (node) { return this._postfix(node, 'Le'); }
+    };
+
+    // mix-in to generate stack machine code for names
+    const Code_Names = superclass => class extends superclass {
+      // [ 'name' name ]
+    
+      name (node) {
+        return this.machine.gen('Load', this._alloc(node[1]).ord - 1);
+      }
+    
+      // [ 'assign' name value ] returns next code address.
+      assign (node) {
+        this.visit(node[2]);
+        this.machine.gen('Store', this._alloc(node[1]).ord - 1);
+        return this.machine.gen('Pop');
+      }
+    };
+
+    // mix-in to generate stack machine code for statements
+    const Code_Stmts = superclass => class extends superclass {
+      // [Override] Add Bnzero.
+      get Instructions () {
+        return this.#Instructions ??=
+          superclass => class extends super.Instructions(superclass) {
+            // stack: ... bool -> ... | pc: bool? a 
+            Bnzero (a) {
+              return memory => { if (memory.pop()) memory.pc = a; }
+            }
+          };
+      }
+      #Instructions;
+    
+      // [ 'stmts' stmt ... ]
+      stmts (node) {
+        return node.slice(1).reduce((end, stmt) => this.visit(stmt), 0);
+      }
+    
+      // [ 'print' value ... ]
+      print (node) {
+        node.slice(1).forEach(value => this.visit(value));
+        return this.machine.gen('Print', node.length - 1);
+      }
+    
+      // [ 'loop' cond stmt ]
+      loop (node) {
+        const a = this.machine.code.push(null) - 1,  // a:   Branch b
+          b = this.visit(node[2]);                   // a+1: stmt
+        this.visit(node[1]);                         // b:   cond
+        this.machine.code[a] = this.machine.ins('Branch', b); // fixup
+        return this.machine.gen('Bnzero', a + 1);    //      Bnzero a+1
+      }
+    
+      // [ 'select' cond then else? ]
+      select (node) {
+        const a = this.visit(node[1]);         //      cond
+        this.machine.code.push(null);          // a:   Bzero b
+        let b = this.visit(node[2]), end = b;  //      then
+        if (node.length > 3) {                 // b:end:
+          this.machine.code.push(null);    //          Branch end
+          end = this.visit(node[3]);           // b:   else
+                                               // end:
+          this.machine.code[b ++] = this.machine.ins('Branch', end);
+        }
+        this.machine.code[a] = this.machine.ins('Bzero', b); // fixup
+        return end;
+      }
+    };
+
+    // builder and code generator for a little language
+    return Eleven.Compile(
+             Eleven.Main(Eleven.Build_Stmts(
+                           Eleven.Build_Names(
+                             Eleven.Symbols(
+                               Eleven.Build_Cmps(
+                                 Eleven.Build_Number(Eleven.Build)))))),
+             Code_Stmts(
+               Code_Names(
+                 Code_Cmps(
+                   Eleven.Symbols(
+                     Eleven.Code_Number(Eleven.Code))))));
+  }) ()

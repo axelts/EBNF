@@ -1,0 +1,19 @@
+%% output
+  This grammar recognizes two numbers preceded by the word 'literal'.
+  (Un)comment the 'ref' action method and check what is built.
+%% grammar
+  rule: 'literal' Number ref;
+  ref: Number;
+%% tokens
+  { Number: /[0-9]+/ }
+%% program
+  literal 1 2
+%% actions
+  class Actions {
+    // (un)comment to see the difference
+    ref (number) { return parseInt(number, 10); }
+
+    // both of these have the same result
+    rule (...val) { puts(val[0], parseInt(val[1], 10), typeof val[2]); }
+    // rule (literal, number, ref) { puts(literal, parseInt(number, 10), typeof ref); }
+  }

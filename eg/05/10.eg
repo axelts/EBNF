@@ -1,0 +1,18 @@
+%% output
+  This grammar recognizes one or more non-whitespace characters [see 5/09].
+  The action methods communicate using 'queue', defined as a private array.
+%% grammar
+  chars: { char };
+  char: Char;
+%% tokens
+  { Char: /./ }
+%% program
+  ein.Esel.lese.nie!
+%% actions
+  class Actions {
+    #queue = [];
+
+    char (ch) { this.#queue.unshift(ch); }
+    chars () { return this.#queue.join(''); } 
+  }
+  

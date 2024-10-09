@@ -1,0 +1,13 @@
+%% output
+  Scanner pattern.
+  The program contains some illegal characters.
+%% grammar
+  example:  'if' Number '<=' Name;
+%% tokens
+  { Number: /[0-9]+/, Name: /[a-z]+/ }
+%% program
+  ++
+  if 10 <=
+  ++
+  iffy
+  +

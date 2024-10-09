@@ -1,0 +1,136 @@
+%% output
+  Grammar for a semicolon-separated list of arithmetic expressions [see 6/07].
+  Actions for evaluation using a simulated stack machine.
+  More legible machine instructions.
+  
+  Output: 4 7.5 7.5 if the input is 4
+%% grammar
+  list: stmt [{ ';' stmt }];
+  stmt: sum;
+  sum: 'let' Name '=' sum | product [{ add | subtract }];
+  add: '+' product;
+  subtract: '-' product;
+  product: signed [{ multiply | divide }];
+  multiply: '*' signed;
+  divide: '/' signed;
+  signed: [ '-' ] term;
+  term: input | number | name | '(' sum ')';
+  input: 'input' [ Number ];
+  number: Number;
+  name: Name;
+%% tokens
+  { Number: /0|[1-9][0-9]*/, Name: /[a-z]+/ }
+%% program
+  let x = let y = input 4; (x + 1) / (y - 2) * 3;
+  y + ((let y = 2) + 1) / (x - 2) + y
+%% actions
+  (() => {  // define and immediately use an anonymous function
+    // the stack machine generator
+    class Machine10 extends Six.Machine09 {
+      /** returns `code.length` */
+      gen (name, ... args) {
+        return this.code.push(this.ins(name, ... args));
+      }
+    
+      /** returns instruction function */
+      ins (name, ... args) {
+        return args.length ?
+          eval(`memory => this.${name}(${args.join(', ')})(memory)`) :
+          eval(`memory => this.${name}(memory)`);
+      }
+      
+      /** `stack: ... a b -> ... a+b` */                 Add (memory) {
+        memory.splice(-2, 2, memory.at(-2) + memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a/b` */              Divide (memory) {
+        memory.splice(-2, 2, memory.at(-2) / memory.at(-1));
+      }
+      /** `stack: ... -> ... input` */                   Input (dflt) {
+        dflt = String(dflt);
+        return memory =>
+          memory.push(parseInt(prompt('input', dflt), 10));
+      }
+      /** `stack: ... -> ... memory[addr]` */             Load (addr) {
+        return memory => memory.push(memory[addr]);
+      }
+      /** `stack: ... a -> ... -a` */                  Minus (memory) {
+        memory.splice(-1, 1, -memory.at(-1));
+      }
+      /** `stack: ... a b -> ... a*b` */            Multiply (memory) {
+        memory.splice(-2, 2, memory.at(-2) * memory.at(-1));
+      }
+      /** `stack: ... val -> ...` */                     Pop (memory) {
+        memory.pop();
+      }
+      /** `stack: ... -> ... result` */                 Push (result) {
+        return memory => memory.push(result);
+      }
+      /** `stack: ... val -> ... | puts(val)` */        Puts (memory) {
+        puts(memory.at(-1));
+      }
+      /** `stack: ... val -> ... val  | memory[a]: val` */  Store (a) {
+        return memory => memory[a] = memory.at(-1);
+      }
+      /** `stack: ... a b -> ... a-b` */            Subtract (memory) {
+        memory.splice(-2, 2, memory.at(-2) - memory.at(-1));
+      }
+    }
+
+    // the actions
+    class Arithmetic10 extends Six.Arithmetic09 {
+      constructor (parser, machine = new Machine10()) {
+        super(parser, machine);
+      }
+    
+      // list: stmt [{ ';' stmt }];
+    
+      /** `stmt: sum;` */
+      stmt (s) {                               // print and clear stack
+        this.machine.gen('Puts');
+        this.machine.gen('Pop');
+      }
+    
+      /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+      sum (...val) {
+        if (val.length < 4) return;
+        this.machine.gen('Store', this._alloc(val[1]));
+      }
+    
+      /** `add: '+' product;` */
+      add () { this.machine.gen('Add'); }
+    
+      /** `subtract: '-' product;` */
+      subtract () { this.machine.gen('Subtract'); }
+      
+      // product: signed [{ multiply | divide }];
+    
+      /** `multiply: '*' signed;` */
+      multiply () { this.machine.gen('Multiply'); }
+      
+      /** `divide: '/' signed;` */
+      divide () { this.machine.gen('Divide'); }  // 
+    
+      /** `signed: [ '-' ] term;` */
+      signed (minus, t) { if (minus) this.machine.gen('Minus'); }
+    
+      // term: input | number | name | '(' sum ')';
+    
+      /** `input: 'input' [ Number ];` */
+      input (i, number) {
+        this.machine.gen('Input', number !== null ? number[0] : 0);
+      }
+    
+      /** `number: Number;` */
+      number (number) { 
+        const result = parseInt(number, 10);
+        this.machine.gen('Push', result);
+      }
+    
+      /** `name: Name;` */
+      name (name) {
+        this.machine.gen('Load', this._alloc(name));
+      }
+    }
+
+    return Arithmetic10;
+  })()

@@ -1,0 +1,55 @@
+%% output
+  Error recovery in typical iteration constructs.
+  
+  Add and use a token definition to see discard messages:
+    example: Bad;
+    { Bad: /[A-Z]/ }
+%% grammar
+  example: ;
+  example: example 'many' many ';';
+  example: example 'some' some ';';
+  example: example 'list' list ';';
+
+  many: ;
+  many: many 'm';
+  many: many $error;
+
+  some: 's';
+  some: some 's';
+  some: $error;
+  some: some $error;
+
+  list: 'l';
+  list: list ',' 'l';
+  list: $error;
+  list: list $error;
+  list: list $error 'l';
+%% program
+  many;
+  many m m;
+  many A;
+  many B m;
+  many m C m;
+  many m D m E;
+
+  some s s;
+  some F;
+  some G s;
+  some s H s;
+  some s s I;
+
+  list l;
+  list l, l;
+  list l,;
+  list J;
+  list l K;
+  list l L l;
+  list l, M;
+  list l, N l;
+  list l, O,;
+  list l, P, l;
+  list l, Q, l,;
+%% actions
+  class Actions {
+    example (... arg) { if (arg.length) puts(`reduced ${arg[1]}`); }
+  }

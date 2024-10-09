@@ -1,0 +1,13 @@
+%% output
+  The 'dangling else' issue [see 2/05].
+  This grammar has no problem because 'if' and 'fi' must be balanced.
+%% grammar
+  stmt: Text | if;
+  if: 'if' Text 'then' stmt [ 'else' stmt ] 'fi';
+%% tokens
+  { Text: /[a-z]+/ }
+%% program
+  if a then
+    if b then c
+    else d fi
+  fi
