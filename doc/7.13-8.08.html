@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>nested functions ➡️ functions as argument values</title>
+    <link type="text/css" rel="stylesheet" href="diff.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="diff.js"></script>
+  </head>
+  <body>
+      <div class="grid output">
+      </div>
+      <div class="grid program">
+      </div>
+      <div class="grid grammar">
+        <pre class="A">prog: [ vars ] funs;</pre>
+        <pre class="B">prog: [ typedcls ] [ vars ] funs;</pre>
+        <pre class="A">vars: 'var' names ';';</pre>
+        <pre class="B">typedcls: { 'type' typedcl [{ ',' typedcl }] ';' };</pre>
+        <pre class="A">names: Name [{ ',' Name }];</pre>
+        <pre class="B">typedcl: Name '(' [ types ] ')' [ ':' 'number' ];</pre>
+        <pre class=a></pre>
+        <pre class="B">types: typename [{ ',' typename }];</pre>
+        <pre class=a></pre>
+        <pre class="B">typename: Name | 'number';</pre>
+        <pre class=a></pre>
+        <pre class="B">vars: 'var' varname [{ ',' varname }] ';';</pre>
+        <pre class=a></pre>
+        <pre class="B">varname: Name;</pre>
+        <pre class=a>funs: { fun };</pre>
+        <pre class=b>funs: { fun };</pre>
+        <pre class=a>fun: head parms [ block ] ';';</pre>
+        <pre class=b>fun: head parms [ block ] ';';</pre>
+        <pre class=a>head: 'function' Name;</pre>
+        <pre class=b>head: 'function' Name;</pre>
+        <pre class="A">parms: '(' [ names ] ')';</pre>
+        <pre class="B">parms: '(' [ names ] ')' [ ':' Name ];</pre>
+        <pre class=a></pre>
+        <pre class="B">names: Name [{ ',' Name }];</pre>
+        <pre class=a>block: begin body 'end';</pre>
+        <pre class=b>block: begin body 'end';</pre>
+        <pre class=a>begin: 'begin';</pre>
+        <pre class=b>begin: 'begin';</pre>
+        <pre class=a>body: [ vars ] [ funs ] stmts;</pre>
+        <pre class=b>body: [ vars ] [ funs ] stmts;</pre>
+        <pre class=a>stmts: stmt [{ ';' stmt }];</pre>
+        <pre class=b>stmts: stmt [{ ';' stmt }];</pre>
+        <pre class=a>stmt: assign | print | return | block | loop | select;</pre>
+        <pre class=b>stmt: assign | print | return | block | loop | select;</pre>
+        <pre class=a>assign: symbol action;</pre>
+        <pre class=b>assign: symbol action;</pre>
+        <pre class=a>action: store | call;</pre>
+        <pre class=b>action: store | call;</pre>
+        <pre class=a>store: '=' sum;</pre>
+        <pre class=b>store: '=' sum;</pre>
+        <pre class=a>call: args;</pre>
+        <pre class=b>call: args;</pre>
+        <pre class=a>args: '(' [ sums ] ')';</pre>
+        <pre class=b>args: '(' [ sums ] ')';</pre>
+        <pre class=a>print: 'print' sums;</pre>
+        <pre class=b>print: 'print' sums;</pre>
+        <pre class=a>sums: sum [{ ',' sum }];</pre>
+        <pre class=b>sums: sum [{ ',' sum }];</pre>
+        <pre class=a>return: 'return' [ sum ];</pre>
+        <pre class=b>return: 'return' [ sum ];</pre>
+        <pre class=a>loop: While cmp Do body 'od';</pre>
+        <pre class=b>loop: While cmp Do body 'od';</pre>
+        <pre class=a>While: 'while';</pre>
+        <pre class=b>While: 'while';</pre>
+        <pre class=a>Do: 'do';</pre>
+        <pre class=b>Do: 'do';</pre>
+        <pre class=a>select: 'if' cmp then [ else ] 'fi';</pre>
+        <pre class=b>select: 'if' cmp then [ else ] 'fi';</pre>
+        <pre class=a>then: Then [ body ];</pre>
+        <pre class=b>then: Then [ body ];</pre>
+        <pre class=a>else: Else body;</pre>
+        <pre class=b>else: Else body;</pre>
+        <pre class=a>Then: 'then';</pre>
+        <pre class=b>Then: 'then';</pre>
+        <pre class=a>Else: 'else';</pre>
+        <pre class=b>Else: 'else';</pre>
+        <pre class=a>cmp: sum rel;</pre>
+        <pre class=b>cmp: sum rel;</pre>
+        <pre class=a>rel: eq | ne | gt | ge | lt | le;</pre>
+        <pre class=b>rel: eq | ne | gt | ge | lt | le;</pre>
+        <pre class=a>eq: '=' sum;</pre>
+        <pre class=b>eq: '=' sum;</pre>
+        <pre class=a>ne: '&lt;>' sum;</pre>
+        <pre class=b>ne: '&lt;>' sum;</pre>
+        <pre class=a>gt: '>' sum;</pre>
+        <pre class=b>gt: '>' sum;</pre>
+        <pre class=a>ge: '>=' sum;</pre>
+        <pre class=b>ge: '>=' sum;</pre>
+        <pre class=a>lt: '&lt;' sum;</pre>
+        <pre class=b>lt: '&lt;' sum;</pre>
+        <pre class=a>le: '&lt;=' sum;</pre>
+        <pre class=b>le: '&lt;=' sum;</pre>
+        <pre class=a>sum: product [{ add | subtract }];</pre>
+        <pre class=b>sum: product [{ add | subtract }];</pre>
+        <pre class=a>add: '+' product;</pre>
+        <pre class=b>add: '+' product;</pre>
+        <pre class=a>subtract: '-' product;</pre>
+        <pre class=b>subtract: '-' product;</pre>
+        <pre class=a>product: signed [{ multiply | divide }];</pre>
+        <pre class=b>product: signed [{ multiply | divide }];</pre>
+        <pre class=a>multiply: '*' signed;</pre>
+        <pre class=b>multiply: '*' signed;</pre>
+        <pre class=a>divide: '/' signed;</pre>
+        <pre class=b>divide: '/' signed;</pre>
+        <pre class=a>signed: [ '-' ] term;</pre>
+        <pre class=b>signed: [ '-' ] term;</pre>
+        <pre class=a>term: input | number | name | '(' sum ')';</pre>
+        <pre class=b>term: input | number | name | '(' sum ')';</pre>
+        <pre class=a>input: 'input' [ Number ];</pre>
+        <pre class=b>input: 'input' [ Number ];</pre>
+        <pre class=a>number: Number;</pre>
+        <pre class=b>number: Number;</pre>
+        <pre class=a>name: symbol [ args ];</pre>
+        <pre class=b>name: symbol [ args ];</pre>
+        <pre class=a>symbol: Name;</pre>
+        <pre class=b>symbol: Name;</pre>
+      </div>
+      <div class="grid tokens">
+      </div>
+      <div class="grid actions">
+      </div>
+  </body>
+</html>

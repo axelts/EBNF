@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 2. Writing Grammars</title -->
+	<title>2. Writing Grammars</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>2. Writing Grammars</h2>
+</header>
+
+<article>
+    <h4 id="what's-in-a-rule%3F">What's in a Rule?</h4>
+<h4 id="a-language-for-rules">A Language for Rules</h4>
+<hr>
+<p>Formally, a rule is an ordered pair of two sequences of terminals and non-terminals,
+i.e., from the two sets of symbols in a grammar.
+For rules of a <a href="https://en.wikipedia.org/wiki/Context-free_grammar" title="Context-Free Grammar">context-free grammars</a>
+the first sequence of the ordered pair is restricted to be a single non-terminal.</p>
+<p>A grammar contains rules and describes sentences, i.e., sequences of input terminals.
+As an example we consider sentences which are sums of numbers such as</p>
+<pre class="prettyprint source"><code>1 + 2
+</code></pre>
+<p>A rule to describe this sentence is, e.g.,</p>
+<pre class="prettyprint source"><code>sum: '1' '+' '2';
+</code></pre>
+<p>So far, this notation for rules is inspired by the <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">Backus-Naur form</a>:</p>
+<ul>
+<li>
+<p><code>sum</code> is the non-terminal at left; we require that non-terminals are alphanumeric names,
+i.e., consist of letters, digits, and perhaps underscores, and start with a letter.</p>
+</li>
+<li>
+<p>The sequence of terminals on the right consists of <code>1</code>, <code>+</code>, and <code>2</code>; we enclose each in single quotes to indicate that they have to be spelled literally as shown. If we need a quote or backslash as part of a terminal we will precede it by a backslash.</p>
+</li>
+<li>
+<p>Finally, we require that the two parts of the rule are separated by a colon and that the entire rule is terminated by a semicolon.</p>
+</li>
+<li>
+<p>White space is necessary in a rule to separate non-terminal names,
+but it is ignored outside of terminals.</p>
+</li>
+</ul>
+<p>It should be noted that a list of such rules implicitly defines everything there is to know about a grammar:
+terminals and their representations in the input, non-terminals, rules, and the start symbol,
+by convention the non-terminal at left in the first rule — here it is <code>sum</code>.</p>
+<p><a href="../?eg=02/01">Example 2/01</a> illustrates that this grammar can be used to recognize a sentence:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar, and then</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis,
+i.e., to try to recognize the sentence,
+i.e., to check whether a parse tree can be found.</p>
+</li>
+<li>
+<p>Now add or remove some spaces in the <span class='a-program'></span>
+and press <span class='c-parse'></span> again
+to see that white space does not matter for recognition.</p>
+</li>
+<li>
+<p>Replace <code>1</code> and <code>2</code> in the <span class='a-program'></span>
+and press <span class='c-parse'></span> again
+to see that other numbers cause errors
+as long as the rule in the <span class='a-grammar'></span>
+requires <code>1</code> and <code>2</code>.</p>
+</li>
+<li>
+<p>Finally, replace <code>1</code> and <code>2</code> in the <span class='a-grammar'></span>
+<em>and</em> in the <span class='a-program'></span>
+and press <span class='c-new'></span> and <span class='c-parse'></span>
+to allow different numbers.</p>
+</li>
+</ul>
+<h3 id="literals-and-tokens">Literals and Tokens</h3>
+<p>The example shows that spelling terminals literally in grammar rules
+may be useful but it is too restrictive.
+If we want to describe sums of numbers in general
+the specific value of a number is not important.</p>
+<p>Therefore, we use two kinds of terminals:</p>
+<ul>
+<li>
+<p><em>Literals</em> represent themselves
+and are single-quoted strings using <code>\</code> only to escape single quotes and <code>\</code> itself.</p>
+</li>
+<li>
+<p><em>Tokens</em> represent classes of similar inputs such as numbers,
+and are specified in rules as alphanumeric names which must be different from non-terminal names.
+For convenience we will use upper- and lower-case initials to immediately distinguish the two kinds of names.</p>
+</li>
+</ul>
+<p>Tokens have to be defined separately from the grammar itself.
+<a href="tutorial-03-scanner.html">Chapter three</a> explains in detail that <a href="https://en.wikipedia.org/wiki/Regular_expression" title="Regular Expression">regular expressions</a>
+are a very good way to describe tokens.
+For now it is sufficient that</p>
+<pre class="prettyprint source"><code>/[0-9]+/
+</code></pre>
+<p>describes a <code>Number</code> of any length
+which consists of one or more of the digits from <code>0</code> to <code>9</code>.</p>
+<p>Based on this definition the rule</p>
+<pre class="prettyprint source"><code>sum: Number '+' Number;
+</code></pre>
+<p>describes all sums of two integer numbers such as</p>
+<pre class="prettyprint source"><code>12 + 345
+</code></pre>
+<p><a href="../?eg=02/02">Example 2/02</a> contains the new rule in the <span class='a-grammar'></span>
+and the definition of <code>Number</code> as a property with the token name
+and a (non-anchored) regular expression as the value in the <span class='a-tokens'></span>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar.</p>
+</li>
+<li>
+<p>As it is set up, the example will produce an error
+when you press <span class='c-parse'></span>
+to create a parser and perform syntax analysis —
+the <span class='a-program'></span> area contains a bit more than a sentence.</p>
+</li>
+<li>
+<p>Change either the <span class='a-grammar'></span>
+or the <span class='a-program'></span> to avoid the error.</p>
+</li>
+</ul>
+<h3 id="alternatives">Alternatives</h3>
+<p>A more useful sum of numbers has to contain at least one number,
+but it should be allowed to contain any number of numbers.</p>
+<p>If the right hand side of a rule only contains terminals
+we would need very many rules.
+Here are the first three,
+all with the same non-terminal on the left:</p>
+<pre class="prettyprint source"><code>sum: Number;
+sum: Number '+' Number;
+sum: Number '+' Number '+' Number;
+</code></pre>
+<p>There have been many <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extensions to the BNF notation</a>
+which inspired the grammar notation used in most of this book
+and developed in this chapter.
+For alternatives, we collect all pairs with the same non-terminal at left and write instead:</p>
+<pre class="prettyprint source"><code>sum: Number | Number '+' Number | Number '+' Number '+' Number;
+</code></pre>
+<p>We require that a <em>rule name</em>, i.e., the non-terminal at left, is unique,
+and we use  <code>|</code> to concatenate separate alternative sequences for the right-hand side.</p>
+<p><a href="../?eg=02/03">Example 2/03</a> illustrates that the grammar above has a problem:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar
+and see the error message.</p>
+</li>
+<li>
+<p>You can toggle <span class='t-greedy'></span> to suppress ambiguity checking
+and thus the error message when you press <span class='c-new'></span>, but</p>
+</li>
+<li>
+<p>when you press <span class='c-parse'></span> to try and recognize the content
+of the <span class='a-program'></span> you will find that only one number,
+i.e., the first alternative of the rule, can be recognized.</p>
+</li>
+<li>
+<p>Check out that once <span class='t-greedy'></span> is set
+the order of the alternatives in the rule
+determines how many numbers can be in a sum.</p>
+</li>
+</ul>
+<p>In the formal definition of a grammar there are no restrictions on rules.
+However, it would be quite inefficient to have to try all alternatives to find one
+that actually confirms that an input is a sentence.</p>
+<p>Therefore, we require that we must be able to select the appropriate alternative
+just by looking at the very next input — this is known as <em>one symbol lookahead</em>
+and it means that we will never back up in the input.</p>
+<p><a href="../?eg=02/04">Example 2/04</a> shows a change to the grammar
+to circumvent the problem:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar, and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to recognize the prefix
+and the sum with three numbers in the <span class='a-program'></span>.</p>
+</li>
+<li>
+<p>Change the prefix and work with other sums in the <span class='a-program'></span>.</p>
+</li>
+</ul>
+<p>The example uses the following grammar:</p>
+<pre class="prettyprint source"><code>sum: 'a' Number
+     | 'b' Number '+' Number
+     | 'c' Number '+' Number '+' Number;
+</code></pre>
+<p>A prefix from <code>a</code> to <code>c</code> determines how many numbers the sum should contain.
+While this works it is not exactly user-friendly...</p>
+<p><a href="tutorial-10-bottom-up.html">Chapter ten</a> will show a less intuitive way
+to get from grammars
+to recognition which makes the grammar in
+<a href="../?eg=02/03&amp;mode=stack">example 2/03</a> perform as intended
+— still without backing up:</p>
+<ul>
+<li>
+<p>The very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</p>
+</li>
+<li>
+<p>Press <span class='c-new'></span> to process the grammar
+— this time there is no error message.</p>
+</li>
+<li>
+<p>Enter sums with one, two, or three numbers in the <span class='a-program'></span>
+and press <span class='c-parse'></span> to see that all are recognized without errors.</p>
+</li>
+<li>
+<p>You can toggle <span class='t-parser'></span> to produce a trace
+(to be explained in <a href="tutorial-10-bottom-up.html">chapter ten</a>)
+which indicates when input is stacked (<code>shift</code>)
+and when a rule is satisfied (<code>reduce</code>, always followed by <code>goto</code>).</p>
+</li>
+</ul>
+<h3 id="recursion">Recursion</h3>
+<p>Real sums contain any number of numbers, and they shouldn't require
+an obscure prefix.</p>
+<p>Consider the following approach:</p>
+<pre class="prettyprint source"><code>a: Number | Number '+' a;
+</code></pre>
+<p>This may look confusing but it is a finite description of an infinite number of sums
+with a number and as many additional plus signs with numbers as we choose:</p>
+<ul>
+<li>
+<p>The first alternative states that <code>a</code> is a <code>Number</code>.</p>
+</li>
+<li>
+<p>Alternatively, <code>a</code> is a <code>Number</code>, a plus sign, and another <code>a</code> —
+which can be a single <code>Number</code>, or more...</p>
+</li>
+</ul>
+<p>Recursion is a finite way to describe infinite things.
+However, the particular rule above violates the principle
+that one symbol lookahead should be sufficient to select the successful alternative,
+i.e., two alternatives should not start with the same terminal —
+this was already illustrated in <a href="../?eg=02/03">example 2/03</a>.</p>
+<p>The following rule seems to look better:</p>
+<pre class="prettyprint source"><code>b: Number | b '+' Number;
+</code></pre>
+<p>This is another finite description of an infinite number of sums
+with as many numbers as we choose:</p>
+<ul>
+<li>
+<p>The first alternative states that <code>b</code> is a <code>Number</code>.</p>
+</li>
+<li>
+<p>The second alternative allows us
+to append as many plus signs with numbers as we want.</p>
+</li>
+</ul>
+<p>However, <a href="../?eg=02/05">example 2/05</a> which contains both rules, <code>a</code> and <code>b</code>,
+shows that there might still be problems:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar
+and see an error message: <code>b</code> is left-recursive.</p>
+</li>
+<li>
+<p>Remove the rule for <code>b</code> from the grammar
+and remove <code>b</code> as an alternative in <code>sum</code>.
+Then press <span class='c-new'></span> again to
+see another error message: <code>a</code> has ambiguous alternatives.</p>
+</li>
+</ul>
+<p>A rule, considered just as an ordered pair,
+is <a href="https://en.wikipedia.org/wiki/Left_recursion" title="left recursion">left-recursive</a> if the non-terminal at left
+appears first in the sequence at right,
+either directly, or even when tracing through other ordered pairs.</p>
+<p><a href="../?eg=02/06">Example 2/06</a> contains a small change to <code>b</code>
+to illustrate that left recursion can involve several rules:</p>
+<ul>
+<li>Press <span class='c-new'></span> to try to represent the grammar
+and see the error messages: this time <code>sum</code> is left-recursive.</li>
+</ul>
+<pre class="prettyprint source"><code>sum: b;
+b: Number | sum '+' Number;
+</code></pre>
+<p>Intuitively, this grammar does look doubtful — even without ambiguities.
+&quot;One symbol lookahead&quot; would select the first alternative of <code>b</code> and that is only a single number.</p>
+<p>If the alternatives for <code>b</code> are interchanged and the rules are tried in order
+it looks like a <code>sum</code> is a <code>b</code> is a
+<code>sum</code> is a <code>b</code> ... will we ever start to look at the first number in the input?</p>
+<p>It all depends on the approach used to interpret the grammar.
+The technique explained in <a href="tutorial-10-bottom-up.html">chapter ten</a>
+can deal with left recursion.
+Try <a href="../?eg=02/06&amp;mode=stack">example 2/06</a> again:</p>
+<ul>
+<li>
+<p>The very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</p>
+</li>
+<li>
+<p>Press <span class='c-new'></span> to process the grammar
+— this time there is no error message.</p>
+</li>
+<li>
+<p>Enter various sums in the <span class='a-program'></span>
+and press <span class='c-parse'></span> to see that all are recognized.</p>
+</li>
+</ul>
+<h3 id="optional-brackets">Optional Brackets</h3>
+<p>We want to describe sums and avoid ambiguities and left recursion.
+Consider:</p>
+<pre class="prettyprint source"><code>sum: Number more;
+more: '+' sum |;
+</code></pre>
+<p>A <code>sum</code> consists of a number and <code>more</code>,
+and <code>more</code> adds a plus sign and another number or eventually nothing
+because <code>more</code> has an empty alternative which stops the right recursion on <code>sum</code>.</p>
+<p>At the end of <a href="tutorial-01-overview.html">chapter one</a> it was noted that empty alternatives
+are awkward and they can easily be overlooked in a rule.
+Therefore, we extend our grammar notation:</p>
+<pre class="prettyprint source"><code>sum: Number [ more ];
+more: '+' sum;
+</code></pre>
+<p>We use brackets to indicate that part of an alternative is optional
+and we forbid empty alternatives — including those which only consist
+of optional parts...</p>
+<p>Work with this grammar in <a href="../?eg=02/07">example 2/07</a>
+to see that we can finally have any number of numbers in a sum:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to process the grammar,</p>
+</li>
+<li>
+<p>enter various sums in the <span class='a-program'></span>, and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to see that all are recognized.</p>
+</li>
+</ul>
+<p>The grammar uses right recursion to get long sums
+with syntax trees such as the following:</p>
+<div class='diagram'>
+  <table style='width: 100%; margin: 1em auto'>
+    <col style='width: 12.5%'>
+    <col style='width: 37.5%'>
+    <col style='width: 50%'>
+    <tr>
+      <td style='text-align: center'> <img src='02/one.svg' alt='one'> </td>
+      <td style='text-align: center'> <img src='02/two.svg' alt='two'> </td>
+      <td style='text-align: center'> <img src='02/three.svg' alt='three'> </td>
+    </tr>
+  </table>
+</div>
+<p>If these trees were interpreted to perform arithmetic
+they would compute the sums from right to left, i.e.,
+right recursion in the grammar results in right-associative trees.
+This is suggested by the brackets in the output from <a href="../?eg=02/07">example 2/07</a>:</p>
+<pre class="prettyprint source"><code>[ '12' [ [ '+' [ '345' [ [ '+' [ '6789' null ] ] ] ] ] ] ]
+</code></pre>
+<p>Deeper nesting occurs at right.</p>
+<p>Rules can contain alternatives.
+We can use this to allow addition and subtraction in the rule for <code>more</code>:</p>
+<pre class="prettyprint source"><code>sum: Number [ more ];
+more: '+' sum | '-' sum;
+</code></pre>
+<p>Brackets can contain alternatives, too.
+Here is another way to describe the same language,
+i.e., the same set of sentences,
+i.e., sums with any number of additions and subtractions:</p>
+<pre class="prettyprint source"><code>sum: Number [ add | subtract ];
+add: '+' sum;
+subtract: '-' sum;
+</code></pre>
+<p>In <a href="tutorial-06-compile.html">chapter six</a>
+this last version will turn out to be the most useful.</p>
+<p>For now, you can experiment with the first variant in <a href="../?eg=02/08">example 2/08</a>
+and the second variant in <a href="../?eg=02/09">example 2/09</a>.
+Either one accepts arbitrary sums and differences and even produces
+the same set of brackets, numbers, and operators:</p>
+<pre class="prettyprint source"><code>[ '12' [ [ '-' [ '345' [ [ '+' [ '6789' null ] ] ] ] ] ] ]
+</code></pre>
+<p><a href="tutorial-05-lists.html">Chapter five</a> will explain
+what all the brackets in the output mean.
+For now we note that the different grammars produce the same output,
+but something else is more significant. Consider</p>
+<pre class="prettyprint source"><code>   12  (    -     345  (    +     6789           )     )
+</code></pre>
+<p>which is the same output with some clutter removed.</p>
+<p>Mathematical conventions dictate that the innermost parentheses have to be elaborated first,
+i.e., this is likely to be interpreted as</p>
+<pre class="prettyprint source"><code>add 6789 to 345
+then subtract the result from 12
+</code></pre>
+<p>i.e.,</p>
+<pre class="prettyprint source"><code>12 - (345 + 6789)
+</code></pre>
+<p>and that's probably not what the program</p>
+<pre class="prettyprint source"><code>12 - 345 + 6789
+</code></pre>
+<p>intended...</p>
+<p>Therefore, it is important to note that</p>
+<ul>
+<li>
+<p>there can be different grammars describing the same sentences
+and language, and</p>
+</li>
+<li>
+<p>if a grammar is intended to suggest meaning,
+such as mathematical operator precedence and associativity,
+rules have to be crafted with that in mind —</p>
+</li>
+<li>
+<p>right recursion produces right associativity
+and for now left recursion is not allowed for the interpretation of rules from left to right
+even if it would produce the commonly used left associativity.</p>
+</li>
+</ul>
+<h3 id="some-braces">Some Braces</h3>
+<p>We started with the grammar notation known as <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">Backus-Naur Form</a>
+which was created to describe the programming language <a href="https://en.wikipedia.org/wiki/ALGOL_58" title="Algol">Algol</a>.
+Recursion was used to express any kind of iteration
+so that a finite grammar can describe sentences of arbitrary length.</p>
+<p>Niklaus Wirth noticed that
+many programmers are more comfortable with explicit constructs for iteration
+and proposed the first of many <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extensions to BNF</a>
+which all offer such constructs.</p>
+<p>Assuming that a sum has at least two numbers,
+here is another way to define a grammar:</p>
+<pre class="prettyprint source"><code>sum: Number { '+' Number | '-' Number };
+</code></pre>
+<p>Unlike other <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extensions to BNF</a>,
+this book uses braces to enclose alternatives which must occur <em>one or more</em> times,
+i.e., a sum conforming to this grammar contains at least two numbers.</p>
+<p>Check out <a href="../?eg=02/10">example 2/10</a>
+and compare the output</p>
+<pre class="prettyprint source"><code>[ '12' [ [ '-' '345' ] [ '+' '6789' ] ] ]
+</code></pre>
+<p>to the output of <a href="../?eg=02/08">example 2/08</a> and <a href="../?eg=02/09">example 2/09</a> shown before:</p>
+<pre class="prettyprint source"><code>[ '12' [ [ '-' [ '345' [ [ '+' [ '6789' null ] ] ] ] ] ] ]
+</code></pre>
+<p>Iteration makes for simpler looking output —
+this will be discussed further in <a href="tutorial-05-lists.html">chapter five</a>
+and <a href="tutorial-06-compile.html">six</a>.</p>
+<h3 id="many-iterations">Many Iterations</h3>
+<p>What about a sum that consists of a single number or more?</p>
+<p>As part of a rule, both, brackets and braces, can contain one or more alternatives.
+Alternatives are on the right-hand side of rules,
+where braces and brackets made their appearance.
+Combining the ideas, this means that braces and brackets can be nested.</p>
+<p>Clearly, it is superfluous to have brackets only contain another set of brackets
+or braces only contain another set of braces.
+More importantly,
+we avoid empty alternatives,
+i.e., an alternative cannot just consist of something optional in brackets,
+i.e., braces cannot just contain sets of brackets.</p>
+<p>But — something in braces appears one or more times;
+therefore, when brackets directly contain braces, together, they indicate something that can
+appear zero or more times:</p>
+<pre class="prettyprint source"><code>sum: Number [{ '+' Number | '-' Number }];
+</code></pre>
+<p>Check out <a href="../?eg=02/11">example 2/11</a> and, in particular,
+confirm that single numbers are recognized
+and compare the output for <code>1</code> <code>+</code> <code>2</code></p>
+<pre class="prettyprint source"><code>[ '1' [ [ [ '+' '2' ] ] ] ]
+</code></pre>
+<p>to the output for the same sum in <a href="../?eg=02/10">example 2/10</a>:</p>
+<pre class="prettyprint source"><code>[ '1' [ [ '+' '2' ] ] ]
+</code></pre>
+<p>We will return to this in <a href="tutorial-05-lists.html">chapter five</a>.</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p><em>Terminals</em> are <em>literals</em> and <em>tokens</em>.</p>
+</li>
+<li>
+<p><em>Literals</em> represent themselves as input
+and are single-quoted strings using <code>\</code> only to escape single quotes and <code>\</code> itself.</p>
+</li>
+<li>
+<p><em>Tokens</em> represent sets of inputs, e.g., numbers,
+and are alphanumeric names starting with a letter — in our examples in upper case.</p>
+</li>
+<li>
+<p>Tokens are defined with search patterns, e.g., <code>/[0-9]+/</code> for numbers.</p>
+</li>
+<li>
+<p>Formally, <em>rules</em> are ordered pairs,
+each consisting of a non-terminal and a sequence of terminals and non-terminals.</p>
+</li>
+<li>
+<p><em>Non-terminals</em> are alphanumeric names starting with a letter — in our examples in lower case.
+The sets of non-terminal names and token names must be disjoint.</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">Backus-Naur Form</a> uses
+<code>:</code> to separate the non-terminal from the sequence in the rule,
+<code>|</code> to combine all alternative sequences for the same non-terminal,
+and <code>;</code> to terminate a rule.</p>
+</li>
+<li>
+<p>There has to be exactly one rule for each non-terminal
+and we call the non-terminal name the <em>rule name.</em></p>
+</li>
+<li>
+<p>The rule name of the first rule in the list of rules of a grammar
+is the name of the start symbol.</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">Extended BNF</a> adds notations for optional and repeated sets of
+alternatives.
+We use <code>[</code> and <code>]</code> (brackets) to enclose a set of <em>optional</em> alternatives
+and <code>{</code> and <code>}</code> (braces) to enclose
+a set of alternatives that must appear <em>some</em> times, i.e., one(!) or more times.</p>
+</li>
+<li>
+<p>We forbid empty alternatives,
+e.g., an empty sequence or a sequence containing only optional items.
+In particular, braces cannot directly contain only brackets.</p>
+</li>
+<li>
+<p>We allow brackets to directly contain braces because this denotes
+a set of alternatives which can appear <em>many</em> times, i.e., zero or more times.</p>
+</li>
+<li>
+<p>By convention, white space in a grammar and usually in input will be ignored.</p>
+</li>
+</ul>
+<h3 id="recursion-revisited">Recursion Revisited</h3>
+<p><a href="../?eg=02/12">Example 2/12</a> contains a fairly comprehensive grammar
+describing a comma-separated list of expressions,
+with the typical arithmetic operators and parentheses:</p>
+<pre class="prettyprint source"><code>list: sum [{ ',' sum }];
+sum: product [{ '+' product | '-' product }];
+product: signed [{ '*' signed | '/' signed }];
+signed: [ '-' | '+' ] term;
+term: Number | '(' sum ')';
+</code></pre>
+<p>This grammar shows the necessary use of recursion
+for balanced notations such as parentheses.
+This is neither left- nor right-recursion.</p>
+<p>The rule for <code>term</code> contains both parentheses
+to keep them balanced
+and by recursion nests a <code>sum</code> and thus balanced parentheses
+to any depth.</p>
+<p>The rule for <code>sum</code> uses iteration to arrange for any number of <code>product</code>
+and thus <code>term</code> in sequence,
+and they can contain balanced parentheses,
+but the grammar does not permit unbalanced parentheses in a sentence.</p>
+<p><a href="../?eg=02/13">Example 2/13</a> contains a grammar describing typical list constructs:</p>
+<pre class="prettyprint source"><code>terminated: { [ separated ] ';' }; 
+separated:  element [{ ',' element }];
+element:    Number | enclosed;
+enclosed:   '(' [ separated ] ')';
+</code></pre>
+<ul>
+<li>
+<p>A sentence is a list with one or more entries, each <code>terminated</code> with a semicolon.</p>
+</li>
+<li>
+<p>An entry itself can be empty (because <code>seperated</code> is optional),
+or it is a list of one or more elements
+which are <code>separated</code> by single commas.</p>
+</li>
+<li>
+<p>An <code>element</code> is either a <code>Number</code>, or a list <code>enclosed</code> by a balanced number of parentheses.</p>
+</li>
+<li>
+<p>The <code>enclosed</code> list consists of zero or more elements which are <code>separated</code> by single commas.</p>
+</li>
+<li>
+<p><code>terminated</code> or <code>separated</code> are blueprints for statements in a programming language.
+<code>enclosed</code> is a blueprint for function parameters or arguments.</p>
+</li>
+</ul>
+<p>It is instructive to investigate various sentences, e.g.,</p>
+<pre class="prettyprint source"><code>( (1,2), 3, (()) ); ;
+</code></pre>
+<p>even if the output looks much messier than the sentence itself.</p>
+<h3 id="tokens-revisited">Tokens Revisited</h3>
+<p>As a final example in this chapter, <a href="../?eg=02/14">example 2/14</a> contains
+the grammar from <a href="../?eg=02/12">example 2/12</a>,
+with one more rule added to
+define <code>Number</code> right in the grammar
+from single digit literals:</p>
+<pre class="prettyprint source"><code>list: ...
+Number: { '0' | '1' | '2' | '3' | '4' 
+        | '5' | '6' | '7' | '8' | '9' };
+</code></pre>
+<p>This suggests that we might not need tokens,
+i.e., names for classes of input such as numbers or names.</p>
+<p>However, <a href="../?eg=02/14">example 2/14</a> demonstrates
+that the result is not quite the same.
+As we shall see in the <a href="tutorial-03-scanner.html">next chapter</a>,
+our recognition process usually ignores white space in the input.
+With the rule above, both of the following numbers</p>
+<pre class="prettyprint source"><code>12,
+1 2
+</code></pre>
+<p>are acceptable for a sentence and the result, even for a single number, can be unexpected:</p>
+<pre class="prettyprint source"><code>[ [ [ [ null [ [ [ [ '1' ] [ '2' ] ] ] ] ] null ] null ] null ]
+</code></pre>
+<p>Plus, character recognition with a grammar, while mostly automated,
+is much less efficient than character recognition
+with <a href="https://en.wikipedia.org/wiki/Regular_expression" title="Regular Expression">regular expressions</a>,
+and we will use these in recognizing literals anyhow.</p>
+<h4 id="previous%3A-%7B%40tutorial-01-overview%7D-next%3A-%7B%40tutorial-03-scanner%7D">Previous: <a href="tutorial-01-overview.html">1. Compiler Terminology</a> Next: <a href="tutorial-03-scanner.html">3. Scanning Input</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

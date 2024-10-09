@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 10. Recognition Revisited</title -->
+	<title>10. Recognition Revisited</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>10. Recognition Revisited</h2>
+</header>
+
+<article>
+    <h4 id="try-(almost)-everything%3F">Try (Almost) Everything?</h4>
+<h4 id="conflicts-and-errors">Conflicts and Errors</h4>
+<hr>
+<p><a href="tutorial-02-grammars.html">Chapter two</a> defined
+<a href="https://en.wikipedia.org/wiki/Context-free_grammar" title="Context-Free Grammar"><em>context-free grammars</em></a>,
+the <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">BNF notation</a> for grammar rules,
+and the version of <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">Extended BNF</a> used throughout this book —
+rules are alternative sequences
+which contain literals, tokens, references to other rules,
+and additionally brackets for optional alternatives
+and braces for alternatives which can appear one or more times.</p>
+<p>All the examples so far employed
+the <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent"><em>recursive descent</em></a> algorithm
+for recognition implemented by the <a href="module-EBNF.html">EBNF module</a>
+and described in <a href="tutorial-04-parser.html">chapter four</a>:</p>
+<ul>
+<li>Consider the grammar rules to be recognition functions.</li>
+<li>Call the start rule.</li>
+<li>The lookahead (next input symbol) uniquely selects an alternative within the rule.</li>
+<li>If the next item in the rule is a literal or token
+it is collected and recognition moves on.</li>
+<li>If the next item is a reference another rule is called.</li>
+<li>Brackets are entered if the lookahead fits.</li>
+<li>Braces are entered and iterated as long as the lookahead fits.</li>
+<li>Eventually the start rule has to be completed.</li>
+</ul>
+<p>As an aside, <a href="../?eg=02/05">example 2/05</a> illustrated that
+this algorithm cannot handle left recursion in grammar rules.</p>
+<p>This chapter discusses a stack-based parser
+to replace the <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent"><em>recursive descent</em></a> algorithm.
+The parser is constructed from <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">BNF</a> rules and supports left recursion.
+It is based on <a href="https://en.wikipedia.org/wiki/LR_parser" title="LR parser">an idea by Don Knuth</a>.</p>
+<p>It turns out that <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">EBNF</a> rules can be translated to <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">BNF</a>
+in such a way that the stack-based parser executes the same actions as before,
+i.e., the objective of this chapter is to construct a more powerful parser
+from grammars which are not suitable for <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent"><em>recursive descent</em></a>.</p>
+<p>All numbered classes in the examples are available from the <a href="module-Ten.html">module <code>Ten</code></a>
+which is built into the practice page.</p>
+<p>All examples in the previous chapters can use either the recursive descent parser
+or the stack-based parser — no changes are required!</p>
+<h3 id="the-idea">The Idea</h3>
+<p>The construction is based on BNF notation,
+i.e., rules are ordered pairs with a non-terminal on the left
+and a symbol sequence — terminals and non-terminals — on the right.
+Alternatives are expressed by rules which have the same non-terminal at left.</p>
+<p>The stack-based parser moves from left to right along the input
+and records each move on the stack
+until the top values on the stack fit a rule of the grammar.
+At this point there are at least as many values on the stack as there are symbols
+in the rule's sequence.</p>
+<p>At this point the values corresponding to the rule are popped off the stack,
+optionally processed by an action,
+and a value corresponding to the rule is placed on the stack instead.</p>
+<p>The process continues until the input is exhausted
+and the stack just contains a value corresponding to the start rule of the grammar.
+Success!</p>
+<p>This looks like the obvious algorithm — but the problem is to recognize that
+<em>the top values on the stack fit a rule of the grammar</em>.</p>
+<p><a href="../?eg=10/01&amp;mode=bnf">Example 10/01</a> shows how this might be accomplished:</p>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Toggle <span class='t-states'></span> and</li>
+<li>press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Press <span class='c-parse'></span> to see that the text
+in the <span class='a-program'></span> is recognized.</li>
+<li>Remove <code>b</code> or <code>c</code> from the <span class='a-program'></span>
+and each time press <span class='c-parse'></span> again.</li>
+</ul>
+<p>The grammar describes sequences starting with a single <code>a</code>, optionally followed by a single <code>b</code>,
+and ending in any number of <code>c</code>:</p>
+<pre class="prettyprint source"><code>root: 'a';
+root: 'a' 'b';
+root: root 'c';
+</code></pre>
+<p>The grammar is left-recursive and the first two rules for <code>root</code> start with the same terminal symbol,
+i.e., the grammar is definitely not LL(1) and it is not suitable for <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent"><em>recursive descent</em></a>.</p>
+<p>However, the grammar is not ambiguous because a sentence starts either with <code>a</code> or with <code>a</code> and <code>b</code>,
+and that uniquely determines how each syntax tree is built.</p>
+<p>How should recognition proceed if it is based on this grammar?
+The stack-based parser is controlled by a transition diagram
+which is constructed by simulating execution:
+a position marker <span style='color:red'>•</span> is placed at the beginning of the rules
+and is advanced as input arrives:</p>
+<div>
+  <img style='display: block; margin: 1em auto' src='10/lr1-1.svg' alt='lr1'>
+</div>
+<p>The result is a directed graph where the nodes are recognition states which contain marked rules
+and the edges indicate transitions based on input terminals (single arrowhead)
+or recognized non-terminals (double arrowhead).</p>
+<p>A non-terminal is recognized exactly when a rule can be satisfied,
+i.e., the graph needs edges for completed rules —
+rules with the marker at the end of the rule.
+Edges must lead from states with completed rules to states with rules
+where the marker is just before the non-terminal at left in the completed rule:</p>
+<div>
+  <img style='display: block; margin: 1em auto' src='10/lr1-2.svg' alt='lr1'>
+</div>
+<p>In the diagram above these edges are blue,
+labeled <em>reduce</em>, and are marked with double arrowheads.</p>
+<p>Finally, there are transitions based on non-terminals
+(black with double arrowheads).
+A transition based on a terminal is called a <em>shift</em>
+and a transition based on a non-terminal is called a <em>goto</em>.
+A <em>reduce</em> transition is always immediately followed by a <em>goto</em> transition.</p>
+<p>To get unique start and end states for the transition diagram
+a <em>rule zero</em> is added to the grammar</p>
+<pre class="prettyprint source"><code>$accept: root $eof
+</code></pre>
+<p>where <code>root</code> is the start non-terminal of the grammar.</p>
+<p>This provides a unique start state 0 for the transition diagram,
+namely the state which contains rule 0 marked at the beginning.</p>
+<p>Whenever the position marker is right before a non-terminal,
+<a href="https://en.wikipedia.org/wiki/Closure_(mathematics)" title="closure"><em>closure</em></a> is applied (recursively), i.e.,
+all rules for the non-terminal are marked at the beginning
+and are added to the state.</p>
+<p>Rule zero also provides a unique state where the transitions end successfully,
+namely the state which contains rule 0 marked at the end, following <code>$eof</code>,
+the end of input.
+Here is the complete transition diagram:</p>
+<div>
+  <img style='display: block; margin: 1em auto' src='10/lr1-3.svg' alt='lr1'>
+</div>
+<p>States and transitions for <a href="../?eg=10/01&amp;mode=bnf">example 10/01</a> can be viewed:</p>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Toggle <span class='t-states'></span>
+so that the effect of <a href="https://en.wikipedia.org/wiki/Closure_(mathematics)" title="closure">closure</a> is displayed and</li>
+<li>press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Check the <span class='a-output'></span>.
+It contains the states and the marked rules defining each state.
+Each state is followed by the transition messages.</li>
+</ul>
+<p>One more thought and the recognition technique is complete:
+The transition diagram is finite because the number and length of rules, both, are finite.
+However, a grammar can, for example, describe a set of nested parentheses of arbitrary depth,
+i.e., recognition needs a mechanism for unlimited counting which a finite diagram cannot provide.</p>
+<p>Therefore, the states are kept on a <em>state stack</em> with the current state on top.
+Each <em>shift</em> and <em>goto</em> transition,
+i.e., recognizing an input terminal or a completed non-terminal,
+pushes one new state on top of the stack.
+A <em>reduce</em> transition pops states off the stack,
+namely exactly as many states as it took to complete the rule which is reduced,
+i.e., exactly as many states as there are symbols in the right-hand side of the rule.
+This can be counted for any specific path through the diagram, too.</p>
+<p>The transition diagram really tries &quot;everything.&quot;
+It starts with the parser positioned at the beginning of rule 0.
+It transitions and pushes the state stack for every possible input.
+It pops the stack for completed rules
+and transitions beyond them
+until, hopefully, the end of rule 0 is reached.
+The states are computed in a way that &quot;everything&quot; is tried in parallel,
+thus avoiding the complications of trial and error.</p>
+<p><a id='catch'></a>There has to be a catch — not every grammar will result
+in this kind of a transition diagram.
+The catch will show up once <a href="#constructing-the-state-table">the state table is constructed</a>
+but <a href="../?eg=04/04">example 4/04</a>
+which was <a href="tutorial-04-parser.html#ambiguity-revisited">discussed previously</a>
+provides a quick preview:</p>
+<ul>
+<li>The very first button should show <span class='t-mode'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar —
+no complaints because the <code>if</code> statement is defined with a trailing <code>fi</code>.</li>
+<li>Remove the <code>'fi'</code> in the <span class='a-grammar'></span> and
+press <span class='c-new'></span> again to see
+that the <a href="tutorial-04-parser.html#check"><code>check()</code> algorithm</a> is not happy —
+the grammar is now ambiguous.</li>
+<li>Switch to BNF:
+press the very first button until it shows <span class='t-mode stack'></span>,
+i.e., the EBNF grammar will be translated to BNF and the stack-based parser is used.</li>
+<li>Toggle <span class='t-states'></span>
+to see the effect of <a href="https://en.wikipedia.org/wiki/Closure_(mathematics)" title="closure">closure</a> and</li>
+<li>press <span class='c-new'></span> to translate the grammar
+to BNF and create the state table.</li>
+<li>Check the <span class='a-output'></span>:
+The last line complains about a <em>shift/reduce conflict</em>.</li>
+<li>If you scroll to state 7 you can see that it contains both,
+a complete rule which could be reduced
+and the opportunity to shift <code>else</code>.</li>
+</ul>
+<h3 id="the-architecture">The Architecture</h3>
+<p>The <a href="module-EBNF.html">EBNF</a> and <a href="module-BNF.html">BNF</a> modules
+use similar class architectures to represent grammars:
+A <a href="module-BNF.html">BNF</a> <a href="module-BNF-Grammar.html"><code>Grammar</code></a> object wraps a grammar for parsing
+and <a href="module-BNF.html">BNF</a> classes <a href="module-BNF-Rule.html"><code>Rule</code></a>, <a href="module-BNF-Rule.html"><code>Lit</code></a>,
+<a href="module-BNF-Token.html"><code>Token</code></a>, and <a href="module-BNF-NT.html"><code>NT</code></a>
+are used to represent the rules.</p>
+<p>A <a href="module-BNF.html">BNF</a> <a href="module-BNF-Grammar.html"><code>Grammar</code></a> object can be constructed from
+a string with rules expressed in BNF notation using the kind of bootstrap technique
+described in <a href="tutorial-09-bootstrap.html">chapter nine</a>
+which is demonstrated in <a href="../?eg=10/02&amp;mode=bnf">example 10/02 for BNF</a>:</p>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the BNF grammars' grammar.</li>
+<li>Press <span class='c-parse'></span>
+to let the BNF grammars' grammar represent itself and store the parser
+from the new representation as the result in <code>run</code>.</li>
+<li>Press <span class='c-run'></span> to apply this parser to the <span class='a-program'></span>
+which also contains the BNF grammar's grammar.</li>
+<li>Press <span class='c-run'></span> a few more times:
+The <code>count</code> in the <span class='a-output'></span> increases
+because the grammar keeps representing itself.</li>
+</ul>
+<p>The <a href="module-EBNF.html">EBNF</a> and <a href="module-BNF.html">BNF</a> modules share some common code
+included from the <a href="module-Base.html">Base</a> module.
+In particular, the ability to create a scanner from the literals and token
+patterns in a grammar is implemented in the <a href="module-Base.html">Base</a> module.</p>
+<p>The design objective was to decouple the modules as far as possible
+and avoid duplicating code,
+but for the fact that a <a href="module-BNF.html">BNF</a> <a href="module-BNF-Grammar.html"><code>Grammar</code></a>
+can be constructed from an <a href="module-EBNF.html">EBNF</a> <a href="module-EBNF-Grammar.html"><code>Grammar</code></a>
+using the <a href="module-BNF.html">BNF</a> factory method <a href="module-BNF-Grammar.html#.fromEBNF"><code>Grammar.fromEBNF()</code></a>.</p>
+<p>There are some subtle but significant differences which reduce the number of classes
+used to represent a <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form" title="Backus-Naur Form">BNF</a> grammar:</p>
+<ul>
+<li>a <a href="module-BNF.html">BNF</a> <a href="module-BNF-Rule.html"><code>Rule</code></a> is an ordered pair
+which contains a <a href="module-BNF.html">BNF</a> non-terminal <a href="module-BNF-NT.html"><code>NT</code></a> at left
+and a flat list of terminals and non-terminals at right,</li>
+<li>the same non-terminal can be at left in several rules, and</li>
+<li>a non-terminal has a list of rules where it is at left.</li>
+</ul>
+<p>The state table is computed by <a href="module-BNF-Grammar.html#check"><code>check()</code></a> and owned
+by the <a href="module-BNF.html">BNF</a> <a href="module-BNF-Grammar.html"><code>Grammar</code></a> object.
+A <a href="module-BNF.html">BNF</a> <a href="module-BNF-Parser.html"><code>Parser</code></a> is a separate object
+which owns the state stack and is consumed during the parsing operation,
+i.e., a <a href="module-BNF.html">BNF</a> <a href="module-BNF-Parser.html"><code>Parser</code></a> cannot be reused
+once all input has been processed.</p>
+<p>As before, a <a href="module-Base-Scanner.html"><code>Scanner</code></a> is a separate object,
+created from the terminals of a <a href="module-BNF.html">BNF</a> <a href="module-BNF-Grammar.html"><code>Grammar</code></a>
+with the technique explained in <a href="tutorial-03-scanner.html">chapter three</a>.
+It translates a string into
+a list of <a href="module-Base-Tuple.html"><code>Tuple</code></a> objects
+each of which contains a piece of the input string, the line number in the input, and a
+<a href="module-BNF.html">BNF</a> <a href="module-BNF-Rule.html"><code>Lit</code></a> or <a href="module-BNF-Token.html"><code>Token</code></a> object
+representing the piece of the input.</p>
+<ul>
+<li>In <a href="../?eg=10/01&amp;mode=bnf">Example 10/01</a>
+the very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Press <span class='c-scan'></span> to see
+the pattern used in the scanner and
+the <a href="module-Base-Tuple.html"><code>Tuple</code></a> objects
+for the text in the <span class='a-program'></span>.</li>
+</ul>
+<p>The <a href="module-BNF.html">BNF</a> parsing method <a href="module-BNF-Parser.html#parse"><code>Parser.parse()</code></a>
+can either be called with a string,
+or it can be called repeatedly,
+either with a list of <a href="module-Base-Tuple.html"><code>Tuple</code></a> objects
+or with a function providing such lists.
+Because the parsing state is stacked, successive input lists can be pushed to the parsing method,
+i.e., parsing could even operate interactively.
+<code>null</code> acts as end of all input and matches <code>$eof</code> in rule zero.</p>
+<p>An illegal input character is represented as
+a <a href="module-Base-Tuple.html"><code>Tuple</code></a> containing <code>null</code> rather than a
+<a href="module-BNF-Rule.html"><code>Lit</code></a> or <a href="module-BNF-Token.html"><code>Token</code></a> object.
+This kind of <a href="module-Base-Tuple.html"><code>Tuple</code></a> will cause an error during recognition.</p>
+<ul>
+<li>In <a href="../?eg=10/01&amp;mode=bnf">Example 10/01</a>
+the very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Toggle either <span class='t-parser'></span> to see all transitions
+or <span class='t-actions'></span> to see only <code>reduce</code> and</li>
+<li>toggle <span class='t-build'></span> to collect the input into lists.</li>
+<li>Finally, press <span class='c-parse'></span> to observe recognition:</li>
+</ul>
+<pre class="prettyprint source"><code>> g.config.build = true
+> g.config.trace = /./
+> g.parser().parse(program)
+STATE TUPLE    MESSAGE                  RETURNS
+  0  (1) 'a'   shift   1                null
+  1  (1) 'b'   shift   3                null
+  3  (1) 'c'   reduce  root: 'a' 'b';   [ 'a' 'b' ]
+  0  (1) 'c'   goto    2                null
+  2  (1) 'c'   shift   4                null
+  4  (1) 'c'   reduce  root: root 'c';  [ [ 'a' 'b' ] 'c' ]
+  0  (1) 'c'   goto    2                null
+  2  (1) 'c'   shift   4                null
+  4  eof $eof  reduce  root: root 'c';  [ [ [ 'a' 'b' ] 'c' ] 'c' ]
+  0  eof $eof  goto    2                null
+  2  eof $eof  accept                   [ [ [ 'a' 'b' ] 'c' ] 'c' ]
+[ [ [ 'a' 'b' ] 'c' ] 'c' ]
+</code></pre>
+<p>Recognition implicitly contains an <a href="https://en.wikipedia.org/wiki/Observer_pattern" title="Observer pattern"><em>Observer</em> design pattern</a>.
+Input terminals are processed and trigger some of the state changes and transitions
+<a href="#the-idea">described earlier</a>
+and the transitions result in messages: <code>shift</code>, <code>reduce</code>, <code>goto</code>, <code>accept</code>, and perhaps <code>error</code>.
+The parser’s <a href="module-BNF-Parser.html#observe"><code>observe()</code></a> method reacts to these messages.
+It sends the message to the <a href="module-BNF-Parser.html#trace"><code>trace()</code></a> method
+if the configuration option <a href="module-BNF-Grammar.html"><code>Grammar.config.trace</code></a> is set,
+i.e., <span class='t-parser'></span> is set on the practice page,
+and to the <a href="module-BNF-Parser.html#build"><code>build()</code></a> method
+if <a href="module-BNF-Grammar.html"><code>Grammar.config.build</code></a>,
+i.e., <span class='t-build'></span>, is set,
+or if <a href="module-Base.html#~Action"><code>Action</code></a> methods were supplied in the first call
+of the <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> method.
+For <code>reduce</code> messages
+<a href="module-BNF-Parser.html#build"><code>build()</code></a> assembles recognized input into lists
+and sends them to <a href="module-Base.html#~Action"><code>Action</code></a> methods, if any.</p>
+<p>The classic implementations of this parsing technique,
+<a href="https://en.wikipedia.org/wiki/Yacc" title="yacc">yacc</a>
+and
+<a href="https://en.wikipedia.org/wiki/GNU_Bison" title="bison">bison</a>,
+spend considerable effort on optimizing the state table.
+<a href="module-BNF.html">BNF</a> was designed to be more tutorial in nature;
+therefore, the state table is a list of <a href="module-BNF-State.html"><code>State</code></a> objects.
+Each holds <code>marks</code>, a list of one or more <a href="module-BNF-Mark.html"><code>Mark</code></a> objects, i.e., the marked rules,
+and a <code>messages</code> collection which maps the symbols for the outgoing edges of the state
+to the possible messages which are sent to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>
+and which define the operations on the stack.
+For display purposes these messages are encoded as <a href="module-BNF-Message.html"><code>Message</code></a> objects.</p>
+<p>As an aside, this chapter uses the term <em>actions</em> for semantic actions implemented
+as <a href="module-Base.html#~Action"><code>Action</code></a> methods as introduced in previous chapters.
+In contradistinction, the term <em>messages</em> is used for the operations on the state stack
+because they are also sent as messages to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>.
+The <code>reduce</code> <em>messages</em> trigger the semantic <em>actions</em>, if any.</p>
+<h3 id="constructing-the-state-table">Constructing the State Table</h3>
+<p>The state table is constructed by the <a href="module-BNF-Grammar.html#check"><code>check()</code></a> method
+which is called once after the rules of a <a href="module-BNF-Grammar.html">BNF Grammar</a> have been
+represented.
+The first <a href="module-BNF-State.html"><code>State</code></a> object is created
+with a <a href="module-BNF-Mark.html"><code>Mark</code></a> object for rule zero marked at the beginning:</p>
+<pre class="prettyprint source"><code>$accept: ● start-symbol $eof;
+</code></pre>
+<p><a href="module-BNF-Grammar.html#check"><code>check()</code></a> uses factory methods
+<a href="module-BNF-Grammar.html#state"><code>state()</code></a> and
+<a href="module-BNF-Grammar.html#mark"><code>mark()</code></a>
+to create state 0:</p>
+<pre class="prettyprint source"><code>this.states.push(this.state([this.mark(this.rules[0], 0)]));
+</code></pre>
+<p>A state is created with a list of one or more marked rules.
+Together they are called the <em>core</em> marks and they uniquely define the state.
+The state additionally contains the <a href="https://en.wikipedia.org/wiki/Closure_(mathematics)" title="closure"><em>closure</em></a> of the core:
+all rules for all non-terminals which immediately follow a marker.
+Here is the factory method which is called with a list of <a href="module-BNF-Mark.html"><code>Mark</code></a> objects:</p>
+<pre class="prettyprint source"><code>state (core) {
+  const coreLength = core.length;
+  const messages = {};
+  // compute closure: loop over core and add(ed) marks
+    ...
+  return new State(this, core, coreLength, messages);
+}
+</code></pre>
+<p>The state stores the number of core marks because only cores have to be compared
+to determine if two states are equal.</p>
+<p>Each state maps terminals and non-terminals to messages which control parsing:</p>
+<table>
+<thead>
+<tr>
+<th>message verb</th>
+<th>information</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shift</code></td>
+<td>next state</td>
+<td>push onto state stack,<br>advance in input.</td>
+</tr>
+<tr>
+<td><code>reduce</code></td>
+<td>rule</td>
+<td>pop state stack by rule length,<br>uncover state which expects the non-terminal.</td>
+</tr>
+<tr>
+<td><code>goto</code></td>
+<td>next state</td>
+<td>push onto state stack.</td>
+</tr>
+<tr>
+<td><code>accept</code></td>
+<td></td>
+<td>done!</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="module-BNF-State.html"><code>State</code></a> object contains a <code>messages</code> object:</p>
+<ul>
+<li><code>messages</code> maps a terminal symbol which immediately follows a mark in the state
+either to a <code>shift</code> message which consumes the corresponding input and transition to another state,
+or to a <code>reduce</code> message which completes recognition of a rule.</li>
+<li><code>messages</code> maps a non-terminal symbol which immediately follows a mark in the state
+to a <code>goto</code> message which transitions to another state.</li>
+<li><code>messages</code> maps <code>$eof</code> if it immediately follows a mark in the state
+to an <code>accept</code> message which completes parsing.</li>
+<li>The keys of <code>messages</code> are exactly all symbols which immediately follow one or more
+marks in the state. All other terminal symbols would not be expected.</li>
+</ul>
+<p><code>messages</code> is set up when the rules in the closure are added to the <code>core</code> of the state:</p>
+<pre class="prettyprint source"><code>  // compute closure: loop over core and add(ed) marks
+  for (let c = 0; c &lt; core.length; ++ c)
+    // for each incomplete mark
+    if (!core[c].complete) {
+      // next symbol in a mark
+      const s = core[c].rule.symbols[core[c].position];
+      if (s instanceof NT && !(s.ord in messages))
+        // add all rules for a new non-terminal, marked at 0
+        s.rules.forEach(rule => core.push(this.mark(rule, 0)), this);
+      // map this next terminal or non-terminal to null
+      messages[s.ord] = null;
+    }
+</code></pre>
+<p>This loop runs as long as new marked rules are added  —
+until it reaches the eventual end of <code>core</code>.</p>
+<p><code>.complete</code> is true for a <a href="module-BNF-Mark.html"><code>Mark</code></a>
+if the marker follows all symbols of the rule.</p>
+<p>So far, all values in <code>messages</code> are <code>null</code>
+and the keys of <code>messages</code> are the symbols that immediately follow one of the marks in the state.</p>
+<p>In a similar loop in the <a href="module-BNF-Grammar.html#check"><code>check()</code></a> method,
+all state objects are then asked to <a href="module-BNF-State.html#advance"><code>advance()</code></a>,
+i.e., to create outgoing edges and more states as needed to terminate the edges,
+and to fill in all <code>messages</code> collections:</p>
+<pre class="prettyprint source"><code>// tell each state to advance
+// this creates new states which are also advanced
+for (let s = 0; s &lt; this.states.length; ++ s)
+  this.states[s].advance(s);
+</code></pre>
+<p>The heavy lifting happens in the <a href="module-BNF-State.html#advance"><code>advance()</code></a> method:</p>
+<pre class="prettyprint source"><code>advance (stateNumber) {
+  // create reduce messages for complete rules
+  this.marks.forEach(mark => {
+    if (mark.complete) {
+      ...
+    } // done with every complete rule
+  }, this);
+</code></pre>
+<p>The first step is to enter <code>reduce</code> messages into the <code>messages</code> collection
+for all <code>complete</code> marks. The details are discussed <a href="#conflicts">below</a>.</p>
+<p>Each literal, token, and non-terminal has a unique ordinal number, starting with 0.
+<code>messages</code> maps this number to a message.
+Once the <code>reduce</code> messages have been entered,
+all other values in <code>messages</code> will have to be <code>shift</code> or <code>goto</code>, with one exception:</p>
+<pre class="prettyprint source"><code>  // create accept/shift messages for each next symbol which has none
+  for (let a in this.messages) {
+    if (this.messages[a] == null) {
+      if (a == this.grammar.lit().ord) {
+        // special case: $eof
+        this.messages[a] = this.grammar.accept();
+        this.grammar.rules[0].reduced = true;
+</code></pre>
+<p><code>$eof</code> only appears in rule zero
+and this symbol can only lead to a <code>reduce</code> or <code>accept</code> message.
+<code>accept</code> means that rule zero is successfully recognized.</p>
+<p>If the symbol is not <code>$eof</code>, the message will be <code>shift</code> or <code>goto</code> and needs a target state
+which is computed by advancing the marker across the symbol in all <a href="module-BNF-Mark.html"><code>Mark</code></a>
+objects where the marker is currently just before the symbol:</p>
+<pre class="prettyprint source"><code>      } else {
+        // create next core by advancing marker over one symbol
+        const next = [ ];
+        let symbol = null;
+        this.marks.forEach(mark => {
+          // find a as next symbol in all marks
+          if (!mark.complete && a == mark.rule.symbols[mark.position].ord) {
+            // remember symbol and push mark after symbol
+            symbol = mark.rule.symbols[mark.position];
+            next.push(mark.advance());
+          }
+        }, this);
+</code></pre>
+<p><code>next</code> is a list, used to collect all new <a href="module-BNF-Mark.html"><code>Mark</code></a> objects
+with the marker moved across the <code>symbol</code>.
+<a href="module-BNF-Mark.html#advance"><code>advance()</code></a>
+uses the factory method to create a new mark
+with the same rule but the marker in the next position.
+<code>next</code> will contain at least one <a href="module-BNF-Mark.html"><code>Mark</code></a> object,
+otherwise <code>a</code> would not have been a key in <code>messages</code> for this state.</p>
+<p><code>next</code> is the core of the target state
+for the <code>shift</code> or <code>goto</code> message to be recorded for
+the key <code>a</code> in <code>messages</code>.
+If the core cannot be found among the known states, a new state needs to be created:</p>
+<pre class="prettyprint source"><code>        // add new state with next as core, if any
+        // shift/goto existent or new state
+        if (!this.grammar.states.some((state, s) =>
+            state.equals(next) ?
+              (this.messages[a] = this.grammar.shift_or_goto(symbol, s),
+                true) : false, this)) {
+          this.messages[a] =
+            this.grammar.shift_or_goto(symbol, this.grammar.states.length);
+          this.grammar.states.push(this.grammar.state(next));
+        }
+</code></pre>
+<p>This concludes creating all but the <code>reduce</code> messages,
+and it looks as if nothing can go wrong.
+Unfortunately,
+entering the <code>reduce</code> messages will show that there can be problems.
+This part of the <a href="module-BNF-State.html#advance"><code>advance()</code></a> method is
+<a href="#conflict-resolution">discussed next</a>
+but it was already demonstrated <a href="#catch">above</a>
+that not every grammar is suitable for stack-based parsing because there can be conflicts.</p>
+<h3 id="conflicts">Conflicts</h3>
+<p>The <a href="#constructing-the-state-table">previous section</a> did not discuss
+how <code>reduce</code> messages are entered
+into a state's <code>messages</code> table before the other messages are filled in.
+A <code>reduce</code> message requires a <code>.complete</code> rule
+and it only makes sense to enter it for terminals
+which can follow the mark's rule's non-terminal:</p>
+<pre class="prettyprint source"><code>  // create reduce messages for complete rules
+  this.marks.forEach(mark => {
+    if (mark.complete) {
+      // rule we are in
+      const rule = mark.rule;
+      // for each terminal which can follow the rule in the grammar
+      for (let t in rule.nt.follow) {  // ordinal number
+        const f = rule.nt.follow[t];   // terminal which can follow
+        if (!(t in this.messages)) {   // can it follow in this state?
+          // if t is not in messages it cannot follow this state -> reduce
+          rule.reduced = true;
+          this.messages[t] = this.grammar.reduce(f, rule);
+</code></pre>
+<p><code>.follow</code> contains all terminals which can follow a rule.
+Computing <code>.follow</code> for EBNF grammars was <a href="tutorial-04-parser.html#follow">discussed in chapter four</a>.
+For BNF grammars the computation is easier because BNF rules are simpler.</p>
+<p>If a terminal in <code>.follow</code> is not yet a key in the state's <code>messages</code> table,
+it cannot lead from the state to another one;
+therefore, this terminal needs to be added with a <code>reduce</code> message.</p>
+<p>However, if the terminal is already a key in the <code>messages</code> table, there is a <em>conflict</em>.
+If the terminal was associated with a <code>reduce</code> message previously,
+the terminal is in the <code>follow</code> set for some other complete rule,
+i.e., there are two different rules which can be reduced before the terminal is accepted:</p>
+<pre class="prettyprint source"><code>        } else if (this.messages[t] != null) {
+          // t is in messages and messages[t] is already set as a reduce
+          const r2 = this.messages[t].info; // the other rule
+
+          ++ this.grammar.rr;
+          error('for', f.toString(), 'reduce/reduce conflict between',
+            '(' + rule + ')', 'and', '(' + r2 + ')');
+
+          // resolve for rule which is first in the grammar
+          if (rule.index &lt; r2.index) this.messages[t].info = rule;
+</code></pre>
+<p>Technically, this <em>reduce/reduce conflict</em> makes the grammar unsuitable for stack-based parsing
+because the state table's message is not unique.
+Traditionally, as a stopgap measure in such a case, the first rule in the grammar is selected to be reduced.</p>
+<p>If there is no prior <code>reduce</code> message, the terminal is in the <code>messages</code> table
+because it will be associated with a <code>shift</code> message when the marker is moved across it,
+as discussed in the <a href="#constructing-the-state-table">previous section</a>:</p>
+<pre class="prettyprint source"><code>        else { // this.messages[t] == null
+          ++ this.grammar.sr;
+          error('shift/reduce conflict between',
+            f.toString(), 'and rule', '(' + rule + ')');
+        } // done with conflicts
+      } // done with every t which can follow
+    } // done with every complete rule
+  }, this);
+</code></pre>
+<p>This is called a <em>shift/reduce conflict</em> and makes the grammar unsuitable for stack-based parsing, too.
+In this case the stopgap measure is to prefer the <code>shift</code> message.</p>
+<h4 id="a-shift%2Freduce-conflict"><a id='shift-reduce-conflict'></a> A <em>shift/reduce</em> Conflict</h4>
+<p><a href="../?mode=bnf&amp;eg=10/03">Example 10/03</a> shows that
+preferring the <code>shift</code> action can be desirable,
+for example to resolve the classic <em>dangling <code>else</code></em> problem
+in favor of the innermost <code>if</code> statement.</p>
+<pre class="prettyprint source"><code>statement: 'if' Number statement;
+statement: 'if' Number statement 'else' statement;
+statement: Number;
+</code></pre>
+<p>The grammar above has a shift/reduce conflict for <code>else</code>.</p>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar
+and check on the conflict.</li>
+<li>Toggle <span class='t-build'></span> and</li>
+<li>press <span class='c-parse'></span> to see that</li>
+</ul>
+<pre class="prettyprint source"><code>if 1
+  if 2 3 else 4
+</code></pre>
+<p>is recognized as</p>
+<pre class="prettyprint source"><code>[ 'if' '1' [ 'if' '2' [ '3' ] 'else' [ '4' ] ] ]
+</code></pre>
+<p>i.e., the <code>else</code> is recognized as part of the innermost <code>if</code>.</p>
+<ul>
+<li>Toggle <span class='t-actions'></span> and</li>
+<li>press <span class='c-parse'></span> again to confirm:</li>
+</ul>
+<pre class="prettyprint source"><code>STATE TUPLE       MESSAGE                          RETURNS
+  2  (2) 'else'   reduce  statement: Number;       [ '3' ]
+  2  (0) $eof     reduce  statement: Number;       [ '4' ]
+  7  (0) $eof     reduce  statement: 'if' Number   [ 'if' '2' [ '3' ] 'else
+  5  (0) $eof     reduce  statement: 'if' Number   [ 'if' '1' [ 'if' '2' [ 
+[ 'if' '1' [ 'if' '2' [ '3' ] 'else' [ '4' ] ] ]
+</code></pre>
+<h4 id="a-reduce%2Freduce-conflict"><a id='reduce-reduce-conflict'></a> A <em>reduce/reduce</em> Conflict</h4>
+<p>The built-in resolution for a shift/reduce conflict,
+i.e., to <code>shift</code> rather than to <code>reduce</code>,
+can often be accepted.
+However, reduce/reduce conflicts are usually more serious and need to be investigated carefully.</p>
+<p><a href="../?mode=bnf&amp;eg=10/04">Example 10/04</a>
+contains a grammar, hugely simplified,
+where an <code>expression</code> is based on a <code>condition</code> or arithmetic
+and where a <code>condition</code> is based on a comparison or arithmetic:</p>
+<pre class="prettyprint source"><code>expression: condition;
+expression: Number;
+condition: sum '&lt;' sum;
+sum: Number;
+</code></pre>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>. If not, click it until it does.</li>
+<li>Toggle <span class='t-states'></span> and
+press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Check the <span class='a-output'></span> to see the reduce/reduce conflict in state 1
+between the rules in line 2 and 4 above
+which is resolved in favor of the rule in line 2.</li>
+<li>Toggle <span class='t-parser'></span> or <span class='t-actions'></span> and</li>
+<li>press <span class='c-parse'></span> to confirm
+that a single <code>Number</code> such as <code>0</code> can be recognized.</li>
+<li>Move the last rule into second place and
+press <span class='c-new'></span> again
+to see that the conflict is now resolved in favor of that rule.</li>
+<li>Press <span class='c-parse'></span> to confirm
+that now a single <code>Number</code> such as <code>0</code> cannot be recognized:</li>
+</ul>
+<pre class="prettyprint source"><code>(0) $eof is not allowed
+expecting: '&lt;'
+irrecoverable error
+</code></pre>
+<h4 id="lr(1)">LR(1)</h4>
+<p>As a final note, the implementation discussed here is a <a href="https://en.wikipedia.org/wiki/Simple_LR_parser" title="SLR parser">simplification of Knuth's LR(1)</a>.
+<a href="module-BNF.html">BNF</a> was designed to illustrate the principle
+and to at least be capable of handling all the examples from the previous chapters.</p>
+<p>The idea of using the <code>follow</code> set of a rule's non-terminal
+to avoid some conflicts when the complete rule is processed
+is convenient but not as restrictive as possible.</p>
+<p>Each marked rule starts with a nonterminal in a known context
+and one could consider only those terminals which can follow in that context,
+i.e., each mark should include it's own <code>follow</code> set.
+This results in larger state tables but potentially fewer conflicts
+and, therefore, more grammars which are suitable for LR(1) parsing.</p>
+<h3 id="precedence-and-associativity">Precedence and Associativity</h3>
+<p>The LL(1) grammar for <a href="tutorial-06-compile.html#immediate-evaluation">interpreting arithmetic expressions</a>
+written in EBNF was a bit cumbersome.
+Operator associativity had to be implemented in the semantic actions, not in the grammar itself.</p>
+<p><a href="../?eg=10/05&amp;mode=stack">Example 10/05</a> contains a more convenient grammar:</p>
+<pre class="prettyprint source"><code>sum:      product | add | subtract;
+add:      sum '+' product;
+subtract: sum '-' product;
+product:  factor | multiply | divide;
+multiply: product '*' factor;
+divide:   product '/' factor;
+factor:   power | term;
+power:    term '**' factor;
+term:     number | '(' sum ')';
+number:   Number;
+</code></pre>
+<p>This time,
+left associativity for <code>sum</code> and <code>product</code> is expressed through left recursion,
+right associativity for <code>power</code> is expressed through right recursion.
+Operator precedence is encoded into the grammar
+because the non-terminals <code>sum</code>, <code>product</code>, <code>factor</code>, and <code>term</code> establish appropriate levels.</p>
+<p>Both, <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent">recursive descent</a> and the stack-based parser,
+can apply an action when a rule is reduced.
+The <a href="#translating-ebnf">translation from EBNF to BNF</a>
+does not change the structures which are presented to the action.
+As a result,
+actions for immediate evaluation with this grammar are very intuitive, for example:</p>
+<pre class="prettyprint source"><code>class Actions {
+  // sum: product | add | subtract;
+  sum (value) { return value; }
+ 
+  // add: sum '+' product;
+  add (sum, x, product) { return sum + product; }
+    ...
+  // term: number | '(' sum ')';
+  term (... arg) {
+    return arg.length > 1 ? arg[1] : arg[0];
+  }
+  
+  // number: Number;
+  number (number) { return parseInt(number, 10); }
+}
+</code></pre>
+<p>Here is an expression which produces <code>2</code> as a result:</p>
+<pre class="prettyprint source"><code> 1 + 2*3 - 45/(1 + 2**3**2 / 4**3)
+</code></pre>
+<p>The grammar in <a href="../?eg=10/05&amp;mode=stack">example 10/05</a> uses EBNF notation
+— because <code>|</code> is used to separate alternatives —
+but the grammar is left recursive and has to be processed using the stack-based parser:</p>
+<ul>
+<li>The very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to translate the grammar from EBNF to BNF, represent, and check it.</li>
+<li>Press <span class='c-parse'></span> to recognize and evaluate the
+expression in the <span class='a-program'></span>.</li>
+<li>Toggle <span class='t-parser'></span> and</li>
+<li>press <span class='c-parse'></span> again to observe evaluation.</li>
+</ul>
+<p>The actions for
+<code>sum</code>, <code>product</code>, <code>factor</code>, and <code>term</code>, each, receive one or three values
+and each action just extracts and returns the appropriate value.</p>
+<p>The actions for
+<code>add</code>, <code>subtract</code>, etc., each, receive two values, separated by an operator,
+perform immediate evaluation, and return the result.</p>
+<p>None of the actions has to deal with associativity or precedence.</p>
+<p>Yet another grammar for arithmetic expressions, in <a href="../?eg=10/06&amp;mode=stack">example 10/06</a>,
+is as short as it can get</p>
+<pre class="prettyprint source"><code>expr:     add | subtract | multiply | divide | power
+          | '(' expr ')' | number;
+add:      expr '+' expr;
+subtract: expr '-' expr;
+multiply: expr '*' expr;
+divide:   expr '/' expr;
+power:    expr '**' expr;
+number:   Number;
+</code></pre>
+<p>but this grammar lacks any information about operator precedence and associativity.</p>
+<ul>
+<li>The very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to translate the grammar to BNF and try to represent and check it.</li>
+<li>Unfortunately, there are 25 shift/reduce conflicts...</li>
+</ul>
+<p>Following <a href="https://en.wikipedia.org/wiki/Yacc" title="yacc">yacc</a>,
+precedence and associativity are specified in <a href="../?eg=10/07&amp;mode=stack">example 10/07</a>
+as a sequence of precedence levels preceding the grammar rules:</p>
+<pre class="prettyprint source"><code>%left '+' '-';
+%left '*' '/';
+%right '**';
+
+expr:     add | subtract | multiply | divide | power
+  ...
+</code></pre>
+<p>Precedence increases in the order of the level statements.
+Each level statement contains one or more terminal symbols.
+Terminal symbols in the same level statement have the same precedence and associativity.
+A precedence level can also start with <code>%nonassoc</code> to suppress associativity, e.g., for comparison operators.</p>
+<p>The grammar rules remain unchanged for <a href="../?eg=10/07">example 10/07</a>
+but the precedences make no sense in the context of recursive descent:</p>
+<ul>
+<li>The very first button should show <span class='t-mode'></span>. If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar. Note that
+precedences are not allowed for recursive descent.</li>
+<li>Click the very first button until it shows <span class='t-mode stack'></span>.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar. Note that
+there are no more conflicts <em>reported</em>.</li>
+<li>Press <span class='c-parse'></span> to confirm
+that the expression in the <span class='a-program'></span> can be recognized and evaluated.</li>
+<li>Toggle <span class='t-parser'></span> and</li>
+<li>press <span class='c-parse'></span> again to observe evaluation
+as a result of the <code>reduce</code> messages.</li>
+</ul>
+<h4 id="principles">Principles</h4>
+<p>Consider the grammar</p>
+<pre class="prettyprint source"><code>expr: expr 'a' expr;
+expr: expr 'b' expr;
+expr: Number; 
+</code></pre>
+<p>and the input</p>
+<pre class="prettyprint source"><code>1 a 2 b 3
+</code></pre>
+<p>and two trees which could be built
+to suggest that <code>a</code> and <code>b</code> are mathematical operations
+on the inputs <code>1</code>, <code>2</code>, and <code>3</code>:</p>
+<div>
+  <table style='width: 100%; margin: 1em auto'>
+    <col style='width: 50%'>
+    <col style='width: 50%'>
+    <tr>
+      <td style='text-align: center'> <img src='10/left.svg' alt='left'> </td>
+      <td style='text-align: center'> <img src='10/right.svg' alt='right'> </td>
+    </tr>
+  </table>
+</div>
+<p>The left tree suggests that operator <code>a</code> has precedence over <code>b</code>,
+e.g., multiplication happens before addition,
+or — for equal precedence — that <code>a</code> is left-associative,
+e.g., addition and subtraction happen from left to right.</p>
+<p>The right tree suggests that operator <code>b</code> has precedence over <code>a</code>,
+or — for equal precedence — that <code>b</code> is right-associative,
+e.g., exponentiation or assignment happen from right to left.</p>
+<p>What happens if creating the state table has reached the following point:</p>
+<pre class="prettyprint source"><code>expr a expr  ●  b
+</code></pre>
+<p>Rule 1 in the grammar above is complete, and it can be followed by terminal <code>b</code>.</p>
+<p>The left tree can be built if rule 1 is reduced first,
+the right tree requires a <code>shift</code> of <code>b</code> so that rule 2 can be reduced first.</p>
+<p><a id='precedence-cases'></a>Therefore:</p>
+<ol>
+<li>
+<p>If the last terminal in a complete rule (<code>a</code>) has higher precedence than
+the &quot;follow&quot; terminal (<code>b</code>), the rule should be reduced.</p>
+</li>
+<li>
+<p>If the last terminal in a complete rule has lower precedence than
+the &quot;follow&quot; terminal, there should be a <code>shift</code>.</p>
+</li>
+<li>
+<p>If the last terminal in a complete rule and the &quot;follow&quot; terminal
+have equal precedence,
+the rule should be reduced if the last terminal is left-associative, and
+there should be a <code>shift</code> if the last terminal is right-associative.</p>
+</li>
+<li>
+<p>Otherwise, i.e., with equal precedence and no associativity, there remains a shift/reduce conflict.</p>
+</li>
+</ol>
+<p>This will be implemented <a href="#conflict-resolution">below</a>.</p>
+<h4 id="hiding-conflicts">Hiding Conflicts</h4>
+<p>It should be noted that precedences <em>hide</em> conflicts,
+but they are a natural way to implement arithmetic.
+It is usually a good idea to check the state table before and after
+adding precedence information to make sure the precedences have the intended effect.</p>
+<p><a href="../?eg=10/08&amp;mode=bnf">Example 10/08</a> is a &quot;dangling else&quot; without a visible conflict:</p>
+<pre class="prettyprint source"><code>%right 'else';
+
+statement: 'if' Number statement %prec 'else';
+statement: 'if' Number statement 'else' statement;
+statement: Number;
+</code></pre>
+<p>A BNF rule can include a trailing <code>%prec</code> clause to specify precedence and associativity explicitly
+by referencing a terminal on a precedence level defined earlier (lines 3 and 1 above).</p>
+<p>For this grammar there is no message about the
+<a href="#shift-reduce-conflict">shift/reduce conflict demonstrated earlier</a> and
+state 5 shows that this state table will still reduce <code>else</code> with the closest <code>if</code>:</p>
+<pre class="prettyprint source"><code>state 5
+  statement: 'if' Number statement ● %prec 'else';
+  statement: 'if' Number statement ● 'else' statement %prec 'else';
+  
+  $eof         reduce (statement: 'if' Number statement %prec 'else';)
+  'else'       shift 6
+</code></pre>
+<p>It is tempting to think that changing <code>%right</code> to <code>%left</code> would reduce <code>else</code> with an outer <code>if</code>
+but in fact the change renders the grammar useless:</p>
+<pre class="prettyprint source"><code>rule 2 is never reduced
+  ...
+state 5
+  statement: 'if' Number statement ● %prec 'else';
+  statement: 'if' Number statement ● 'else' statement %prec 'else';
+  
+  $eof         reduce (statement: 'if' Number statement %prec 'else';)
+  'else'       reduce (statement: 'if' Number statement %prec 'else';)
+
+errors: 1
+</code></pre>
+<p>Now the second grammar rule is never reduced,
+i.e., input cannot contain <code>else</code>.</p>
+<p>Actually, we are in case (3) <a href="#precedence-cases">described above</a>.
+The <code>%prec</code> clause assigns the same precedence to the rule
+which the &quot;follow&quot; terminal <code>else</code> has.
+Right associativity will cause a <code>shift</code> in this case,
+i.e., <code>else</code> will be reduced with the innermost <code>if</code>.</p>
+<h4 id="ebnf-and-precedence">EBNF and Precedence</h4>
+<p>The state table is computed for a BNF grammar —
+or for an EBNF grammar internally translated into BNF.
+How should a <code>%prec</code> clause apply to EBNF to be translated to BNF?</p>
+<p>The clause must always apply to a single BNF rule.
+EBNF brackets and braces have to be translated into several BNF rules
+because each BNF rule can only contain one symbol sequence.
+This suggests that a <code>%prec</code> clause
+can only apply to a symbol sequence in EBNF,
+i.e., to one (of perhaps several) alternatives.</p>
+<p><a href="../?eg=10/09&amp;mode=stack">Example 10/09</a> is a small but useful example
+which shows how to add a unary minus to the arithmetic example
+<a href="#precedence-and-associativity">discussed above</a>:</p>
+<pre class="prettyprint source"><code>%left '-';
+
+expr:     subtract | minus | number;
+subtract: expr '-' expr;
+minus:    '-' expr;
+number:   Number;
+</code></pre>
+<p>With the additional semantic action</p>
+<pre class="prettyprint source"><code>class Actions09 extends Ten.Actions07 {
+  minus (x, a) { return - a; }
+}
+</code></pre>
+<p>this will get <code>1</code> as the result of evaluating</p>
+<pre class="prettyprint source"><code>-1 -- 2
+</code></pre>
+<p>The grammar enforces that the unary minus has precedence over the binary minus.
+Without a precedence level the grammar is ambiguous.
+<code>%left</code> defines associativity for binary minus and settles the conflicts;
+replacing <code>%left</code> by <code>%right</code> would cause a chain of subtractions to be evaluated right to left.
+Unary minus only &quot;fits&quot; the grammar at an implicitly higher precedence.</p>
+<p><a href="../?eg=10/10&amp;mode=stack">Example 10/10</a> adds another precedence level
+and a <code>%prec</code> clause to the EBNF grammar:</p>
+<pre class="prettyprint source"><code>%right Number;
+%left '-';
+
+expr:     subtract | minus | number;
+subtract: expr '-' expr;
+minus:    '-' expr %prec Number;
+number:   Number;
+</code></pre>
+<p>This — deliberately —
+gives the unary minus <em>less</em> precedence than the binary minus.
+The same input now evaluates to <code>-3</code>.</p>
+<p>It is instructive to trace both evaluations. With the rule <code>%prec</code> clause,</p>
+<pre class="prettyprint source"><code>5  (0) $eof         reduce  expr: minus;             -3
+</code></pre>
+<p>is the last <code>reduce</code> message, without it it is</p>
+<pre class="prettyprint source"><code>4  (0) $eof         reduce  expr: subtract;          1
+</code></pre>
+<p>i.e., with lower precedence <code>minus</code> is the last operation,
+with higher precedence for <code>minus</code> the subtraction is last.</p>
+<p>Both examples are EBNF grammars because they contain alternatives for <code>expr</code>,
+but both require the stack-based parser because of the precedence levels.</p>
+<p>The <code>%prec</code> clause is not applied to an EBNF rule —
+which can have several alternatives —
+but to a symbol sequence such as <code>'-'</code> <code>expr</code>.
+<a href="../?eg=10/11&amp;mode=stack">Example 10/11</a> takes this to an extreme:</p>
+<pre class="prettyprint source"><code>%right Number;
+%left '-';
+
+expr: expr '-' expr | 
+      '-' expr %prec Number |
+      Number;
+</code></pre>
+<p>The action for this one-line grammar is just based on the number of arguments:</p>
+<pre class="prettyprint source"><code>class Actions {
+  expr (... arg) {
+    switch (arg.length) {
+    case 3: return arg[0] - arg[2];
+    case 2: return - arg[1];
+    case 1: return parseInt(arg[0], 10);
+    }
+  }
+}
+</code></pre>
+<p>Why use <code>Number</code> in the precedence level statement for this example?
+All that is required is to connect the unary minus with a <code>%prec</code> clause
+to a terminal symbol which is — for fun — on a level below binary minus.
+Assigning a precedence to <code>Number</code> through a level statement
+does not affect the state table and does not introduce a new, otherwise unused terminal symbol.</p>
+<p>Trick question: without a <code>%prec</code> clause and without changes to the grammar structure, how can</p>
+<pre class="prettyprint source"><code>-1 -- 2 ---- 4
+</code></pre>
+<p>be evaluated as either <code>-7</code> or <code>5</code>?</p>
+<h4 id="conflict-resolution">Conflict Resolution</h4>
+<p><a href="module-Base-Precedence.html"><code>Precedence</code></a> objects
+represent precedence levels and contain associativity and a list of terminals
+which are at the same level of precedence.
+<code>Grammar</code> objects for either <a href="module-EBNF.html">EBNF</a> or <a href="module-BNF.html">BNF</a> contain
+a list of <a href="module-Base-Precedence.html"><code>Precedence</code></a> objects
+in order of increasing precedence;
+for <a href="module-EBNF.html">EBNF</a> they can only be used when translating to <a href="module-BNF.html">BNF</a>.</p>
+<p><a href="module-BNF-Lit.html"><code>BNF.Lit</code></a> and <a href="module-BNF-Token.html"><code>BNF.Token</code></a> objects,
+<a href="module-EBNF-Seq.html"><code>EBNF.Seq</code></a> and
+<a href="module-BNF-Rule.html"><code>BNF.Rule</code></a> objects
+can have a <code>.prec</code> property with similar information
+which can be set up during construction
+because the precedence table has to precede the rules of a grammar.</p>
+<p>The Grammars' Grammars for <a href="module-EBNF-Grammar.html#.ebnf">EBNF</a> and <a href="module-BNF-Grammar.html#.bnf">BNF</a>
+contain the appropriate syntax and the bootstrap process described in <a href="tutorial-09-bootstrap.html">chapter nine</a>
+includes the necessary actions to create the representations.</p>
+<p>Thus, the stage is set to resolve some conflicts.
+They are detected when there are complete rules
+and <code>reduce</code> messages are about to be entered into the <code>messages</code> table for a state.
+Recall the code structure in the <a href="module-BNF-State.html#advance"><code>advance()</code></a> method
+<a href="#conflicts">set up above</a>:</p>
+<pre class="prettyprint source"><code>advance (stateNumber) {
+                       // create reduce messages for complete rules
+  this.marks.forEach(mark => {
+    if (mark.complete) {
+      const rule = mark.rule;                     // rule we are in
+      // for each terminal which can follow the rule in the grammar
+      for (let t in rule.nt.follow) {             // ordinal number
+        const f = rule.nt.follow[t];   // terminal which can follow
+        if (!(t in this.messages)) {
+             // if t is not in messages it cannot follow this state
+          ...                              // create reduce message
+        } else if (this.messages[t] == null) {
+            // if t is in messages -- there might be a s/r conflict
+          ...                                    // explained below
+        } else {
+          ...   // t already set as a reduce -- report r/r conflict
+        }                                       // done with this t
+      }                       // done with every t which can follow
+    }                                    // done with complete mark
+  }, this);                                  // done with all marks
+                         // create shift messages, next state, etc.
+</code></pre>
+<p>Recall that <code>rule</code> is complete, ready to be reduced (line 5 above),
+<code>f</code> is one of the &quot;follow&quot; terminals (line 8),
+<code>t</code> is it's key in <code>messages</code> (line 7),
+and a message has not yet been entered (line 9).</p>
+<p>If both, rule and &quot;follow&quot; terminal, actually have a precedence
+the shift/reduce conflict can be resolved
+with the following code inserted above (at line 14):</p>
+<pre class="prettyprint source"><code>            // if t is in messages -- there might be a s/r conflict
+          if (rule.prec && f.prec.assoc) {  
+                       // rule and terminal have defined precedence
+            if (rule.prec.level > f.prec.level) {
+                           // rule's precedence is higher -> reduce
+              ...
+            } else if (rule.prec.level &lt; f.prec.level) {
+             // rule's precedence is lower -> fall through to shift
+            } else                              // equal precedence
+              switch (rule.prec.assoc) {
+              case '%left':   // rule is left-associative -> reduce
+                ...
+              case '%right':  // rule is right-associative -> shift
+                break;                              // fall through
+              case '%nonassoc':         // non-associative -> error
+                delete this.messages[t];
+                               // i.e. f as input would be an error
+              }
+          } else {
+                // no precedence available -- shift/reduce conflict
+            ...
+          }                   // resolved as a shift (fall through)
+</code></pre>
+<p>Conflict resolution through precedences is implemented
+just as the <a href="#principles">principles above</a> require.
+In order to concentrate on the overall structure,
+calls on the factory methods for the messages
+and insertion in the state's <code>messages</code> table
+have been omitted in the code above.
+The complete code can be viewed from the documentation of the
+<a href="module-BNF-State.html#advance"><code>advance()</code></a> method.</p>
+<h3 id="recognition">Recognition</h3>
+<p>Given a state table owned by a <a href="module-BNF-Grammar.html"><code>Grammar</code></a> object,
+how is input recognized,
+how are values collected and presented to any <a href="module-Base.html#~Action"><code>Action</code></a> methods,
+and what needs to be done so that a recursive descent parser
+and a stack-based parser,
+both derived from the same EBNF grammar,
+can interact with the exact same <a href="module-Base.html#~Action"><code>Action</code></a> methods?</p>
+<p>Recognition starts with a <a href="module-BNF-Parser.html"><code>Parser</code></a> object
+which is constructed by the <a href="module-BNF-Grammar.html"><code>Grammar</code></a> object
+and owns a state stack
+which is simply a list of indices into the <a href="module-BNF-Grammar.html"><code>Grammar</code></a>'s list of states.
+The current state is the top element on the stack;
+therefore the stack initially contains just one element with value zero.</p>
+<h4 id="%7B%40linkcode-module%3Abnf~parser%23parse-parse()%7D"><a href="module-BNF-Parser.html#parse"><code>parse()</code></a></h4>
+<p>The <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> method takes a list of
+<a href="module-Base-Tuple.html"><code>Tuple</code></a> objects which a
+<a href="module-Base-Scanner.html"><code>Scanner</code></a> can prepare from a string.
+<code>null</code> in the list represents the end of all input, i.e., <code>$eof</code>;
+otherwise <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> is called again with more input.</p>
+<p><a href="module-BNF-Parser.html#parse"><code>parse()</code></a> executes a loop which can be aborted:</p>
+<pre class="prettyprint source"><code>try {
+  while (true) {
+    if (!this.current) this.next();          // lookahead as needed
+    if (this.current.t                           // expected input?
+        && this.current.t.ord in this.state.messages) {
+      if (this.process(this.current))
+        this.next();                                    // consumed
+    } else                 // illegal character or unexpected input
+      this.recover();
+  }
+} catch (outcome) {
+  if (outcome instanceof Array) return outcome[0];       // success
+  throw outcome;                 // true: more input, else: failure
+}
+</code></pre>
+<p><code>this.current</code> is a <a href="module-Base-Tuple.html"><code>Tuple</code></a>
+representing the current input terminal
+and <a href="module-BNF-Parser.html#next"><code>next()</code></a> is called to move along —
+just not beyond <code>null</code>, i.e., <code>$eof</code>.
+By convention, <a href="module-BNF-Parser.html#next"><code>next()</code></a> throws <code>true</code>
+to request more input.</p>
+<p>If there is a message for the current input terminal
+in the current state <a href="module-BNF-Parser.html#process"><code>process()</code></a>
+executes the message for the <a href="module-Base-Tuple.html"><code>Tuple</code></a> and returns <code>true</code>
+if the terminal should be consumed, i.e., after a <code>shift</code> message (line 6 above).
+<code>false</code> would protect the terminal for another round, i.e., after <code>reduce</code> plus <code>goto</code>.</p>
+<p>If there is no message the input is not expected and
+<a href="module-BNF-Parser.html#recover"><code>recover()</code></a> gets a chance to
+arrange for the loop to continue <a href="#error-recovery">as discussed below</a> (line 9).</p>
+<p>If a value, wrapped into an <code>Array</code>, is thrown
+<a href="module-BNF-Parser.html#parse"><code>parse()</code></a> would unwrap and return it (line 12) —
+this is a hook for an observer to return a value from a semantic action.
+Any other <code>throw</code> (but <code>true</code>) will terminate recognition ungracefully (line 13).</p>
+<h4 id="%7B%40linkcode-module%3Abnf~parser%23process-process()%7D"><a href="module-BNF-Parser.html#process"><code>process()</code></a></h4>
+<p>The <a href="module-BNF-Parser.html#process"><code>process()</code></a> method
+accepts an input <a href="module-Base-Tuple.html"><code>Tuple</code></a>,
+finds a message, if any,
+offers it to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>,
+and manages the state stack:</p>
+<pre class="prettyprint source"><code>process (tuple) {
+                                 // get message and inform observer
+  const verb = this.state.messages[tuple.t.ord].message,
+    info = this.state.messages[tuple.t.ord].info,
+    result = this.observe(tuple, verb, info);
+  switch (verb) {                               // dispatch message
+  case 'accept':
+    throw [ result ];                    // parse ends with success
+  case 'shift':
+    this.stack.push(info);                    // shift to new state
+    return true;                               // tuple is consumed
+  case 'reduce':
+          // pop the stack by the length of the rule, uncover state
+    this.stack.length -= info.symbols.length;
+                // there always follows a goto for the non-terminal
+    const g = this.state.messages[info.nt.ord];
+    this.observe(tuple, g.message, g.info);     // observe the goto
+    this.stack.push(g.info);                   // goto to new state
+    return false;                          // tuple still available
+  }
+}
+</code></pre>
+<p>The message is obtained from the current state (lines 3 and 4 above) and
+a call to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>
+with the message produces a result (line 5).
+As <a href="#the-architecture">described above</a>
+<a href="module-BNF-Parser.html#observe"><code>observe()</code></a>
+will invoke an <a href="module-Base.html#~Action"><code>Action</code></a> method, if there is one,
+or return the result <code>null</code> so that there always is a value.</p>
+<p>If the message is <code>accept</code> the result is wrapped into an <code>Array</code> and thrown (line 8),
+to be returned from <a href="module-BNF-Parser.html#parse"><code>parse()</code></a>.</p>
+<p>For <code>shift</code> the message contains the next state which is pushed
+and the input terminal will be consumed (lines 10 and 11).</p>
+<p>For <code>reduce</code> the message references the rule so that the
+state stack can be popped (line 14).
+In addition, a <code>goto</code> for the non-terminal
+is sent to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>
+and the corresponding state is pushed (lines 17 and 18).
+In this case the input terminal is not consumed (line 19).</p>
+<h4 id="%7B%40linkcode-module%3Abnf~parser%23observe-observe()%7D"><a href="module-BNF-Parser.html#observe"><code>observe()</code></a></h4>
+<p>The <a href="module-BNF-Parser.html#observe"><code>observe()</code></a> method
+accepts a <a href="module-Base-Tuple.html"><code>Tuple</code></a> and the corresponding message,
+asks the <a href="module-BNF-Parser.html#build"><code>build()</code></a> method to compute a result in place of <code>null</code>
+if <a href="module-BNF-Grammar.html"><code>Grammar.config.build</code></a> is set
+or if <a href="module-Base.html#~Action"><code>Action</code></a> methods were supplied in the first call
+to <a href="module-BNF-Parser.html#parse"><code>parse()</code></a>,
+asks the <a href="module-BNF-Parser.html#trace"><code>trace()</code></a> method to create and display a trace
+if the configuration option <a href="module-BNF-Grammar.html"><code>Grammar.config.trace</code></a> is set,
+and displays an error message if the incoming message is <code>error</code> with non-empty information.</p>
+<p><a href="module-BNF-Parser.html#observe"><code>observe()</code></a>,
+<a href="module-BNF-Parser.html#build"><code>build()</code></a>,
+and <a href="module-BNF-Parser.html#trace"><code>trace()</code></a>
+are deliberate hooks for subclassing at different levels.
+For example,
+<a href="https://en.wikipedia.org/wiki/Yacc" title="yacc">yacc</a>
+and
+<a href="https://en.wikipedia.org/wiki/GNU_Bison" title="bison">bison</a>
+have a significantly different approach to collecting input
+and presenting it to semantic actions
+because they do not have to accommodate <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">EBNF</a>.</p>
+<h4 id="%7B%40linkcode-module%3Abnf~parser%23build-build()%7D"><a href="module-BNF-Parser.html#build"><code>build()</code></a></h4>
+<p><a href="tutorial-05-lists.html">Chapter five</a> explained how
+the recursive descent parser collects recognized input into nested lists
+which can be processed by <a href="module-Base.html#~Action"><code>Action</code></a> methods, if any.
+Similarly, the stack-based parser can use <a href="module-Base.html#~Action"><code>Action</code></a> methods
+if an observer collects input in response to <code>shift</code> messages and
+calls actions in response to <code>reduce</code> messages.</p>
+<p><a id='reduce-case'></a>
+When the <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> method is first called,
+if the <a href="module-BNF-Grammar.html"><code>Grammar.config.build</code></a> configuration option is set
+or if <a href="module-Base.html#~Action"><code>Action</code></a> methods are supplied
+a <code>value</code> stack is added to the <a href="module-BNF-Parser.html"><code>Parser</code></a>.
+The <a href="module-BNF-Parser.html#build"><code>build()</code></a> method
+accepts a <a href="module-Base-Tuple.html"><code>Tuple</code></a> and the corresponding message,
+manages the value stack to parallel the state stack,
+and presents values to <a href="module-Base.html#~Action"><code>Action</code></a> methods, if any,
+to potentially change the result of <code>reduce</code> messages:</p>
+<pre class="prettyprint source"><code>build (tuple, verb, info) {
+  switch (verb) {
+  case 'shift':                        // shift: collect input text
+    this.values.push(tuple.value);
+    return null;
+  case 'reduce':                      // reduce: pop by rule length
+    const len = info.symbols.length;
+    let result = this.values.splice(- len, len);       // can be []
+    result = this.act(info.nt.name, result); // apply action if any
+    this.values.push(result);       // goto (follows!): push result 
+    return result;
+  case 'accept':             // accept: return result of start rule
+    return this.values.pop();
+  }                          // actual goto can be silently ignored
+}
+</code></pre>
+<p><a href="module-BNF-Parser.html#build"><code>build()</code></a> is called with
+the current input <code>tuple</code> and <code>verb</code> and <code>info</code> of the message triggered by the state and the input.</p>
+<p>A <code>shift</code> message indicates that the parser transitions
+to a new state in response to some input and
+<a href="module-BNF-Parser.html#build"><code>build()</code></a> pushes the input
+onto the value stack for the stacks to stay in sync (line 4 above).</p>
+<p>A <code>reduce</code> message indicates that a rule has been completed and
+<a href="module-BNF-Parser.html#build"><code>build()</code></a> has to pop values off the value stack to keep it in sync.
+The extra <code>info</code> references the rule to be reduced.
+The rule's number of symbols (line 7)
+determines how many values have to be popped off the value stack (line 8)
+to be presented to an <a href="module-Base.html#~Action"><code>Action</code></a> method, if any (line 9).
+Either the list of values or the result of the action
+is returned for <code>reduce</code> (line 11)
+and pushed as value associated with the immediately following <code>goto</code> message (line 10)
+which itself will be silently ignored (line 14).</p>
+<p>The method <a href="module-Base-Parser.html#act"><code>act()</code></a> (line 9) is shared
+between the recursive descent and the stack-based parser.
+It takes a rule name and a list of values collected for the rule
+and tries to find and execute an action method with the rule name.
+<a href="module-Base-Parser.html#act"><code>act()</code></a> returns the result of the action method
+or the list of values.</p>
+<p>An <code>accept</code> message indicates that the parser is done and
+<a href="module-BNF-Parser.html#build"><code>build()</code></a> pops the top value off the value stack and returns it.
+Eventually, <a href="module-BNF-Parser.html#process"><code>process()</code></a>
+sends it back as the <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> method's result value.
+Success!</p>
+<h3 id="translating-ebnf">Translating EBNF</h3>
+<p>The <a href="module-BNF-Parser.html#build"><code>build()</code></a> method
+seems to produce nested lists just like the recursive descent parser does.
+However, <a href="../?eg=10/12&amp;mode=bnf">example 10/12</a> shows that there is a problem:</p>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Toggle <span class='t-build bnf'></span> and</li>
+<li>press <span class='c-parse'></span> to see the result.</li>
+</ul>
+<p>This BNF grammar uses left recursion to specify that a sentence should consist of one or more sequences,
+where a sequence consists of <code>a</code>, an optional <code>b</code>, and <code>c</code>:</p>
+<pre class="prettyprint source"><code>some: seq;
+some: some seq;  
+seq: 'a' opt 'c';
+opt: 'b';
+opt: ;
+</code></pre>
+<p>This program consists of two sequences:</p>
+<pre class="prettyprint source"><code>a b c
+a c
+</code></pre>
+<p>Here is the output, reformatted for clarity:</p>
+<pre class="prettyprint source"><code>[ 
+  [ [ 'a' [ 'b' ] 'c' ] ]
+    [ 'a' [     ] 'c' ]
+]
+</code></pre>
+<p>By default, the observer creates a list whenever a rule is reduced,
+i.e., rule 4 (above) will return a list containing <code>b</code> and rule 5 will return an empty list.
+Note that the recursive descent parser will instead return <code>null</code>
+when there is no input for an optional alternative — which is enclosed in brackets in the EBNF notation.</p>
+<p>Rule 3 returns a list when a sequence is found —
+these are the brackets directly around the sequences in the output above.
+Rule 1 returns a list containing the list with the first sequence ever
+and rule 2 creates yet another — outermost — list whenever another sequence is found.
+The <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>some</code> would have to count arguments to know
+which of the two rules for <code>some</code> is reduced in order to process it's arguments correctly.</p>
+<p>The EBNF grammar in <a href="../?eg=10/13">example 10/13</a></p>
+<pre class="prettyprint source"><code>some: { 'a' [ 'b' ] 'c' };
+</code></pre>
+<p>accepts the same input with two sequences shown above
+but it produces a more uniform output (reformatted for clarity):</p>
+<pre class="prettyprint source"><code>[
+  [
+    [ 'a' [ 'b' ] 'c' ]
+    [ 'a'   null  'c' ] 
+  ] 
+]
+</code></pre>
+<p>This is independent of the choice of parser:</p>
+<ul>
+<li>The very first button should show <span class='t-mode'></span>. If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the result
+for the recursive descent parser.</li>
+<li>Click the very first button to show <span class='t-mode stack'></span>,</li>
+<li>press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see that the stack-based parser
+produces the same result.</li>
+</ul>
+<p>A BNF grammar expresses alternatives as rules with the same non-terminal at left.
+EBNF uses <code>|</code> to separate alternatives and insists on unique non-terminals as rule names.
+Additionally, EBNF uses brackets for optional alternatives
+and braces for alternatives which can be repeated.</p>
+<p>The EBNF rule in <a href="../?eg=10/13">example 10/13</a>
+produces a list for the selected alternative.
+The braces produce a list containing one inner list
+for each alternative that was recognized.
+The brackets produce <code>null</code> or a list for the recognized alternative.</p>
+<p>The two examples together hint at the translation from EBNF to BNF
+which the factory method <a href="module-BNF-Grammar.html#.fromEBNF"><code>BNF.Grammar.fromEBNF()</code></a> implements.
+<a href="../?eg=10/14&amp;mode=stack">Example 10/14</a> combines the two grammars and (almost) allows direct comparison
+between automatic and manual translation:</p>
+<pre class="prettyprint source"><code>cases: ebnf bnf;
+
+ebnf:  'ebnf' { 'a' [ 'b' ] 'c' };
+
+bnf:   'bnf' ebnf4;
+
+ebnf4: ebnf5 | ebnf4 ebnf5;
+ebnf5: 'a' ebnf6 'c';
+
+ebnf6: | 'b';
+</code></pre>
+<p>The two <code>cases</code> in this EBNF grammar accept the same sequences as before,
+prefixed with <code>ebnf</code> or <code>bnf</code> to select different rule sets for recognition.</p>
+<p>The <code>ebnf</code> rule uses braces and brackets for iteration and the optional part (line 3 above).</p>
+<p>The <code>bnf</code> rule (line 5) uses
+the left-recursive <code>ebnf4</code> rules to express iteration of one or more sequences (line 7),
+the <code>ebnf5</code> rule to express the sequence itself (line 8)
+— i.e., the single alternative enclosed by the braces in the <code>ebnf</code> rule —
+and the <code>ebnf6</code> rules (line 10) to express the optional <code>b</code>
+— i.e., the enclosed alternative and the brackets in the <code>ebnf</code> rule.</p>
+<p>Preparing the grammar in <a href="../?eg=10/14&amp;mode=stack">Example 10/14</a> shows (more or less)
+that the manual translation
+agrees with the translation performed for the stack-based parser:</p>
+<ul>
+<li>The very first button should show <span class='t-mode stack'></span>. If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>The error is due to the fact that EBNF does not permit empty alternatives
+— regardless of parser. Remove the empty alternative of the <code>ebnf6</code> rule and</li>
+<li>press <span class='c-new'></span> again to represent and check the grammar.</li>
+</ul>
+<p>The BNF rules can be found near the beginning of the <span class='a-output'></span>:</p>
+<pre class="prettyprint source"><code>0 $accept: cases $eof;
+1 cases: ebnf bnf;
+2 $-6: ;
+3 $-6: 'b';
+4 $-5: 'a' $-6 'c';
+5 $-4: $-5;
+6 $-4: $-4 $-5;
+7 ebnf: 'ebnf' $-4;
+  ...
+</code></pre>
+<p>Technically, special characters cannot be part of non-terminal names in
+either grammar notation — they are used internally for BNF rule zero
+and for the additional rules resulting from the translation.
+BNF rule 2 (above) is simply copied from EBNF (line 1 below),
+BNF rules 2 to 7 are the translation of the <code>ebnf</code> rule (line 3 below).
+Rules 2 and 3 take care of the brackets (compare to line 5),
+rules 5 and 6 take care of the iteration with rule 4 for the content (compare to lines 6 and 7).
+Altogether, the BNF rules are the same as the explicit manual translation in the example's (almost) EBNF grammar:</p>
+<pre class="prettyprint source"><code>cases: ebnf bnf;
+
+ebnf:  'ebnf' { 'a' [ 'b' ] 'c' };
+  ...
+ebnf6: | 'b';
+ebnf5: 'a' ebnf6 'c';
+ebnf4: ebnf5 | ebnf4 ebnf5;
+</code></pre>
+<p>The translation of brackets and braces from EBNF to BNF according to the pattern suggested above
+requires additional BNF rules which should result in more deeply nested lists to be built.
+Why can the stack-based parser turn out the same lists
+as the recursive descent parser?</p>
+<p>There have to be hidden actions which happen when the additional rules are reduced.
+The <code>reduce</code> case implemented in
+the <a href="module-BNF-Parser.html#build"><code>build()</code></a> method
+turns out to be a bit more devious than shown <a href="#reduce-case">before</a>:</p>
+<pre class="prettyprint source"><code>  case 'reduce':                      // reduce: pop by rule length
+    const len = info.symbols.length;
+    let result = this.values.splice(- len, len);       // can be []
+    if (this.grammar.ebnf &&  // extra rule to translate from EBNF?
+        info.nt.name.startsWith(this.grammar.config.uniq)) {
+      if (len == 2 && info.symbols[0] === info.nt)  // left recurse
+        result.splice(0, 1, ...result[0]); // don't add one more []
+      else if (!len)        // return null if brackets find nothing
+        result = null;
+    } else                                 // rule copied from EBNF
+      result = this.act(info.nt.name, result);     // action if any
+    this.values.push(result);       // goto (follows!): push result 
+    return result;
+</code></pre>
+<p>Additional rules are only present if the BNF grammar is translated from EBNF
+(which is noted in a property <code>.ebnf</code> of the grammar).
+The names of the additional BNF rules will always start with a prefix
+which can be configured as <a href="module-BNF-Grammar.html"><code>Grammar.config.uniq</code></a>.
+Those rules cannot have explicit <a href="module-Base.html#~Action"><code>Action</code></a> methods
+because they only exist if the BNF grammar is translated from EBNF as shown above:</p>
+<pre class="prettyprint source"><code>0 $accept: cases $eof;
+</code></pre>
+<p>Rule 0 collects an extra list but the top-level <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> method
+corrects that implicitly.</p>
+<pre class="prettyprint source"><code>$-6: ;
+</code></pre>
+<p>Rules like the one above describe an optional alternative which recognizes nothing.
+If they are completed <code>null</code> must be returned rather
+than the empty list which was collected. This is taken care of in line 9 in the code above.</p>
+<pre class="prettyprint source"><code>$-6: 'b';
+$-5: 'a' $-6 'c';
+$-4: $-5;
+</code></pre>
+<p>Rules like these three above collect the same lists which the recursive descent parser collects
+for alternatives, even rules like the last one which recognizes the first iteration
+within braces.</p>
+<pre class="prettyprint source"><code>$-4: $-4 $-5;
+</code></pre>
+<p>This kind of a left-recursive rule handles further iterations of alternatives in braces.
+The rule pattern is recognized in line 6 in the code above
+and in line 7 the list collected for the second symbol is added (not appended!)
+to the list already collected by flattening this first list with the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">spread syntax</a>.</p>
+<p>All other completed rules will invoke the same actions as for the recursive descent parser.</p>
+<p>The hidden actions may look complicated but they preserve the
+<a href="tutorial-05-lists.html#idioms-for-actions">Idioms for Actions</a>
+described in chapter five which have worked well throughout.</p>
+<p>Representing structured input always requires some kind of list and tree building.
+Iteration constructs in the grammar and the hidden actions
+avoid the list manipulations which would otherwise be needed
+to accommodate iteration implemented as recursion.</p>
+<p>EBNF notation seems more convenient and the stack-based parser is more powerful.
+Thanks to the hidden actions this is a winning combination.</p>
+<h3 id="error-recovery">Error recovery</h3>
+<p>Most of the implementation of recognition was discussed <a href="#recognition">before</a>.
+The <a href="module-BNF-Parser.html#parse"><code>parse()</code></a> method executes the following loop:</p>
+<pre class="prettyprint source"><code>try {
+  while (true) {
+    if (!this.current) this.next();          // lookahead as needed
+    if (this.current.t                           // expected input?
+        && this.current.t.ord in this.state.messages) {
+      if (this.process(this.current))
+        this.next();                                    // consumed
+    } else                 // illegal character or unexpected input
+      this.recover();
+  }
+} catch (outcome) {
+  if (outcome instanceof Array) return outcome[0];       // success
+  throw outcome;                 // true: more input, else: failure
+}
+</code></pre>
+<p><code>this.current</code> is the next input symbol to be recognized, represented as a <a href="module-Base-Tuple.html"><code>Tuple</code></a>.
+<a href="module-BNF-Parser.html#next"><code>next()</code></a> is called to advance in the input (line 3 above).</p>
+<p><code>this.state</code> is the current parser state,
+i.e., the top value on the parser's stack,
+and <code>this.state.messages</code> maps the unique ordinal values of expected input symbols to messages (line 5).</p>
+<p><a href="module-BNF-Parser.html#process"><code>process()</code></a> is called (line 6) to
+send such a message to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>,
+change the parser state,
+and request to consume input or return a recognition result as appropriate.</p>
+<p><a href="module-BNF-Parser.html#recover"><code>recover()</code></a> is called (line 9) to handle
+unexpected inputs in order to continue recognition if possible.
+<a href="module-BNF-Parser.html#recover"><code>recover()</code></a> could:</p>
+<ul>
+<li>discard input, i.e., call <a href="module-BNF-Parser.html#next"><code>next()</code></a>, or</li>
+<li>pop parser states and perhaps tell <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>, or</li>
+<li>select a combination of these.</li>
+</ul>
+<p>Theoretically, expected input symbols could even be created and inserted;
+however, that might well result in a never ending recognition loop
+with a very long sentence-to-be...</p>
+<p><a href="module-BNF-Parser.html#recover"><code>recover()</code></a>
+first sends an <code>error</code> message to <a href="module-BNF-Parser.html#observe"><code>observe()</code></a>
+indicating (from the state table) which input symbols were expected:</p>
+<pre class="prettyprint source"><code>recover () {
+  const error = this.grammar.token(),       // unique symbol $error
+    eof = this.grammar.lit();                 // unique symbol $eof
+
+  this.observe(this.current, 'error',
+    `${this.current} is not allowed\nexpecting:` +
+    Object.entries(this.state.messages).reduce((s, kv) => s +=
+      kv[1].symbol instanceof Base.T && kv[1].symbol !== error ?
+        ' ' + kv[1].symbol : '', ''));
+</code></pre>
+<p>Next, illegal input characters are silently dropped:</p>
+<pre class="prettyprint source"><code>  while (!this.current.t)
+    this.next();          // next tuple, throws true for more input
+                          // now at tuple with $eof or actual input
+</code></pre>
+<p>Finally,
+<a href="module-BNF-Parser.html#recover"><code>recover()</code></a>
+has no choice but to pop the stack and/or to discard input.
+The choice can be fine tuned in the grammar:
+following <a href="https://en.wikipedia.org/wiki/Yacc" title="yacc">yacc</a>, there is a special <code>$error</code> token
+which can be used in rules
+to let a grammar have some control over error recovery.
+<code>$error</code> is used like any other token on the right-hand side of a rule
+and, therefore, ends up as a key in some <code>state.messages</code>:</p>
+<pre class="prettyprint source"><code>  pop: while (this.stack.length > 0) {
+    if (!(error.ord in this.state.messages)) { // $error unexpected
+      this.observe(this.current, 'error', null); // pop value stack
+      this.stack.pop();                          // pop state stack
+      continue;
+    }                                       // else $error expected
+    if (this.process(this.grammar.tuple(this.current.lineno, error)))
+      while (true)        // did shift $error, now search for input
+        if (this.current.t?.ord in this.state.messages) {
+          if (this.process(this.current)) {    // did shift current
+            this.#current = null;                        // consume
+            return;                  // recovery should be complete
+          }           // else did reduce+goto before current, retry
+        } else if (this.current.t === eof) {        // end of input
+          this.grammar.message('terminating at ' + this.current);
+          break pop;                              // cannot recover
+        } else {                // current is not expected: discard
+          this.grammar.message('discarding ' + this.current);
+          this.next();
+        }
+    //   else did reduce before $error, process $error again or pop
+  }
+  throw 'irrecoverable error';
+}
+</code></pre>
+<p>If <code>$error</code> is not expected in <code>state.messages</code> (line 2 above)
+<a href="module-BNF-Parser.html#recover"><code>recover()</code></a>
+sends a special <code>error</code> message
+so that <a href="module-BNF-Parser.html#observe"><code>observe()</code></a> can pop a value stack, if any (line 3),
+and <a href="module-BNF-Parser.html#recover"><code>recover()</code></a> pops the state stack (line 4).</p>
+<p>If <code>$error</code> is never expected
+an <code>irrecoverable</code> <code>error</code> is eventually thrown (line 23)
+and aborts recognition.</p>
+<p>Otherwise, once <code>$error</code> is expected,
+<a href="module-BNF-Parser.html#process"><code>process()</code></a>
+deals with it, wrapped in an artificial <a href="module-Base-Tuple.html"><code>Tuple</code></a> (line 7).</p>
+<p>If there is a <code>shift</code> message for <code>$error</code>
+the search is on for a <code>shift</code> message for an input symbol (lines 8 to 20).
+If found,
+this input symbol is consumed (line 11) and
+<a href="module-BNF-Parser.html#recover"><code>recover()</code></a> returns (line 12).</p>
+<p>If instead there was a <code>reduce</code> message before the input symbol
+the message is executed, followed by <code>goto</code> as usual, and the input symbol is retried (back to line 8).</p>
+<p>If the input symbol is not expected (at line 14)
+end of input results in an <code>irrecoverable</code> <code>error</code> (line 15 to line 23)
+and other input is discarded (line 18 back to line 8).</p>
+<p>Finally, if there is a <code>reduce</code> message before <code>$error</code>
+it is executed, followed by <code>goto</code> as usual,
+and either the new state expects <code>$error</code> or the new state is popped, too (line 7 back to line 1).</p>
+<p>This is a tutorial implementation; therefore, all discarded symbols are reported (line 18).
+The algorithm could be modified to be less chatty and perhaps require more than one
+successful <code>shift</code> message, i.e., accepting more than one input symbol,
+before normal processing is resumed.</p>
+<p><a href="../?eg=10/15&amp;mode=bnf">Example 10/15</a> implements error recovery for a <code>sentence</code>
+consisting of a list of one or more copies of the letter <code>a</code>:</p>
+<pre class="prettyprint source"><code>sentence: some;
+sentence: $error;
+some: 'a';
+some: some 'a';
+some: $error;
+some: some $error;
+</code></pre>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Toggle <span class='t-states'></span> and</li>
+<li>press <span class='c-new'></span> to represent and check the grammar.</li>
+</ul>
+<p>There is a reduce/reduce conflict in state 2:</p>
+<pre class="prettyprint source"><code>state 2
+  sentence: $error ●;
+  some: $error ●;
+  
+  $eof         reduce (sentence: $error;)
+  'a'          reduce (some: $error;)
+  $error       reduce (some: $error;)
+for $eof reduce/reduce conflict between (some: $error;) and (sentence: $error;)
+</code></pre>
+<p>The conflict happens at the end of input and is resolved in favor of the earlier rule 2 (line 5).
+This can be seen if input is simply the letter <code>b</code>:</p>
+<ul>
+<li>Toggle <span class='t-parser'></span> and press <span class='c-parse'></span>:</li>
+</ul>
+<pre class="prettyprint source"><code>STATE TUPLE           MESSAGE                     RETURNS
+  0  (1) &quot;b&quot;          error   -message-           null
+error: at (1) &quot;b&quot;: (1) &quot;b&quot; is not allowed
+expecting: 'a'
+  0  eof &quot;&quot; $error    shift   2                   null
+  2  eof $eof         reduce  sentence: $error;   null
+  0  eof $eof         goto    4                   null
+  4  eof $eof         accept                      null
+</code></pre>
+<ul>
+<li>Move rule 2 to the end of the grammar,</li>
+<li>press <span class='c-new'></span> to prepare the modified grammar, and press <span class='c-parse'></span>:</li>
+</ul>
+<pre class="prettyprint source"><code>STATE TUPLE           MESSAGE                     RETURNS
+  0  (1) &quot;b&quot;          error   -message-           null
+error: at (1) &quot;b&quot;: (1) &quot;b&quot; is not allowed
+expecting: 'a'
+  0  eof &quot;&quot; $error    shift   2                   null
+  2  eof $eof         reduce  some: $error;       null
+  0  eof $eof         goto    3                   null
+  3  eof $eof         reduce  sentence: some;     null
+  0  eof $eof         goto    4                   null
+  4  eof $eof         accept                      null
+</code></pre>
+<ul>
+<li>Toggle <span class='t-build'></span> and press <span class='c-parse'></span> again
+to see that different lists are built depending on which rule catches the error.</li>
+<li>Try different inputs — including none —
+to see that an <code>irrecoverable error</code> cannot happen for this grammar.</li>
+</ul>
+<h4 id="idioms-for-%24error">Idioms for <code>$error</code></h4>
+<p>The placement of <code>$error</code> symbols in BNF grammar rules
+is guided by the following, conflicting goals:</p>
+<ul>
+<li>
+<p>as close as possible to the start symbol of the grammar.</p>
+<p>This way there is always a point to recover from
+because there should always be
+a state very low on the stack in which <code>$error</code> is expected.
+The parser then is unable to clear its stack early,
+i.e., to not <code>accept</code> the end of input from the scanner.</p>
+</li>
+<li>
+<p>as close as possible to each terminal symbol.</p>
+<p>This way only a small amount of input would be skipped on each error.</p>
+</li>
+<li>
+<p>without introducing conflicts.</p>
+<p>This may be quite difficult. In fact, accepting shift/reduce conflicts is reasonable
+as long as they serve to lengthen strings. E.g., one can continue parsing an
+expression past an error, rather then accepting the same error at the statement
+level, thus trashing the rest of the expression.</p>
+</li>
+</ul>
+<p>Given these goals, there are typical positions for <code>$error</code> symbols:</p>
+<ul>
+<li>in each recursive construct, i.e., in iterations such as
+statement lists in a program, argument lists in a function call, etc.</li>
+<li>preferably not at the end of a rule because that is more likely to cause conflicts.</li>
+<li>non-empty lists  (<em>some</em>) require two <code>$error</code> symbols:
+one for a problem at the beginning of the list,
+and one for a problem at the current end of the list — see <a href="../?eg=10/15&amp;mode=bnf">example 10/15</a>.</li>
+<li>possibly empty lists (<em>many</em>) require an <code>$error</code> symbol in the empty branch —
+if this causes bad conflicts the symbol could be added to the places where the possibly
+empty list is referenced.</li>
+</ul>
+<p><a href="../?eg=10/16&amp;mode=bnf">Example 10/16</a> is a blueprint for typical constructs:</p>
+<pre class="prettyprint source"><code>example: ;
+example: example 'many' many ';';
+example: example 'some' some ';';
+example: example 'list' list ';';
+</code></pre>
+<p>Input consists of any number of examples.
+An <code>example</code> starts with the name of a construct and ends with a semicolon.
+There is no error recovery at this level —
+e.g., calling for a non-existing construct causes an <code>irrecoverable error</code>.
+Each construct should recover from all errors so that the terminating semicolon can be found.
+The following action</p>
+<pre class="prettyprint source"><code>class Actions {
+  example (... arg) { if (arg.length) puts(`reduced ${arg[1]}`); }
+}
+</code></pre>
+<p>will confirm successful recovery <em>within</em> each construct.</p>
+<pre class="prettyprint source"><code>many: ;
+many: many 'm';
+many: many $error;
+</code></pre>
+<p>A <code>many</code> construct contains any number of <code>m</code> but no other letters.
+One additional rule with <code>$error</code> in place of <code>m</code> is sufficient for a full recovery.
+For example, in the following input</p>
+<pre class="prettyprint source"><code>many;
+many m m;
+many A;
+many B m;
+many m C m;
+many m D m E;
+</code></pre>
+<p>the upper-case letters are not allowed but the <code>many</code> construct is still reduced six times.</p>
+<pre class="prettyprint source"><code>some: 's';
+some: some 's';
+some: $error;
+some: some $error;
+</code></pre>
+<p>Similarly, <code>some</code> contains one or more <code>s</code> but no other letters
+and two rules with <code>$error</code> in place of <code>s</code> are required for a full recovery.
+Again, in the following input</p>
+<pre class="prettyprint source"><code>some s s;
+some F;
+some G s;
+some s H s;
+some s s I;
+</code></pre>
+<p>the upper-case letters are not allowed but the <code>some</code> construct is still reduced five times.</p>
+<pre class="prettyprint source"><code>list: 'l';
+list: list ',' 'l';
+list: $error;
+list: list $error;
+list: list $error 'l';
+</code></pre>
+<p>Finally, <code>list</code> is defined as a comma-separated list of one or more <code>l</code>.
+For programming language grammars this is probably the most frequently used construct.
+Unfortunately, it is also the most complicated.
+The following input contains many errors
+such as unexpected upper-case letters and missing or superfluous commas:</p>
+<pre class="prettyprint source"><code>list l;
+list l, l;
+list l,;
+list J;
+list l K;
+list l L l;
+list l, M;
+list l, N l;
+list l, O,;
+list l, P, l;
+list l, Q, l,;
+</code></pre>
+<p>The output shows that <code>list</code> is still reduced eleven times.</p>
+<p><a href="../?eg=10/16&amp;mode=bnf">Example 10/16</a> contains the grammar and the input shown above.
+It is instructive to compare input and error messages:</p>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the error messages.</li>
+</ul>
+<p>As expected, every upper-case character in the input triggers a message,
+but the examples for <code>list</code> additionally complain about three unexpected semicolons.
+The output does <em>not</em> end with an <code>irrecoverable error</code>.</p>
+<p>In order to avoid message bursts, <a href="module-BNF-Parser.html#recover"><code>recover()</code></a>
+discards illegal characters silently, but discarded tokens and literals are reported.</p>
+<ul>
+<li>Add a token definition <code>{ Bad: /[A-Z]/ }</code> and a rule <code>example: Bad;</code>
+so that the token is used in the grammar and recognized by the scanner and</li>
+<li>press <span class='c-new'></span> and <span class='c-parse'></span>
+to see the discard messages.</li>
+</ul>
+<p><a href="../?eg=10/17&amp;mode=bnf">Example 10/17</a> contains the same grammar and input as before
+and adds the following actions to record the numbers of the rules which are reduced:</p>
+<pre class="prettyprint source"><code>class Actions {
+  example (example, tag, rules) {
+    if (!(typeof example == 'string')) return '';     // example: ;
+    return `${example}${tag} ${rules.join(' ')}\n`; // example: ...
+  }
+  
+  many (many, m) {
+    if (!many) return [ 5 ];                             // many: ;
+    many.push(m == 'm' ? 6 : 7); return many;    // many: many 'm';
+  }
+  
+  some (some, s) {
+    if (some == 's') return [ 8 ];                    // some: 's';
+    if (!some) return [ 10 ];                      // some: $error;
+    some.push(s == 's' ? 9 : 11); return some;   // some: some 's';
+  }
+    
+  list (list, comma, l) {
+    if (list == 'l') return [ 12 ];                   // list: 'l';
+    if (!list) return [ 14 ];                      // list: $error;
+    if (comma == ',') list.push(13);         // list: list ',' 'l';
+    else if (l == 'l') list.push(16);     // list: list $error 'l';
+    else list.push(15);                       // list: list $error;
+    return list;
+  }
+}
+</code></pre>
+<p>An action is called when a rule is reduced and selected by the non-terminal name.
+The actions above are based on the following:</p>
+<ul>
+<li>a <code>shift</code> of a terminal pushes the input value onto the value stack,</li>
+<li>a <code>shift</code> of <code>$error</code> pushes <code>null</code>,</li>
+<li>a <code>goto</code> pushes the result of a rule's action, and</li>
+<li>a rule's action receives one value corresponding to each symbol on the right-hand side.</li>
+</ul>
+<p>The output shows for each recognized construct the list of rule numbers
+which were reduced during recognition, for example:</p>
+<table>
+<thead>
+<tr>
+<th>input</th>
+<th>output</th>
+<th>rules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>many;</code></td>
+<td><code>many 5</code></td>
+<td><code>5 many: ;</code></td>
+</tr>
+<tr>
+<td><code>many m m;</code></td>
+<td><code>many 5 6 6</code></td>
+<td><code>6 many: many 'm';</code></td>
+</tr>
+<tr>
+<td><code>many A;</code></td>
+<td><code>many 5 7</code></td>
+<td><code>7 many: many $error;</code></td>
+</tr>
+<tr>
+<td><code>many B m;</code></td>
+<td><code>many 5 7 6</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>many m C m;</code></td>
+<td><code>many 5 6 7 6</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>many m D m E;</code></td>
+<td><code>many 5 6 7 6 7</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>toggle <span class='t-noargs'></span> to suppress messages about mismatched argument counts, and</li>
+<li>press <span class='c-parse'></span> to see the raw result data — how often is each rule used?</li>
+</ul>
+<p><a href="../?eg=10/18&amp;mode=bnf">Example 10/18</a> can be used
+to analyze some interactions of error recovery strategies.
+The idea is to recognize one or more <code>a</code> followed by one or more <code>b</code>.
+Each can be done with and without error recovery:</p>
+<pre class="prettyprint source"><code>as:  'a';
+as:  as 'a';
+
+aes: 'a';
+aes: $error;
+aes: aes 'a';
+aes: aes $error;
+</code></pre>
+<p>Both sets of rules, <code>as</code> and <code>aes</code>, recognize one or more <code>a</code>
+but only <code>aes</code> includes error recovery.
+<code>bs</code> and <code>bes</code> are defined in the same fashion.</p>
+<p>Finally, a <code>sentence</code> starts by selecting a strategy, from <code>1</code> to <code>4</code>,
+followed by some <code>a</code> and then some <code>b</code>.
+As a fallback, <code>sentence</code> includes <code>$error</code> but no provision to try again:</p>
+<pre class="prettyprint source"><code>sentence: '1' as  bs  ';';
+sentence: '2' aes bs  ';';
+sentence: '3' as  bes ';';
+sentence: '4' aes bes ';';
+sentence: $error;
+</code></pre>
+<p>A typical (faulty) input is</p>
+<pre class="prettyprint source"><code>1 b a b a;
+</code></pre>
+<ul>
+<li>The very first button should show <span class='t-mode bnf'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see that all but the strategy input
+in the <span class='a-program'></span> is discarded.</li>
+<li>Toggle <span class='t-actions'></span> and
+press <span class='c-parse'></span> again to see
+why there is no <code>irrecoverable error</code>.</li>
+<li>Toggle <span class='t-parser'></span> and
+press <span class='c-parse'></span> again to find out
+which single input symbol is recognized.</li>
+<li>Change <code>1</code> in the <span class='a-program'></span> to <code>2</code>, etc.,
+and repeat the experiments for the different recovery strategies.</li>
+<li>Which strategy results in an <code>irrecoverable error</code> and why?</li>
+<li>Does the resolution of the conflict in state 23 make any difference?</li>
+<li>How many <code>a</code> or <code>b</code> are ever passed to an action, if any?</li>
+</ul>
+<h4 id="error-recovery-for-ebnf">Error recovery for EBNF</h4>
+<p><a href="../?eg=10/19">Example 10/19</a> recognizes all sentences but one
+which <a href="../?eg=10/16&amp;mode=bnf">example 10/16</a> recognizes:</p>
+<pre class="prettyprint source"><code>examples: { example };
+example: many | some | list | $error;
+many: 'many' [{ 'm' }] ';';
+some: 'some' { 's' } ';';
+list: 'list' 'l' { ',' 'l' } ';';
+</code></pre>
+<p>Which &quot;sentence&quot; for <a href="../?eg=10/16&amp;mode=bnf">example 10/16</a> is no longer acceptable?</p>
+<p>A simple action can show the list that each <code>example</code> recognizes:</p>
+<pre class="prettyprint source"><code>class Actions {
+  example (e) { puts('example', g.dump(e)); }
+}
+</code></pre>
+<ul>
+<li>The very first button should show <span class='t-mode'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see that the recursive descent parser
+can handle all examples involving <code>many</code>:</li>
+</ul>
+<pre class="prettyprint source"><code>many;
+many m m;
+many A;
+many B m;
+many m C m;
+many m D m E;
+
+some s s;
+some F;
+  ...
+</code></pre>
+<p>The recursive descent parser succeeds as long as it drops illegal characters
+but it fails after dropping <code>F</code> because <em>check before you call</em> cannot enter the
+iteration in the rule for <code>some</code> and the recursive descent parser is not designed to recover.</p>
+<ul>
+<li>To work with the stack-based parser,
+click the very first button to show <span class='t-mode stack'></span>.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>toggle <span class='t-actions'></span> and press <span class='c-parse'></span> to see
+how the stack-based parser survives all examples.</li>
+<li>Remove <code>|</code> <code>$error</code> from the second rule and try again.</li>
+</ul>
+<p><code>$error</code> has no effect in the recursive descent parser.
+However, it is an alternative of the top-level iterative construct in this grammar
+and allows the stack-based parser to recover.
+The trace shows that a lot of meaningful input is discarded.</p>
+<ul>
+<li>Reload the example,</li>
+<li>click the very first button until it shows <span class='t-mode stack'></span>,</li>
+<li>toggle <span class='t-error'></span> to insert <code>$error</code> into all iteration constructs
+during the translation to BNF, and</li>
+<li>press <span class='c-new'></span> to represent and check the grammar again.</li>
+</ul>
+<p>There are a number of reduce/reduce conflicts which are all caused
+by the explicit <code>$error</code> token in the second rule.</p>
+<ul>
+<li>Remove <code>|</code> <code>$error</code> from the second rule,</li>
+<li>press <span class='c-new'></span> to represent and check the grammar again, and</li>
+<li>toggle <span class='t-actions'></span> and press <span class='c-parse'></span> to see
+that the stack-based parser again survives all examples.</li>
+</ul>
+<p>The trace shows that with the semi-automatic error recovery produced by <span class='t-error'></span>
+a lot more meaningful input is recognized.</p>
+<p>In general, the stack-based parser is preferable because
+it can work with more grammars, e.g., with a shift/reduce conflict for a dangling <code>else</code>,
+and it usually recovers well if <code>$error</code> is automatically inserted into iterations
+expressed with braces in EBNF.</p>
+<p>If a grammar is used to explain the features of a programming language,
+the effects of braces and brackets in EBNF are easier to understand
+than left recursion and empty alternatives in BNF.
+Actions are easier to design for EBNF
+and they do not have to be changed for the translation to BNF.</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<h5 id="parser-types.">Parser Types.</h5>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a> refers to recognition from left to right searching for the left-most derivation
+with one symbol lookahead. This is known as <em>top-down</em> because the left-most derivation
+determines the root of the parse tree. The lookahead symbol is used for the
+<em>check before you call</em> approach discussed <a href="tutorial-04-parser.html">in chapter four</a>.</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/LR_parser" title="LR parser">LR(1)</a> instead searches for the right-most derivation. This is known as <em>bottom-up</em>
+because it creates the parse tree from the leaves to the root.</p>
+</li>
+<li>
+<p>Grammars suitable for LL(1) parsing are suitable for LR(1) parsing. The opposite is not true; e.g.,
+some left-recursive grammars are suitable for LR(1) parsing.</p>
+</li>
+</ul>
+<h5 id="state-transition-table.">State-Transition Table.</h5>
+<ul>
+<li>
+<p>A state-transition table is computed from a BNF grammar by considering all acceptable input sequences.</p>
+</li>
+<li>
+<p>States are sets of marked rules. Rules and rule lengths are finite, i.e., the set of states is finite.</p>
+</li>
+<li>
+<p>Starting with a mark at the beginning of the start rule of the grammar, <a href="https://en.wikipedia.org/wiki/Closure_(mathematics)" title="closure">closure</a> is applied to each new state, i.e., if the mark precedes a non-terminal, all rules for the non-terminal are added to the state and marked at their beginnings.</p>
+</li>
+<li>
+<p><code>shift</code> transitions for each combination of a state and an input symbol are defined
+by moving each mark across the next terminal in it's rule.
+<code>goto</code> transitions, instead, involve non-terminals.
+This finite process can result in new marked rules and then new states.</p>
+</li>
+<li>
+<p>Completed rules have the mark at their end.
+For <a href="https://en.wikipedia.org/wiki/Simple_LR_parser" title="SLR parser">simplified LR(1)</a>, a <code>reduce</code> transition is defined if the lookahead
+is in the follow set of the rule.</p>
+</li>
+</ul>
+<h5 id="conflicts-and-resolution.">Conflicts and Resolution.</h5>
+<ul>
+<li>
+<p>There is a <a href="#reduce-reduce-conflict">reduce/reduce conflict</a>
+if several different rules in the same state have the mark at their end and if the lookahead
+is in the follow set of each.
+Recognition would be based on whichever conflicting rule appears earlier in the grammar.</p>
+</li>
+<li>
+<p>There is a <a href="#shift-reduce-conflict">shift/reduce conflict</a> if in the same state
+there is a mark at the end of one rule and the lookahead is in the follow set
+and in a different rule the mark can be moved across the lookahead.
+In this case, recognition will be based on <code>shift</code>, i.e., accept more input,
+which implements, e.g., proper <a href="tutorial-04-parser.html#ambiguity-revisited">dangling else</a> recognition.</p>
+</li>
+</ul>
+<h5 id="explicit-shift%2Freduce-conflict-resolution.">Explicit <em>shift/reduce</em> Conflict Resolution.</h5>
+<ul>
+<li>
+<p>A precedence table preceding a grammar assigns decreasing precedence levels
+and associativity to lists of terminals.</p>
+</li>
+<li>
+<p>A precedence clause at the end of a single BNF rule copies precedence level
+and associativity to the last terminal in the rule.</p>
+</li>
+<li>
+<p>Conflicts are hidden and resolved according to the following table:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>last rule terminal</th>
+<th>follow terminal</th>
+<th>resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>higher precedence</td>
+<td>lower</td>
+<td><code>reduce</code></td>
+</tr>
+<tr>
+<td>lower</td>
+<td>higher</td>
+<td><code>shift</code></td>
+</tr>
+<tr>
+<td>equal, <code>%left</code></td>
+<td>equal</td>
+<td><code>reduce</code></td>
+</tr>
+<tr>
+<td>equal, <code>%right</code></td>
+<td>equal</td>
+<td><code>shift</code></td>
+</tr>
+<tr>
+<td>equal, <code>%nonassoc</code></td>
+<td>equal</td>
+<td>error</td>
+</tr>
+</tbody>
+</table>
+<h5 id="recognition.">Recognition.</h5>
+<ul>
+<li>
+<p>Based on a state-transition table, a LR(1) parser consumes lookaheads
+and pushes it's new states onto a stack
+until the combination of state and lookahead indicates that a rule has been completed.
+The states corresponding to the rule are popped and a new state corresponding to the completed
+rule is pushed. End of input should cause a transition to a legal state.</p>
+</li>
+<li>
+<p>The parser can be observed. An observer maintains a stack of values parallel to the states
+and offers them to actions when rules are reduced.</p>
+</li>
+<li>
+<p>EBNF can be translated to BNF and hidden actions added so that identical actions can be used
+by a top-down and a bottom-up parser.</p>
+</li>
+</ul>
+<h5 id="error-recovery-1">Error Recovery</h5>
+<ul>
+<li>
+<p>If there is an unexpected input symbol
+the parser will pop the state stack until the input symbol
+is expected or the stack is empty, i.e., recognition failed.</p>
+</li>
+<li>
+<p>For better control, grammar rules can contain <code>$error</code> tokens
+which accept no input but, if expected in a state,
+will stop the stack popping and result in a state transition.
+Next, unexpected input symbols are discarded
+until either recognition can continue with a <code>shift</code> transition
+or the end of input is reached.</p>
+</li>
+<li>
+<p><code>$error</code> tokens are most effective when inserted into iteration constructs,
+especially, when EBNF is translated into BNF to construct a more powerful parser.</p>
+</li>
+</ul>
+<h4 id="previous%3A-%7B%40tutorial-09-bootstrap%7D-next%3A-%7B%40tutorial-11-trees%7D">Previous: <a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a> Next: <a href="tutorial-11-trees.html">11. Compiling Revisited</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

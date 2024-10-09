@@ -1,0 +1,3603 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 7. Language Features</title -->
+	<title>7. Language Features</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>7. Language Features</h2>
+</header>
+
+<article>
+    <h4 id="type-checking">Type Checking</h4>
+<h4 id="functions%2C-scopes%2C-and-nesting">Functions, Scopes, and Nesting</h4>
+<hr>
+<p><a href="tutorial-06-compile.html">Chapter six</a> explained how to use actions
+to interpret or compile arithmetic expressions.
+Simple variables, input, output, and control structures were added,
+resulting in a little language
+which was compiled into JavaScript functions,
+or into machine instructions for a stack machine simulated in JavaScript.</p>
+<p>This chapter adds specific language features to the little language
+and shows how to implement them, primarily for the stack machine.
+All classes are available from the <a href="module-Seven.html">module <code>Seven</code></a>
+which is built into the practice page.</p>
+<h3 id="syntactic-type-checking">Syntactic Type Checking</h3>
+<p>The result types of arithmetic and other operations depend on both,
+the operators, and the types of the operand values.</p>
+<p><a href="https://en.wikipedia.org/wiki/Dynamic_typing" title="dynamic typing">Dynamically typed</a> languages such as JavaScript tend to allow
+operators to combine fairly arbitrary types
+and let variables store values of different types at different times.
+The results can be surprising:</p>
+<ul>
+<li>
+<p>Strings and numbers can be compared in JavaScript,
+but the string is first converted to a number,
+i.e., <code>'A'</code> <code>&gt;</code> <code>'1'</code> is true (string comparison)
+and <code>'A'</code> <code>&gt;</code> <code>1</code> is false (number comparison).</p>
+</li>
+<li>
+<p>Strings and numbers can be added in JavaScript,
+but the number is converted to a string
+and strings are concatenated with the <code>+</code> operator,
+i.e., <code>1</code> <code>+</code> <code>'2'</code> is <code>'12'</code> (string sum) rather than <code>3</code> (number sum).</p>
+</li>
+<li>
+<p>These effects are more surprising if variables are involved.</p>
+</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Strong_and_weak_typing" title="strong typing">Strongly typed</a> languages such as Java determine the types of all values at compile time
+so that they can select the most efficient machine instructions for implementation.
+This requires either explicitly declaring or implicitly deducing
+the data types which variables may store,
+and flagging every operation which does not use compatible data types.</p>
+<p><a href="../?eg=07/01">Example 7/01</a> shows
+that strong type checking can be accomplished with a restrictive grammar
+where type mismatches will be reported as syntax errors.</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar, and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+error: at (4) '-': in sequence, Lit.parse(): expects 'fi'
+</code></pre>
+<p>Here is line 4 of the program:</p>
+<pre class="prettyprint source"><code>      x = x - y 
+</code></pre>
+<p>A deep dive into the grammar will reveal that a <code>Name</code> such as <code>x</code>
+is recognized as a <code>stringTerm</code> which cannot appear adjacent to the operator <code>-</code>,
+i.e., the error message is right on target — but hardly helpful.</p>
+<p>Constants in a program tend to exhibit their data type by their looks:</p>
+<ul>
+<li>
+<p>integers are represented as digit strings,</p>
+</li>
+<li>
+<p>floating point numbers require a decimal point, an exponent, or both,</p>
+</li>
+<li>
+<p>strings are enclosed in quotes,</p>
+</li>
+<li>
+<p>Boolean constants usually are symbols such as <code>true</code> and <code>false</code>, etc.</p>
+</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Fortran" title="Fortran">Fortran</a> considered a variable to be &quot;integer&quot;
+if the name started with one of the letters <code>I</code> through <code>N</code>
+and &quot;floating point&quot; otherwise,
+but this idea of <em>implicit typing</em> has long since been abandoned.
+Instead,
+variable names are usually declared and typed before use,
+i.e., usually there is only one token for variable names</p>
+<pre class="prettyprint source"><code>{
+  Number: /0|[1-9][0-9]*/,
+  String: /'(?:[^'\\]|\\['\\])+'/,
+  Name: /[a-z]+/
+}
+</code></pre>
+<p>and the type of a variable is determined
+by actions which interpret declarations.</p>
+<p>Numbers can be converted to strings;
+therefore, this little language requires all variables to be strings.
+<a href="../?eg=07/01">Example 7/01</a> more or less duplicates the rules
+for <code>cmp</code> and <code>sum</code> from <a href="../?eg=06/12">example 6/12</a>
+to separate string and number operations
+and fuse comparisons and terms:</p>
+<pre class="prettyprint source"><code>cmp: sum rel | stringSum stringRel;
+
+term: number | '(' sum ')' | 'number' stringTerm;
+
+stringRel: stringEq | stringNe | stringGt | stringGe | stringLt | stringLe;
+stringEq: '=' stringSum;
+  ...
+  
+stringSum: stringTerm [{ stringTerm }];
+stringTerm: string | name | input | 'string' term;
+string: String;
+name: Name;
+input: 'input' String String;
+</code></pre>
+<p><code>cmp</code> requires that numbers are compared to numbers,
+and strings to strings (line 1 above) because
+all comparison rules have been duplicated for strings (lines 5 to 7)
+and only allow <code>stringSum</code> operands (lines 1 and 6).</p>
+<p><code>sum</code> still recognizes arithmetic with numbers,
+but <code>name</code> and <code>input</code> have been moved from a (numerical) <code>term</code> (line 3)
+to a <code>stringTerm</code> (line 10), i.e., <code>name</code> and <code>input</code> only allow strings.
+<code>input</code> uses two <code>String</code> tokens to specify a prompt text
+and a default input value (line 13).</p>
+<p>A <code>stringTerm</code> can be converted to a number by preceding it with
+the literal <code>number</code> as a cast operation (line 3)
+and a (numerical) <code>term</code> similarly can be converted to a string (line 10).</p>
+<p>A <code>stringSum</code> allows concatenation using one or more <code>stringTerm</code> (line 9);
+there is no explicit operator to mark this operation.</p>
+<p><a href="../?eg=07/01">Example 7/01</a> still implements <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's Algorithm</a>:</p>
+<pre class="prettyprint source"><code>x = input 'x' '36'; y = input 'y' '       54';
+while x &lt;> y do
+  if x > y then 
+    x = x - y 
+  else
+    y = y - x 
+  fi
+od;
+print '\'gcd\': ' x
+</code></pre>
+<p>It is unchanged but for some extra strings for <code>input</code> and <code>print</code> (lines 1 and 9 above).
+There are essentially three errors in the program,
+the last one serious enough to crash the practice page:</p>
+<ul>
+<li>
+<p><code>number</code> Conversions are required before <code>y</code> can be subtracted from <code>x</code>
+and vice versa (lines 4 and 6).</p>
+</li>
+<li>
+<p><code>string</code> Conversions are required before the results
+can be assigned back to <code>x</code> and <code>y</code> (lines 4 and 6).</p>
+</li>
+<li>
+<p>The default strings for <code>x</code> and <code>y</code> are not equal (line 1)
+but string comparison would consider any positive or negative number in <code>x</code> to be greater than <code>y</code> (line 3)
+because of the leading blanks in the default input (line 1)
+and 'x' would be set to ever more negative numbers —
+the program loops!</p>
+</li>
+</ul>
+<p>The last error demonstrates
+that strong typing will not necessarily catch serious flaws in a program.
+It should also be noted that this syntactic approach to type checking
+requires that there are few types
+and that operations are well separated.</p>
+<p>The actions from <a href="../?eg=06/12">Example 6/12</a>
+can be extended in <a href="../?eg=07/01">example 7/01</a> to compile
+this little language into JavaScript functions:</p>
+<pre class="prettyprint source"><code>class TCheck01 extends Six.Functions12 {
+  // ...
+  /** `stringEq: '=' stringSum;` returns fct for composition */
+  stringEq (_, right) { return this.parser.call(this, super.eq, _, right); }
+
+  /** `stringSum: stringTerm [{ stringTerm }];` returns fct */
+  stringSum (term, many) {
+    const c = (a, b) => memory => a(memory) + b(memory);
+    return (many ? many[0] : []).
+      reduce((sum, list) => c(sum, list[0]), term);
+  }
+</code></pre>
+<p>The string comparisons can delegate to the numerical comparisons (line 4 above)
+because the target language JavaScript is dynamically typed.
+<code>stringSum</code> implements string concatenation in the callback function
+for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> (line 4).</p>
+<pre class="prettyprint source"><code>  // term: number | '(' sum ')' | 'number' stringTerm;
+  //       [0]          [1]                [1]
+  term (...val) {
+    switch (val.length) {
+    case 1: return val[0];
+    case 3: return val[1];
+    case 2: return memory => parseInt(val[1](memory), 10);
+    }
+  }
+
+  /** `stringTerm: string | name | input | 'string' term;` */
+  //               [0]      [0]    [0]              [1]
+  stringTerm (...val) {
+    return val.length == 1 ? val[0] :
+      memory => String(val[1](memory));
+  }
+</code></pre>
+<p><code>term</code> has to be overwritten to return a function
+if a program calls for an explicit conversion (line 7 above).
+Similarly, <code>stringTerm</code> has to implement a conversion to a string value
+if needed (line 15).</p>
+<pre class="prettyprint source"><code>  /** Removes quotes and backslash */
+  _unq (s) { 
+    return  s.slice(1,-1).replace(/\\([\\'])/g, &quot;$1&quot;);
+  }
+
+  /** `string: String;` returns fct */
+  string (s) { return () => this._unq(s); }
+
+  /** `input: 'input' String String;` [replace] returns fct */
+  input (i, prmpt, dflt) {
+    return () => prompt(this._unq(prmpt), this._unq(dflt));
+  }
+</code></pre>
+<p>Finally, the <code>string</code> and <code>input</code> actions have to convert
+a single-quoted string literal in the program into the corresponding string value.
+A helper method <code>_unq()</code> removes the outer quotes and interprets backslashes
+if any (line 3 above).
+Just like the <code>number</code> action,
+the <code>string</code> action has to return a function which will return
+a constant, literal string value (line 7).
+<code>input</code> is overwritten to use the prompt and default strings
+and to not perform implicit conversion of the incoming string value
+into a number (line 11).</p>
+<h3 id="type-checking-by-interpretation">Type Checking by Interpretation</h3>
+<p>In this section the functional implementation of the little language with control structures
+<a href="tutorial-06-compile.html#control-structures">from chapter six</a>
+will be extended with strings and floating point and integer numbers.
+Changes to the grammar can be seen <a href="6.12-7.02.html">on this page</a>,
+new action methods can be seen
+<a href="../methods.html?file=modules/06.js&amp;file=modules/07.js&amp;item=Functions12&amp;item=TCheck01&amp;item=TCheck02">in the method browser</a>.</p>
+<p>The best conclusion <a href="#syntactic-type-checking">from the previous section</a>
+is that syntax analysis, i.e., sentence structure,
+and semantic analysis, i.e., sentence meaning,
+require separate mechanisms.</p>
+<p>If variables are declared before use,
+type checking amounts to symbolic interpretation of a program —
+with types taking the place of values.
+<a href="tutorial-06-compile.html#immediate-evaluation">Chapter six</a>
+showed how to implement interpretation, i.e., immediate evaluation at compile time —
+at least for arithmetic expressions without variables.</p>
+<p><a href="../?eg=07/02">Example 7/02</a>
+shows how to interpret types while translating a program
+into JavaScript functions.
+Variables have to be declared before use
+and there are integer and floating point variables with mixed arithmetic,
+strings with input, printing, and concatenation, strict comparisons and assignments,
+implicit conversion only for numerical operations, and
+explicit type casting operations.
+Here is the typed version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>:</p>
+<pre class="prettyprint source"><code>int x, y;
+x = int (input 'x' '36');
+y = int (input 'y' '54');
+while x &lt;> y do
+  if x > y then 
+    x = x - y 
+  else
+    y = y - x 
+  fi
+od;
+print '\'gcd\': ' + x
+</code></pre>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax and semantic analysis
+and generate an executable, and</p>
+</li>
+<li>
+<p>press <span class='c-run'></span> to execute the compiled program.</p>
+</li>
+<li>
+<p>Toggle <span class='t-actions'></span> and
+press <span class='c-parse'></span> again to see
+what JavaScript functions are created.</p>
+</li>
+</ul>
+<p>In this kind of type checking,
+actions immediately interpret types similar to values
+while generating and returning JavaScript functions to the parent rules and actions.
+The new action class is mostly concerned with type interpretation.
+Almost all function generation is inherited from
+<a href="../?eg=06/12">example 6/12</a> and <a href="../?eg=07/01">example 7/01</a>.
+<code>TCheck02</code> first defines some infrastructure:</p>
+<pre class="prettyprint source"><code>class TCheck02 extends Seven.TCheck01 {
+  /** For error messages */
+  get parser () { return this.#parser; }
+  #parser;
+  /** Symbol table, maps names to types */
+  get symbols () { return this.#symbols; }
+  #symbols; 
+  /** For symbolic computing with types */
+  get stack () { return this.#stack; }
+  #stack = [ ];
+  
+  constructor (parser, symbols = new Map()) {
+    super();
+    this.#parser = parser;
+    this.#symbols = symbols;
+  }
+
+  /** Returns type of name, message if undefined */
+  _type (name) {
+    const type = this.symbols.get(name);
+    if (type) return type;
+    this.parser.error(name + ': undeclared');   // return undefined
+  }
+</code></pre>
+<p>Error messages require access to the parser (lines 3, 12, and 14 above).
+There have to be a map from variable names to their types (lines 6, 12, and 15)
+and a stack (lines 9 and 10)
+where actions such as <code>number</code>, <code>string</code>, etc., will push a type
+and actions such as <code>product</code>, <code>sum</code>, etc., will pop and combine operand types
+and push result types.</p>
+<p><code>_type()</code> expects to find and return the type declared for a variable name in the
+symbol table (lines 20 and 21). If not, the method displays an error message (line 22)
+and returns <code>undefined</code>.</p>
+<p>If a <code>Name</code> is recognized, the <code>name</code> action determines the type,
+pushes it onto the compile time type stack (line 3 below), and delegates to the superclass(es)
+to generate an appropriate JavaScript function (line 4).</p>
+<pre class="prettyprint source"><code>  /** `name: Name;`  returns `fct:_type(name)` */
+  name (name) {
+    this.stack.push(this._type(name));
+    return this.parser.call(this, super.name, name);
+  }
+</code></pre>
+<p>This pattern is typical for <code>int</code> — which pushes <code>'int'</code> and delegates to <code>number</code> —
+and <code>string</code> and <code>input</code> — which push <code>'string'</code>.
+The <code>float</code> action has to generate a new function:</p>
+<pre class="prettyprint source"><code>  /** `float: Float;` returns `fct:float` */
+  float (float) {
+    this.stack.push('float'); return () => parseFloat(float);
+  }
+</code></pre>
+<p>The first heavy lifting happens when a <code>term</code> contains an explicit conversion (line 12 below):</p>
+<pre class="prettyprint source"><code>  // term: int | float | string | name | input
+  //       [0]
+  //     | 'int' term | 'float' term | 'string' term
+  //       [0]   [1]
+  //     | '(' sum ')';
+  //           [1]
+  term (...val) {
+    switch (val.length) {
+    case 1: return val[0];
+    case 3: return val[1];
+    }
+    const to = val[0], from = this.stack.pop();
+    this.stack.push(to);
+    return this._cast(val[1], from, to);
+  }
+</code></pre>
+<p>In this case the <code>term</code> action is called with two arguments,
+namely the target type <code>val[0]</code> which is stored as <code>to</code>
+and the function <code>val[1]</code> which will produce the value which may have to be converted.
+The type of this value <code>from</code> is popped off the type stack (line 12 above).
+The result type of the explicit conversion will be <code>to</code> and it is pushed onto the type stack (line 13).
+Conversions might be applied elsewhere; therefore, it is the job of a new method <code>_cast()</code> to compose
+a suitable JavaScript function:</p>
+<pre class="prettyprint source"><code>  /** Converts `fct:from` into `fct:to` if needed */
+  _cast (fct, from, to) {
+    switch (`${to} &lt;- ${from}`) {
+    default:
+      this.parser.error('impossible cast from', from, 'to', to);
+
+    case 'int &lt;- int': case 'float &lt;- float':
+    case 'string &lt;- string': case 'float &lt;- int':
+      return fct;
+
+    case 'int &lt;- float':
+      return memory => Math.round(fct(memory));
+
+    case 'int &lt;- string':
+      return memory => parseInt(fct(memory), 10);
+
+    case 'float &lt;- string':
+      return memory => parseFloat(fct(memory));
+
+    case 'string &lt;- int': case 'string &lt;- float':
+      return memory => String(fct(memory));
+    }
+  }
+</code></pre>
+<p>Nothing needs to be done in four of the nine possible cases (lines 7 to 9 above)
+because three cases are identities, and integers and floating point values, both, are represented
+as numbers in the implementation language.</p>
+<p>The five other cases are handled by composing four new functions
+which involve <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round" title="round()"><code>Math.round()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt" title="parseInt()"><code>parseInt()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat" title="parseFloat()"><code>parseFloat()</code></a>,
+and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String" title="String()"><code>String()</code></a>. The latter, again, works for both, integers and floating point values.</p>
+<p>Arithmetic operations allow integers and floating point arguments, e.g.:</p>
+<pre class="prettyprint source"><code>  /** `subtract: '-' product;` returns `fct:int|float` */
+  subtract (_, right) {
+    const [ l, r ] = this.stack.splice(-2, 2);
+    if (l == 'string' || r == 'string')
+      this.parser.error(&quot;cannot apply '-' to string&quot;);
+    this.stack.push(l == 'int' && r == 'int' ? 'int' : 'float');
+    return this.parser.call(this, super.subtract, _, right);
+  }
+</code></pre>
+<p>The types of the left and right operand are on the stack (line 3 above).
+Subtraction and most other operations flag strings as errors (lines 4 and 5)
+and replace the operand types by the result type — <code>'int'</code> only if all operands are integers (line 6).
+Division always produces <code>'float'</code>.
+Code generation is always delegated to the superclass (line 7).</p>
+<pre class="prettyprint source"><code>  /** `add: '+' product;` returns `fct:string|int|float` */
+  add (_, right) {
+    const [ l, r ] = this.stack.splice(-2, 2);
+    this.stack.push(l == 'string' || r == 'string' ? 'string' :
+        l == 'int' && r == 'int' ? 'int' : 'float');
+    return this.parser.call(this, super.add, _, right);
+  }
+</code></pre>
+<p>The operator <code>+</code> specifies concatenation if a string is involved and addition otherwise —
+this determines the result type (lines 4 and 5 above).
+This makes no difference for the generated function (line 6) because JavaScript has the same semantics.</p>
+<pre class="prettyprint source"><code>  /** `cmp: sum rel;` returns fct */
+  cmp (sum, rel) {
+    const [ l, r ] = this.stack.splice(-2, 2);
+    if ((l == 'string' || r == 'string') && l != r)
+      this.parser.error('must compare strings to strings');
+    return this.parser.call(this, super.cmp, sum, rel);
+  }
+</code></pre>
+<p><code>cmp</code> flags comparisons between strings and numbers (lines 4 and 5 above).
+The action discards the operand types because the parent rule is a statement
+and can only be <code>select</code> or <code>loop</code> which need no additional checking.</p>
+<p>Assignment insists that variable and value type are equal (lines 3 to 6 below)
+and pops the value's type, clearing the stack at the statement level (line 4):</p>
+<pre class="prettyprint source"><code>  /** `assign: Name '=' sum;` returns fct */
+  assign (name, _, sum) {
+    const type = this._type(name),
+      r = this.stack.pop();
+    if (type != r)
+        this.parser.error(`assigning ${r} to ${type} ${name}`);
+    return this.parser.call(this, super.assign, name, _, sum);
+  }
+</code></pre>
+<p><code>print</code> accepts only string values and pops all their types:</p>
+<pre class="prettyprint source"><code>  /** `print: 'print' sums;` returns fct, string arguments only */
+  print (p, sums) { 
+    if (! this.stack.splice(- sums.length, sums.length).
+            every(type => type == 'string'))
+      this.parser.error('can only print strings');
+    return this.parser.call(this, super.print, p, sums);
+  }
+</code></pre>
+<p>As an alternative, <code>printAny()</code>, is an action for the same rule which implicitly
+converts all arguments to strings using the <code>_cast()</code> method described above:</p>
+<pre class="prettyprint source"><code>  /** `printAny: 'print' sums;` returns fct */
+  printAny (p, sums) {     // implicitly casts non-string arguments
+    sums.reverse().map((sum, n) => {         // check each argument
+      const type = this.stack.pop();      // requires reverse order
+      if (type != 'string') {
+        sum = this._cast(sum, type, 'string');  // apply conversion
+        puts(`print argument ${sums.length - n} was ${type}`);
+      }
+      return sum;                             // returns fct:string
+    }).reverse();
+    return this.parser.call(this, super.print, p, sums);
+  }
+</code></pre>
+<p><code>sums</code>, the list of functions computing the values to be printed,
+is reversed so that the order matches the type stack top-down.
+For each function a type is popped off the stack (line 4 above).
+If the type is not <code>'string'</code> already an implicit conversion is applied (line 6).
+Finally, the resulting list of functions is reversed again (line 10)
+just before delegation to <code>print()</code> in the superclass (line 11)
+to generate code for the actual print operation.</p>
+<p>Essential for type checking in <a href="../?eg=07/02">example 7/02</a> is that
+variables have to be declared before they are used.
+The rule for <code>prog</code> is revised to include declarations before statements (line 1 below).
+The action has to be overwritten to send the function
+generated for <code>stmts</code> to the superclass (line 2):</p>
+<pre class="prettyprint source"><code>  /** `prog: [{ decl ';' }] stmts;` returns executable */
+  prog (many, stmts) { return this.parser.call(this, super.prog, stmts); }
+  
+  /** `decl: type Name [{ ',' Name }];` */
+  decl (type, name, many) {
+    [ name ].concat(many ? many[0].map(list => list[1]) : []).
+      forEach(name => {
+        if (this.symbols.has(name))
+          this.parser.error(`${name}: duplicate`);
+        this.symbols.set(name, type[0]);
+      });
+  }
+}
+</code></pre>
+<p>Each name in each declaration is checked to catch duplicate declarations (line 8 above)
+and it's type is recorded in the symbol table (line 10).</p>
+<p>In <a href="../?eg=07/02">example 7/02</a></p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar.</p>
+</li>
+<li>
+<p>Replace <code>+</code> in the last line in the <span class='a-program'></span> with a comma
+so that there are two arguments to <code>print</code> and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax and semantic analysis
+to determine that <code>print</code> only permits string arguments.</p>
+</li>
+<li>
+<p>Replace the name <code>print</code> in two(!) rules by <code>printAny</code> in the <span class='a-grammar'></span>
+to use the alternative action,</p>
+</li>
+<li>
+<p>press <span class='c-new'></span> to represent and check the changed grammar, and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax and semantic analysis again
+to see that there now is an implicit conversion.</p>
+</li>
+</ul>
+<p>Semantic analysis is done.
+It should be noted that the little language is more restrictive than the implementation language
+but benefits from some shortcuts due to dynamic typing
+and powerful implicit conversions in JavaScript.</p>
+<p>All error messages show the typical dilemma:
+an action method could <code>throw</code> an error and forcibly terminate syntax analysis,
+but then only one error would be detected.
+Usually, it is better to continue syntax analysis with incorrect code generation
+and mark the executable as defective.
+Error reporting through the parser counts errors and reports them at the end of recognition.</p>
+<p>It is also quite apparent that implementing semantic analysis
+points out design choices that were made for the little language.
+They may be a matter of taste, but they can surprise or annoy users endlessly...</p>
+<p><a href="../?eg=07/03">Example 7/03</a>
+uses the same compiler <a href="module-Seven-TCheck02.html"><code>Seven.TCheck02</code></a>
+and contains statements with a number of semantic errors.</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax and semantic analysis.</p>
+</li>
+<li>
+<p>Repair the semantic errors, e.g., by deleting the offending statements, and
+recompile with <span class='c-parse'></span>.</p>
+</li>
+<li>
+<p>Finally, press <span class='c-run'></span> to execute the compiled program.
+The last two lines of output should be <code>3</code> and <code>4</code>.</p>
+</li>
+</ul>
+<h3 id="functions">Functions</h3>
+<p>In this section the <a href="tutorial-06-compile.html#control-structures">little language with control structures</a>
+will be extended with functions which can be called recursively.
+Changes to the grammar can be seen <a href="6.11-7.04.html">on this page</a>,
+new stack machine and action methods can be seen
+<a href="../methods.html?file=modules/06.js&amp;file=modules/07.js&amp;item=Control11&amp;item=Machine04&amp;item=Functions04">in the method browser</a>.</p>
+<p>Just like <a href="tutorial-06-compile.html#control-structures">control structures</a>,
+functions depend either on language features of the implementation language,
+i.e., functions in JavaScript to which the source language functions can be mapped,
+or on branch instructions which capture return information.
+This section looks at an implementation of functions without parameters
+for the stack machine.</p>
+<p><a href="../?eg=07/04">Example 7/04</a> contains two mutually recursive functions
+which together implement <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> without an explicit loop:</p>
+<pre class="prettyprint source"><code>var x, y;
+function fa;
+function fb;
+
+function main begin
+  x = input 36; y = input 54;
+  fa; print x;
+  x = 90; y = 72;
+  return fb; print 99
+end;
+
+function fa begin
+  if x = y then return x fi;
+  if x > y then x = x - y else y = y - x fi;
+  fa = fb
+end;
+
+function fb begin
+  if x = y then fb = x else 
+    if x > y then x = x - y else y = y - x fi;
+    fb = fa
+  fi
+end;
+</code></pre>
+<p>The program starts in <code>main</code>, inputs decimal values for <code>x</code> and <code>y</code>,
+calls the algorithm, and prints the result (lines 6 and 7 above).
+It then sets <code>x</code> and <code>y</code> to other values,
+calls the algorithm again, and returns the result.
+<code>99</code> will not be printed (line 9).</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to create the executable,</p>
+</li>
+<li>
+<p>press <span class='c-run'></span> to execute, and</p>
+</li>
+<li>
+<p>input two arbitrary positive integers for the first call to the algorithm.</p>
+</li>
+</ul>
+<p>The second output (line 3 below) is the greatest common divisor of 90 and 72.
+It is returned from <code>main</code> (line 9 above) and printed by the caller.
+After execution memory contains the values <code>18</code> for the variables <code>x</code> and <code>y</code> (line 4).</p>
+<pre class="prettyprint source"><code>> run()
+0
+18
+[ 18 18 ]
+</code></pre>
+<p>A program consists of global variable definitions followed by function definitions;
+one of the functions must be called <code>main</code>.
+When the executable is run <code>main</code> is called implicitly
+and the result is printed.</p>
+<p>Functions must be declared before they can be used, i.e.,
+mutual recursion requires a declaration of <code>function</code> <code>fb</code> (line 3 in the program above)
+before it can be used in the definition of <code>function</code> <code>fa</code> (lines 12 to 16).
+If <code>function</code> <code>fb</code> is declared it must later be defined (lines 18 to 23).</p>
+<p><code>return</code> terminates function execution (lines 9 and 13)
+and can arrange for a result to be delivered to the point of call.
+The result value of a function is either specified explicitly for <code>return</code>
+or it is assigned to the function name, or it is zero.
+Technically,
+there is no need for a <code>return</code> statement because a result value
+can be assigned to the function name within the function body (lines 15, 19 and 21);
+however, <code>return</code> can be convenient for early termination (e.g., line 13 for <code>fa</code>).</p>
+<p>Functions can be called in the context of expressions or as statements.
+If a function is called in a statement (line 7) the result value is discarded;
+otherwise the result value can be used in an expression.
+E.g., <code>return</code> <code>fb</code> in the definition of <code>main</code> (line 9)
+first makes a call to <code>fb</code>
+and then terminates the (implicit) call to <code>main</code> and returns the result
+of the call to <code>fb</code> as result of the call to <code>main</code>.</p>
+<p>This step in the evolution of the little language requires a bit of semantic analysis:</p>
+<ul>
+<li>
+<p>Variables are global and need not be declared.</p>
+</li>
+<li>
+<p>A variable cannot be called as if it were a function.</p>
+</li>
+<li>
+<p>Functions must be declared or defined before they can be used.</p>
+</li>
+<li>
+<p>A function cannot be declared after it has already been defined.</p>
+</li>
+<li>
+<p>Assignment to a function name is only allowed in the function body.</p>
+</li>
+</ul>
+<h4 id="grammar-modifications">Grammar Modifications</h4>
+<p>A program consists of an optional list of global variables
+followed by one or more function declarations
+and definitions, each terminated by a semicolon.
+A function declaration has no body (line 5 below):</p>
+<pre class="prettyprint source"><code>prog: [ vars ] funs;
+vars: 'var' names ';';
+names: Name [{ ',' Name }];
+funs: { fun };
+fun: head [ 'begin' stmts 'end' ] ';';
+head: 'function' Name;
+</code></pre>
+<p>There are only two more extensions to the grammar:</p>
+<pre class="prettyprint source"><code>  stmt: assign | print | return | loop | select;
+  assign: Name [ '=' sum ];
+  return: 'return' [ sum ];
+</code></pre>
+<p>A procedure call has to be recognized as an assignment
+where the actual assignment operation is omitted (line 2 above).
+<code>return</code> is added as a new statement.
+All other changes are semantic in nature, i.e., they concern the fact
+that a <code>Name</code> can refer to a function or a variable.</p>
+<h4 id="machine-instructions">Machine Instructions</h4>
+<p>The stack machine needs three new instructions:</p>
+<pre class="prettyprint source"><code>class Machine04 extends Six.Machine11 {
+  /** `stack: ... -> ... old-pc | pc: addr` */
+  Call (addr) { 
+    return memory => (memory.push(memory.pc), memory.pc = addr);
+  }
+  /** `stack: ... old-pc -> ,,, 0 old-pc` */
+  Entry (memory) { 
+    memory.splice(-1, 0, 0);
+  }
+  /** `stack: ... old-pc -> ... | pc: old-pc` */
+  Return (memory) { 
+    memory.pc = memory.pop(); 
+  }
+  /** `stack: ... x old-pc result -> ... result old-pc result` */
+  ReturnValue (memory) { 
+    memory.splice(-3, 1, memory.at(-1)); 
+  }    
+}
+</code></pre>
+<p>Functions are control structures and require a machine instruction
+which remembers the address to return to.
+Recursive calls are possible as long as this address is deposited
+on the stack.
+<code>Call(addr)</code> pushes the stack machine's current program counter onto the stack
+and places <code>addr</code> into the program counter (line 4 above).</p>
+<p><code>Return</code> undoes the effect of <code>Call</code>:
+It expects the function result value on top of the stack and the return address just below.
+It removes the return address from the stack and assigns it to the program counter (line 8).
+This leaves the function result value on top of the stack.</p>
+<p><code>ReturnValue(memory)</code> expects the function result value
+on top of the stack, just above the return address and
+the slot for the function result.
+It copies the result value from the top of the stack into
+the result slot (line 12).
+Depending on context the value may then have to be popped off the stack.</p>
+<h4 id="infrastructure">Infrastructure</h4>
+<p>The symbol table now contains descriptions of variables and functions;
+therefore, a separate counter <a href="module-Seven-Functions04.html#size"><code>size</code></a>
+is needed to allocate variable addresses (lines 3 and 4 below):</p>
+<pre class="prettyprint source"><code>class Functions04 extends Six.Control11 {
+  /** Manages next (global) variable address */
+  get size () { return this.#size; }
+  set size (size) { this.#size = size; }
+  #size = 0;
+  
+  /** Describes current function */
+  get funct () { return this.#funct; }
+  set funct (sym) { this.#funct = sym; }
+  #funct;
+</code></pre>
+<p><a href="module-Seven-Functions04.html#funct"><code>funct</code></a>
+contains the symbol description of the current function (lines 8 and 9 above).
+Getters and setters are used because they can be overwritten in subclasses
+and they cannot be mistaken for action methods.</p>
+<p>Symbol descriptions will change as the little language evolves.
+All of them contain a name and a reference to the actions class which uses them,
+i.e., they are best represented by inner classes which have
+<a href="module-Seven-Functions04_Symbol.html"><code>this.Symbol</code></a>  as the common base class:</p>
+<pre class="prettyprint source"><code>  get Symbol () { return this.#Symbol ??= class {
+      owner;                                   // surrounding class         
+      name;                               // variable/function name
+    
+      constructor (owner, name) {
+        this.owner = owner; this.name = name; 
+      }
+    };
+  }
+  #Symbol;
+</code></pre>
+<p><a href="module-Seven-Functions04_Var.html"><code>this.Var</code></a> is the class to represent variables.
+This kind of symbol description must be created with a new global address (line 5 below):</p>
+<pre class="prettyprint source"><code>  get Var () { return this.#Var ??= class extends this.Symbol {
+      addr;                                       // memory address
+  
+      constructor (owner, name, addr) {
+        super(owner, name); this.addr = addr;
+      }
+      load () {                        // generate load instruction
+        this.owner.machine.gen('Load', this.addr);
+      }
+      storeOk () { return true; }       // always permit assignment
+      store () {                      // generate store instruction
+        this.owner.machine.gen('Store', this.addr);
+      }
+      toString () { return `${this.name} at ${this.addr}`; }
+    };
+  }
+  #Var;
+</code></pre>
+<p>The class has a few convenience methods
+to create instructions to copy the variable value to the stack (line 8 above) and back (line 12)
+and to format information about the symbol (line 14).</p>
+<p><a href="module-Seven-Functions04_Fun.html"><code>this.Fun</code></a> is the class to represent functions
+and has similar convenience methods for code generation:</p>
+<pre class="prettyprint source"><code>  get Fun () { return this.#Fun ??= class extends this.Symbol {
+      start = false;                  // start address, not yet set
+      calls = [];                    // forward references to entry
+      returns = [];                   // forward references to exit
+    
+      entry () { // defines start address, arranges slot for result
+        this.start = this.owner.machine.gen('Entry') - 1;
+      }  
+      undo () {               // ends a declaration, undoes entry()
+        this.owner.machine.code.length = this.start;
+        this.start = false;
+      }  
+      call () {    // create Call or save address for slot for Call
+        if (typeof this.start == 'number')
+          this.owner.machine.gen('Call', this.start);
+        else
+          this.calls.push(this.owner.machine.code.push(null) - 1);
+      }
+      return () {           // create slot for Branch, save address
+        this.returns.push(this.owner.machine.code.push(null) - 1);
+      }
+      storeOk () {                     // ok to store result value?
+        if (this == this.owner.funct) return true;
+        this.owner.parser.error(`${this.name}: ` +
+            `assigned to outside function`);
+        return false;
+      }
+      store () {              // store top of stack as result value
+        this.owner.machine.gen('ReturnValue');
+      }
+      end () {          // resolve calls and returns if any, exit()
+        const call = this.owner.machine.ins('Call', this.start);
+        this.calls.forEach(c => this.owner.machine.code[c] = call);
+        this.calls.length = 0;
+
+        const br = this.owner.machine.ins('Branch',
+          this.owner.machine.code.length);
+        this.returns.forEach(c => this.owner.machine.code[c] = br);
+        this.returns.length = 0;
+        this.exit();
+      }
+      exit () {      // generates code to return from function call
+        this.owner.machine.gen('Return');
+      }    
+      toString () {
+        return `function ${this.name} start ${this.start}`;
+      }
+    };
+  }
+  #Fun;
+</code></pre>
+<p>A function result value is zero by default;
+therefore, the slot for the function result is created at the beginning of a function
+by pushing zero onto the stack (line 7 above).</p>
+<p>Function declarations and definitions look more or less alike
+and both will cause a call to <code>entry()</code>
+which a declaration can undo by calling <code>undo()</code> (line 9).</p>
+<p>Because of function declarations a function can be called before it is defined;
+therefore, a method <code>call()</code> might create an empty slot for a <code>Call</code> instruction (line 17)
+and a method <code>end()</code> is called when the function definition is complete
+to fill these slots (lines 32 to 34).</p>
+<p>Similarly, <code>return()</code> directs all function returns to the end of the function code (line 20)
+and <code>end()</code> inserts the necessary forward branch instructions (lines 36 to 39).</p>
+<p><code>storeOk()</code> checks if a function result is assigned within the current function definition (line 23)
+and displays an error message if not.</p>
+<p><code>store()</code> codes the <code>ReturnValue</code> instruction
+which sets the function result (line 29).</p>
+<p><code>end()</code> delegates to <code>exit()</code> to code the <code>Return</code> instruction which ends
+function execution (line 43).</p>
+<p>All of these methods are designed to be overwritten
+if function setup and cleanup have to be changed.</p>
+<p>All three symbol classes are defined using getters so that they can be overwritten
+in action subclasses. The result values of the getters are <a href="https://en.wikipedia.org/wiki/Memoization" title="memoize">memoized</a> using the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_assignment" title="??="><code>??=</code> operator</a> so that tests like <code>symbol</code> <code>instanceof</code> <code>this.Fun</code>
+produce the intended result.</p>
+<p><a href="module-Seven-Functions04.html#_find"><code>_find()</code></a> and
+<a href="module-Seven-Functions04.html#_dcl"><code>_dcl()</code></a> manage the symbol table,
+<a href="module-Seven-Functions04.html#_alloc"><code>_alloc()</code></a> allocates addresses for new variables:</p>
+<pre class="prettyprint source"><code>  /** Returns symbol description for name, if any */
+  _find (name, report) {
+    const sym = this.symbols.get(name);
+    if (report && !sym) this.parser.error(`${name}: undefined`);
+    return sym;
+  }
+  
+  /** (Re-)defines and returns `sym`, cannot be undefined */
+  _dcl (sym, report) {
+    if (report && this.symbols.get(sym.name))
+      this.parser.error(`${sym.name}: duplicate`);
+    this.symbols.set(sym.name, sym);
+    return sym;
+  }
+  
+  /** Returns new `Var` at next global address. */
+  _alloc (name) { return new this.Var(this, name, this.size ++); }
+</code></pre>
+<p><a href="module-Seven-Functions04.html#_find"><code>_find()</code></a> returns a symbol description for a name
+and can optionally report that the symbol is undefined.
+<a href="module-Seven-Functions04.html#_dcl"><code>_dcl()</code></a> enters a symbol description into the symbol table
+and can optionally report that this is a duplicate definition.</p>
+<h4 id="actions">Actions</h4>
+<p>Given functions,
+<code>Name</code> can refer to either a function or a variable;
+therefore, actions have to be created or revised for all rules involving <code>Name</code>.</p>
+<pre class="prettyprint source"><code>   // names: Name [{ ',' Name }];
+  names (name, some) {
+     const dcl = name => this._dcl(this._alloc(name), true);
+     dcl(name);
+     if (some) some[0].forEach(list => dcl(list[1]));
+     return 1 + (some ? some[0].length : 0);
+  }
+</code></pre>
+<p><code>names</code> creates variable descriptions for a list of names
+and uses <a href="module-Seven-Functions04.html#_dcl"><code>_dcl()</code></a> to enter them into the symbol table
+and report duplicates.</p>
+<pre class="prettyprint source"><code>  // name: Name;
+  name (name) {
+    const sym = this._find(name, true);
+    if (sym instanceof this.Fun) sym.call();
+    else if (sym) sym.load();
+  }
+</code></pre>
+<p>In an expression,
+a <code>Name</code> can trigger a function call (line 4 above)
+which will eventually leave the result on top of the stack,
+or it can cause the current value of a variable to be pushed onto the stack (line 5).
+Code generation for either case is handled by the symbol description as discussed above.
+If a name is undefined <a href="module-Seven-Functions04.html#_find"><code>_find()</code></a> reports an error
+and no code is generated (line 5).</p>
+<pre class="prettyprint source"><code>  // assign: Name [ '=' sum ];
+  assign (name, sum) {
+    const sym = this._find(name, true);
+    if (sym) {
+      if (sym instanceof this.Var)
+        if (sum && sym.storeOk()) sym.store();   // variable = sum
+        else this.parser.error(`${name}: cannot call a variable`);
+      else if (!sum) sym.call();                   // function call
+      else if (sym.storeOk()) sym.store();        // function = sum
+      this.machine.gen('Pop');                       // clear stack
+    }
+  }
+</code></pre>
+<p>In an assignment statement
+<code>Name</code> can refer to a function or a variable.
+Code is only generated if <a href="module-Seven-Functions04.html#_find"><code>_find()</code></a>
+provides a description and does not report an error (line 4 above).
+If it is a variable (line 5)
+and if there is something to assign
+<code>sym.store()</code> is called to generate the <code>Store</code> instruction (line 6).
+Otherwise there is an error because a variable cannot be called (line 7).
+If it is a function name and nothing to assign
+<code>sym.call()</code> takes care of the <code>Call</code> instruction (line 8).
+If there is something to assign
+<code>sym.store()</code> can be called if the name refers to the current function,
+i.e., if the assignment is in the function body (line 9);
+otherwise <code>sym.storeOK()</code> reports the assignment to the function name as an error.
+Finally, the stack has to be popped
+to discard the assigned value or the function result (line 10).</p>
+<pre class="prettyprint source"><code>  // return: 'return' [ sum ];
+  return (r, sum) {
+    if (sum && this.funct.storeOk())
+      (this.funct.store(), this.machine.gen('Pop'));
+    this.funct.return();
+  }
+</code></pre>
+<p>If a <code>return</code> statement includes a value,
+the current function's <code>store()</code> method will assign it as a function result
+and then the value has to be popped off the stack (line 4 above).
+Function termination is arranged by the function description's <code>return()</code> method (line 5).</p>
+<p>Functions can be declared so that they can be called before they are defined:</p>
+<pre class="prettyprint source"><code>funs: { fun };
+fun: head [ 'begin' stmts 'end' ] ';';
+head: 'function' Name;
+</code></pre>
+<p><code>head</code> is recognized before <code>fun</code> and the function body if any,
+i.e., the action for <code>head</code> happens first:</p>
+<pre class="prettyprint source"><code>  // head: 'function' Name;
+  head (f, name) {
+    let sym = this._find(name);
+    if (! (sym instanceof this.Fun)) {
+      if (sym instanceof this.Var)
+        this.parser.error(`${name}: used as variable and function`);
+      sym = this._dcl(new this.Fun(this, name));
+    }
+    if (typeof sym.start == 'number') {
+      this.parser.error(`${name}: duplicate`);
+      sym = this._dcl(new this.Fun(this, name));           // patch
+    }
+    sym.entry();                // generate code for function entry
+    return this.funct = sym;                         // in function
+  }
+</code></pre>
+<p>First there is some semantic analysis:</p>
+<ul>
+<li>
+<p>A variable name cannot be a function name (line 5 above);
+to allow further processing it is redeclared as a function (line 7).</p>
+</li>
+<li>
+<p>An undefined name is declared as a function (line 7).</p>
+</li>
+<li>
+<p>A function cannot be <em>defined</em> more than once (line 9) —
+<code>sym.start</code> will contain an address once there is code for the function.</p>
+</li>
+</ul>
+<p><code>head</code> may be the beginning of a function definition;
+therefore <code>sym.entry()</code> is called to generate the code to start the function (line 13).
+Finally, the current function is posted in <code>this.funct</code> and returned (line 14).</p>
+<p>Once code generation for the function body is complete
+— or immediately if there is no body — the <code>fun</code> action
+performs some cleanup:</p>
+<pre class="prettyprint source"><code>  // head [ 'begin' stmts 'end' ] ';';
+  fun (head, opt, _) {
+    if (opt) head.end();            // function definition: wrap up
+    else head.undo();   // function declaration: discard entry code
+    this.funct = null;                           // not in function
+  }
+</code></pre>
+<p><code>head</code> provides access to the function description.
+If there is a function body the <code>end()</code> method <a href="#infrastructure">described previously</a>
+inserts <code>Call</code> and <code>Branch</code> instructions and generates the code
+to return from the function call (line 3 above).
+Otherwise this was only a function declaration and <code>undo()</code>
+removes the effect of <code>entry()</code> in the <code>head</code> action (line 4).
+Finally, <code>this.funct</code> is set to <code>null</code>
+to signal that code generation has left the body of the function (line 5).</p>
+<p>All actions for functions and their consequences are in place.
+Expressions can be retained from the
+previous (untyped) version of the little language,
+i.e., from <a href="../?eg=06/11">example 6/11</a>.
+The <code>prog</code> action performs some final cleanup
+and generates the stack machine:</p>
+<pre class="prettyprint source"><code>  // prog: [ vars ] funs;
+  prog (v, f) {
+    const main = this._check_defs(this.symbols),  // flag undefined
+      startAddr = this.machine.code.length,      // at startup code
+      trace = this._find('trace'),  // does variable 'trace' exist?
+      traceAddr = trace instanceof this.Var ? trace.addr : false;
+    if (main) this._startup(main);         // generate call to main
+    else this.parser.error('main: undefined');
+    if (traceAddr !== false) {                 // if 'trace' exists
+      puts(this.machine.toString());                  // show code,
+      this.symbols.forEach(s => puts(s.toString()));    // symbols,
+      puts('stack starts at', this.size);   // variable memory size
+      if (main) puts('execution starts at', startAddr);
+    }
+    return this.machine.run(this.size, startAddr, traceAddr);
+  }
+</code></pre>
+<p><a href="tutorial-06-compile.html#prog-11">Just as before</a>
+tracing depends on the existence of a symbol named <code>trace</code> (line 5 above)
+but <code>trace</code> has to be a variable (line 6).
+If so, the generated code, the symbols, and the initial memory size are shown (lines 9 to 14).
+The stack machine generator creates the executable as before (line 15);
+however, functions definitions have to be checked (line 2)
+and the initial call to <code>main</code> has to be generated (line 7)
+which will determine the start address of the executable.</p>
+<p><a href="module-Seven-Functions04.html#_check_defs"><code>_check_defs()</code></a> checks all symbols to make sure that
+all functions have a defined start address and
+it returns the description for <code>main</code> if it is a defined function:</p>
+<pre class="prettyprint source"><code>  _check_defs (map) {
+    let main = undefined;
+    map.forEach(sym => {
+      if (sym instanceof this.Fun)
+        if (typeof sym.start != 'number')
+          this.parser.error(`${sym.name}: undefined function`);
+        else if (sym.name == 'main')
+          main = sym;
+    });
+    return main;
+  }
+</code></pre>
+<p>If <code>main</code> was defined,
+<a href="module-Seven-Functions04.html#_startup"><code>startup()</code></a>
+generates instructions to call the function and print the result
+and returns the start address of the instructions.</p>
+<pre class="prettyprint source"><code>  _startup (main) {
+    this.machine.gen('Call', main.start);     // call main function
+    this.machine.gen('Print', 1);                  // print and pop
+  }
+}
+</code></pre>
+<p>Tracing was introduced <a href="tutorial-06-compile.html#control-structures">in chapter six</a>.
+Check out how a function is called and how it returns a result in
+<a href="../?eg=07/04">example 7/04</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to create the executable, and</p>
+</li>
+<li>
+<p>repeatedly press <span class='c-1'></span> to execute one step at a time.</p>
+</li>
+<li>
+<p>Alternatively, add statements <code>trace</code> <code>=</code> <code>-1</code>, <code>trace</code> <code>=</code> <code>1</code>,
+or <code>trace</code> <code>=</code> <code>input</code> to turn tracing off and on, or</p>
+</li>
+<li>
+<p>add <code>trace</code> to the list of global variables (which are initialized to zero)
+to trace everything.</p>
+</li>
+</ul>
+<p><a href="../?eg=07/05">Example 7/05</a> demonstrates 13 semantic errors:</p>
+<pre class="prettyprint source"><code>  var a, a;
+  function undefined;
+  function a;
+  function g begin g = 1 end;
+  function f begin f = 2; g = 3; v = 4 end;
+  function v;
+  function f begin
+    return;
+    v = 5; v; undef; f = 6
+  end;
+  function g;
+</code></pre>
+<ul>
+<li>
+<p>duplicate global variable names (in line 1 above),</p>
+</li>
+<li>
+<p>a name <code>a</code> which is defined as a variable and forward declared as a function (line 3),</p>
+</li>
+<li>
+<p>a function names <code>g</code> and <code>v</code> which are assigned to outside the function definitions (lines 5 and 9),</p>
+</li>
+<li>
+<p>an undefined variable name 'v' (line 5),</p>
+</li>
+<li>
+<p>a duplicate function definition (line 7),</p>
+</li>
+<li>
+<p>a function <code>undef</code> which is used but not declared (or defined) (line 9),</p>
+</li>
+<li>
+<p>forward declarations for functions <code>a</code>, <code>v</code>, and <code>undefined</code> which are never defined (lines 2, 3, and 6),</p>
+</li>
+<li>
+<p>a forward declaration for <code>g</code> <em>after</em> the function has been defined (line 11),</p>
+</li>
+<li>
+<p>and no definition for a <code>main</code> function.</p>
+</li>
+</ul>
+<h3 id="local-variables">Local Variables</h3>
+<p>In this section the <a href="#functions">little language with functions</a>
+will be extended with local variables.
+Changes to the grammar can be seen <a href="7.04-7.06.html">on this page</a>,
+new stack machine and action methods can be seen
+<a href="../methods.html?file=modules/07.js&amp;item=Machine04&amp;item=Machine06&amp;item=Functions04&amp;item=Parameters06">in the method browser</a>.</p>
+<h4 id="frames">Frames</h4>
+<p>Real functions have parameters and local variables.
+This complicates the code when entering and exiting a function:</p>
+<ul>
+<li>
+<p>At entry, argument values are connected to parameter names
+and memory is allocated for local variables.</p>
+</li>
+<li>
+<p>At exit, cleanup is required so that <code>Return</code> only leaves a result behind —
+this is why a <code>return</code> inside a function body is coded as a branch to the exit code.</p>
+</li>
+</ul>
+<p>Recursion complicates access to parameters and local variables even more
+because the values exist once for each level of recursion
+and the names refer to the latest activation of each function.</p>
+<p>Rather than just stacking a return address and a result value slot
+as <a href="../?eg=07/04">in example 7/04</a>,
+now frames, also called <a href="https://en.wikipedia.org/wiki/Call_stack" title="activation record">activation records</a>, have to be stacked
+which additionally contain argument values and local variables:</p>
+<div class='diagram'>
+  <table>
+    <col style='width: 30%'>
+    <col style='width: 35%'>
+    <col style='width: 45%'>
+    <tr>
+      <td> <img src='07/global.svg' alt='global'> </td>
+      <td> <img src='07/global-o-i.svg' alt='function'> </td>
+      <td> <img src='07/global-o-i-i.svg' alt='recurse'> </td>
+    </tr>
+  </table>
+</div>
+<p>Memory use evolves:</p>
+<ul>
+<li>
+<p>Initially there are global variables.</p>
+</li>
+<li>
+<p>Once function <code>a</code> is called and itself calls function <code>b</code>
+there are two <em>locals</em> frames.</p>
+</li>
+<li>
+<p>If there is a recursive call from <code>b</code> to <code>a</code>
+there are three <em>locals</em> records.</p>
+</li>
+</ul>
+<p>The <em>locals</em> are chained on a <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>dynamic link</em></a>
+so that the exit code and <code>Return</code> can clean them up in reverse order.</p>
+<p>Addressing also gets more complicated:</p>
+<ul>
+<li>
+<p>Global variables have <em>absolute addresses</em>, determined at compile time.</p>
+</li>
+<li>
+<p>Local variables have <em>relative addresses</em>,
+i.e., offsets within their frame,
+which have to be added
+to the <em>base address</em> where the frame begins at run time.
+The offset is determined at compile time but —
+as the graphic indicates —
+the base address depends on the call history.</p>
+</li>
+</ul>
+<p>In summary, if <em>parms</em> is the number of parameters of a function, a frame contains
+the following:</p>
+<table>
+<thead>
+<tr>
+<th>offset</th>
+<th>content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+0</code>...</td>
+<td>argument values for the parameters, if any</td>
+</tr>
+<tr>
+<td><code>+</code><em>parms</em></td>
+<td>the return address for the function</td>
+</tr>
+<tr>
+<td><code>+</code><em>parms</em><code> +1</code></td>
+<td>a slot for the dynamic link,<br>i.e., the address of the frame of the caller</td>
+</tr>
+<tr>
+<td><code>+</code><em>parms</em><code> +2</code></td>
+<td>a slot for the function result</td>
+</tr>
+<tr>
+<td><code>+</code><em>parms</em><code> +3</code>...</td>
+<td>values for the local variables</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="module-Seven-Machine04_Memory.html"><code>Memory</code></a> class
+from <a href="../?eg=07/04">example 7/04</a>
+is extended with a <em>frame pointer</em> register, represented as a property <code>.fp</code> (line 4 below), and
+<code>toString()</code> is overwritten to display the stack as a sequence of frames:</p>
+<pre class="prettyprint source"><code>class Machine06 extends Seven.Machine04 {
+  get Memory () {
+    return this.#Memory ??= class extends super.Memory {
+      fp = 0;                           // global frame starts at 0
+      frames = [ 0 ];   // toString(): list of number of parameters
+      
+      toString () {
+        let fp = this.fp,                   // begin of (top) frame
+          to = this.length;                   // end of (top) frame
+        return this.frames.map((parms, n) => {
+          try {
+            return `${fp}:[ ${this.slice(fp, to).
+              map(slot => this.mapSlot(slot)).join(' ')} ]`;
+          } catch (e) { throw e;                // shouldn't happen
+          } finally {
+            to = fp;             // end and begin of previous frame
+            if (n == this.frames.length-1) fp = 0;       // globals
+            else fp = this[fp + parms + 1];       // previous frame
+          }
+        }).reverse().join(' ');
+      }
+      
+      mapSlot (slot) {                   // hook to interpret slots
+        return typeof slot == 'undefined' ? 'undefined' : slot;
+      }
+    };
+  }
+  #Memory;
+</code></pre>
+<p>The frames can be displayed by following the dynamic link
+which at this point depends on the number of parameters in each frame.
+At this point this is stored in a list represented as a property <code>.frames[]</code> (line 5 above).</p>
+<p>The top frame on the stack extends from <code>.fp</code> to the current end of the memory array (lines 8 and 9).
+In a loop over the frames (line 10) a frame is accessed using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" title="slice()"><code>slice()</code></a> (line 12)
+and each slot is represented as a string using a function <code>mapSlot()</code> which might be overwritten (lines 13 and 24).</p>
+<h4 id="machine-instructions-1">Machine Instructions</h4>
+<p>Argument values are pushed onto the stack
+before a function is called.
+The <code>Entry</code> instruction at the beginning of each function
+has to initialize the frame as described above,
+given that
+<code>parms</code> is the number of parameters of the function
+and <code>size</code> is the memory requirement of the
+new frame:</p>
+<pre class="prettyprint source"><code>  /** `stack: ... arguments old-pc
+      -> ... arguments old-pc old-fp result locals` */
+  Entry (parms, size) { 
+    return memory => {
+      const locals = size - parms - 3,           // local variables
+        fp = memory.length - parms - 1;         // new frame's base
+      memory.push(memory.fp, 0);             // push old-fp, result
+      if (locals)                   // push local variables, if any
+        memory.push(... Array(locals).fill(0));
+      memory.fp = fp;                           // new dynamic link
+      memory.frames.unshift(parms);  // push frames stack for trace      
+    };
+  } 
+</code></pre>
+<p>The frame contains a slot for the function result, initialized to <code>0</code> (line 7 above).
+This slot can be treated just like a local variable
+but for the fact that it is only assigned to.</p>
+<p>The <code>Exit</code> instruction at the end of each function
+reverts to the previous frame pointer (line 6 below)
+and removes all but the return address and result value from the stack
+as the <code>Return</code> instruction expects it (lines 7 and 8):</p>
+<pre class="prettyprint source"><code>  /** `stack: ... arguments old-pc old-fp result locals
+      -> ... result old-pc` */
+  Exit (parms) {  
+    return memory => {
+      const fp = memory.fp;                        // current frame
+      memory.fp = memory[fp + parms + 1];   // restore dynamic link
+      memory.splice(fp, Infinity,  // pop frame, push result old-pc
+        memory[fp + parms + 2], memory[fp + parms]);
+      memory.frames.shift();            // pop frames stack (trace)
+    };
+  }
+</code></pre>
+<p><code>return</code> statements within the body of the function are coded as branches
+to the <code>Exit</code> instruction.</p>
+<p>Parameters and local variables have to be addressed relative to the frame pointer
+using two new instructions:</p>
+<pre class="prettyprint source"><code>  /** `stack: ... -> ... frame[addr]` */
+  LoadFP (addr) {
+    return memory => memory.push(memory[memory.fp + addr]);
+  }
+
+  /** `stack: ... val -> ... val | frame[addr]: val` */
+  StoreFP (addr) {
+    return memory => memory[memory.fp + addr] = memory.at(-1);
+  }
+}
+</code></pre>
+<h4 id="grammar-modifications-1">Grammar Modifications</h4>
+<p>To enable semantic analysis in the actions of syntax analysis,
+functions have to be declared before use,
+and a design decision is necessary
+to determine the scope of declarations
+in a way that is compatible with the activation record stack:</p>
+<ul>
+<li>
+<p>A function should not have access to the local
+variables and parameters of a different function
+because its frame might not exist.</p>
+</li>
+<li>
+<p>Functions may have access to global variables.</p>
+</li>
+<li>
+<p>Local names may <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadow</a> global names.</p>
+</li>
+</ul>
+<p>For example, &quot;declare before use&quot; for variables could be done prior to
+functions and at the beginning of function bodies, and
+missing declarations could be considered errors:</p>
+<pre class="prettyprint source"><code>prog: GLOBAL { fun };
+fun: head [ 'begin' [ LOCAL ] stmts 'end' ];
+head: 'function' Name '(' [ parms ] ')';
+parms: Name [{ ',' Name }];
+</code></pre>
+<p>Alternatively, in the absence of <code>GLOBAL</code> and <code>LOCAL</code> above,
+unknown names could be resolved in the closest scope,
+i.e., enclosing function.</p>
+<p>In this case there could be <code>GLOBAL</code> import declarations
+so that functions could share some global variables:</p>
+<pre class="prettyprint source"><code>fun: head [ 'begin' [ GLOBAL ] stmts 'end' ];
+</code></pre>
+<p>As a third alternative, unknown names could be resolved
+in the global scope, i.e., visible to any function unless <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a> by parameter names.</p>
+<p>In this case there could be <code>LOCAL</code> definitions as above
+so that functions can have local variables in addition to parameters.</p>
+<p>The design choice among these alternatives depends on
+perceived convenience vs. the wish to prevent errors due to
+scope violations.</p>
+<p>The little language in
+<a href="../?eg=07/06">example 7/06</a>
+requires strict &quot;declare before use&quot;
+and uses global and local declarations:</p>
+<pre class="prettyprint source"><code>prog: [ vars ] funs;
+vars: 'var' names ';';
+names: Name [{ ',' Name }];
+funs: { fun };
+fun: head parms [ block ] ';';
+head: 'function' Name;
+parms: '(' [ names ] ')';
+block: 'begin' [ vars ] stmts 'end';
+</code></pre>
+<p><code>names</code> before all functions define global variables (lines 1 to 3 above),
+<code>names</code> in a <code>block</code> define local variables (line 8), and
+<code>names</code> in <code>parms</code> declare parameter names local to the function (line 7).</p>
+<p><code>begin</code> and <code>end</code> delimit a <code>block</code> (line 8) to avoid an ambiguity
+between a semicolon separating statements and a semicolon terminating a function definition.</p>
+<p>On the other hand, the semicolons terminating function and variable declarations
+are not required to disambiguate —
+they are punctuation in the spirit of <code>end</code>, <code>fi</code>, and <code>od</code>.</p>
+<p>A forward declaration omits the function body (line 5).
+The number of parameters in a forward declaration
+has to match the function definition,
+the parameter names need not.</p>
+<p>A <code>Name</code> can be assigned to or called with function arguments in a statement,
+or it can be referenced and called with function arguments in an expression.
+The common aspects can be emphasized by changes to the grammar:</p>
+<pre class="prettyprint source"><code>assign: symbol action;
+action: store | call;
+store: '=' sum;
+call: args;
+args: '(' [ sums ] ')';
+
+name: symbol [ args ];
+symbol: Name;
+</code></pre>
+<p>In addition to distinguishing the use of variable and function names,
+semantic analysis now has to check that the numbers of parameters
+and argument values agree
+and that a forward declaration of a function
+specifies as many parameters — irrespective of the actual names —
+as the function definition.</p>
+<p><a href="../?eg=07/07">Example 7/07</a>
+contains all semantic errors:</p>
+<pre class="prettyprint source"><code>var f, dup, dup;
+function undefined ();
+function a ();
+function a (dup) begin var dup; dup = 1 end;
+function a (x) begin var y; y = 1 end;
+function b () begin b = 2 end;
+function f () begin f = 3; g = 4 end;
+function main () begin
+  a();
+  a = 5;
+  undef();
+  dup()
+end;
+</code></pre>
+<ul>
+<li>
+<p>a global variable <code>dup</code> defined more than once (line 1),</p>
+</li>
+<li>
+<p>a function <code>a</code> declared forward with no parameters but defined with one (lines 3 and 4),</p>
+</li>
+<li>
+<p>a local variable <code>dup</code> with the same name as a parameter (line 4),</p>
+</li>
+<li>
+<p>a second definition for the function <code>a</code> (line 5),</p>
+</li>
+<li>
+<p>a function <code>f</code> with the same name as a global variable (line 7),</p>
+</li>
+<li>
+<p>an undefined variable <code>g</code> (line 7),</p>
+</li>
+<li>
+<p>a call to <code>a</code> where the number of arguments and parameters differ (line 9),</p>
+</li>
+<li>
+<p>an assignment to the function name <code>a</code> outside the function definition (line 10),</p>
+</li>
+<li>
+<p>an undefined function <code>undef</code> (line 11),</p>
+</li>
+<li>
+<p>a function call to the variable <code>dup</code> (line 12), and</p>
+</li>
+<li>
+<p>a forward declared function <code>undefined</code> (line 2) which is not defined.</p>
+</li>
+</ul>
+<h4 id="infrastructure-1">Infrastructure</h4>
+<p>Local names can <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadow</a> global names,
+i.e., attributes such as type or address can differ.
+Therefore, a function needs a local symbol table (line 5 below):</p>
+<pre class="prettyprint source"><code>class Parameters06 extends Seven.Functions04 {
+  get Fun () { return this.#Fun ??= class extends super.Fun {
+      parms;                                // number of parameters
+      addr;              // offset of function result slot in frame
+      #locals = new Map();      // maps local names to descriptions
+      get locals () { return this.#locals; }
+      set locals (locals) { this.#locals = locals; }
+      #size = 0;                        // next address, frame size
+      get size () { return this.#size; }
+      set size (size) { this.#size = size; }
+</code></pre>
+<p><a href="module-Seven-Parameters06_Fun.html"><code>Fun</code></a>,
+the class of function descriptions in the symbol table, is extended (line 2 above).
+It now contains the number of parameters (line 3),
+the relative address of the function result in the frame (line 4),
+the symbol table for parameters and local variables (lines 5 to 7),
+and the size of the frame (lines 8 to 10).
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" title="getter">Getters and setters</a> are used
+so that further restrictions on the visibility of names can be added.</p>
+<p>Code generation for functions has to be modified and extended:</p>
+<pre class="prettyprint source"><code>      entry () {  // defines start address, arranges slot for Entry
+        this.start = this.owner.machine.code.push(null) - 1;
+      }  
+      setParms () {         // frame: parms, old-pc, old-fp, result
+        if (typeof this.parms != 'undefined' 
+            && this.parms != this.size)
+          this.owner.parser.error(`${this.name} parameters: ` +
+            `previously ${this.parms}, now ${this.size}`);
+        this.parms = this.size;         // set number of parameters
+        this.size += 2;         // leave room for old pc and old fp
+        this.addr = this.size ++;          // leave slot for result
+      }
+      undo () {
+        this.locals = new Map();             // undefine parameters
+        this.size = 0;            // reset next address, frame size
+        super.undo();
+      }
+      store () {                                   // use `StoreFP`
+        this.owner.machine.gen('StoreFP', this.addr);
+      }
+      exit () {           // fills Entry, generates Exit and Return
+        this.owner.machine.code[this.start] =
+          this.owner.machine.ins('Entry', this.parms, this.size);
+        this.owner.machine.gen('Exit', this.parms);
+        this.owner.machine.gen('Return');
+      }    
+      toString () {
+        const names = [];
+        this.locals.forEach(sym => names.push(sym.name));
+        return `function ${this.name} start ${this.start} ` +
+          `parms ${this.parms} size ${this.size} ` +
+          `[ ${names.join(' ')} ]`;
+      }
+    };
+  }
+  #Fun;
+</code></pre>
+<p><code>entry()</code> leaves room for an <code>Entry</code> instruction (line 2 above).
+This instruction can only be created by <code>exit()</code>
+once the number of parameters and the frame size are known (lines 22 and 23).</p>
+<p><code>setParms()</code> will be called once the names in the parameter list, if any, have been declared.
+The method ensures that declarations match (line 6),
+records the number of parameters,
+leaves room for the old frame pointer and function result in the frame,
+and records the address of the function result (lines 9 to 11).</p>
+<p><code>setParms()</code> is called for both, a forward declaration and a definition of a function.
+<code>undo()</code> is called for a forward declaration and is extended to remove
+the symbol table in order to discard the parameter names in the declaration
+and reset the frame size so that nothing has been allocated in the frame yet (lines 14 and 15).</p>
+<p>The <code>ReturnValue</code> instruction is no longer used.
+<code>store()</code> uses a <code>StoreFP</code> instruction to copy the function result
+from the stack into the slot at <code>.addr</code> reserved by <code>setParms()</code> (line 19).</p>
+<p>As before, <code>exit()</code> generates a <code>Return</code> instruction,
+but it is also responsible for inserting the <code>Entry</code> and <code>Exit</code> instructions
+which require information about parameters and frame size (lines 22 to 25).
+Needless to say, on real hardware there would be boilerplate instruction sequences
+for function entry and exit which <code>exit()</code> would still generate.</p>
+<p>Variables can be local in a frame or global,
+and different instructions are needed to access their values.
+Therefore, <a href="module-Seven-Parameters06_Var.html"><code>Var</code></a>,
+the class of variable descriptions in the symbol table, has to be extended, too:</p>
+<pre class="prettyprint source"><code>  get Var () { return this.#Var ??= class extends super.Var {
+      depth;                               // 0: global, else local
+      
+      constructor (owner, name, addr, depth) {
+        super(owner, name, addr); this.depth = depth;
+      }
+      load () {                        // generate load instruction
+        if (this.depth)                                    // local
+          this.owner.machine.gen('LoadFP', this.addr);
+        else                                              // global
+          this.owner.machine.gen('Load', this.addr);
+      }
+      store () {                      // generate store instruction
+        if (this.depth)                                    // local
+          this.owner.machine.gen('StoreFP', this.addr);
+        else                                              // global
+          this.owner.machine.gen('Store', this.addr);
+      }
+      toString () {
+        return `${this.name} at ${this.depth ? '+' : ''}${this.addr}`;
+      }
+    };
+  }
+  #Var;
+</code></pre>
+<p>A new property <code>.depth</code> differentiates between local and global variables (line 2 above).
+It has to be set when the variable is created (lines 4 and 5).
+<code>load()</code> and <code>store()</code> consult the property to create the appropriate
+instruction for local and global access.</p>
+<pre class="prettyprint source"><code>  /** Replace: returns new `Var` at next local/global address. */
+  _alloc (name) {
+    if (this.funct)                      // create local variable
+      return new this.Var(this, name, this.funct.size ++, 1);
+    else                                // create global variable
+      return new this.Var(this, name, this.size ++, 0);
+  }  
+
+  /** Extend: checks local then global map, returns `sym` */
+  _find (name, report) {
+    let sym;
+    if (this.funct && (sym = this.funct.locals.get(name)))
+      return sym;                                          // local
+    return super._find(name, report);                     // global
+  }
+
+  /** Replace: sets innermost map, returns `sym` */
+  _dcl (sym, report) {
+    const map = this.funct ? this.funct.locals : this.symbols;
+    
+    if (report && map.get(sym.name))
+      this.parser.error(`${sym.name}: duplicate`);
+    map.set(sym.name, sym);
+    return sym;
+  }
+</code></pre>
+<p><a href="module-Seven-Parameters06.html#funct"><code>funct</code></a>
+contains the description of a function exactly while the function is compiled.</p>
+<p><a href="module-Seven-Parameters06.html#_alloc"><code>_alloc()</code></a> uses
+<a href="module-Seven-Parameters06.html#funct"><code>funct</code></a>
+to create a local variable in the frame described by
+<a href="module-Seven-Parameters06.html#funct"><code>funct</code></a>
+(line 4 above)
+or a global variable (line 6).
+In each case a new address is created from the corresponding <code>size</code> counter.</p>
+<p><a href="module-Seven-Parameters06.html#_find"><code>_find()</code></a> uses
+<a href="module-Seven-Parameters06.html#funct"><code>funct</code></a>
+to check for local names before global names (line 12).
+This implements <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>.</p>
+<p>Similarly, <a href="module-Seven-Parameters06.html#_dcl"><code>_dcl()</code></a> uses
+<a href="module-Seven-Parameters06.html#funct"><code>funct</code></a>
+to declare a name in a local or global symbol table (line 19)
+and report duplicates, if any.</p>
+<pre class="prettyprint source"><code>  _startup (main) {
+    for (let p = 0; p &lt; main.parms; ++ p)
+      this.machine.gen('Push', 0);
+    super._startup(main);
+  }
+</code></pre>
+<p>Finally, <a href="module-Seven-Parameters06.html#_startup"><code>_startup()</code></a>
+has to be extended to allocate room for the parameters of the <code>main()</code> function
+(lines 2 and 3 above) before the function can be called to start execution.</p>
+<h4 id="statements">Statements</h4>
+<p>While the grammar now unifies the use of a <code>Name</code> in an assignment statement
+and in an expression, the rule changes <a href="#grammar-modifications-1">described earlier</a> create a problem:</p>
+<pre class="prettyprint source"><code>assign: symbol action;
+action: store | call;
+store: '=' sum;
+call: args;
+args: '(' [ sums ] ')';
+
+name: symbol [ args ];
+symbol: Name;
+</code></pre>
+<p>An <code>assign</code> statement operates on a <code>symbol</code>, i.e., a <code>Name</code> (lines 1 and 8 above).
+However, there are two possible operations (line 2):
+either a value is assigned to a variable (line 3)
+or a function is called with an argument list (line 4).
+Similarly, in the context of an expression,
+either a variable value is pushed onto the stack
+or — again — a function is called with an argument list (line 7).</p>
+<p>Recognition starts top-down with the start rule of the grammar,
+but the rules call their actions from leaf nodes such as <code>symbol</code>
+back to the start rule.
+It is predictable from the grammar
+in which exact order recognition will complete:</p>
+<pre class="prettyprint source"><code>symbol: Name;
+  store: '=' sum;
+  args: '(' [ sums ] ')';
+    call: args;
+      action: store | call;
+        assign: symbol action;
+        name: symbol [ args ];
+</code></pre>
+<p>Given the order in which the actions are called,
+it easy to design what each action should do:</p>
+<table>
+<thead>
+<tr>
+<th>rule</th>
+<th>action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol: Name;</code></td>
+<td>find description</td>
+</tr>
+<tr>
+<td><code>store: '=' sum;</code></td>
+<td>if variable generate <code>Store</code></td>
+</tr>
+<tr>
+<td><code>args: '(' [ sums ] ')';</code></td>
+<td>generate code to stack each value<br>finally call function</td>
+</tr>
+<tr>
+<td><code>call: args;</code></td>
+<td><em>nothing to do</em></td>
+</tr>
+<tr>
+<td><code>action: store | call;</code></td>
+<td><em>nothing to do</em></td>
+</tr>
+<tr>
+<td><code>assign: symbol action;</code></td>
+<td>pop stack</td>
+</tr>
+<tr>
+<td><code>name: symbol [ args ];</code></td>
+<td>if variable generate <code>Load</code><br>else <em>nothing to do</em></td>
+</tr>
+</tbody>
+</table>
+<p>However, there is a lack of information flow while <code>assign</code> is recognized, e.g.,
+the action for <code>symbol</code> finds a description
+but the action for <code>store</code> will not receive it as a parameter.
+Similarly,
+the action for <code>args</code> seems to have no access to the description of the function to be called.</p>
+<p><a id='context'></a><a href="../?eg=05/10">Example 5/10</a> demonstrated that action methods
+should use the actions class as context to communicate with each other,
+i.e., <code>symbol</code> needs to put the description somewhere into <code>this</code> so that
+<code>store</code> and <code>args</code> — one of which is called later — can access it.</p>
+<p><a href="module-Seven-Parameters06.html#context"><code>this.context</code></a> has to be a stack
+because the <code>store</code> and <code>args</code> rules both involve <code>sum</code>
+which in turn could involve another <code>name</code> and <code>symbol</code>...
+Therefore, <a href="module-Seven-Parameters06.html#context"><code>this.context</code></a>
+is implemented with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" title="getter"><code>get</code> and <code>set</code></a>:</p>
+<pre class="prettyprint source"><code>  get context () {
+    if (this.#contexts.length) return this.#contexts.at(-1);
+    throw 'no context';                              //can't happen
+  }
+  set context (context) {            // push a value, pop with null
+    if (context) this.#contexts.push(context);
+    else this.#contexts.pop();
+  }
+  #contexts = [];
+</code></pre>
+<p>The action for <a href="module-Seven-Parameters06.html#symbol"><code>symbol</code></a> creates a context entry (line 5 below),</p>
+<pre class="prettyprint source"><code>  // symbol: Name;
+  symbol (name) {
+    let sym = this._find(name, true);
+    if (!sym) sym = this._dcl(this._alloc(name));          // patch
+    this.context = { symbol: sym };      // push symbol description
+    return sym;
+  }
+</code></pre>
+<p>The actions for <a href="module-Seven-Parameters06.html#store"><code>store</code></a>
+and <a href="module-Seven-Parameters06.html#args"><code>args</code></a> access the context entry:</p>
+<pre class="prettyprint source"><code>  // store: '=' sum;
+  store (_, sum) {
+    if (this.context.symbol.storeOk())
+      this.context.symbol.store();
+  }
+
+  // args: '(' [ sums ] ')';
+  args (lp, sums, rp) {
+    const sym = this.context.symbol,            // to apply args to
+      nargs = sums ? sums[0] : 0;                 // # of arguments
+    if (!(sym instanceof this.Fun))
+      this.parser.error(`${sym.name}: not a function`);
+    else if (nargs != sym.parms)
+      this.parser.error(`${sym.name} arguments: ` +
+        `expected ${sym.parms}, specified ${nargs}`);
+    else
+      sym.call();                                  // call function
+  }
+</code></pre>
+<p>Calling <a href="module-Seven-Parameters06_Var.html"><code>storeOk()</code></a> ensures that assignment is allowed and
+<a href="module-Seven-Parameters06_Var.html"><code>store()</code></a> generates the appropriate code (lines 3 and 4 above).</p>
+<p><a href="module-Seven-Parameters06.html#args"><code>args()</code></a> ensures that a function is called (line 11)
+and that the numbers of parameters and argument values match (line 13)
+before <a href="module-Seven-Parameters06_Fun.html"><code>call()</code></a> is used to generate code (line 17).</p>
+<p>Finally, the actions for <a href="module-Seven-Parameters06.html#assign"><code>assign</code></a>
+and <a href="module-Seven-Parameters06.html#name"><code>name</code></a> delete the context entry (lines 3 and 13 below):</p>
+<pre class="prettyprint source"><code>  // assign: symbol action;
+  assign (symbol, action) {
+    this.machine.gen('Pop'); this.context = null;    // pop context
+  }
+
+  // name: symbol [ args ]; 
+  name (sym, args) {
+    if (!args)
+      if (sym instanceof this.Fun)
+        this.parser.error(`${sym.name}: no argument list`);
+      else
+        sym.load();                           // variable reference
+    this.context = null;                             // pop context
+  }
+</code></pre>
+<p><a href="module-Seven-Parameters06.html#name"><code>name()</code></a> marks a function reference without arguments as an error (line 9 above).
+The grammar guarantees that the context stack remains balanced at all times.</p>
+<h4 id="just-one-more">Just One More</h4>
+<p>Next up on the way to the start rule of the grammar are function definitions.
+Semantic analysis and code generation for functions consist of five steps:</p>
+<ol>
+<li>declare a function with a local symbol table,</li>
+<li>declare parameters,</li>
+<li>define local variables,</li>
+<li>generate code for the function body, and</li>
+<li>wrap up.</li>
+</ol>
+<p>An action happens after all input required by the corresponding rule has been recognized.
+If something has to happen earlier,
+the rule is split into several rules
+to get the proper timing for the actions:</p>
+<pre class="prettyprint source"><code>fun: 'function' Name '(' [ names ] ')'
+       [ 'begin' [ 'var' names ';' ] stmts 'end' ] ';';
+</code></pre>
+<p>This rule would have a single action
+— plus more for <code>names</code> and <code>stmts</code> —
+and it could not handle the timing of the five steps as described above.
+Instead:</p>
+<pre class="prettyprint source"><code>head: 'function' Name;
+names: Name [{ ',' Name }];
+parms: '(' [ names ] ')';
+vars: 'var' names ';';
+block: 'begin' [ vars ] stmts 'end';
+fun: head parms [ block ] ';';
+</code></pre>
+<p>This amounts to the same rule but the steps
+can now be assigned to different actions,
+here in the order in which they will happen:</p>
+<table>
+<thead>
+<tr>
+<th>rule</th>
+<th>action</th>
+<th>return</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="module-Seven-Functions04.html#head"><code>head</code></a></td>
+<td>[inherited] create function description, set <a href="module-Seven-Parameters06.html#funct"><code>funct</code></a></td>
+<td>symbol</td>
+</tr>
+<tr>
+<td><a href="module-Seven-Functions04.html#names"><code>names</code></a></td>
+<td>[inherited] declare parameters in <a href="module-Seven-Parameters06_Fun.html"><code>funct.locals</code></a></td>
+<td>count</td>
+</tr>
+<tr>
+<td><a href="module-Seven-Parameters06.html#parms"><code>parms</code></a></td>
+<td>call <a href="module-Seven-Parameters06_Fun.html"><code>setParms()</code></a> to layout frame</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="module-Seven-Functions04.html#names"><code>names</code></a></td>
+<td>[inherited] declare variables in <a href="module-Seven-Parameters06_Fun.html"><code>funct.locals</code></a></td>
+<td>count</td>
+</tr>
+<tr>
+<td><code>stmts</code></td>
+<td>[inherited] generate code</td>
+<td></td>
+</tr>
+<tr>
+<td><code>block</code></td>
+<td><em>nothing to do</em></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fun</code></td>
+<td>[inherited] call <a href="module-Seven-Parameters06.html#funct"><code>funct.end()</code> or <code>funct.undo()</code></a>, pop <a href="module-Seven-Parameters06.html#funct"><code>funct</code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>It turns out that there is only one new action:
+<a href="module-Seven-Parameters06.html#parms"><code>parms()</code></a> calls <a href="module-Seven-Parameters06.html#funct"><code>funct.setParms()</code></a>
+to record the number of parameters and layout the function's frame.</p>
+<p>Tracing in <a href="../?eg=07/06">example 7/06</a> confirms the order:</p>
+<ul>
+<li>Enter only <code>function</code> <code>main(a)</code> <code>begin</code> <code>var</code> <code>b;</code> <code>print</code> <code>1</code> <code>end;</code> into the <span class='a-program'></span>.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>toggle <span class='t-actions'></span>, and</li>
+<li>press <span class='c-parse'></span>.</li>
+</ul>
+<p>Here is the redacted output:</p>
+<pre class="prettyprint source"><code>head('function', 'main') returns
+  { function main start 0 parms undefined size 0 [  ] }
+names('a', null) returns 1
+parms('(', [ 1 ], ')') returns undefined
+names('b', null) returns 1
+...
+fun(...) returns undefined
+prog(...) returns (memory, steps) => StackMachine(memory, steps)
+</code></pre>
+<p>Everything is in place, we have reached the top-level rules of the grammar
+which remain unchanged from the <a href="#functions">previous version of the little language</a>:</p>
+<pre class="prettyprint source"><code>prog: [ vars ] funs;
+vars: 'var' names ';';
+names: Name [{ ',' Name }];
+funs: { fun };
+</code></pre>
+<p>The actions remain unchanged, too.
+At the top level, <a href="module-Seven-Parameters06.html#funct"><code>funct</code></a> is <code>null</code>;
+therefore <a href="module-Seven-Parameters06.html#_dcl"><code>_dcl()</code></a> defines the variable names in the global symbol table.</p>
+<p><a href="../?eg=07/08">Example 7/08</a>
+contains mutually recursive functions just as in <a href="../?eg=07/04">example 7/04</a>,
+but this time one version of Euclid's algorithm takes advantage of function parameters.</p>
+<h4 id="tracing">Tracing</h4>
+<p>It is often useful to see how the frames are laid out,
+and what they contain when the program executes,
+as well as the machine instructions before and during execution.</p>
+<p>In <a href="../?eg=07/06">example 7/06</a>:</p>
+<ul>
+<li>Add <code>var trace;</code> before the definition of <code>euclid</code> in the
+<span class='a-program'></span> to define the global variable.</li>
+<li>As usual, press <span class='c-new'></span> to represent and check the grammar, and</li>
+<li>press <span class='c-parse'></span> to compile the executable and
+show the extra information:</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+0: memory => this.Entry(2, 5)(memory)
+1: memory => this.LoadFP(0)(memory)
+2: memory => this.LoadFP(1)(memory)
+3: memory => this.Gt(memory)
+  ...
+30: memory => this.Entry(0, 3)(memory)
+31: memory => this.Input(36)(memory)
+32: memory => this.Input(54)(memory)
+  ...
+42: memory => this.Call(30)(memory)
+43: memory => this.Print(1)(memory)
+trace at 0
+function euclid start 0 parms 2 size 5 [ x y ]
+function main start 30 parms 0 size 3 [  ]
+stack starts at 1
+execution starts at 42
+(memory, steps) => StackMachine(memory, steps)
+</code></pre>
+<ul>
+<li>press <span class='c-run'></span> to execute.
+Global variables such as <code>trace</code> are initialized to <code>0</code>, i.e., execution will be traced:</li>
+</ul>
+<pre class="prettyprint source"><code>> run()
+0:[ 0 ]
+0:[ 0 43 ] 42: memory => this.Call(30)(memory)
+0:[ 0 ] 1:[ 43 0 0 ] 30: memory => this.Entry(0, 3)(memory)
+0:[ 0 ] 1:[ 43 0 0 36 ] 31: memory => this.Input(36)(memory)
+0:[ 0 ] 1:[ 43 0 0 36 54 ] 32: memory => this.Input(54)(memory)
+0:[ 0 ] 1:[ 43 0 0 36 54 34 ] 33: memory => this.Call(0)(memory)
+0:[ 0 ] 1:[ 43 0 0 ] 4:[ 36 54 34 1 0 ] 0: memory => this.Entry(2, 5)(memory)
+  ...
+0:[ 0 ] 1:[ 43 0 0 38 18 ] 28: memory => this.Exit(2)(memory)
+0:[ 0 ] 1:[ 43 0 0 18 ] 29: memory => this.Return(memory)
+0:[ 0 ] 1:[ 43 0 18 18 ] 38: memory => this.StoreFP(2)(memory)
+0:[ 0 ] 1:[ 43 0 18 ] 39: memory => this.Pop(memory)
+0:[ 0 43 18 ] 40: memory => this.Exit(0)(memory)
+0:[ 0 18 ] 41: memory => this.Return(memory)
+18
+0:[ 0 ] 43: memory => this.Print(1)(memory)
+0:[ 0 ]
+</code></pre>
+<p>The output shows the machine instructions as they are executed,
+preceded by the frames.
+First, there is the global frame (line 2 above),
+<code>main()</code> is called (line 3),
+there are two frames,
+and the input values <code>36</code> and <code>54</code> are pushed onto the stack (lines 5 and 6).
+Then the call to <code>euclid()</code> happens (line 7) and there is a third frame
+which starts at location <code>4</code> in <code>memory</code> (line 8).
+Eventually, <code>euclid()</code> exits (line 10),
+the result value <code>18</code> is left on the stack (line 11),
+is assigned as result of <code>main()</code> and popped (lines 12 and 13),
+<code>main()</code> exits and leaves <code>18</code> on top of the stack (lines 14 and 15),
+ready to be printed.</p>
+<p><a href="../?eg=07/08">Example 7/08</a> contains several functions and, therefore,
+has a much more interesting trace...</p>
+<h3 id="block-scopes">Block Scopes</h3>
+<p>In this section the <a href="#local-variables">little language with local variables</a>
+will be extended with block scopes for the variables.
+Changes to the grammar can be seen <a href="7.06-7.09.html">on this page</a>,
+new stack machine and action methods can be seen
+<a href="../methods.html?file=modules/06.js&amp;file=modules/07.js&amp;item=Functions12&amp;item=TCheck01&amp;item=TCheck02">in the method browser</a>.</p>
+<p>At compile time a local scope is pushed on top of a global scope to implement <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>.
+So far, for the <a href="#local-variables">little language with local variables</a>,
+<a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a> means that parameters and local variables owned by a function
+hide global variables and function names.
+The scope where a name is visible is either the enclosing function or the entire program.</p>
+<p>Languages like JavaScript also have block scopes, i.e., a name is visible only within the
+block which contains the definition.
+In <a href="../?eg=07/09">example 7/09</a>
+some variables are declared before use
+and can be <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a> within blocks:</p>
+<pre class="prettyprint source"><code>var trace;
+function main (x) begin
+      var a;    print x; x = 1; print x;
+begin var b;    print x; x = 2; print x end;
+begin var c, x; print x; x = 3; print x; main = 99 end;
+begin var d, x; print x; x = 4; print x end;
+                print x
+end;
+</code></pre>
+<p>The output is produced as follows:</p>
+<table>
+<thead>
+<tr>
+<th>line</th>
+<th>code</th>
+<th>scope</th>
+<th style="text-align:center">output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>var trace;</code></td>
+<td>global</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>function main (x)</code></td>
+<td><code>main()</code> parameters</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td></td>
+<td><code>begin</code></td>
+<td><code>main()</code> block</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>var a; print x;</code></td>
+<td></td>
+<td style="text-align:center"><code>0</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>x = 1; print x;</code></td>
+<td></td>
+<td style="text-align:center"><code>1</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>begin var b; print x;</code></td>
+<td>first inner block</td>
+<td style="text-align:center"><code>1</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>x = 2; print x end;</code></td>
+<td></td>
+<td style="text-align:center"><code>2</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>begin var c, x; print x;</code></td>
+<td>second inner block</td>
+<td style="text-align:center"><code>0</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>x = 3; print x; main = 99 end;</code></td>
+<td></td>
+<td style="text-align:center"><code>3</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>begin var d, x; print x;</code></td>
+<td>third inner block</td>
+<td style="text-align:center"><code>3</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>x = 4; print x end;</code></td>
+<td></td>
+<td style="text-align:center"><code>4</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>print x</code></td>
+<td><code>main()</code> block</td>
+<td style="text-align:center"><code>2</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>end;</code></td>
+<td>global</td>
+<td style="text-align:center"><code>99</code></td>
+</tr>
+</tbody>
+</table>
+<p>The first few lines of output are no surprise.
+<code>trace</code> is a global variable, initialized to <code>0</code> (program line 1 above).
+<code>x</code> is declared as parameter of <code>main()</code> and the startup code sets the corresponding argument to <code>0</code>.
+<code>begin</code> starts the scope for local variables of <code>main()</code> (line 2).
+<code>x</code> is printed, set to <code>1</code>, and printed again (line 3).</p>
+<p>The first inner block does not declare another <code>x</code> (line 4);
+therefore, the parameter <code>x</code> is not <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a>. It is printed,
+set to <code>2</code>, and printed again.</p>
+<p>The second, parallel, inner block declares a new <code>x</code> which <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadows</a> the parameter <code>x</code> (line 5).
+The local variable region of the frame is initialized to <code>0</code>; therefore the inner <code>x</code> prints as <code>0</code>,
+is set to <code>3</code> and printed again.</p>
+<p>The third, again parallel, inner block declares another <code>x</code> which <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadows</a> the parameter <code>x</code> (line 6).
+In a parallel block it shares memory (by location, not by name);
+therefore this <code>x</code> prints as <code>3</code>,
+is set to <code>4</code> and printed again.</p>
+<p>Back in the scope for local variables of <code>main()</code> the parameter <code>x</code> is still <code>2</code> and is printed as such (line 7).</p>
+<p>Deeply nested in the second inner block the result of <code>main()</code> was set to 99 (line 5)
+and that is printed by the startup code.</p>
+<p><a href="../?eg=07/09">Example 7/09</a> demonstrates <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>:
+there are exactly two memory slots for various versions of <code>x</code>.
+The inner two declarations for <code>x</code> are in parallel blocks;
+therefore, the two <code>x</code> share one memory slot.</p>
+<ul>
+<li>As usual, press <span class='c-new'></span> to represent and check the grammar, and</li>
+<li>press <span class='c-parse'></span> to compile the executable and
+show the extra information provided because there is a global variable <code>trace</code>:</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+block [ b at +5 ]
+block [ c at +5, x at +6 ]
+block [ d at +5, x at +6 ]
+block [ a at +4 ]
+block [ x at +0 ]
+0: memory => this.Entry(1, 7)(memory)
+  ...
+trace at 0
+function main start 0 parms 1 frame size 7
+stack starts at 1
+execution starts at 36
+(memory, steps) => StackMachine(memory, steps)
+</code></pre>
+<p>The global variable <code>trace</code> is at memory location <code>0</code> (line 9 above).
+Each block layout is displayed when recognition of the block is complete.
+The first inner block contains variable <code>b</code> at offset <code>5</code> in the frame for <code>main()</code> (line 2).
+Each of the next two inner blocks contains a variable <code>x</code> at offset <code>6</code> in the frame for <code>main()</code> (lines 3 and 4).
+The <code>main()</code> block contains variable <code>a</code> at offset <code>4</code> in the frame for <code>main()</code> (line 5).
+Finally, the parameter <code>x</code> is at offset <code>0</code> in the frame for <code>main()</code> (line 6).</p>
+<p>All the blocks belong to the frame for <code>main()</code>.
+The highest offset in the frame for <code>main()</code> is <code>6</code> (lines 3 and 4);
+therefore, the frame size is <code>7</code> (line 10).</p>
+<p>Note that the variables <code>b</code>, <code>c</code>, and <code>d</code> are declared first in the parallel inner blocks;
+therefore they share offset <code>5</code> in the frame for <code>main()</code> (lines 2 to 4).</p>
+<ul>
+<li>What changes if the order of <code>d</code> and <code>x</code> is interchanged in program line 6?</li>
+</ul>
+<p><a href="../?eg=07/10">Example 7/10</a>
+has more names, more functions, several frames, and more scopes:</p>
+<pre class="prettyprint source"><code>var a, b, c;
+function f (x);
+function d (d) begin print 100, a, d, x end;
+function e (a) begin print 200, a, b end;
+function f (a) begin
+  a = 1; b = 2; c = 3; d(4); e(5);
+  begin var a, b; 
+    a = 10; b = 20; 
+    print 300, a, b, c; d(40); e(50)
+  end;
+  print 400, a, b, c  
+end;
+function main () begin c = 5; f(6) end;
+$ /^%% grammar/,/^%% actions/ | 07/09.eg
+Seven.Blocks09
+</code></pre>
+<ul>
+<li>Prepare the grammar and compile.</li>
+<li>There is one error. Repair it by globally defining the missing variable and a variable <code>trace</code>.</li>
+<li>Recompile and explain how the listing</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+block [  ]
+block [ d at +0 ]
+block [  ]
+block [ a at +0 ]
+block [ a at +4, b at +5 ]
+block [  ]
+block [ a at +0 ]
+block [  ]
+block [  ]
+  ...
+a at 0
+b at 1
+c at 2
+x at 3
+trace at 4
+function f start 15 parms 1 frame size 6
+function d start 0 parms 1 frame size 4
+function e start 8 parms 1 frame size 4
+function main start 55 parms 0 frame size 3
+stack starts at 5
+</code></pre>
+<p>corresponds to the following frame layouts:</p>
+<table>
+<thead>
+<tr>
+<th>frame</th>
+<th style="text-align:center"><code>+0</code></th>
+<th style="text-align:center"><code>+1</code></th>
+<th style="text-align:center"><code>+2</code></th>
+<th style="text-align:center"><code>+3</code></th>
+<th style="text-align:center"><code>+4</code></th>
+<th style="text-align:center"><code>+5</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>global</td>
+<td style="text-align:center"><code>a</code></td>
+<td style="text-align:center"><code>b</code></td>
+<td style="text-align:center"><code>c</code></td>
+<td style="text-align:center"><code>x</code></td>
+<td style="text-align:center"><code>trace</code></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><code>d()</code></td>
+<td style="text-align:center"><code>d</code></td>
+<td style="text-align:center">old pc</td>
+<td style="text-align:center">old fp</td>
+<td style="text-align:center">result</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><code>e()</code></td>
+<td style="text-align:center"><code>a</code></td>
+<td style="text-align:center">old pc</td>
+<td style="text-align:center">old fp</td>
+<td style="text-align:center">result</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><code>f()</code></td>
+<td style="text-align:center"><code>a</code></td>
+<td style="text-align:center">old pc</td>
+<td style="text-align:center">old fp</td>
+<td style="text-align:center">result</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><code>a</code></td>
+<td style="text-align:center"><code>b</code></td>
+</tr>
+<tr>
+<td><code>main</code></td>
+<td style="text-align:center">old pc</td>
+<td style="text-align:center">old fp</td>
+<td style="text-align:center">result</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Remove <code>trace</code>, compile and run the program, and explain the output:</li>
+</ul>
+<pre class="prettyprint source"><code>> run()
+100 0 4 0
+200 5 2
+300 10 20 3
+100 0 40 0
+200 50 2
+400 1 2 3
+0
+0:[ 0 2 3 0 ]
+</code></pre>
+<p><a href="../?eg=07/11">Example 7/11 </a> contains a recursive version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> with a global <code>trace</code>
+and a rather risky use of nested blocks.</p>
+<pre class="prettyprint source"><code>var trace;
+function euclid (x,y) begin
+  if x > y then 
+    var gt; gt = euclid(x-y, y) 
+  else 
+    var lt;
+    if y > x then lt = euclid(x, y-x)
+    else return x
+    fi
+  fi;
+  begin var common; print common; euclid = common end
+end;
+
+function main (x, y) begin
+  x = input 54; y = input 36;
+  return euclid(x, y)
+end;
+$ /^%% grammar/,/^%% actions/ | 07/09.eg
+Seven.Blocks09
+</code></pre>
+<ul>
+<li>Compile the program and confirm that the frames are laid out as follows:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>frame</th>
+<th style="text-align:center"><code>+0</code></th>
+<th style="text-align:center"><code>+1</code></th>
+<th style="text-align:center"><code>+2</code></th>
+<th style="text-align:center"><code>+3</code></th>
+<th style="text-align:center"><code>+4</code></th>
+<th style="text-align:center"><code>+5</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>global</td>
+<td style="text-align:center"><code>trace</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><code>euclid()</code></td>
+<td style="text-align:center"><code>x</code></td>
+<td style="text-align:center"><code>y</code></td>
+<td style="text-align:center">old pc</td>
+<td style="text-align:center">old fp</td>
+<td style="text-align:center">result</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><code>gt</code></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><code>lt</code></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><code>common</code></td>
+</tr>
+<tr>
+<td><code>main()</code></td>
+<td style="text-align:center"><code>x</code></td>
+<td style="text-align:center"><code>y</code></td>
+<td style="text-align:center">old pc</td>
+<td style="text-align:center">old fp</td>
+<td style="text-align:center">result</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Run the program and confirm that it stacks a maximum of five frames,
+right when <code>18</code> is returned as the greatest common divisor of <code>36</code> and <code>54</code>:</li>
+</ul>
+<pre class="prettyprint source"><code>0:[ 0 ] 
+  1:[ 54 36 54 0 0 ]
+    6:[ 54 36 46 1 0 0 ] 
+      12:[ 18 36 10 6 0 0 ]
+        18:[ 18 18 22 12 18 0 18 ] 26: memory => this.StoreFP(4)(memory)
+</code></pre>
+<ul>
+<li>Where is the risky use of nested blocks -- why does this program produce correct results?</li>
+</ul>
+<h4 id="grammar-modifications-2">Grammar Modifications</h4>
+<p>There are a few changes to the grammar:</p>
+<pre class="prettyprint source"><code>prog: [ vars ] funs;
+vars: 'var' names ';';
+names: Name [{ ',' Name }];
+funs: { fun };
+fun: head parms [ block ] ';';
+head: 'function' Name;
+parms: '(' [ names ] ')';
+block: begin [ vars ] stmts 'end';
+begin: 'begin';
+
+stmt: assign | print | return | block | loop | select;
+loop: While cmp Do [ vars ] stmts 'od';
+select: 'if' cmp then [ else ] 'fi';
+then: Then [ [ vars ] stmts ];
+else: Else [ vars ] stmts;
+</code></pre>
+<p>As before, global variables can be defined with a <code>vars</code> phrase prior to functions (lines 1 and 2 above).
+They can be accessed wherever they are not <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a>.</p>
+<p>As before, parameters can be declared with a <code>names</code> phrase enclosed in parentheses
+following a function name in a function declaration or definition (lines 5 and 7).
+They can be accessed throughout the function body as long as they are not <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a>.
+Parameters themselves <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadow</a> global variables.</p>
+<p>As before, a <code>block</code> is the body of a function (line 5);
+however, it can also be a statement,
+i.e., blocks can now be nested (line 11).</p>
+<p>A <code>block</code> delimits the scope of the variables defined by its <code>vars</code> phrase (line 8)
+and entered into a symbol table for the scope
+by the <a href="module-Seven-Blocks09.html#names"><code>names()</code></a> action (line 3).
+They will <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadow</a> all,
+global variables,
+parameters of the encompassing function,
+and variables in encompassing blocks
+— this is the semantics of JavaScript's <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" title="let"><code>let</code></a>, rather than <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var" title="var"><code>var</code></a>.</p>
+<p>Similarly, variables can also be defined local to a <code>loop</code> body (line 12)
+or the <code>then</code> or <code>else</code> branch of a <code>select</code> statement (lines 14 and 15).</p>
+<p>Obviously, actions will have to create and discard the symbol tables
+which represent the scopes
+and it is tempting to assign these responsibilities to the <code>vars</code> and <code>parms</code> rules
+to create as few scopes as possible.
+However,
+a symbol table must exist exactly while the closest scope within a program
+is recognized which contains the <code>names</code> phrase,
+i.e., the actions for the <code>fun</code>, <code>block</code>, <code>loop</code>, <code>then</code>, and <code>else</code> rules
+are involved in managing these symbol tables.</p>
+<p>These actions happen when recognition is complete,
+i.e., they will discard the symbol tables, if any,
+but each of the corresponding rules needs a hook
+where an action happens early enough to create a symbol table
+before the <a href="module-Seven-Blocks09.html#names"><code>names()</code></a> action enters names.
+The obvious hooks are the literals <code>'var'</code> and <code>'('</code> at the beginning of the <code>vars</code> and <code>parms</code> rules;
+however, <code>vars</code> is also used to define global variables (line 1)
+and the global symbol table <code>symbols</code>
+is allocated as a property of the actions class.
+Therefore, the actions for
+<a href="module-Seven-Blocks09.html#head"><code>head</code></a>,
+<a href="module-Seven-Blocks09.html#begin"><code>begin</code></a>,
+<a href="module-Seven-Blocks09.html#Do"><code>Do</code></a>,
+<a href="module-Seven-Blocks09.html#Then"><code>Then</code></a>,
+and
+<a href="module-Seven-Blocks09.html#Else"><code>Else</code></a>
+will have to arrange for new scopes.</p>
+<h4 id="scope-management">Scope Management</h4>
+<p><a href="#local-variables">Previously</a>,
+a
+<a href="module-Seven-Parameters06_Fun.html">function description</a>
+contained a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map"><code>Map</code></a> <code>.locals</code> for parameter and local variable names
+and a property <code>.size</code> which determined the frame size and which
+<a href="module-Seven-Parameters06.html#_alloc"><code>_alloc()</code></a> uses to assign new addresses.
+<a href="module-Seven-Parameters06.html#_dcl"><code>_dcl()</code></a> stores new entries
+in <a href="module-Seven-Parameters06.html#funct"><code>funct.locals</code></a> and
+<a href="module-Seven-Parameters06.html#_find"><code>_find()</code></a> searched
+<a href="module-Seven-Parameters06.html#funct"><code>funct.locals</code></a> before the global symbol table.</p>
+<p>To implement block scopes,
+<code>.locals</code> has to refer to the top-most <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map"><code>Map</code></a> of a stack of symbol tables, one per nested scope,
+<code>.size</code> has to refer to the top-most address of a stack of addresses for new variables in a scope,
+and <a href="module-Seven-Blocks09.html#_find"><code>_find()</code></a> has to search backwards through the stack of
+symbol tables before consulting the global symbol table.
+Together, these stacks describe one frame,
+i.e., they should be owned by the function description for the frame.</p>
+<p>It helps to create a class <a href="module-Seven-Blocks09_Block.html">Block</a> for scope descriptions
+which contain a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map"><code>Map</code></a> <code>.locals</code> for names defined in the scope
+and a property <code>.size</code> to use for new addresses:</p>
+<pre class="prettyprint source"><code>  get Block () { return this.#Block ??= class {
+      locals = new Map();    // maps names in block to descriptions
+      size;                       // next variable address in block
+
+      constructor (size) { this.size = size; }
+      toString () // ...
+    };
+  }
+  #Block;     
+</code></pre>
+<p><code>.size</code> must be initialized when a new scope is created.</p>
+<p><a href="#local-variables">Previously</a>,
+<code>.locals</code> and <code>.size</code> were implemented with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" title="getter">getters and setters</a>
+and they can be overwritten in an
+<a href="module-Seven-Blocks09_Fun.html">extended function description</a>:</p>
+<pre class="prettyprint source"><code>class Blocks09 extends Seven.Parameters06 {
+  get Fun () { return this.#Fun ??= class extends super.Fun {
+      frameSize = 0;        // because this.size is local to blocks            
+      blocks;                // block stack, [0] is innermost block
+      get locals () { return this.blocks[0].locals; }
+      set locals (locals) {
+        try { return this.blocks[0].locals = locals; }
+        catch (e) { console.trace(e); throw e; } }
+      get size () { return this.blocks[0].size; }
+      set size (size) { return this.blocks[0].size = size; }
+      
+      constructor (owner, name) {        // creates outermost block
+        super(owner, name);
+        this.blocks = [ new this.owner.Block(0) ];
+      }
+</code></pre>
+<p><code>.blocks[]</code> is a list which represents the nested scopes (line 4 above).
+It is created and initialized for the scope of parameters
+when a function description is constructed (line 14).
+Parameter addresses start in the frame at <code>0</code>.</p>
+<p>To simplify searching,
+the list will contain the  scopes in order from innermost to outermost.
+Therefore, <code>.locals</code> and <code>.size</code> can simply be delegated to <code>block[0]</code> (lines 5 to 10).</p>
+<p><code>.frameSize</code> is a new property because <code>.size</code> will not necessarily be both,
+the next new address and the total size of the frame (line 3).</p>
+<pre class="prettyprint source"><code>      push () {           // add block, start in encompassing block
+        this.blocks.unshift(
+          new this.owner.Block(this.blocks[0].size)
+        );
+      }      
+
+      pop () {         // remove block, maintain maximum frame size
+        this.frameSize =
+          Math.max(this.frameSize, this.blocks[0].size);
+        if (this.owner.symbols.get('trace')               // trace?
+              instanceof this.owner.Var)
+          puts(this.blocks[0].toString());
+        this.blocks.shift();
+      }
+
+      end () {                    // [extend] pop outermost block
+        this.pop(); super.end();
+      }
+      // ...
+    };
+  }
+  #Fun;     
+</code></pre>
+<p>There is no need to reset <code>.frameSize</code> if parameters are allocated during a forward declaration for a function
+because the function definition will later allocate the same amount of memory.</p>
+<p><code>push()</code> creates a new innermost scope (line 2 above)
+which will use new addresses at <code>.size</code> of the current scope (line 3).</p>
+<p><code>pop()</code> maintains <code>.frameSize</code> as the maximum <code>.size</code> reached by all nested scopes (lines 8 and 9),
+displays the definitions in the scope (line 12) if there is a global variable <code>trace</code> (lines 10 and 11),
+and discards the scope (line 13).
+At this point <code>.size</code> reverts to the next outer scope,
+i.e., the part of the frame used by the discarded scope will be reused.</p>
+<p>Finally, <code>end()</code> is extended to discard the scope created by the constructor (line 17).</p>
+<p>With the block stack in place,
+<a href="module-Seven-Blocks09.html#_find"><code>_find()</code></a> can be extended to search innermost to outermost through the
+symbol tables (lines 5 to 8 below) before consulting the global symbol table (line 9):</p>
+<pre class="prettyprint source"><code>  _find (name, report) {
+    let sym;
+    try {
+      if (this.funct)                  // loop inner to outer block
+        this.funct.blocks.forEach(block => {
+          sym = block.locals.get(name);
+          if (typeof sym != 'undefined') throw sym;
+        });
+      return sym = this.symbols.get(name);                // global
+    } catch (sym) {                             // found in a block
+      if (sym instanceof Error) throw sym;      // shouldn't happen
+      return sym;
+    } finally {
+      if (report && !sym)
+          this.parser.error(`${name}: undefined`);
+    }
+  }
+</code></pre>
+<h4 id="actions-1">Actions</h4>
+<p>Scopes manage absolute global and relative local memory addresses at compile time,
+frames manage memory at run time,
+i.e., instruction generation does not change for block scopes.</p>
+<p>There are new actions for <code>begin</code> and <code>block</code> which call <code>funct.push()</code>
+and <code>funct.pop()</code> at compile time, respectively, to create and discard a scope for a <code>block</code>
+as a statement or function body.</p>
+<p>Similarly, the actions for <code>Do</code>, <code>Then</code>, and <code>Else</code> are extended to call <code>funct.push()</code>
+and the actions for <code>loop</code>, <code>then</code>, and <code>else</code> are extended to call <code>funct.pop()</code>
+to create and discard their respective scopes, for example:</p>
+<pre class="prettyprint source"><code>  // Do: 'do';
+  Do () { this.funct.push(); return super.Do(); }
+
+  //  loop: While cmp Do [ vars ] stmts 'od';
+  loop (While, c, Do, v, s, o) {
+    this.funct.pop(); super.loop(While, c, Do);
+  }
+
+  // ...
+}
+</code></pre>
+<h3 id="nested-functions">Nested Functions</h3>
+<p>In this section the <a href="#block-scopes">little language with block scopes</a>
+will be extended to permit nested function definitions.
+Changes to the grammar can be seen <a href="7.09-7.13.html">on this page</a>,
+new stack machine and action methods can be seen
+<a href="../methods.html?&amp;file=modules/07.js&amp;item=Machine06&amp;item=Machine13&amp;item=Nest13">in the method browser</a>.</p>
+<p>Nested function definitions provide another level of scopes and <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>,
+e.g., to hide details and instrumentation of an algorithm
+from the actual use of the algorithm.
+Consider <a href="../?eg=07/12">example 7/12</a>:</p>
+<pre class="prettyprint source"><code>function factorial (n) begin
+  var f, calls;
+  function factorial (n) begin
+    calls = calls + 1;
+    if n &lt;= 1 then return 1 fi;
+    factorial = n * factorial(n - 1)
+  end;
+  if n >= 0 then
+    f = factorial(n);
+    print calls;
+    return f
+  fi
+end;
+
+function main (n) begin
+  while n &lt;= 5 do
+    print n, factorial(n);
+    n = n + 1
+  od
+end;
+</code></pre>
+<p>The outer <code>factorial()</code> (line 1 above) accepts any value as an argument
+but only performs the requested computation for non-negative numbers (line 8).
+The number of calls to the inner <code>factorial()</code> (line 3) is counted (line 4) and reported (line 10),
+but the counter variable <code>calls</code> is hidden inside the outer <code>factorial()</code> (line 2).</p>
+<p>The scope of <code>calls</code> demonstrates that nesting functions requires a modification
+to the management of frames for local variables
+<a href="#local-variables">as discussed earlier</a>:</p>
+<ul>
+<li>
+<p><code>calls</code> is not global,
+it is in the frame of the outer <code>factorial()</code>.</p>
+</li>
+<li>
+<p><code>calls</code> is accessed from within each activation of the inner <code>factorial()</code>.</p>
+</li>
+<li>
+<p>Because of recursion, there can be many such inner activations stacked up,
+i.e., each inner activation needs a reference to the common outer frame.</p>
+</li>
+</ul>
+<div class='diagram'>
+  <table>
+    <col style='width: 20%'>
+    <col style='width: 30%'>
+    <col style='width: 40%'>
+    <tr>
+      <td> <img src='07/global.svg' alt='global'> </td>
+      <td> <img src='07/function.svg' alt='function'> </td>
+      <td> <img src='07/recurse.svg' alt='recurse'> </td>
+    </tr>
+  </table>
+</div>
+<p>Memory use evolves:</p>
+<ul>
+<li>
+<p>Initially there is the <em>globals</em> frame.</p>
+</li>
+<li>
+<p>Once the outer <code>factorial()</code> is called and itself calls the inner <code>factorial()</code>
+there are two more frames.</p>
+</li>
+<li>
+<p>If there are recursive calls from the inner <code>factorial()</code> to itself
+there are more and more frames stacked up.</p>
+</li>
+</ul>
+<p>All frames are chained on the <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>dynamic link</em></a> (at left)
+so that the code at the function exits can clean them up in reverse order.</p>
+<p>Global variables have <em>absolute addresses</em>, determined at compile time.</p>
+<p>Local variables have <em>relative addresses</em>,
+i.e., offsets within their frame,
+which have to be added
+to the <em>base address</em> where the frame begins at run time.
+The offset is determined at compile time but —
+as the graphic indicates —
+the base address depends on the call history.</p>
+<p>If function definitions are nested, the inner function — i.e., frame —
+needs to know the base address of the outer frame.</p>
+<p>This is known as the <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>static link</em></a> (at right).
+It points from an inner frame to
+the topmost frame for the outer function
+which the inner function is nested into —
+the &quot;static&quot; nesting at compile time which determines
+which outer names are visible.</p>
+<p>The base address for a local variable can be found by following the static link
+for as many levels outward as the variable name is in a scope more outward at compile time,
+i.e., the deeper functions are nested the more address tracing is required
+to access more global variables at run time.</p>
+<p>The elements of the static link are &quot;somewhere&quot; in each frame,
+i.e., above the function parameters if any.
+Therefore, just like there is a frame pointer register
+there has to be a register pointing to the beginning of the static link,
+and it, too, has to be saved when a function is called
+and restored on return.</p>
+<p>An alternative implementation, the so called <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>display</em></a>, requires a single level of
+address tracing — at the cost of one memory slot per function nesting level
+in each frame.</p>
+<p>The display is the stack of currently visible base addresses
+for a frame, i.e., it is a copy of all elements of the static link of the frame.
+A <em>display pointer register</em> is used to locate the bottom of the display.
+At the bottom of the display is the address of the topmost frame for the outermost
+function. The top of the display is the address of the display's own frame.</p>
+<p>In summary, if <em>parms</em> is the number of parameters of a function
+and <em>depth</em> is the nesting level of the function, starting with <code>1</code> for global functions,
+the frame contains</p>
+<table>
+<thead>
+<tr>
+<th>register</th>
+<th>offset</th>
+<th>content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.fp</code> →</td>
+<td><code>+0</code> ...</td>
+<td>argument values for the parameters, if any</td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em></td>
+<td>the return address for the function,<br>i.e., the previous value of <code>.pc</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em><code> +1</code></td>
+<td>a slot for the dynamic link,<br>i.e., the address of the frame of the caller,<br>i.e., the previous value of <code>.fp</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em><code> +2</code></td>
+<td>a slot for the static link,<br>i.e., the address of the display of the caller,<br>i.e., the previous value of <code>.dp</code></td>
+</tr>
+<tr>
+<td><code>.dp</code> →</td>
+<td><code>+</code><em>parms</em><code> +3</code></td>
+<td>a slot for the function result</td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em><code> +3 +1</code></td>
+<td>the end of the static link,<br>i.e., the address of the outermost<br>encompassing function's topmost frame</td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em><code> +3 +</code> ...</td>
+<td>parts of the static link,<br>i.e., the addresses of other encompassing<br>functions' topmost frames</td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em><code> +3 +</code><em>depth</em></td>
+<td>begin of the static link,<br>i.e., the address of the function call's frame,<br>i.e., the address which is also in <code>.fp</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>+</code><em>parms</em><code> +3 +</code><em>depth</em><code>+</code> ...</td>
+<td>values for the local variables and stack</td>
+</tr>
+</tbody>
+</table>
+<p>Global variables have absolute addresses, determined at compile time.</p>
+<p>Local variables in the current frame can be addressed relative
+to the base address of the current frame in <code>.fp</code> of the stack machine.</p>
+<p>Local variables in outer frames are addressed by using the nesting level of their
+function relative to the bottom of the display
+to retrieve the base address of the appropriate frame.
+Nesting levels for functions start at <code>1</code>.
+They can be directly used as indices into the display because <code>.dp</code>
+is set to point to the function result slot at offset <em>parms</em> <code>+3</code>
+which directly precedes the display.</p>
+<p>The display itself is copied to the new frame when a function is called:</p>
+<ul>
+<li>
+<p>if the new nesting level is less than the current one,
+the new display is popped until it has a length
+equal to the new nesting level minus 1 —
+because only something that is visible at compile time can be called,</p>
+</li>
+<li>
+<p>if the nesting level stays the same, only the top entry is popped —
+because something at the same nesting level can access the same things
+which the caller can, and it cannot access the caller itself,</p>
+</li>
+<li>
+<p>otherwise, the nesting level can only increase by <code>1</code>.</p>
+</li>
+<li>
+<p>In all cases the current base address from <code>.fp</code> —
+which points to the current frame — is pushed onto the new display.</p>
+</li>
+</ul>
+<p>This section explains how nested functions are implemented in <a href="../?eg=07/12">example 7/12</a>
+on top of the block scopes implemented in <a href="../?eg=07/09">example 7/09</a>.</p>
+<h4 id="grammar-modifications-3">Grammar Modifications</h4>
+<p>The grammar has to be modified so that function definitions can be nested:</p>
+<pre class="prettyprint source"><code>block: begin body 'end';
+begin: 'begin';
+body: [ vars ] [ funs ] stmts;
+
+loop: While cmp Do body 'od';
+While: 'while';
+Do: 'do';
+select: 'if' cmp then [ else ] 'fi';
+then: Then [ body ];
+else: Else body;
+Then: 'then';
+Else: 'else';
+</code></pre>
+<p>A <code>body</code> contains variable definitions, if any,
+followed by function declarations and definitions, if any,
+followed by one or more statements (line 3 above).
+The names defined within the <code>body</code> are only visible within the body,
+i.e., within the functions and statements, unless <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a>.</p>
+<p>A <code>body</code> is part of a <code>block</code> (line 1),
+i.e., a function definition or a <code>block</code> statement,
+and it is also part of a <code>loop</code> (line 5) and the <code>then</code> and <code>else</code> parts of a <code>select</code> statement (lines 9 and 10).</p>
+<h4 id="display-implementation">Display Implementation</h4>
+<p>Argument values are pushed onto the stack
+before a function is called.
+The <a href="module-Seven-Machine13.html#Entry"><code>Entry</code></a> instruction at the beginning of each function
+has to initialize the frame as described above,
+given that
+<code>parms</code> is the number of parameters of the function,
+<code>depth</code> is the nesting depth, starting with <code>1</code> for global functions,
+and <code>size</code> is the memory requirement of the new frame:</p>
+<pre class="prettyprint source"><code>class Machine13 extends Seven.Machine06 {
+  Entry (parms, depth, size) {
+    return memory => {
+      const locals = size - parms - 4 - depth,   // local variables
+        fp = memory.length - parms - 1,         // new frame's base
+        dp = memory.length + 2;             // new display's bottom
+                                     // push old-fp, old-dp, result
+      memory.push(memory.fp, memory.dp, 0); 
+      if (depth > 1) memory.push(           // push part of display
+        ... memory.slice(memory.dp + 1, memory.dp + depth) );
+      memory.push(fp);                     // push new frame's base
+      if (locals)                    // push local variables if any
+        memory.push(... Array(locals).fill(0));
+      memory.fp = fp;                           // new dynamic link
+      memory.dp = dp;                       // new display's bottom
+    };
+  }
+</code></pre>
+<p>The frame contains a slot for the function result, initialized to <code>0</code> (line 8 above).
+The initial part of the display is copied from the previous frame (lines 9 and 10)
+and the address of the new frame is added on top (line 11).</p>
+<p>The <a href="module-Seven-Machine13.html#Exit"><code>Exit</code></a> instruction at the end of each function
+no longer needs to know the number of parameters:</p>
+<pre class="prettyprint source"><code>  Exit (memory) {
+
+    const fp = memory.fp,        // current frame, i.e., @arguments
+      dp = memory.dp;             // current display, i.e., @result
+    memory.fp = memory[dp - 2];                   // restore old-fp
+    memory.dp = memory[dp - 1];                   // restore old-dp
+                                    // pop frame, push old-pc result
+    memory.splice(fp, Infinity, memory[dp], memory[dp - 3]);
+  }
+</code></pre>
+<p>It reverts to the previous frame and display pointers (lines 5 and 6 above)
+and removes all but the return address and result value from the stack
+as the <code>Return</code> instruction expects it (lines 8).</p>
+<p>Parameters and local variables have to be addressed relative to the display pointer
+using two new instructions:</p>
+<pre class="prettyprint source"><code>  /** `stack: ... -> ... frame[depth][addr]` */
+  LoadDP (addr, depth) {
+    return memory =>
+      memory.push(memory[memory[memory.dp + depth] + addr]);
+  }
+</code></pre>
+<p>Both,
+<a href="module-Seven-Machine13.html#LoadDP"><code>LoadDP</code></a>
+and
+<a href="module-Seven-Machine13.html#StoreDP"><code>StoreDP</code></a>,
+need to know the static nesting <code>depth</code>
+at which a variable is defined at compile time and the variable's offset in the frame.
+<code>depth</code> is used as an index into the display to obtain the appropriate frame's address
+which is combined with the offset (lines 4 and 10 above).</p>
+<p>The display pointer simplifies displaying memory for a trace, i.e.,
+<code>toString()</code> is overwritten in the <a href="module-Seven-Machine13_Memory.html"><code>Memory</code></a> class:</p>
+<pre class="prettyprint source"><code>  get Memory () {
+    return this.#Memory ??= class extends super.Memory {
+      dp = 0;                      // display (static link) pointer
+      // frames[] is no longer used
+      
+      toString () {
+        let fp = this.fp,                   // begin of (top) frame
+          to = this.length,                   // end of (top) frame
+          dp = this.dp,                              // static link
+          output = []; 
+        do {
+          if (!dp) fp = 0;                          // global frame
+          output.unshift(`${fp}:[ ${this.slice(fp, to).
+            map(slot => this.mapSlot(slot)).join(' ')} ]`);
+          to = fp;               // end and begin of previous frame
+          fp = this[dp - 2];              // previous frame pointer
+          dp = this[dp - 1];                // previous static link
+        } while (to);
+        return output.join(' ');
+      }
+    };
+  }
+  #Memory;
+}
+</code></pre>
+<p>The current frame extends from the frame pointer to the end of memory (lines 7 and 8 above).
+The previous frame and display pointers can be obtained relative to the display pointer (lines 16 and 17).
+Output is collated in reverse order using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift" title="unshift()"><code>unshift()</code></a> (line 13).</p>
+<h4 id="infrastructure-2">Infrastructure</h4>
+<p>Nesting functions is a natural extension of block structure.
+However, <a href="tutorial-08-functions.html">chapter eight</a> will show that the feature
+can cause a very significant complication for runtime memory management;
+therefore, it should be an optional part of the inheritance chain
+of the action classes for the little language versions.
+Nesting functions is implemented as a function which can be applied
+to extend an action class such as <a href="module-Seven-Blocks09.html"><code>Blocks09</code></a> which supports block structure:</p>
+<pre class="prettyprint source"><code>const Nest13 = superclass => class extends superclass {
+  constructor (parser, machine = new Machine13()) {
+    super(parser, machine);
+  }
+  // ...
+};
+</code></pre>
+<p>The result of the function call <code>Nest13(Blocks09)</code> is a class.
+The function <a href="module-Seven-Nest13.html"><code>Nest13()</code></a> overwrites
+and adds methods and properties of its argument class.
+In particular, by default it uses <a href="module-Seven-Machine13.html"><code>Machine13</code></a>
+to generate the stack machine (line 2 above).</p>
+<p><a href="module-Seven-Nest13.html#funct"><code>funct</code></a> references the current function description.
+If functions are nested, this description has to be the top entry of a stack
+so that recognition of a nested function can interrupt recognition of the encompassing functions:</p>
+<pre class="prettyprint source"><code>  get funct () { return this.functs[0]; }
+  set funct (sym) {
+    if (sym) this.functs.unshift(sym);             // push function  
+    else this.functs.shift();                       // pop function
+  }
+
+  get functs () { return this.#functs; }  // current function stack
+  #functs = [ null ];
+</code></pre>
+<p><a href="module-Seven-Nest13.html#funct"><code>funct</code></a> is overwritten as a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" title="getter">getter</a>
+where <code>functs[0]</code> describes the current function (line 1 above).
+The list is initialized with <code>null</code> to indicate that there is no current function (line 8).
+The stack is pushed with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift" title="unshift()"><code>unshift()</code></a>
+if a function description is assigned to <a href="module-Seven-Nest13.html#funct"><code>funct</code></a> (line 3)
+and popped with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift" title="shift()"><code>shift()</code></a> if <code>null</code> is assigned (line 4).</p>
+<p>Variable access uses new instructions; therefore,
+the <a href="module-Seven-Nest13_Var.html">class of variable descriptions</a> has to be extended:</p>
+<pre class="prettyprint source"><code>  get Var () { return this.#Var ??= class extends super.Var {
+      load () {                         // [replace] load by depth
+        if (!this.depth)                                  // global
+          this.owner.machine.gen('Load', this.addr);
+        else if (this.depth+1 != this.owner.functs.length)// nested
+          this.owner.machine.gen('LoadDP', this.addr, this.depth);
+        else                                               // local
+          this.owner.machine.gen('LoadFP', this.addr);
+      }
+      store () {                       // [replace] store by depth
+        if (!this.depth)                                  // global
+          this.owner.machine.gen('Store', this.addr);
+        else if (this.depth+1 != this.owner.functs.length)// nested
+          this.owner.machine.gen('StoreDP', this.addr, this.depth);
+        else                                               // local
+          this.owner.machine.gen('StoreFP', this.addr);
+      }
+      toString () {
+        // ...
+      }
+    };
+  }
+  #Var;
+</code></pre>
+<p><code>load()</code> and <code>store()</code> use direct addressing (lines 4 and 12 above),
+addressing relative to the display (lines 6 and 14),
+or relative to the frame pointer (line 8 and 16),
+depending at what nesting depth the variable is defined by <a href="module-Seven-Nest13.html#_alloc"><code>_alloc()</code></a>:</p>
+<pre class="prettyprint source"><code>  _alloc (name) {
+    if (this.funct)                        // create local variable
+      return new this.Var(this, name, this.funct.size ++,
+        this.funct.depth);
+    else                                  // create global variable
+      return new this.Var(this, name, this.size ++, 0);
+  }  
+</code></pre>
+<p>For global variables, <code>depth</code> is set to <code>0</code> (line 6 above)
+Otherwise it is taken from <a href="module-Seven-Nest13.html#funct"><code>funct</code></a> (line 4).</p>
+<p>The <a href="module-Seven-Nest13_Fun.html">class of function descriptions</a> has to be extended
+to account for the changes in frame layout:</p>
+<pre class="prettyprint source"><code>  get Fun () { return this.#Fun ??= class extends super.Fun {
+      depth;        // length of static link, 1 for global function
+
+      constructor (owner, name) {   // sets depth from owner.functs
+        super(owner, name);
+        this.depth = owner.functs.length;        // functs[.. null]
+      }
+</code></pre>
+<p><code>depth</code> records the nesting depth,
+i.e., the current length of <a href="module-Seven-Nest13.html#functs"><code>functs[]</code></a> (lines 2 and 6 above),</p>
+<p><code>setParms()</code> is extended because the display pointer and the display
+will also be stored in the frame (lines 3 and 4 below):</p>
+<pre class="prettyprint source"><code>      setParms () { // frame: parms, old-pc, old-fp, old-dp, result
+        super.setParms();
+        this.addr = this.size ++;         // insert slot for old-dp
+        this.size += this.depth;         // leave slots for display
+      }
+</code></pre>
+<p><code>storeOk()</code> has to check all of <a href="module-Seven-Nest13.html#functs"><code>functs[]</code></a>
+to see if a function result is assigned within the function (line 2 below):</p>
+<pre class="prettyprint source"><code>      storeOk () {            // [replace] consider outer functions
+        if (this.owner.functs.some(f => f == this)) return true;
+        this.owner.parser.error(`${this.name}: ` +
+          `assigned to outside function`);
+        return false;
+      }
+
+      store () {                        // [replace] consider depth
+        if (this == this.owner.funct)                      // local
+          this.owner.machine.gen('StoreFP', this.addr);
+        else                                      // outer function
+          this.owner.machine.gen('StoreDP', this.addr, this.depth);
+      }
+</code></pre>
+<p><a href="module-Seven-Machine06.html#LoadFP"><code>LoadFP</code></a> can still be used
+to store a function result in the current function (line 9 above)
+but <a href="module-Seven-Machine13.html#LoadDP"><code>LoadDP</code></a> is necessary
+to store the result of an encompassing function (line 12).</p>
+<p><code>entry()</code> and <code>exit()</code> have to be overwritten
+because the <a href="module-Seven-Machine13.html#Entry"><code>Entry</code></a> and <a href="module-Seven-Machine13.html#Exit"><code>Exit</code></a>
+instructions expect different arguments.
+More importantly,
+function definitions can appear at the beginning of a block,
+i.e., within a <code>begin</code>, <code>loop</code>, or <code>select</code> statement.
+Code which is generated during recognition of a function definition cannot easily be moved aside;
+therefore, nested function definitions have to be bypassed with branch instructions.</p>
+<p>One branch before the <a href="module-Seven-Machine13.html#Entry"><code>Entry</code></a> of the first
+in a sequence of function definitions is sufficient if it lands after the
+<a href="module-Seven-Machine13.html#Exit"><code>Exit</code></a> and <a href="module-Seven-Machine04.html#Return"><code>Return</code></a>
+of the last function in sequence; i.e.,
+<code>entry()</code> and <code>exit()</code> together have to code the branch and they can share information
+in the <a href="module-Seven-Blocks09_Block.html"><code>Block</code></a> where the sequence of functions is defined:</p>
+<pre class="prettyprint source"><code>      entry () {                   // [extend] make room for bypass
+        if (this.depth > 1) {                    // nested function
+                                  // remember where this is defined
+          this.scope = this.owner.funct.blocks[0];
+          if (typeof this.scope.bypass == 'undefined')
+            this.scope.bypass =      // make room for bypass branch
+              this.owner.machine.code.push(null) - 1;
+        }
+        super.entry();
+      }
+
+      exit () {               // [replace] uses depth, fixes bypass
+        this.owner.machine.code[this.start] =
+          this.owner.machine.ins('Entry', this.parms,
+            this.depth, this.frameSize);
+        this.owner.machine.gen('Exit');      // needs no parms info
+        const end = this.owner.machine.gen('Return');
+        if (this.scope)                    // need to repair bypass
+          this.owner.machine.code[this.scope.bypass] =
+            this.owner.machine.ins('Branch', end);
+      }    
+</code></pre>
+<p>A bypass branch is only required for nested functions (line 2 above).
+<code>entry()</code> is called when <a href="module-Seven-Nest13.html#funct"><code>funct</code></a> still references the encompassing function;
+therefore, a reference to the <a href="module-Seven-Blocks09_Block.html"><code>Block</code></a> which contains the
+description of the new function can be stored as property <code>.scope</code> of the new function description (line 4).
+The same <a href="module-Seven-Blocks09_Block.html"><code>Block</code></a> contains the descriptions of all
+functions defined in a sequence in the same scope;
+therefore, a new property <code>.bypass</code> in this <a href="module-Seven-Blocks09_Block.html"><code>Block</code></a> can be shared
+by all functions in the sequence:</p>
+<ul>
+<li>
+<p>If <code>.bypass</code> is undefined, <code>entry()</code> for the first function in the sequence allocates a slot
+for a branch and stores the address in <code>.bypass</code> (lines 5 to 7).</p>
+</li>
+<li>
+<p><code>exit()</code> for each function checks for the shared <a href="module-Seven-Blocks09_Block.html"><code>Block</code></a>
+and inserts an appropriate branch instruction in the <code>.bypass</code> slot (lines 18 to 20).</p>
+</li>
+</ul>
+<p>The result is a single branch instruction preceding all function definitions in the same block
+and landing past the exit of the last of these function definitions.</p>
+<p>One last extension: function definitions have to be checked at the end of every block (line 2 below),
+not only once globally:</p>
+<pre class="prettyprint source"><code>      pop () {            // [extend] check for undefined functions
+        this.owner._check_defs(this.locals);
+        super.pop();
+      }
+    };
+  }
+</code></pre>
+<h4 id="actions-2">Actions</h4>
+<p>The actions for <code>block</code>, <code>loop</code>, and <code>else</code> now receive fewer parameters than before, e.g.,</p>
+<pre class="prettyprint source"><code>loop: While cmp Do [ vars ] stmts 'od';
+  vs.
+loop: While cmp Do body 'od';
+</code></pre>
+<p>The parser checks the argument count for actions;
+therefore, these actions have to be overwritten, for example:</p>
+<pre class="prettyprint source"><code>  loop (While, cmp, Do, body, od) {
+    super.loop(While, cmp, Do, undefined, undefined, od);
+  }
+</code></pre>
+<p>Other than that, only one more action has to be overwritten:</p>
+<pre class="prettyprint source"><code>  // head: 'function' Name;
+  head (_, name) {
+    let sym = this._find(name);
+    try {
+      if (sym instanceof this.Fun) {
+        if (sym.depth >= this.functs.length) {  // same nesting level
+          if (typeof sym.start != 'number') throw true;    // forward
+          this.parser.error(`${name}: duplicate`);
+        }                      // else define at deeper nesting level
+      } else if (sym instanceof this.Var &&     // same nesting level
+                   sym.depth >= this.functs.length - 1) 
+        this.parser.error(`${name}: used as variable and function`);
+      sym = this._dcl(new this.Fun(this, name));       // (re-)define
+    } catch (e) { throw e;                        // shouldn't happen
+    } finally {
+      sym.entry();                // generate code for function entry
+      return this.funct = sym;                         // in function
+    }
+  }
+</code></pre>
+<p><a href="module-Seven-Nest13.html#head"><code>head()</code></a> defines a new <code>Name</code> as a function (line 13 above),
+generates code at function entry (line 16)
+and pushes the description as the new value of <a href="module-Seven-Nest13.html#funct"><code>funct</code></a> (line 17).
+If a prior definition for the <code>Name</code> can be found (line 3)
+it has to be investigated:</p>
+<ul>
+<li>The description of a function declaration at the same nesting level (line 6)
+without a start address (line 7) can be used to define the function,</li>
+<li>otherwise it is a duplicate name (line 8).</li>
+<li>A more global function description can be <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a>
+by a new local definition.</li>
+<li>A variable definition at the same level is an error (lines 10 to 12).</li>
+</ul>
+<p>If an error is found a local definition is created to continue recognition (line 13).</p>
+<p><a href="module-Seven-Nest13.html#_find"><code>_find()</code></a> searches for a name
+beginning with the innermost <a href="module-Seven-Blocks09.html"><code>Block</code></a>
+outward through all nested scopes (line 6 below) and functions (line 4)
+and ending with the global symbol table (line 11):</p>
+<pre class="prettyprint source"><code>  _find (name, report) {
+    let sym;
+    try {
+      this.functs.forEach(funct => {   // loop inner to outer funct
+        if (funct)                     // loop inner to outer block
+          funct.blocks.forEach(block => {
+            sym = block.locals.get(name);
+            if (typeof sym != 'undefined') throw sym;
+          });
+      });
+      return sym = this.symbols.get(name);                // global
+    } catch (sym) {                             // found in a block
+      if (sym instanceof Error) throw sym;      // shouldn't happen
+      return sym;
+    } finally {
+      if (report && !sym)
+          this.parser.error(`${name}: undefined`);
+    }
+  }
+</code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" title="forEach()"><code>forEach()</code></a> can be used because scopes and functions
+are stored innermost first.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw" title="throw"><code>throw</code></a> is used to abort the search as soon as a match is found (line 8)
+and a <code>catch</code> clause converts the <code>throw</code> into a <code>return</code> (line 14).
+It is only prudent to rethrow any errors caught in this construction (line 13).
+Finally, an error is reported if the name cannot be found and a report was requested (lines 16 and 17).</p>
+<h4 id="examples">Examples</h4>
+<p><a href="../?eg=07/13">Example 7/13</a> shows a function which uses an inner helper function
+to compute the factorial for non-negative numbers.
+There is significant <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>:</p>
+<ul>
+<li>
+<p>Add a global <code>trace</code> variable to see which names belong to which scope.</p>
+</li>
+<li>
+<p>Trace execution to see which variable is accessed using the display and when.</p>
+</li>
+</ul>
+<p><a href="../?eg=07/14">Example 7/14</a> is yet another variant of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>
+with a helper function which returns zero for invalid arguments.
+Again, there is  <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>.</p>
+<p><a href="../?eg=07/15">Example 7/15</a> is the variant of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>
+with mutually recursive functions studied in <a href="../?eg=07/08">example 7/08</a>,
+modified to take advantage of nested functions.</p>
+<p><a href="../?eg=07/16">Example 7/16</a> is a variant of <a href="../?eg=07/10">example 7/10</a>
+where some functions are nested.</p>
+<ul>
+<li>
+<p>Add a <code>trace</code> variable to see which names belong to which scope.</p>
+</li>
+<li>
+<p>Compare to the previous output (below) and explain the difference:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>    100 1 4 0
+    200 5 2
+    300 10 20 3
+    100 1 40 0
+    200 50 2
+    400 1 2 3
+</code></pre>
+<ul>
+<li>Delete the first assignment to <code>c</code> and explain the difference in output.</li>
+</ul>
+<p><a href="../?eg=07/17">Example 7/17</a> is a puzzle with nested functions.</p>
+<ul>
+<li>Explain the output — and then add a variable definition to obtain the expected output:
+<table>
+<thead>
+<tr>
+<th>expected</th>
+<th>actual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>3 -1</code></td>
+<td><code>-13 -11</code></td>
+</tr>
+<tr>
+<td><code>4 -2</code></td>
+<td><code>4 -2</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p><a href="../?eg=07/18">Example 7/18</a> demonstrates that inner functions can set
+the result of outer functions which they are nested into (line 4 below) — function names
+do act as assign-only variables:</p>
+<pre class="prettyprint source"><code>function main () begin
+  function a (x) begin
+    function b (x) begin
+      function c (x) begin c = x + 1; b = x + 2; a = x + 3 end;
+      print c(100 + x)
+    end;
+    print b(10 + x)
+  end;
+  print a(5)
+end;
+</code></pre>
+<p>Finally, <a href="../?eg=07/19">example 7/19</a> is another collection of semantic errors:</p>
+<pre class="prettyprint source"><code>function main ();
+function a ();
+function a (dup, dup) begin var dup; dup = 1 end;
+function a (x) begin var y; y = 1 end;
+function f () begin var g;
+  function undef ();
+  function main (x) begin return y end;
+  function g () begin print 2 end;
+  f = 3; g = 4
+end;
+</code></pre>
+<ul>
+<li>a duplicate parameter <code>dup</code> (line 3 above)</li>
+<li>a mismatch in parameter counts (lines 2 and 3)</li>
+<li>a duplicate function definition <code>a()</code> (line 4)</li>
+<li>an undefined variable <code>y</code> (line 7)</li>
+<li>a name <code>g</code> used as a variable and nested function (lines 5 and 8)</li>
+<li>an assignment to <code>g</code> outside the function <code>g()</code> because <code>g</code> was redefined as a function (line 9)</li>
+<li>an undefined nested function (line 10)</li>
+<li>there is a function definition for <code>main()</code> (line 7) but it is not global</li>
+</ul>
+<p>Note that a local variable can <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadow</a> a parameter (line 3).</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p>A programming language can be strongly typed — to be checked at compile time —
+or dynamically typed like JavaScript — where all values are typed and operators
+convert as necessary.</p>
+</li>
+<li>
+<p>Grammar rules can be type-aware; however, this approach to type checking fails
+unless there are very few mixed type operations in a language.</p>
+</li>
+<li>
+<p>Type checking can be done during syntax analysis and code generation for a stack machine,
+mostly by checking argument types for machine instructions
+and returning types from the actions generating the instructions.</p>
+</li>
+<li>
+<p>Functions require branch instructions which capture an address to return to.
+Recursive functions require stacking return addresses.</p>
+</li>
+<li>
+<p>Argument values and return values for functions can be passed on the stack machine's stack.</p>
+</li>
+<li>
+<p>The values of local variables for a recursive function have to be on the stack.
+Together with argument values, return value, return address, and other administrative information
+they are the <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>activation record</em> or <em>frame</em></a> of a function call.</p>
+</li>
+<li>
+<p>Local variables and parameters are addressed relative to a <em>frame pointer</em>
+or <em>activation record pointer</em>
+which is used to locate the frame and which also has to be stacked during a call to another function.</p>
+</li>
+<li>
+<p>The visibility of names and <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing"><em>shadowing</em></a> of global names by local names
+can be implemented by stacking symbol tables at compile time.
+Variables within the same frame in non-intersecting scopes
+can share memory but they are not always initialized.</p>
+</li>
+<li>
+<p>Nesting functions at compile time requires a <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>static link</em></a> at run time
+which connects the visible nested scopes for variable access.</p>
+</li>
+<li>
+<p>Addressing variables in encompassing scopes requires only a single level of indirection
+through the <a href="https://en.wikipedia.org/wiki/Call_stack" title="static and dynamic link"><em>display</em></a> which is a complete copy of the static link in each frame.</p>
+</li>
+<li>
+<p>If a sequence of actions within a parent rule need to share information
+they can use a stacked <em>context</em> which the first action creates
+and the action of the parent rule deletes.</p>
+</li>
+</ul>
+<h4 id="previous%3A-%7B%40tutorial-06-compile%7D-next%3A-%7B%40tutorial-08-functions%7D">Previous: <a href="tutorial-06-compile.html">6. Compiling Little Languages</a> Next: <a href="tutorial-08-functions.html">8. Functions as Values</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

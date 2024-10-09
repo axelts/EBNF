@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Source: practice.js</title -->
+	<title>Source: practice.js</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: practice.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/** This module implements the model for the practice page which is
+    shared by [batch](script.js.html) and [graphical user interface](index.js.html) scripting.
+
+  @module Practice
+  @author © 2023 Axel T. Schreiner &lt;axel@schreiner-family.net>
+  @version 2024-6-20
+*/
+
+import * as iBase from './base.js';
+import * as iEBNF from './ebnf.js';
+import * as iBNF from './bnf.js';
+import * as iFive from './05.js';
+import * as iSix from './06.js';
+import * as iSeven from './07.js';
+import * as iEight from './08.js';
+import * as iTen from './10.js';
+import * as iEleven from './11.js';
+
+/** Model of the practice page.
+  * The following global variables and global modules
+  * will exist once the model has been constructed.
+  * Pre-existing global variables `newOutput`, `prompt`, and `puts` will not be overwritten.
+
+| name | type | content |
+| ------ | ---- | ------- |
+| `actions` | `string` | Defines the class and {@link module:Base~Action action methods} to be called by a parser. |
+| `g` | `Grammar` | Represents `grammar`. |
+| `grammar` | `string` | Rules of a grammar, argument for the construction of `g`. |
+| `newOutput` | `function` | Displays it's arguments, blank-separated and marked as a new section. |
+| `program` | `string` | Should be a sentence conforming to `grammar`, argument for recognition. |
+| `prompt` | `function` | Displays a prompt string, returns input or a default string, else error. |
+| `puts` | `function` | Displays it's arguments, blank-separated. |
+| `run` | `function` | `null` or an executable compiled from `program` by the `actions`.&lt;br>A stack machine has two arguments, other executables have none. |
+| `tokens` | `string` | Defines an object with pattern properties defining the tokens used in `grammar`. |
+
+| module | purpose |
+| ------ | ------- |
+| {@linkcode module:Base Base} | Base classes shared by the parser generators |
+| {@linkcode module:EBNF EBNF} | LL(1) parser generator |
+| {@linkcode module:BNF BNF} | SLR(1) parser generator |
+| {@linkcode module:Six Six} | Classes for the examples in chapter six |
+| {@linkcode module:Seven Seven} | Classes for the examples in chapter seven |
+| {@linkcode module:Eight Eight} | Classes for the examples in chapter eight |
+| {@linkcode module:Ten Ten} | Classes for the examples in chapter ten |
+| {@linkcode module:Eleven Eleven} | Classes for the examples in chapter eleven |
+
+  * @property {string} grammar - global `grammar`; setter clears global `g` and global `run`.
+  * @property {string} tokens - global `tokens`; setter clears global `g` and global `run`.
+  * @property {RegExp} skip - set by `doNew` from an empty key in `tokens`;
+  *   overwrites default for scanner and parser.
+  * @property {string} actions - global `actions`; setter clears global `run`.
+  * @property {string} program - global `program`; setter clears global `run`.
+  * @property {string} mode - `ebnf`|`stack`|`bnf`; setter clears global `g` and global `run`.
+
+  * @property {boolean} greedy - use `expect()` rather than `check()`.
+  * @property {boolean} error - insert `$error` when translating EBNF.
+  * @property {boolean} tShallow - trace algorithm and display sets.
+  * @property {boolean} tDeep - trace algorithm and display sets.
+  * @property {boolean} tFollow - trace algorithm and display sets.
+  * @property {boolean} dSets - display sets.
+  * @property {boolean} dStates - display states.
+  * @property {boolean} tLookahead - trace lookahead during parse.
+  * @property {boolean} tParser - trace parse.
+  * @property {boolean} tActions - trace actions.
+  * @property {boolean} tNoargs - do not check argument count for actions.
+  * @property {boolean} build - build lists.
+  * 
+  * @property {?Array} memory - for stepping a stack machine.
+  * 
+@example
+// Use in scripting in a Windows environment
+new Model(windows);
+@example
+// Use in scripting in a node.js environment
+new Model(globalThis);
+*/
+class Model {
+  get grammar () {
+    return grammar;
+  }       // global
+  set grammar (value) {
+    if (value == grammar) return;
+    grammar = value.trim();
+    g = run = null;
+  }  // global, if different clears g and run
+  
+  get tokens () {
+    return tokens;
+  }        // global
+  set tokens (value) {
+    if (value == tokens) return;
+    tokens = value.trim();
+    g = run = null;
+  }   // global, if different clears g and run
+  
+  get skip () { return this.#skip; }
+  #skip = undefined;
+  
+  get actions () {
+    return actions;
+  }        // global
+  set actions (value) {
+    if (value == actions) return;
+    actions = value.trim();
+    run = null;
+  }   // global, if different clears run
+  
+  get program () {
+    return program;
+  }        // global
+  set program (value) {
+    if (value == program) return;
+    program = value.trim();
+    run = null;
+  }   // global, if different clears run
+    
+  #mode = 'ebnf';
+  get mode () {
+    return this.#mode;
+  }
+  set mode (value) {
+    if (value == this.#mode) return;
+    this.greedy = this.error = this.tShallow = this.tDeep = this.tFollow =
+    this.dSets = this.dStates = this.tLookAhead = this.tParser = this.tActions = this.tNoargs =
+    this.build = false;
+    g = run = null;
+    this.#mode = value;
+  }      // if different clears all flags, g, run
+  
+  greedy = false;
+  error = false;
+  tShallow = false;
+  tDeep = false;
+  tFollow = false;
+  dSets = false;
+  dStates = false;
+  tLookahead = false;
+  tParser = false;
+  tActions = false;
+  tNoargs = false;
+  build = false;
+  
+  #memory = null;
+  get memory () { return this.#memory; }
+  
+  /** Create a model.
+      @param {object} global - either `windows` or `globalThis`.
+  */
+  constructor (global) {
+    // create and initialize "global" variables
+    global.actions = '';
+    global.g = null;
+    global.grammar = '';
+    global.program = '';
+    global.run = null;
+    global.tokens = '';
+
+    if (!('newOutput' in global))
+      global.newOutput = (...arg) => {
+        console.log('> newOutput');
+        if (arg.length > 1 || arg[0].length) console.log(...arg);
+      };
+    
+    if (!('prompt' in global))
+      global.prompt = (text, dflt) => { console.log(text + ' > ' + dflt); return dflt; };
+    
+    if (!('puts' in global))
+      global.puts = console.log.bind(console);    
+
+    global.Base = iBase;
+    global.EBNF = iEBNF;
+    global.BNF = iBNF;
+    
+    global.Five = iFive;
+    global.Six = iSix;
+    global.Seven = iSeven;
+    global.Eight = iEight;
+    global.Ten = iTen;
+    global.Eleven = iEleven;
+  }
+    
+  /** Event: `eval?.(tokens)`, if any, and represent and check the grammar;
+      modifies `g`, clears `run`, and removes `memory`.
+  */
+  doNew () {
+    // clear globals and remove memory
+    const clearAll = () => g = run = this.#memory = null;
+    clearAll();
+
+    // compile this.tokens into tokens, set this.skip
+    let tokens = null;
+    try {
+      this.#skip = undefined;
+      if (this.tokens.length) {
+        tokens = eval?.('(' + this.tokens + '\n)');
+        if (tokens[''] instanceof RegExp) this.#skip = tokens[''];
+      }
+    } catch (e) {
+      clearAll();
+      newOutput('Error in tokens: ' + (e instanceof Error ? e.message : e));
+      return;
+    }
+
+    // represent this.grammar as g
+    try {
+      let cmd;
+      switch (this.mode) {
+
+      case 'ebnf':
+        const flags = [];
+        if (this.tShallow) flags.push('shallow: true');
+        if (this.tDeep) flags.push('deep: true');
+        if (this.tFollow) flags.push('follow: true');
+
+        cmd = '> g = new EBNF.Grammar(grammar, tokens';
+        if (flags.length) cmd += ', { ' + flags.join(', ') + ' }';
+        newOutput(cmd + ')');
+
+        g = new EBNF.Grammar(this.grammar, tokens, {
+          shallow: this.tShallow,
+          deep: this.tDeep,
+          follow: this.tFollow,
+          log: puts
+        });
+
+        if (g &amp;&amp; !g.errors) {
+          if (this.greedy)
+            puts('> g.expect()'), g.expect();
+          else
+            puts('> g.check()'), g.check();
+          puts(this.tShallow|this.tDeep|this.tFollow ? g.dump() : g.toString());
+        }
+        break;
+
+      case 'stack':
+        cmd = '> g = BNF.Grammar.fromEBNF(new EBNF.Grammar(grammar, tokens)';
+        if (this.error) cmd += ', { error: true }';
+        newOutput(cmd + ')');
+
+        g = BNF.Grammar.fromEBNF(
+          new EBNF.Grammar(this.grammar, tokens, {
+            log: puts
+          }), {
+            error: this.error,
+            log: puts
+          });
+
+        if (g &amp;&amp; !g.errors)
+          puts(this.dSets ? g.dump(undefined, this.dStates) : g.toString(this.dStates));
+        break;
+
+      case 'bnf':
+        newOutput('> g = new BNF.Grammar(grammar, tokens)');
+
+        g = new BNF.Grammar(this.grammar, tokens, {
+          log: puts
+        });
+
+        if (g &amp;&amp; !g.errors)
+          puts(this.dSets ? g.dump() : g.toString(this.dStates));
+      }
+    } catch (e) {
+      newOutput('Error in new grammar: ' + (e instanceof Error ? e.message : e));
+      clearAll();
+    }
+
+    if (g &amp;&amp; g.errors)
+      clearAll();
+  }
+  
+  /** Event: create a scanner and apply it to this.program.
+  */
+  doScan () {
+    puts('do scan', g == null)
+    if (!g) return;
+
+    const s = g.scanner(this.skip);
+    newOutput(`> g.scanner(${this.skip ?? ''}).pattern =`, s.pattern.toString());
+    puts(`> g.scanner(${this.skip ?? ''}).scan(program)`);
+    puts(s.scan(this.program.trim()).join('\n'));
+  }
+  
+  /** Event: `eval?.(this.actions)`, if any, create a parser, and parse the program;
+      modifies `run` and removes `memory`.
+  */ 
+  doParse () {
+    if (!g) return;
+
+    // clear run and remove memory
+    run = this.#memory = null;
+
+    // compile actions, if any
+    let actions = null;
+    if (this.actions.length)
+      try {
+        actions = eval?.('(' + this.actions + '\n)');
+        if (typeof actions != 'function' &amp;&amp; typeof actions != 'object')
+          throw 'actions must define a class or an object';
+      } catch (e) {
+        newOutput('Error in actions: ' + (e instanceof Error ? e.message : e));
+        return;
+      }
+
+    // parse/compile this.program
+    newOutput('');
+    switch (this.mode) {
+
+    case 'ebnf':
+      if (g.config.lookahead = this.tLookahead) puts('> g.config.lookahead = true');
+      if (g.config.parse = this.tParser) puts('> g.config.parse = true');
+      if (g.config.actions = this.tActions) puts('> g.config.actions = true');
+      if (g.config.noargs = this.tNoargs) puts('> g.config.noargs = true');
+      break;
+
+    case 'stack':
+      if (g.config.error = this.error) puts('> g.config.error = true');
+      if (g.config.lookahead = this.tLookahead) puts('> g.config.lookahead = true');
+      if (this.tParser) puts(`> g.config.trace = ${g.config.trace = /./}`);
+      else if (this.tActions) puts(`> g.config.trace = ${g.config.trace = /reduce/}`);
+      else g.config.trace = null;
+      if (g.config.noargs = this.tNoargs) puts('> g.config.noargs = true');
+      break;
+
+    case 'bnf':
+      if (g.config.build = this.build) puts('> g.config.build = true');
+      if (this.tParser) puts(`> g.config.trace = ${g.config.trace = /./}`);
+      else if (this.tActions) puts(`> g.config.trace = ${g.config.trace = /reduce/}`);
+      else g.config.trace = null;
+      if (g.config.noargs = this.tNoargs) puts('> g.config.noargs = true');
+    }
+
+    try {
+      if (actions) puts(`> run = g.parser(${this.skip ?? ''}).parse(program, actions)`);
+      else puts(`> g.parser(${this.skip ?? ''}).parse(program)`);
+      puts(g.dump(run = g.parser(this.skip).parse(this.program, actions)));
+      if (g.errors) run = null;  // don't allow execution
+    } catch (e) {
+      if (this.mode != 'ebnf') puts(e instanceof Error ? e.message : e);
+      run = null;  // don't allow execution
+    } finally {
+      if (typeof run != 'function') run = null;  // don't allow execution
+    }
+  }
+  
+  /** Event: run the executable, if any.
+  */
+  doRun () {
+    if (typeof run != 'function') return;
+
+    try {
+      this.#memory = null;  // no stepping
+      newOutput('> run()');
+      const result = run();
+      puts(run.length == 2 ? result.toString() : g.dump(result));
+    } catch (e) { puts(e instanceof Error ? e.message : e); }
+  }
+
+  /** Event: step the stack machine, if any.
+      @param {number} n - number of steps to execute.
+  */
+  doStep (n) {
+    if (!typeof run == 'function' || run.length != 2) return;
+
+    try {
+      if (!this.memory || !this.memory.continue) {
+        newOutput(`> memory = run(null, ${n})`);
+        this.#memory = run(null, n);
+      } else {
+        puts(`> memory = run(memory, ${n})`);
+        this.#memory = run(this.memory, n);
+      }
+      if (!this.memory.continue) {
+        puts(this.memory.toString());
+        this.#memory = null;
+      }
+    } catch (e) { puts(e instanceof Error ? e.message : e); this.#memory = null; }
+  }
+}
+
+export { Model };</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

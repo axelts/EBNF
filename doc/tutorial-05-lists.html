@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 5. Translating Sentences</title -->
+	<title>5. Translating Sentences</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>5. Translating Sentences</h2>
+</header>
+
+<article>
+    <h4 id="what's-in-a-parse-tree%3F">What's in a Parse Tree?</h4>
+<h4 id="what's-with-the-brackets%3F">What's with the Brackets?</h4>
+<hr>
+<p><a href="tutorial-04-parser.html">Chapter four</a> explained that syntax analysis
+tries to build a parse tree to show that a sequence of input terminals is a sentence
+conforming to a grammar.</p>
+<p>Output from the examples suggests that, indeed, something gets built,
+and it contains strings related to the input terminals.
+However,
+the output seems to consist mostly of brackets,
+and it is very hard to see
+that the output models the parse tree as very deeply nested JavaScript lists.</p>
+<p>This chapter explains how the lists come about
+and how syntax analysis can be augmented with <a href="module-Base.html#~Action"><code>Action</code></a> methods to translate input
+into something more convenient.</p>
+<h3 id="lists">Lists</h3>
+<p>Trace output from <a href="../?eg=05/01">example 5/01</a> demonstrates
+that the <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method
+of the <a href="module-EBNF-Parser.html"><code>Parser</code></a> object generated by the grammar's
+<a href="module-EBNF-Grammar.html#parser"><code>parser()</code></a> method
+collects a list containing the input strings from the <span class='a-program'></span>
+which correspond to the terminals in the grammar rule.</p>
+<p>Here is a sequence of eight examples, 5/01 through 5/08, which illustrate how rules, brackets,
+and braces collaborate to create nested lists. Each time</p>
+<ul>
+<li>
+<p>press <span class='c-new'></span> to represent and check the grammar;</p>
+</li>
+<li>
+<p>toggle <span class='t-parser'></span>
+and press <span class='c-parse'></span>
+to watch how syntax analysis builds the nested lists.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>grammar</th>
+<th>output</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code><span class="red">sum</span>: Number '+' Number;</code></td>
+<td><code><span class="red-bracket">[</span>1 + 2<span class="red-bracket">]</span></code></td>
+<td><a href="../?eg=05/01">01: <code>sum</code> creates a list</a></td>
+</tr>
+<tr>
+<td><code>sum: term '+' Number;</code><br><code><span class="red">term</span>: Number;</code></td>
+<td><code>[<span class="red-bracket">[</span>1<span class="red-bracket">]</span> + 2]</code></td>
+<td><a href="../?eg=05/02">02: <code>term</code> creates a list</a></td>
+</tr>
+<tr>
+<td><code>sum: term '+' term;</code><br><code><span class="red">term</span>: Number;</code></td>
+<td><code>[<span class="red-bracket">[</span>1<span class="red-bracket">]</span> + <span class="red-bracket">[</span>2<span class="red-bracket">]</span>]</code></td>
+<td><a href="../?eg=05/03">03: <code>term</code> creates lists</a></td>
+</tr>
+<tr>
+<td><code>sum: Number <span class="red-bracket">[</span> '+' Number <span class="red-bracket">]</span>;</code></td>
+<td><code>[1 <span class="red">null</span>]</code><br><code>[1 <span class="red-bracket">[</span>+ 2<span class="red-bracket">]</span>]</code></td>
+<td><a href="../?eg=05/04">04: brackets create<br><code>null</code> or a list</a></td>
+</tr>
+<tr>
+<td><code>sum: term [ '+' term ];</code><br><code><span class="red">term</span>: Number;</code></td>
+<td><code>[<span class="red-bracket">[</span>1<span class="red-bracket">]</span> null]</code><br><code>[<span class="red-bracket">[</span>1<span class="red-bracket">]</span> [+ <span class="red-bracket">[</span>2<span class="red-bracket">]</span>]]</code></td>
+<td><a href="../?eg=05/05">05: <code>term</code> creates lists</a></td>
+</tr>
+<tr>
+<td><code>sum: Number <span class="red">{</span> '+' Number <span class="red">}</span>;</code></td>
+<td><code>[1 <span class="red-bracket">[</span><span class="red-bracket">[</span>+ 2<span class="red-bracket">]</span><span class="red-bracket">]</span>]</code><br><code>[1 <span class="red-bracket">[</span><span class="red-bracket">[</span>+ 2<span class="red-bracket">]</span> <span class="red-bracket">[</span>+ 3<span class="red-bracket">]</span><span class="red-bracket">]</span>]</code></td>
+<td><a href="../?eg=05/06">06: braces create list of<br>lists, one inner list per<br>iteration</a></td>
+</tr>
+<tr>
+<td><code>sum: term { '+' term };</code><br><code><span class="red">term</span>: Number;</code></td>
+<td><code>[<span class="red-bracket">[</span>1<span class="red-bracket">]</span> [[+ <span class="red-bracket">[</span>2<span class="red-bracket">]</span>]]]</code></td>
+<td><a href="../?eg=05/07">07: <code>term</code> creates lists</a></td>
+</tr>
+<tr>
+<td><code>sum: Number { more };</code><br><code><span class="red">more</span>: '+' term;</code><br><code>term: Number;</code></td>
+<td><code>[1 [[<span class="red-bracket">[</span>+ [2]<span class="red-bracket">]</span>]]]</code></td>
+<td><a href="../?eg=05/08">08: <code>more</code> creates an<br>extra list</a></td>
+</tr>
+</tbody>
+</table>
+<p>Terminals produce strings in the nested lists.
+In the actual output <a href="../?">on the practice page</a>
+this is emphasized because strings are quoted there;
+in the <strong>output</strong> column above the quotes had to be omitted to save space.</p>
+<p>In summary:</p>
+<ul>
+<li>The <code>parse()</code> algorithm calls the <code>parse()</code> methods for objects selected during
+a top-down traversal of the rule trees of the grammar.
+By default, most of these methods produce lists.</li>
+</ul>
+<div class='diagram'>
+  <table>
+    <col style='width: 35%'>
+    <col style='width: 65%'>
+    <tr>
+      <td> <img src='04/rule-sum.svg' alt='rule sum'> </td>
+      <td> <img src='04/rule-more.svg' alt='rule more'> </td>
+    </tr>
+    <tr>
+      <td colspan='2'> <img src='04/rule-term.svg' alt='rule term'> </td>
+    </tr>
+  </table>
+</div>
+<ul>
+<li>
+<p>The fundamental branch node in a rule tree is a <a href="module-EBNF-Seq.html"><code>Seq</code></a> object
+which always produces a list containing the values which the branch node's subtrees produce.</p>
+</li>
+<li>
+<p>Alternatives show up in a rule tree as branch nodes represented as <a href="module-EBNF-Rule.html"><code>Rule</code></a>,
+<a href="module-EBNF-Opt.html"><code>Opt</code></a>, and <a href="module-EBNF-Some.html"><code>Some</code></a> objects.</p>
+</li>
+<li>
+<p>A <a href="module-EBNF-Rule.html"><code>Rule</code></a> selects one of it's <a href="module-EBNF-Seq.html"><code>Seq</code></a> descendants
+which produces a list for the rule's alternative matching the input.</p>
+</li>
+<li>
+<p>The list will contain exactly one entry for each
+item (terminal, rule reference, brackets, or braces) in the selected sequence.</p>
+</li>
+<li>
+<p>Brackets are represented as an <a href="module-EBNF-Opt.html"><code>Opt</code></a> object in the rule tree
+which again has <a href="module-EBNF-Seq.html"><code>Seq</code></a> descendants for the alternatives.</p>
+</li>
+<li>
+<p>If an alternative of <a href="module-EBNF-Opt.html"><code>Opt</code></a> (i.e., brackets) matches the input,
+it's <a href="module-EBNF-Seq.html"><code>Seq</code></a> will produce a list,
+otherwise the brackets themselves produce <code>null</code>.</p>
+</li>
+<li>
+<p>Braces are represented as a <a href="module-EBNF-Some.html"><code>Some</code></a> object in the rule tree
+which again has <a href="module-EBNF-Seq.html"><code>Seq</code></a> descendants for the alternatives.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Some.html"><code>Some</code></a> will match at least one alternative,
+but it might be able to match several times in a row — the same or a different alternative.</p>
+</li>
+<li>
+<p>Therefore, <a href="module-EBNF-Some.html"><code>Some</code></a> (i.e., braces) will return a list of one or more inner lists,
+one for each iteration.
+Each inner list corresponds to one matched alternative and it is produced by the
+<a href="module-EBNF-Seq.html"><code>Seq</code></a> object representing the alternative in the rule tree.</p>
+</li>
+</ul>
+<p>The <a href="module-EBNF-Parser.html#parse"><code>Parser</code>'s <code>parse()</code></a> method
+returns the nest of lists produced by the rule tree while syntax analysis recognizes a sentence.
+List nesting is completely under control of the grammar
+and the list nesting principles described above are uniform and relatively simple; however,
+as the arithmetic expressions in <a href="../?eg=02/12">example 2/12</a>
+or a simplified version just for sums in <a href="../?eg=04/03">example 4/03</a> showed,
+while this result of syntax analysis is well-formed it is usually so overwhelming
+that it hardly invites further processing.</p>
+<h3 id="action-methods">Action Methods</h3>
+<p>Fortunately, there is a way to interact with list creation
+whenever a rule completes recognition.</p>
+<p>As discussed in <a href="tutorial-04-parser.html#parser-and-parse">chapter four</a>,
+syntax analysis is performed by the
+<a href="module-EBNF-Parser.html#parse"><code>Parser</code>'s <code>parse()</code></a> method
+which calls on the <code>parse()</code> methods
+of the various classes involved in representing a grammar as a rule tree.</p>
+<p>Each grammar rule can be considered to be a function
+which has to recognize a part of the input
+which is described and structured according to the rule's right-hand side.</p>
+<p>This function is the <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> method
+associated with the <a href="module-EBNF-Rule.html"><code>Rule</code></a> object representing the rule in the grammar's rule tree.
+As described above, by default
+this <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> method
+creates a list containing whatever the descendants' <code>parse()</code> methods return.
+The &quot;check before you call&quot; policy ensures that
+there is no backing up and re-creating — recognition cannot be undone.</p>
+<p>The real power of considering a grammar rule as a function
+stems from the fact that each rule can be associated with an
+<a href="module-Base.html#~Action"><code>Action</code></a> method written in JavaScript</p>
+<ul>
+<li>
+<p>which is called when the <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> method
+is done collecting,</p>
+</li>
+<li>
+<p>which receives the list collected by <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a>
+as individual arguments, and</p>
+</li>
+<li>
+<p>which returns a value which <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> returns
+in place of the collected list.</p>
+</li>
+</ul>
+<p>Thus far we have not specified any <a href="module-Base.html#~Action"><code>Action</code></a> methods —
+this is why we have seen deeply nested lists as results of syntax analysis.</p>
+<p>The <a href="module-EBNF-Parser.html#parse"><code>Parser</code>'s <code>parse()</code></a> method accepts an optional argument:</p>
+<ul>
+<li>
+<p>a (singleton) object with methods names equal to some rule names, or</p>
+</li>
+<li>
+<p>a class which the parser instantiates to create such an object;
+the constructor is called with a reference to the parser
+to facilitate error reporting.</p>
+</li>
+</ul>
+<p><a href="../?eg=05/09">Example 5/09</a> contains different <a href="module-Base.html#~Action"><code>Action</code></a> methods to manipulate
+a sequence of non-whitespace characters using the following grammar:</p>
+<pre class="prettyprint source"><code>chars: { char };
+char: Char;
+</code></pre>
+<p>For example, the <a href="module-Base.html#~Action"><code>Action</code></a> methods</p>
+<pre class="prettyprint source"><code>char (ch) { return ch; }
+chars (some) { 
+  return some.reduceRight((rev, list) => rev += list[0], '');
+}
+</code></pre>
+<p>reverse the order of the characters of the <a href="https://norvig.com/palindrome.html" title="World's Longest Palindrome?">palindrome</a></p>
+<pre class="prettyprint source"><code>.ein.Esel.lese.nie!
+</code></pre>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar, and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to see the output.</p>
+</li>
+<li>
+<p>Uncomment one action for <code>char</code> and/or one for <code>chars</code>
+in the <span class='a-actions'></span>
+to see how the output changes.</p>
+</li>
+<li>
+<p>Toggle <span class='t-parser'></span>
+and/or <span class='t-actions'></span>
+and press <span class='c-parse'></span>
+to watch how input is found and converted by the <a href="module-Base.html#~Action"><code>Action</code></a> methods.
+In particular, if there is no <a href="module-Base.html#~Action"><code>Action</code></a> method
+for <code>char</code> the trace shows that the rule returns a list containing a
+single character
+which the <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>chars</code>
+concatenates to a string...</p>
+</li>
+<li>
+<p>Erase either the methods or everything in the <span class='a-actions'></span>
+and press <span class='c-parse'></span> to see
+that without action methods the lists are generated.</p>
+</li>
+</ul>
+<p><a href="../?eg=05/10">Example 5/10</a> with the same grammar
+shows how a property in the class can be used to communicate
+among the <a href="module-Base.html#~Action"><code>Action</code></a> methods:</p>
+<pre class="prettyprint source"><code>class Actions {
+  #queue = [];
+
+  char (ch) { this.#queue.unshift(ch); }
+  chars () { return this.#queue.join(''); } 
+}
+</code></pre>
+<p>Initially, <code>this.#queue</code> is an empty array.</p>
+<p>Syntax analysis proceeds from the start rule of the grammar down
+to the terminal nodes which collect the input terminals from left to right.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift" title="unshift()"><code>unshift()</code></a> stuffs arguments in front of a target array
+and returns the new length (which is not used in this case).
+Because of <code>unshift()</code> the action method for <code>char</code> stuffs
+the non-whitespace input characters into the array in reverse order.</p>
+<p>The action method for the start rule <code>chars</code>
+returns the collected array elements as a string.</p>
+<p>The following chapters illustrate with a few larger examples what <a href="module-Base.html#~Action"><code>Action</code></a> methods can do:
+we interpret arithmetic and compile a little language in <a href="tutorial-06-compile.html">chapter six</a>,
+we perform some type checking and add functions and block structure in <a href="tutorial-07-features.html">chapter seven</a>,
+and we implement <a href="https://en.wikipedia.org/wiki/First-order_function" title="First-order functions">first-order functions</a> in <a href="tutorial-08-functions.html">chapter eight</a>.
+Finally, we create a parser generator in <a href="tutorial-09-bootstrap.html">chapter nine</a>
+which implements lexical and syntax analysis for grammars —
+and which we have used all along.</p>
+<h4 id="error-checking">Error Checking</h4>
+<p>Rules and <a href="module-Base.html#~Action"><code>Action</code></a> methods are very loosely coupled
+but by default the parser tries to check the number of values collected by
+<a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> against the number of parameters
+defined for the action method:</p>
+<ul>
+<li>
+<p>The test is omitted if the action method has no parameters.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" title="... syntax">Rest parameters</a> affect the count of expected parameters;
+in particular, the test is omitted if the entire parameter list
+is one rest parameter.</p>
+</li>
+<li>
+<p>The test can be suppressed by setting <a href="module-Base-Factory.html"><strong>no args</strong></a>.</p>
+</li>
+</ul>
+<h3 id="idioms-for-actions">Idioms for Actions</h3>
+<p>Each rule presents structured data
+to it's <a href="module-Base.html#~Action"><code>Action</code></a> method.
+The <a href="module-Base.html#~Action"><code>Action</code></a> method for the rule will receive
+one argument for each top-level item in the rule.
+Consider the grammar in <a href="../?eg=05/11">example 5/11</a>:</p>
+<pre class="prettyprint source"><code>rule: 'literal' Number ref;
+ref: Number;
+</code></pre>
+<p>There are two ways to write the parameter list
+for the <a href="module-Base.html#~Action"><code>Action</code></a> method,
+namely using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" title="... syntax">rest parameter syntax</a> or using individual parameter names.</p>
+<pre class="prettyprint source"><code>rule (...val) { /* ... */ }
+</code></pre>
+<p>With the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" title="... syntax">rest parameter syntax</a> the array <code>val</code> will contain three values
+because there are three items in <code>rule</code>:</p>
+<ul>
+<li>
+<p><code>val[0]</code> is the string value <code>'literal'</code> itself,</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt" title="parseInt()"><code>parseInt(val[1], 10)</code></a> is the decimal number
+computed from the string matched by the token <code>Number</code>, and</p>
+</li>
+<li>
+<p><code>val[2]</code> contains the value
+returned by the <a href="module-Base.html#~Action"><code>Action</code></a> method, if any,
+for the referenced rule <code>ref</code>, or it contains the list of arguments
+which would have been presented to the referenced rule's
+<a href="module-Base.html#~Action"><code>Action</code></a> method.</p>
+</li>
+</ul>
+<p>A more convenient parameter list
+for an <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>rule</code>
+uses different parameter names for the different argument values:</p>
+<pre class="prettyprint source"><code>rule (literal, number, ref) { /* ... */ }
+</code></pre>
+<p>and in this case</p>
+<ul>
+<li>
+<p><code>literal</code> is the string value <code>literal</code> itself,</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt" title="parseInt()"><code>parseInt(number, 10)</code></a> is the converted <code>Number</code>, and</p>
+</li>
+<li>
+<p><code>ref</code> contains the value
+returned by the <a href="module-Base.html#~Action"><code>Action</code></a> method, if any,
+for the referenced rule <code>ref</code>, or it contains the list of arguments
+which would have been presented to the referenced rule's
+<a href="module-Base.html#~Action"><code>Action</code></a> method.</p>
+</li>
+</ul>
+<p>Note that if there is no <a href="module-Base.html#~Action"><code>Action</code></a> method for a rule,
+the rule returns a list containing the collected values.
+Without an <a href="module-Base.html#~Action"><code>Action</code></a> method
+the rule <code>ref</code> above collects a string matched by the token <code>Number</code>
+and returns it in an array.</p>
+<ul>
+<li>Therefore, if there is no <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>ref</code>,
+the <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>rule</code>
+can compute the decimal value as <code>parseInt(ref[0], 10)</code>.</li>
+</ul>
+<p>Consider the following <a href="module-Base.html#~Action"><code>Action</code></a> methods for <code>rule</code> and <code>ref</code>:</p>
+<pre class="prettyprint source"><code>rule (literal, number, ref) { /* ... */ }
+ref (number) { return parseInt(number, 10); }
+</code></pre>
+<p>Now the <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>rule</code> receives the decimal value in the parameter <code>ref</code>
+because the rule for <code>ref</code> has an <a href="module-Base.html#~Action"><code>Action</code></a> method which returns that value.</p>
+<p>Brackets and braces in a rule amount to unnamed rules
+which cannot have <a href="module-Base.html#~Action"><code>Action</code></a> methods, i.e.,
+they contain alternatives which in turn contain sequences.
+If such a sequence matches input it collects a list.
+The following sections explain how to drill down to access the values.</p>
+<h4 id="%5B-optional-%5D-%E2%80%94-maybe"><code>[ optional ]</code> — maybe</h4>
+<p>The following rule accepts the string <code>literal</code>,
+optionally followed by either <code>maybe</code> or <code>not</code>,
+and either of those followed by a number, check <a href="../?eg=05/12">example 5/12</a>:</p>
+<pre class="prettyprint source"><code>rule: 'literal' [ 'maybe' Number | 'not' '!' Number ];
+</code></pre>
+<p>With explicit parameter names — one per top-level item in the rule —</p>
+<pre class="prettyprint source"><code>rule (literal, opt) { /* ... */ }
+</code></pre>
+<p>here is how to get to the pieces:</p>
+<ul>
+<li>
+<p><code>literal</code> will contain the string value <code>literal</code> and <code>opt</code> will contain a list.</p>
+</li>
+<li>
+<p><code>opt[0]</code> will contain one of the strings <code>maybe</code> or <code>not</code>, and</p>
+</li>
+<li>
+<p><code>opt[1]</code> or <code>opt[2]</code>, respectively, will contain the string value collected for the <code>Number</code>.</p>
+</li>
+</ul>
+<p>However, <code>opt</code> receives the result produced by one of the alternatives
+in the  brackets,
+and that need not match any input — in which case <code>opt</code> is <code>null</code>.</p>
+<p>Therefore, an <a href="module-Base.html#~Action"><code>Action</code></a> method
+to display the decimal values in the output area could be</p>
+<pre class="prettyprint source"><code>class Actions {
+  // rule: 'literal' [ 'maybe' Number | 'not' '!' Number ];
+  rule (literal, opt) {
+    if (opt)
+      switch (opt[0]) {
+      case 'maybe': puts(opt[0], parseInt(opt[1], 10)); break;
+      case 'not':   puts(opt[0], parseInt(opt[2], 10));
+      }
+  }
+}
+</code></pre>
+<h4 id="to-switch-or-not-to-switch-...">To <code>switch</code> or not to <code>switch</code> ...</h4>
+<p>Lexical analysis partitions the input into terminals.
+Syntax analysis collects the terminals in rules.
+It is inefficient if <a href="module-Base.html#~Action"><code>Action</code></a> methods
+have to use <code>switch</code> or <code>if</code> to deal with terminal strings again.</p>
+<p><a href="../?eg=05/13">Example 5/13</a> accepts the same input as <a href="../?eg=05/12">example 5/12</a>
+but two rules have been added
+to simplify the corresponding <a href="module-Base.html#~Action"><code>Action</code></a> methods:</p>
+<pre class="prettyprint source"><code>class Actions {
+  // rule: 'literal' [ maybe | not ];
+  rule (literal, opt) { if (opt) puts(opt[0]); }
+
+  // maybe: 'maybe' Number;   // returns Number value
+  maybe (m, number) { return parseInt(number, 10); }
+  
+  // not: 'not' '!' Number;   // returns Number value
+  not (n, exclamation, number) { return parseInt(number, 10); }
+}
+</code></pre>
+<p>Brackets and braces can contain alternatives.
+It is often easier to make each alternative a separate rule
+to simplify the <a href="module-Base.html#~Action"><code>Action</code></a> methods
+and avoid inspecting terminals explicitly.</p>
+<h4 id="%7B-some-%7D-%E2%80%94-at-least-once"><code>{ some }</code> — at least once</h4>
+<p><a href="../?eg=05/14">Example 5/14</a> contains
+a typical grammar for a list of statements, each terminated by a semicolon:</p>
+<pre class="prettyprint source"><code>list: { item ';' };
+item: dec | hex;
+dec: 'dec' Decimal;
+hex: 'hex' ref;
+ref: Hex;
+</code></pre>
+<p><code>list</code> accepts one or more numbers,
+each is preceded by <code>dec</code> or <code>hex</code> and followed by a semicolon.
+There are tokens for decimal and hexadecimal numbers;
+note that the token patterns overlap — hence the prefixes in the rules:</p>
+<pre class="prettyprint source"><code>{ Decimal: /[0-9]+/, Hex: /[0-9a-fA-F]+/ }
+</code></pre>
+<ul>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>erase the <span class='a-actions'></span>, and</li>
+<li>press <span class='c-parse'></span> to see the nested lists.</li>
+<li>Why does the input <code>hex0;</code> cause an error?</li>
+</ul>
+<p>Without <a href="module-Base.html#~Action"><code>Action</code></a> methods the input</p>
+<pre class="prettyprint source"><code>dec 10;
+hexBad;
+dec 20;
+</code></pre>
+<p>produces</p>
+<pre class="prettyprint source"><code>[ 
+  [ 
+    [ [ [ 'dec' '10' ] ] ';' ]
+    [ [ [ 'hex' [ 'Bad' ] ] ] ';' ]
+    [ [ [ 'dec' '20' ] ] ';' ] 
+  ]
+]
+</code></pre>
+<p>If there are no <a href="module-Base.html#~Action"><code>Action</code></a> methods
+the outermost list (lines 1 and 7) is produced by the sequence for <code>list</code>.
+The next list (lines 2 and 6) is produced by the braces (<em>some</em>)
+and contains one list for each iteration —
+the outer lists in lines 3 through 5.
+The inner lists in lines 3 and 5 are produced by the sequence for <code>dec</code> or <code>hex</code>
+and <code>item</code> adds one more list to these.
+<code>Bad</code> is in one more list, produced by the sequence for <code>ref</code> (line 4).</p>
+<p>Trick question:
+Why are the blanks following <code>dec</code> in the program necessary,
+whereas <code>Bad</code> can immediately follow <code>hex</code>?</p>
+<p>With explicit parameter names here is how to untangle a pair of braces using <a href="module-Base.html#~Action"><code>Action</code></a> methods:</p>
+<pre class="prettyprint source"><code>class Actions14 {
+  /** `dec: 'dec' Decimal ';';` returns value */
+  dec (_, decimal) { return parseInt(decimal, 10); }
+
+  /** `hex: 'hex' ref ';';` returns value */
+  hex (_, ref) { return parseInt(ref[0], 16); }
+  
+  /** `item: dec | hex;` returns `[ value ]`  
+      `list: { item ';' };` displays value ... */
+  list (some) { puts(... some.map(list => list[0][0])); }
+}
+</code></pre>
+<p><code>dec()</code> and <code>hex()</code> decode the numbers.
+There is no need for an <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>ref</code>
+if <code>hex()</code> extracts the input string from the list
+returned from the <code>ref</code> rule by default (line 6).</p>
+<ul>
+<li>Reload the example and press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Toggle <span class='t-actions'></span>, and</li>
+<li>press <span class='c-parse'></span> to see how the numbers are extracted.</li>
+</ul>
+<p><code>list()</code> is now concerned with a list of lists which contain one number
+and a semicolon each.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" title="map()"><code>map()</code></a> is used to convert this nest into
+a simple list and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">spread syntax</a> converts that into
+individual arguments for <code>puts()</code> to display (line 10).</p>
+<h4 id="%5B%7B-many-%7D%5D-%E2%80%94-zero-or-more-times"><a id='many'></a> <code>[{ many }]</code> — zero or more times</h4>
+<p><a href="../?eg=05/15">Example 5/15</a> is very similar,
+but for the fact that the statements are separated by commas.</p>
+<pre class="prettyprint source"><code>list: item [{ ',' item }];
+item: dec | hex;
+dec: 'dec' Decimal;
+hex: 'hex' ref;
+ref: Hex;
+</code></pre>
+<p>The program</p>
+<pre class="prettyprint source"><code>dec 10, hex Bad, dec 20
+</code></pre>
+<p>produces</p>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+[ 10 2989 20 ]
+</code></pre>
+<p>With explicit parameter names here is how to untangle
+a comma-separated list of items,
+i.e., one <code>dec</code> or <code>hex</code> item followed by zero or more items,
+with a comma preceding each item but the first:</p>
+<pre class="prettyprint source"><code>class Actions15 extends Five.Actions14 {
+  /** `item: dec | hex;` returns `[ value ]`  
+      `list: { item ';' };` returns `[ value ... ]` */
+  list (item, many) { 
+    return item.concat(many ? many[0].map(list => list[1][0]) : []);
+  }
+  
+  // alternative solution
+  // list (item, many) {
+  //   return (many ? many[0] : []).reduce(
+  //     (result, list) => (result.push(list[1][0]), result), item);
+  // }
+}
+</code></pre>
+<ul>
+<li>Press <span class='c-new'></span> to represent and check the grammar.</li>
+<li>Toggle <span class='t-actions'></span>, and</li>
+<li>press <span class='c-parse'></span> to see how the numbers are extracted.</li>
+</ul>
+<p><code>item</code> is defined by a separate rule (comment in line 2);
+without an <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>item</code>
+the parameter <code>item</code> (line 4) will receive a list containing the first value.</p>
+<p>This list is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" title="concat()">concatenated</a> either with a list of further values
+or with an empty list (which is discarded).</p>
+<p>If the parameter <code>many</code> (line 4) is not <code>null</code>, it is a list
+containing the list of values for the alternatives created by the braces.
+<code>many[0]</code> is the inner list and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" title="map()"><code>map()</code></a> converts that into
+a list of values that can be concatenated with the first value.</p>
+<p>The callback for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" title="map()"><code>map()</code></a> (line 5) each time receives a <code>list</code> produced
+by the sequence</p>
+<pre class="prettyprint source"><code>',' item
+</code></pre>
+<p>and <code>list[1][0]</code> drills down to the value in the second element of that list.</p>
+<p>An alternative solution employs <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> (lines 9 to 12):</p>
+<ul>
+<li>
+<p>If the parameter <code>many</code> is <code>null</code>, i.e., if there is only one <code>item</code>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> is applied to an empty list and returns the start value,
+i.e., the parameter <code>item</code>.</p>
+</li>
+<li>
+<p>Otherwise, each time the callback function receives a list, extracts
+a value, and appends that to the <code>item</code> parameter.</p>
+</li>
+</ul>
+<p>The result is the same; however, the solution with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" title="concat()"><code>concat()</code></a>
+works on list lengths known a priori whereas the alternative solution
+dynamically extends the list passed as a parameter,
+i.e., one would opt for the solution with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" title="concat()"><code>concat()</code></a>.</p>
+<p><a href="../?eg=05/16">Example 5/16</a> has the same grammar, tokens, and program
+as <a href="../?eg=05/15">example 5/15</a>,
+but this time the <code>list</code> action returns the sum of the numbers,
+i.e., the list of items has to be processed into a single result:</p>
+<pre class="prettyprint source"><code>class Actions16 extends Five.Actions14 {
+  // convoluted solution
+  // list (item, many) {
+  //   return item.concat(many ? many[0].map(list => list[1][0]) : []).
+  //     reduce((sum, value) => sum + value, 0);
+  // }    
+
+  /** `item: dec | hex;` returns `[ value ]`  
+      `list: [{ ',' item }];` returns `value +...` */
+  list (item, many) {
+    return (many ? many[0] : []).reduce(
+      (result, list) => result += list[1][0], item[0]); 
+  }
+}
+</code></pre>
+<p>A convoluted solution would use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" title="map()"><code>map()</code></a> as before to
+create a list of values (line 4) and follow up with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a>
+to produce the sum (line 5).</p>
+<p>In this situation it is better to only apply <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a>,
+either to the list of additional items or to an empty list (line 11),
+initialize with the first value and add the others on the fly (line 12).
+This avoids unneccesary dynamic list creation.</p>
+<h3 id="extending-action-classes">Extending Action Classes</h3>
+<p>The last three examples in this chapter share some grammar rules and the corresponding
+<a href="module-Base.html#~Action"><code>Action</code></a> methods:
+<a href="../?eg=05/14">example 5/14</a> defines <code>item</code>, <code>dec</code>, <code>hex</code>, and <code>ref</code>,
+and examples <a href="../?eg=05/15">5/15</a> and <a href="../?eg=05/16">5/16</a>
+can just extend the action class defined for <a href="../?eg=05/14">example 5/14</a>
+to inherit those methods and only overwrite
+the <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>list</code>
+where the corresponding rule has been changed
+and/or a different algorithm should be applied.</p>
+<p>The practice page supports this as follows:</p>
+<ul>
+<li>
+<p>If class names end in digits, such as <code>Actions14</code> in <a href="../?eg=05/14">example 5/14</a>,
+the classes are exported from modules which are part of the environment
+provided by the practice page.</p>
+</li>
+<li>
+<p>The module names are global, e.g., <code>Five</code> for chapter five,
+so that, e.g., <a href="../?eg=05/15">example 5/15</a> can inherit methods:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>class Actions15 extends Five.Actions14 { ... }
+</code></pre>
+<p>It should be noted, however, that overwriting does not remove code.
+For example, <code>Actions15</code> contains it's own <code>list</code> method
+and <code>super.list()</code>, i.e., the method from <code>Actions14</code>,
+is still available, even if it is not used.
+<a href="tutorial-11-trees.html">Chapter eleven</a> discusses how with careful planning
+<a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> can be used to avoid dead code.</p>
+<p>The following chapters will rely on modules in order to focus
+on the <a href="module-Base.html#~Action"><code>Action</code></a> methods
+that are new or overwritten in a sequence of related examples.
+(Unfortunately, the practice page will not
+copy any other text — rules, tokens, or programs — from one example to another...)</p>
+<h4 id="error-checking-1">Error Checking</h4>
+<p>A subclass inherits methods from the superclass
+and it can delegate to a method in the superclass using <code>super</code> in place of <code>this</code>.</p>
+<p>Argument checking <a href="#error-checking">as described above</a>
+applies implicitly if an action method is inherited,
+and it is explicitly applied if a call such as</p>
+<pre class="prettyprint source"><code>super.method(arg1, .., argn)
+</code></pre>
+<p>is replaced by</p>
+<pre class="prettyprint source"><code>this.parser.call(this, super.method, arg1, .., argn)
+</code></pre>
+<p>using the method
+<a href="module-Base-Parser.html#call"><code>call()</code></a> defined in the parser
+— assuming that the action object stores a reference to <code>parser</code>
+which is provided during construction.</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p>The <a href="module-EBNF-Parser.html#parse"><code>Parser</code>'s <code>parse()</code></a> method
+can be called with a class or a (singleton) object
+with <a href="module-Base.html#~Action"><code>Action</code></a> methods
+matched to the rule names in the grammar.</p>
+</li>
+<li>
+<p>Grammar rules plus their <a href="module-Base.html#~Action"><code>Action</code></a> methods, if any,
+are applied to the input.
+Calls proceed top-down, beginning with the start rule.</p>
+</li>
+<li>
+<p>Once a rule matches input an <a href="module-Base.html#~Action"><code>Action</code></a> method
+is selected which has the same name as the rule.</p>
+</li>
+<li>
+<p>The <a href="module-Base.html#~Action"><code>Action</code></a> method receives arguments
+corresponding to the alternative of the rule which matched the input,
+exactly one argument for each
+item (terminal, rule reference, brackets, or braces) in the alternative.</p>
+</li>
+<li>
+<p>Each set of brackets in the alternative produces either <code>null</code> or a list of values
+for the alternative in the brackets which matches the input.</p>
+</li>
+<li>
+<p>Each set of braces in the alternative produces a list
+which contains one inner list of values for each iteration.</p>
+</li>
+<li>
+<p>The iteration itself produces the (inner) list for the alternative in the braces
+which matches input during this iteration.</p>
+</li>
+<li>
+<p>The result value of the <a href="module-Base.html#~Action"><code>Action</code></a> method
+is received by the parent rule's <a href="module-Base.html#~Action"><code>Action</code></a> method
+or returned by the <a href="module-EBNF-Parser.html#parse"><code>Parser</code>'s <code>parse()</code></a> method.</p>
+</li>
+<li>
+<p>If there is no <a href="module-Base.html#~Action"><code>Action</code></a> function
+the result value is a list of all argument values
+which the <a href="module-Base.html#~Action"><code>Action</code></a> method would have received.</p>
+</li>
+</ul>
+<h4 id="previous%3A-%7B%40tutorial-04-parser%7D-next%3A-%7B%40tutorial-06-compile%7D">Previous: <a href="tutorial-04-parser.html">4. Recognizing Sentences</a> Next: <a href="tutorial-06-compile.html">6. Compiling Little Languages</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

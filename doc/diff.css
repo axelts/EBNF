@@ -1,0 +1,60 @@
+body {
+  margin: 0px 10px;
+}
+
+div.invis, div.buttons {
+  padding-top: 0.5em;
+}
+div.invis {
+  visibility: hidden;
+}
+
+div.buttons {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  border-bottom: thin solid lightgray;
+}
+
+div.buttons span, div.invis span {
+  display: inline-block;
+  visibility: hidden; /* active, title only */
+  width: 100px;
+  border: thin solid lightgray;
+  text-align: center;
+  font-family: monospace;
+  vertical-align: bottom;
+}
+div.buttons span.active {
+  background-color: #D2E9F9;
+}
+div.buttons span.title, div.invis span.title {
+  width: auto;
+  border: initial;
+  font-family: sans-serif;
+  padding: 5px 25px;
+}
+div.buttons span.active, div.buttons span.title {
+  visibility: visible;  /* active, title only */
+}
+
+div.grid {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0px;
+}
+div.grid.active {
+  display: grid;
+}
+
+pre {
+  margin: 0px;
+  padding: 2px;
+  overflow: hidden;
+}
+pre.A, pre.B {
+  background-color: #D2E9F9;
+}
+pre.b, pre.B {
+  border-left: thin solid lightgray;
+}

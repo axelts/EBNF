@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Source: index.js</title -->
+	<title>Source: index.js</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: index.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/** This module implements the _document ready_ event handler
+    for [jQuery](https://en.wikipedia.org/wiki/JQuery)
+    to control the {@link module:Practice~Model practice page model}, i.e.,
+    to edit and run examples.
+
+  @module GUI
+  @author © 2023 Axel T. Schreiner &lt;axel@schreiner-family.net>
+  @version 2024-02-13
+*/
+
+import * as Practice from './practice.js';
+
+/** The _document ready_ event handler.
+*/
+function browse () {
+  // redirect if there is no search
+  if (!location.search.length) { location = 'doc/index.html'; return; }
+  
+  // reference: code to detect how the page was entered
+  // const entries = performance.getEntriesByType("navigation");
+  // entries.forEach((entry) => {
+  //   switch (entry.type) {
+  //   case "navigate":     console.log(`${entry.name} was reached from address!`); break;
+  //   case "reload":       console.log(`${entry.name} was reloaded!`); break;
+  //   case "back_forward": console.log(`${entry.name} was reached from history!`); break;
+  //   default:             console.log(`${entry.name} was reached by ${entry.type}!`);
+  //   }
+  // });
+  
+  // HTML structure               state variable(s)
+  // form class='ebnf|stack|bnf'
+  //   id-grammar                 model.grammar                   nested into .frame with .label
+  //   id-tokens                  model.tokens                    nested into .frame with .label
+  //   id-program                 model.program                   nested into .frame with .label
+  //   id-actions                 model.actions                   nested into .frame with .label
+  //   id-output                                                  nested into .frame with id-book label
+  //   id-mode                    model.mode                      toggles ebnf|stack|bnf
+  //   id-greedy    id-error      model.greedy    model.error
+  //   id-tShallow  id-dSets      model.tShallow  model.dSets
+  //   id-tDeep     id-dStates    model.tDeep     model.dStates
+  //   id-tFollow                 model.tFollow
+  //   id-new                     model.doNew()
+  //   actions                    model.actionsArea               nested into .frame with .label
+  //   id-scan                    model.doScan()
+  //   id-tLookahead              model.tLookahead
+  //   id-tParser                 model.tParser
+  //   id-tActions                model.tActions
+  //   id-tNoargs                 model.tNoargs
+  //   id-build                   model.build
+  //   id-parse                   model.doParse()
+  //   id-run                     model.doRun()
+  //   id-1                       model.doStep(1)
+  //   id-10                      model.doStep(10)
+  //   id-100                     model.doStep(100)
+
+  // set book button
+  {
+    let m, book = 'doc/tutorial-a-webpage.html';
+    
+    if (m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search))
+      book = 'doc/tutorial-' + {
+          '02': '02-grammars',
+          '03': '03-scanner',
+          '04': '04-parser',
+          '05': '05-lists',
+          '06': '06-compile',
+          '07': '07-features',
+          '08': '08-functions',
+          '09': '09-bootstrap',
+          '10': '10-bottom-up',
+          '11': '11-trees'
+        }[m[0].substring(3, 5)] + '.html?' + m[0];
+    
+    else if (m = /eg=[a-z_]+/.exec(location.search))
+      book = {
+        interpret: "doc/tutorial-06-compile.html#immediate-evaluation",
+        compile: "doc/tutorial-06-compile.html#functional-evaluation",
+        postfix: "doc/tutorial-06-compile.html#stack-evaluation",
+        stack: "doc/tutorial-06-compile.html#stack-evaluation",
+        little: "doc/tutorial-06-compile.html#control-structures",
+        little_fn: "doc/tutorial-06-compile.html#functional-programming",
+        typing: "doc/tutorial-07-features.html#type-checking-by-interpretation",
+        recursion: "doc/tutorial-07-features.html#functions",
+        functions: "doc/tutorial-07-features.html#local-variables",
+        scopes: "doc/tutorial-07-features.html#block-scopes",
+        nesting: "doc/tutorial-07-features.html#nested-functions",
+        first_glob: "doc/tutorial-08-functions.html#global-first-order-functions",
+        fn_parameter: "doc/tutorial-08-functions.html#functions-as-argument-values",
+        first: "doc/tutorial-08-functions.html#nested-first-order-functions",
+        curry: "doc/tutorial-08-functions.html#nested-first-order-functions",
+        compose: "doc/tutorial-08-functions.html#nested-first-order-functions",
+        bootstrap: "doc/tutorial-09-bootstrap.html#bootstrap-example",
+        extend: "doc/tutorial-09-bootstrap.html#extending-the-grammars'-grammar"
+      }[m[0].substring(3)];
+          
+    $('#id-book').attr('href', book);
+  }
+  
+  // create model, creates and sets global variables
+  const model = new Practice.Model(window);
+
+  // set window.newOutput: (re)start output
+  newOutput = (...s) => $('#id-output').val(s.join(' '));
+  
+  // set window.puts: append to output
+  puts = (...s) => {
+    const output = $('#id-output'),
+      head = output.val(),
+      nl = head.length &amp;&amp; ! head.endsWith('\n') ? '\n' : '';
+    output.val(head + nl + s.join(' '));
+    output.scrollTop(output.prop("scrollHeight"));
+  };
+
+  // manage local storage, if possible
+  $(document).on('visibilitychange', () => {
+    try {
+      localStorage.setItem('EBNF/state', [
+          '%% grammar\n' + model.grammar.trim() + '\n',
+          '%% tokens\n' + model.tokens.trim() + '\n',
+          '%% actions\n' + model.actions.trim() + '\n',
+          '%% program\n' + model.program.trim() + '\n'
+        ].join('')
+      );
+    } catch (e) { console.error('localStorage.setItem failed: ', e.message); }          
+  });
+  const getState = () => {
+    try {
+      return localStorage.getItem('EBNF/state');
+    } catch (e) {
+      console.error('localStorage.getItem failed: ', e.message);
+      return null;
+    }          
+  };
+  const removeState = () => {
+    try {
+      localStorage.removeItem('EBNF/state');
+    } catch (e) { console.error('localStorage.removeItem failed: ', e.message); }          
+  };
+  
+  // run user interface from text, if any
+  const ui = function (text) {
+    
+    // no text? use or clear local storage
+    if (typeof text != 'string' || !text.length) {
+      // failed search?
+      if (document.location.search.length > 1)
+        removeState();
+      else
+        text = getState();
+    }
+    
+    // load from text, if any
+    if (typeof text == 'string' &amp;&amp; text.length) {
+      document.title = 'Example ' + stem.replace(/^0/, '');      
+      
+      // clear and load all text areas, tell model
+      $('textarea').val('');
+      text.split(/%%/).forEach(part => {
+        try {
+          const id = part.match(/\s+(grammar|tokens|program|actions|output)\s+/)[1];
+          part = part.replace(/^[^\n]*\n/, '').replace(/\n*$/, '');
+          switch (id) {
+          case 'grammar': $('#id-grammar').val(model.grammar = part); break;
+          case 'tokens':  $('#id-tokens').val(model.tokens = part); break;
+          case 'program': $('#id-program').val(model.program = part); break;
+          case 'actions': $('#id-actions').val(model.actions = part); break;
+          case 'output':  $('#id-output').val(part);
+          }
+        } catch (e) { }
+      });      
+    }
+    
+    // capture initial heights (?? not good if window is resized)
+    const vh = { };
+    $('.frame textarea').each(function () { vh[$(this).attr('id')] = $(this).height(); })
+
+    // stack machine test
+    const isStackMachine = () => typeof run == 'function' &amp;&amp; run.length == 2;
+    
+    // maintain text area contents and set buttons to reflect contents
+    const setButtons  = function () {
+            
+      // deactivate all buttons
+      $('.button').removeClass('ok');
+      $('#id-1, #id-10, #id-100').addClass('hidden');
+
+      // toggle-button clicks - toggle 'on' and flag in model
+      $('.button.toggle').each(function () {
+        const name = $(this).attr('id').substring(3);
+        console.assert(typeof model[name] == 'boolean', name, 'is not boolean');
+        if (model[name]) $(this).addClass('on'); else $(this).removeClass('on');
+      });
+
+      // mode - always ok
+      $('#id-mode').addClass('ok');
+
+      // new - requires text in grammar
+      if (model.grammar.length) $('#id-new').addClass('ok');
+      
+      switch (model.mode) {
+      case 'ebnf':
+        // greedy shallow deep follow - require text in grammar
+        if (model.grammar.length)
+          $('#id-greedy, #id-tShallow, #id-tDeep, #id-tFollow').addClass('ok');
+        break;
+        
+      case 'stack':
+        // error sets states - require text in grammar
+        if (model.grammar.length) $('#id-error').addClass('ok');
+      case 'bnf':
+        // sets states - require text in grammar
+        if (model.grammar.length) $('#id-dSets, #id-dStates').addClass('ok');
+      }
+      
+      // scan lookahead parser actions noargs build parse - require represented grammar
+      if (g != null) {
+        $('#id-scan, #id-tLookahead, #id-tParser, #id-tActions, #id-tNoargs, #id-parse').addClass('ok');
+        if (model.mode == 'bnf') $('#id-build').addClass('ok');
+      }
+      
+      // run 1 10 100 - require represented grammar, run, and possibly stack machine
+      if (g != null &amp;&amp; typeof run == 'function') {
+        $('#id-run').addClass('ok');
+        if (isStackMachine()) $('#id-1, #id-10, #id-100').addClass('ok').removeClass('hidden');
+      }
+    }
+    setButtons();
+
+    // deactivate all buttons if textarea gets edited
+    $('textarea').on('focus', () => {
+      $('.button').removeClass('ok');
+      // $('#id-1, #id-10, #id-100').addClass('hidden');
+    });
+    // (re-)activate once focus is out of textarea
+    $('textarea').on('blur', setButtons);
+
+    // mode click - next mode, need to recreate window.g and window.run
+    $('#id-mode').click(() => {
+      $('form').removeClass(model.mode);
+      model.mode = model.mode == 'ebnf' ? 'stack' : model.mode == 'stack' ? 'bnf' : 'ebnf';
+      $('form').addClass(model.mode);
+      newOutput('');
+      setButtons();
+    });
+
+    // act on change
+    $('#id-grammar').change(function () {
+      model.grammar = $(this).val().trim();
+      newOutput('');
+      setButtons();
+    });   // need to recreate g and run
+    $('#id-tokens').change(function () {
+      model.tokens = $(this).val().trim();
+      newOutput('');
+      setButtons();
+    });    // need to recreate g and run
+    $('#id-actions').change(function () {
+      model.actions = $(this).val().trim();
+      newOutput('');
+      setButtons();
+    });   // need to recreate run
+    $('#id-program').change(function () {
+      model.program = $(this).val().trim();
+      newOutput('');
+      setButtons();
+    });   // need to recreate run
+        
+    // click/shift-click on label to emphasize or default textarea layout
+    $('#id-grammar, #id-tokens, #id-actions, #id-program').prev('.label').
+      click(function (event) {
+        if (event.shiftKey)
+          $('.frame textarea').each(function () { $(this).height(vh[$(this).attr('id')]); });
+        else if (!(event.metaKey || event.altKey)) {
+          const area = $(this).next('textarea'), id = area.attr('id');
+          let height = 0;
+          $('#id-grammar, #id-tokens, #id-actions, #id-program').each(function () {
+            height += $(this).height() - 30; $(this).height(30);
+          });
+          area.height(height + 30);
+        }
+      });
+
+      // alt-click handler to open popup with highlighted (non-empty) text location
+    const highlighter = (name, js) =>
+      function (event) {
+        if (!(event.metaKey || event.altKey)) return;
+        const text = $(this).next('textarea').val();
+        if (!text.length) return;
+        const prefix = location.href.replace(/EBNF.*/, 'EBNF/doc/');
+        const html = `&lt;!DOCTYPE html>
+          &lt;html>
+            &lt;head>
+              &lt;title> ${name} &lt;/title>
+                &lt;link rel="stylesheet" type="text/css"
+                  href="${prefix}styles/sunlight.default.css">
+                &lt;script src="${prefix}sunlight-all-min.js">&lt;/script>` +
+                (js ? `&lt;script src="${prefix}sunlight.javascript.js">&lt;/script>` : ``) +
+            `&lt;/head>
+            &lt;body>
+              &lt;h3> ${name} &lt;/h3>
+              &lt;pre id="code" class="sunlight-highlight-${js ? 'javascript' : 'plaintext'}">${text}&lt;/pre>
+              &lt;/div>
+              &lt;script> 
+                new Sunlight.Highlighter({
+                  lineNumbers: true,
+                  tabWidth: 2 }).highlightNode(document.getElementById("code"))
+              &lt;/script>
+            &lt;body>
+          &lt;/html>`;
+        const winUrl = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+        window.open(winUrl, 'source', 'popup,width=800,height=400,screenX=200,screenY=200');
+      };
+
+    // alt-click on label to syntax-color in popup
+    $('#id-grammar').prev('.label').click(highlighter('grammar', false));
+    $('#id-program').prev('.label').click(highlighter('program', false));
+    $('#id-tokens').prev('.label').click(highlighter('tokens', true));
+    $('#id-actions').prev('.label').click(highlighter('actions', true));
+    $('#id-output').prev('.label').click(highlighter('output', false));
+    
+    // toggle-button clicks - toggle 'on' and flag in model
+    $('.button.toggle').click(function () {
+      if ($(this).hasClass('ok')) {
+        const name = $(this).attr('id').substring(3);
+        console.assert(typeof model[name] == 'boolean', name, 'is not boolean');
+        model[name] = !model[name];
+        $(this).toggleClass('on');
+      }
+    });
+
+    // new Grammar
+    $('#id-new').click(function () {
+      if ($(this).hasClass('ok')) {
+        model.doNew();
+        setButtons();
+      }
+    });
+
+    // scanner
+    $('#id-scan').click(function () {
+      if ($(this).hasClass('ok'))
+        model.doScan();
+    });
+
+    // parser/compiler
+    $('#id-parse').click(function () {
+      if ($(this).hasClass('ok')) {
+        model.doParse();
+        setButtons();
+      }
+    });
+
+    // run
+    $('#id-run').click(function () {
+      if ($(this).hasClass('ok'))
+        model.doRun();
+    });
+
+    // 1 10 100
+    $('#id-1, #id-10, #id-100').click(function () {
+      if ($(this).hasClass('ok'))
+        model.doStep(parseInt($(this).attr('id').substring(3), 10));
+    });
+  }
+
+  // determine search parameters, if any 
+  const params = new URLSearchParams(document.location.search),
+    stem = params.get('eg');
+  
+  // set form class=' ebnf|stack|bnf ' from mode
+  switch (model.mode = params.get('mode')) {
+  default:
+    model.mode = 'ebnf';
+  case 'stack':
+  case 'bnf':
+    $('form').removeClass('ebnf stack bnf').addClass(model.mode);
+  }
+  
+  // delegate to user interface
+  if (stem &amp;&amp; /^[/0-9a-zA-Z_]+$/.test(stem))
+    $.get('eg/' + stem + '.eg', ui, 'text').fail(ui);
+  else
+    ui();
+}
+$(browse);
+
+export { browse };</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 11. Compiling Revisited</title -->
+	<title>11. Compiling Revisited</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>11. Compiling Revisited</h2>
+</header>
+
+<article>
+    <h4 id="what's-in-a-tree%3F">What's in a Tree?</h4>
+<h4 id="what's-with-a-tree%3F">What's with a Tree?</h4>
+<hr>
+<p><a href="tutorial-06-compile.html">Chapter six</a> started the implementation of a little language
+with expressions and control structures which concluded with first-order functions in
+<a href="tutorial-08-functions.html">chapter eight</a>.
+Chapter seven contained a short
+<a href="tutorial-07-features.html#type-checking-by-interpretation">section on type-checking</a>.
+Overall, the discussion focussed on semantic analysis and code generation
+as part of syntax analysis, i.e., carried out by the actions called
+when grammar rules were completed.</p>
+<p>This approach is called <a href="https://en.wikipedia.org/wiki/One-pass_compiler" title="One-pass compiler">one-pass compilation</a> because the source program
+is immediately rewritten in the target language —
+it is not converted to an intermediate representation to be processed more than once.
+<a href="https://en.wikipedia.org/wiki/One-pass_compiler" title="One-pass compiler">One-pass compilation</a> should require less time and memory
+but the resulting code might not be as performant.</p>
+<p>This chapter explores a different approach: the source program is represented as a tree
+and <a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">visitors</a> take care of type-checking and code generation.
+The result is much better <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" title="separation of concerns">separation of concerns</a>
+and <a href="https://en.wikipedia.org/wiki/Reusability" title="reusability">reusability</a> of the components.
+Base classes provide infrastructure for tree building and visiting.
+<a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">Mix-ins</a> implement tree-building actions for recognition
+and tree-processing methods for visitors and are used to allow selective sharing of methods.</p>
+<h3 id="classes-and-mix-ins">Classes and Mix-Ins</h3>
+<p>Classes can be extended by adding or overriding methods.
+If a method <code>m()</code> exists in both, the original <a href="https://en.wikipedia.org/wiki/Superclass_(computer_science)" title="superclass">superclass</a>,
+and the <a href="https://en.wikipedia.org/wiki/Subclass_(computer_science)" title="subclass">subclass</a> resulting from extending the <a href="https://en.wikipedia.org/wiki/Superclass_(computer_science)" title="superclass">superclass</a>,
+the subclass method can call the superclass method as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super" title="super"><code>super.m()</code></a>,
+i.e., overriding a method does not discard it's code.</p>
+<p><a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">Mix-ins</a> are functions which conceptually add methods to classes:</p>
+<pre class="prettyprint source"><code>const Mix = superclass => class X extends superclass {
+  hello () { console.debug('hello world', super.constructor.name); }
+};
+try       { new class A { } () . hello(); }
+catch (e) { console.log(e.message); }
+finally   { new (Mix(class A { })) () . hello ();
+            new (Mix(Mix(class A { }))) () . hello(); }
+</code></pre>
+<p>This code produces the following output:</p>
+<pre class="prettyprint source"><code>(intermediate value).hello is not a function
+hello world A
+hello world
+</code></pre>
+<ul>
+<li>Class <code>A</code> has no method <code>hello()</code> (code lines 4 and 5, output line 1).</li>
+<li><code>Mix(class</code> <code>A</code> <code>{})</code> creates a class which has <code>A</code> as the superclass
+and has the method <code>hello()</code> (code line 6, output line 2).</li>
+<li>Mix-ins can be cascaded.
+<code>Mix(Mix(class</code> <code>A</code> <code>{}))</code> creates a subclass of the subclass
+created by <code>Mix(class</code> <code>A</code> <code>{})</code> and these subclasses have no names (code line 7, output line 3).</li>
+</ul>
+<p>The point is that <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> can be applied to &quot;add&quot; methods,
+but there is no extra code if the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> are not applied,
+i.e., <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> can be used to group functionality
+which can optionally be added to a class.
+Once added it will be inherited.</p>
+<p>The code above shows that JavaScript does not need language elements
+to specifically support <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>. There are different ways
+to implement such a feature. The technique shown above is
+taken from a <a href="https://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/" title="mixin how-to">paper by Justin Fagnani</a>.</p>
+<p>The examples in this chapter are largely cumulative.
+To avoid repetition,
+the practice page includes a <a href="module-Eleven.html">module Eleven</a>
+which contains all classes and <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> defined and used in the examples in this chapter.
+They are summarized in <a href="tutorial-d-kit.html">appendix D</a>.
+The methods can be seen
+<a href="../methods.html?file=modules/06.js&amp;file=modules/11.js">in the method browser</a>.</p>
+<h3 id="building-a-tree">Building a Tree</h3>
+<p><a href="tutorial-04-parser.html">Chapter four</a> looked at the arithmetic expression</p>
+<pre class="prettyprint source"><code>1 - (2 + - 3)
+</code></pre>
+<p>which can be represented, e.g., by the following tree:</p>
+<div class="diagram">
+  <table class="table">
+    <tbody><tr>
+      <td> <img src="04/sum-operators.svg" alt="arithmetic tree"> </td>
+    </tr>
+  </tbody></table>
+</div>
+<p>In JavaScript this tree can be represented using nested lists as follows:</p>
+<pre class="prettyprint source"><code>[ 'subtract',
+  [ 'number', 1 ],
+  [ 'add',
+    [ 'number', 2 ],
+    [ 'minus',
+      [ 'number', 3 ] ] ] ]
+</code></pre>
+<p>Each node of the diagram is an <code>Array</code> in JavaScript.
+The first element of each array is a tag, represented as a string with lower-case letters.
+The remaining elements are values and, in particular,
+further nodes represented as arrays.</p>
+<h4 id="using-recursive-descent">Using Recursive Descent</h4>
+<p><a href="../?eg=11/01">Example 11/01</a> shows that it is relatively easy to create a
+tree for a list of arithmetic expressions.</p>
+<ul>
+<li>The very first button should show <span class='t-mode'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the tree
+which is built for the list of expressions in the <span class='a-program'></span>.</li>
+</ul>
+<p>Given the rules</p>
+<pre class="prettyprint source"><code>number: Number;
+term: number | '(' sum ')';
+signed: [ '-' ] term;  
+</code></pre>
+<p>the corresponding tree-building action methods would be something like</p>
+<pre class="prettyprint source"><code>number (number) { return [ 'number', parseInt(number, 10) ]; }
+term (...val) { return val.length == 1 ? val[0] : val[1] }
+signed (minus, term) { return minus ? [ 'minus', term ] : term; }
+</code></pre>
+<p>and left associativity can be handled with an iteration in the grammar</p>
+<pre class="prettyprint source"><code>product: signed [{ multiply | divide }];
+multiply: '*' signed;
+divide: '/' signed;
+</code></pre>
+<p>and by creating lists with &quot;holes&quot;</p>
+<pre class="prettyprint source"><code>multiply (x, right) { return [ 'multiply', null, right ]; }
+divide (x, right) { return [ 'divide', null, right ]; }
+</code></pre>
+<p>and assembling them with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> from left to right as follows:</p>
+<pre class="prettyprint source"><code>product (signed, many) { return (many ? many[0] : []).
+  reduce((product, alt) => (alt[0][1] = product, alt[0]), signed);
+}
+</code></pre>
+<h4 id="building-a-tree-for-arithmetic">Building a Tree for Arithmetic</h4>
+<p><a href="module-Eleven-Build.html"><code>Build</code></a> is the base class
+for the tree builders created in this chapter:</p>
+<pre class="prettyprint source"><code>class Build {
+  /** Sets the property */
+  constructor (parser) { this.parser = parser; }
+
+  /** Tags node with source position as `.lineno` if available. */
+  _lineno (node) {
+    if (this.parser.current && this.parser.current.lineno)
+      node.lineno = this.parser.current.lineno;
+    return node;
+  }
+}
+</code></pre>
+<p><a href="module-Eleven-Build.html"><code>Build</code></a> provides access to the <code>parser</code> (line 3 above),
+e.g., for error reporting and access to the source line numbers.</p>
+<p>If errors are detected when trees are processed
+the error messages should refer back to the source program.
+Therefore, <a href="module-Eleven-Build.html#_lineno"><code>_lineno()</code></a>
+tries to add a property <code>.lineno</code> to a tree node (line 8)
+which references the current source seen by the parser during tree building.</p>
+<p><a href="module-Eleven-Build_RD.html"><code>BuildRD()</code></a> is a <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> which contains the actions
+to build a tree for arithmetic expressions
+based on the recursive descent grammar
+shown <a href="#using-recursive-descent">in the previous section</a>.
+Combined as <code>Build_RD(Build)</code>,
+the superclass <a href="module-Eleven-Build.html"><code>Build</code></a>
+and the mix-in <a href="module-Eleven-Build_RD.html"><code>Build_RD()</code></a>
+result in the subclass which
+should be handed to the <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method.</p>
+<p><a href="../?eg=11/01">Example 11/01</a> uses the trick
+introduced <a href="tutorial-06-compile.html#stack-evaluation">in chapter six</a> to accomplish this:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  class Build { ... }
+  const Build_RD = superclass => class extends superclass { ... };
+  return Build_RD(Build);
+}) ()
+</code></pre>
+<p>The class and <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> definitions are placed into an anonymous function
+where <code>return</code> delivers the actual class for <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> (line 4 above)
+and the anonymous function is called immediately after being defined (line 5).</p>
+<ul>
+<li>The very first button should show <span class='t-mode'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the tree
+which is built for the expression in the <span class='a-program'></span>.</li>
+<li>Replace the entire text in the <span class='a-actions'></span> by <code>Eleven.Build_RD(Eleven.Build)</code>
+to import the builder class from <a href="module-Eleven.html">the module Eleven</a>
+and repeat the steps.</li>
+</ul>
+<h4 id="using-precedences">Using Precedences</h4>
+<p>The LL(1) grammar for arithmetic expressions has to use iterations
+and nested rules so that the resulting tree reflects
+the expected associativities and precedences.
+Instead, <a href="../?mode=stack&amp;eg=11/02">example 11/02</a> uses explicit precedences
+and an ambiguous, very recursive grammar:</p>
+<pre class="prettyprint source"><code>%left '+' '-';
+%left '*' '/';
+%right '**';
+%right Number;
+
+expr:     add | subtract | multiply | divide | power 
+          | minus | '(' expr ')' | number;
+add:      expr '+' expr;
+subtract: expr '-' expr;
+multiply: expr '*' expr;
+divide:   expr '/' expr;
+power:    expr '**' expr;
+minus:    '-' expr %prec Number;
+number:   Number;
+</code></pre>
+<p>In <a href="../?mode=stack&amp;eg=11/02">example 11/02</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the tree
+which is built for the expression in the <span class='a-program'></span>.</li>
+<li>Delete the code in the <span class='a-actions'></span> and
+compare the previous output to the nested lists which are built without the actions —
+these lists represent the same nesting and information
+but would be much harder to process again.</li>
+</ul>
+<p>Using an SLR(1) grammar with precedences
+hugely simplifies the class actions for building, e.g.,</p>
+<pre class="prettyprint source"><code>const Build_Number = superclass => class extends superclass {
+  expr (...values) { return values.length > 1 ? values[1] : values[0]; }
+  add (a, x, b) { return this._lineno([ 'add', a, b ]); }
+    ... 
+};
+</code></pre>
+<p>The anonymous function pattern can be reused from the <a href="../?eg=11/01">previous example</a>:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  const Build_Number = superclass => class extends superclass {
+    ...
+  };
+  return Build_Number(Eleven.Build);
+}) ()
+</code></pre>
+<p>The advantage of using <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> is that <code>Build_Number(Eleven.Build)</code> only contains
+methods which match the structure of the SLR(1) grammar, i.e.,
+if the grammar is changed, only the corresponding <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>
+has to be adapted. Build actions very closely match their rules.</p>
+<p>In spite of different parsers,
+different grammars, and different actions,
+both examples, <a href="../?eg=11/01">11/01</a> and <a href="../?mode=stack&amp;eg=11/02">11/02</a>,
+build the same trees for sentences which are recognized by both grammars.
+This means that code for further processing of the trees can be shared.</p>
+<h3 id="visiting-a-tree">Visiting a Tree</h3>
+<p><a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">Visitors</a> are objects which apply algorithms such as
+evaluation, type-checking, code-generation, etc., to data structures such as a tree
+constructed by the action methods described in the <a href="#building-a-tree">previous section</a>.
+Visitors can be used to <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" title="separation of concerns">separate concerns</a> in a way
+very similar to the interplay between grammar rules and actions.</p>
+<p><a href="../?mode=stack&amp;eg=11/03">Example 11/03</a> implements expression evaluation using a visitor.
+<a href="module-Eleven-Visit.html"><code>Visit</code></a> is the base class for visitors:</p>
+<pre class="prettyprint source"><code>class Visit {
+  trace = false;      // RegExp selects tags to display
+
+  visit (node, trace) {
+    if (trace instanceof RegExp) this.trace = trace;
+    // not a list: return it
+    if (!(node instanceof Array)) return node;
+    // visit
+    let result;
+    const show = this.trace instanceof RegExp &&
+      this.trace.test(node[0]) ? this._dump(node, 0) : false;
+    try {
+      return result = this.constructor.prototype[node[0]].call(this, node);
+    } finally {
+      if (show) puts(show, 'returns', this._dump(result, 1));
+    }
+  }
+</code></pre>
+<p>The most important method is <a href="module-Eleven-Visit.html#visit"><code>visit()</code></a>.
+It is called to apply the visitor's algorithm to a <code>node</code>.
+An optional parameter can turn on tracing
+by setting the <code>.trace</code> property (line 7 above) to make the setting permanent.
+The <code>node</code> argument should be an <code>Array</code>, otherwise it is simply returned (line 9).
+A &quot;real&quot; node, i.e., an <code>Array</code>, contains a tag as first element
+which is used to select a method of the visitor (line 15).
+The method is called with the node as the only argument
+and the result is returned.
+There can be tracing, depending on the node's tag
+and the setting of the property <code>.trace</code> (line 13).
+The method might change the contents of the node;
+therefore, part of the display is computed before the method is called (line 13)
+and it is shown together with the result returned by the method (line 17).</p>
+<p><a href="module-Eleven-Visit.html"><code>Visit</code></a> has a few more methods.
+<a href="module-Eleven-Visit.html#_tree"><code>_tree()</code></a> acts as an assertion.
+It recursively walks a tree, nodes before subtrees, and checks if there are methods for all the node tags.
+If not it throws an error message.</p>
+<pre class="prettyprint source"><code>  _tree (node) {                  // recursively validates a tree
+    if (!(node instanceof Array)) return;
+    if (!node.length) throw 'empty node';
+    if (typeof node[0] != 'string') throw 'node tag is not a string';
+    if (!node[0].length) throw 'empty node tag';
+    if (node[0] == 'visit') throw &quot;'visit' cannot be a tag&quot;;
+    if (typeof this.constructor.prototype[node[0]] != 'function')
+      throw node[0] + ': unknown node tag';
+    node.slice(1).forEach(node => this._tree(node));
+  }
+</code></pre>
+<p><a href="module-Eleven-Visit.html#_dump"><code>_dump()</code></a> recursively converts a tree into a string
+— up to a certain depth. If the argument is not a tree it is decoded (line 2 below).
+Otherwise the tag and — depending on depth — the other entries are shown (line 10).
+If present as <code>.lineno</code>, the source line number is appended to the node display (line 12).
+Similarly, information from <code>.type</code> would be shown (line 13).</p>
+<pre class="prettyprint source"><code>  _dump (node, shallow = -1) {    // recursively dumps a tree
+    if (!(node instanceof Array))
+      switch (typeof node) {
+      case 'boolean':
+      case 'number': return node;
+      case 'string': return &quot;'&quot; + node.replace(/(['\\\n])/g, &quot;\\$1&quot;) + &quot;'&quot;;
+      default:       return typeof node;
+      }
+
+    let result = '[ ' + (!shallow ? this._dump(node[0]) :
+      node.map(item => this._dump(item, shallow - 1)).join(' ')) + ' ]';
+    if ('lineno' in node) result += '.' + node.lineno;
+    if ('type' in node) result += ':' + node.type;
+    return result;
+  }
+</code></pre>
+<p>Finally, <a href="module-Eleven-Visit.html#_error"><code>_error()</code></a>
+is used to report and count errors during a visit:</p>
+<pre class="prettyprint source"><code>  errors = 0;         // counts calls to _error()
+
+  _error (lno, ... s) {
+    if (typeof lno == 'number' && lno > 0) lno = `line ${lno}:`;
+    else lno = s.splice(0, 1)[0];
+    puts(`error ${++ this.errors}: ${lno}`, ... s);
+  }
+};
+</code></pre>
+<p>Methods such as <a href="module-Eleven-Visit.html#_tree"><code>_tree()</code></a>,
+<a href="module-Eleven-Visit.html#_dump"><code>_dump()</code></a>,
+and <a href="module-Eleven-Visit.html#_error"><code>_error()</code></a>
+should not be mistakenly used for node tags; therefore, these &quot;private&quot;
+method names start with an underscore.
+Because of it's importance for the concept,
+<a href="module-Eleven-Visit.html#visit"><code>visit()</code></a> is a deliberate exception to this convention.</p>
+<h4 id="interpreting-arithmetic-expressions">Interpreting Arithmetic Expressions</h4>
+<p>With the infrastructure provided by <a href="module-Eleven-Visit.html"><code>Visit</code></a>,
+interpretation of an arithmetic expression amounts to a traversal
+of the tree, i.e., evaluation visits to the subtrees
+before an operation specific to a node is applied:</p>
+<pre class="prettyprint source"><code>const Eval_Number = superclass => class extends superclass {
+  add (node) { return this.visit(node[1]) + this.visit(node[2]); }
+  subtract (node) { return this.visit(node[1]) - this.visit(node[2]); }
+  multiply (node) { return this.visit(node[1]) * this.visit(node[2]); }
+  divide (node) { return this.visit(node[1]) / this.visit(node[2]); }
+  power (node) { return this.visit(node[1]) ** this.visit(node[2]); }
+  minus (node) { return - this.visit(node[1]); }
+  number (node) { return this.visit(node[1]); }
+};
+</code></pre>
+<p>Each node has a tag defining the operation and one or two operand values
+or subtrees which have to be evaluated first.
+In the implementation shown above the evaluation order for the subtrees is
+defined by the implementation language, i.e., strictly left-to-right for JavaScript.
+This could be changed by temporarily storing the second subtree value
+in a local variable in each method.</p>
+<h4 id="main-program">Main Program</h4>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Main.html">Main()</a> contains action methods which let
+new top-level rules for the grammar do the job of a main program —
+at the expense of not discarding the parser first.
+Here are the new rules, start rule first:</p>
+<pre class="prettyprint source"><code>run:      main;
+main:     dump;
+dump:     expr;
+expr:     add | subtract | ... ;
+</code></pre>
+<p>The <a href="module-Eleven-Main.html#dump">action for <code>dump</code></a> will display and return the tree built by <code>expr</code>:</p>
+<pre class="prettyprint source"><code>const Main = (superclass, ...args) => class extends superclass {
+  dump (tree) {
+    puts(new Visit()._dump(tree));
+    return tree;
+  }
+</code></pre>
+<p>The <a href="module-Eleven-Main.html#main">action for <code>main</code></a> (discussed below) arranges for one or more visits to the tree
+and returns the last visit — in this case expression evaluation —
+as a parameterless function
+and the <a href="module-Eleven-Main.html#run">action for <code>run</code></a> executes this function and returns the result:</p>
+<pre class="prettyprint source"><code>  run (funct) { return funct(); }
+</code></pre>
+<p>The rules for <code>dump</code> or <code>run</code> can be omitted
+and the other rules adjusted if there is no need to display the tree
+or if <code>main</code> is expected to create an executable which can be run more than once.</p>
+<p>Classes or <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> for visitors can be imported or
+the anonymous function pattern in the <span class='a-actions'></span>
+can be used to define them.
+The call on the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Main.html"><code>Main()</code></a>
+determines in which order the visitors are applied:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // base class with visitor methods
+  class Visit {
+    ...
+  }
+  // mix-in for expression evaluation
+  const Eval_Number = superclass => class extends superclass {
+    ...
+  };
+  // mix-in with top-level actions, runs visitors
+  const Main = (superclass, ...args) => class extends superclass {
+    dump (tree) { ... }
+    main (tree) { ... }    
+    run (funct) { ... }
+  };
+  // result of anonymous function
+  return Main(Eleven.Build_Number(Eleven.Build), // builder actions
+    Eval_Number(Visit),                       // evaluation visitor
+    /./);                        // node selector for trace, if any
+}) ()
+</code></pre>
+<p>The <a href="module-Eleven-Main.html#main">action for <code>main</code></a>
+depends on a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" title="closure">closure</a> over extra arguments
+of the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Main.html"><code>Main()</code></a>.<br>
+<code>...args</code> consists of one or more visitor classes (lines 11 and 18 above)
+and optionally one regular expression to control tracing (line 19).
+The last visit, if any, is returned as a function:</p>
+<pre class="prettyprint source"><code>  main (tree) {
+    let [lastVisitor, lastTree, trace] = this._doVisits(tree, args);
+    return () => lastVisitor.visit(lastTree, trace);
+  }
+</code></pre>
+<p>The private method <a href="module-Eleven-Main.html#_doVisits"><code>_doVisits()</code></a> is called with a tree
+and a list of extra arguments to consume.
+It returns a list containing the last visitor object,
+the tree to apply it to, and the tracing expression, if any:</p>
+<pre class="prettyprint source"><code>  _doVisits (tree, args) {
+    let trace;                     // (first) trace pattern, if any
+    const visitors = args.filter(arg => {        // remove patterns
+        if (!(arg instanceof RegExp)) return true;
+        if (!trace) trace = arg;
+        return false;
+      }),
+      tail = visitors.splice(-1, 1);        // last visitor, others
+    if (!tail.length) throw 'main: no visitors';
+    let caller;          // each visitor is constructed with caller 
+    [tree, caller] = visitors.reduce(([tree, caller], Visitor) => {
+      const visitor = new Visitor (caller);  // create next visitor
+      visitor._tree(tree);                         // validate tree
+      tree = visitor.visit(tree, trace);                   // visit
+      if (trace) { puts(visitor._dump(tree)); }    // trace, if any
+      if (visitor.errors) throw `${visitor.errors} error(s)`;
+      return [tree, visitor];            // done; next visit if any
+    }, [tree, this]);                // first caller is the builder
+    const lastVisitor = new tail[0](caller); // last visitor object
+    lastVisitor._tree(tree);                       // validate tree
+    return [ lastVisitor, tree, trace ];
+  }
+</code></pre>
+<p>First the arguments are split into a trace pattern, if any,
+a list of all but the last class, if any, and the last class (lines 2 to 9 above).
+One after another, a visitor is created from a class,
+each incoming tree is checked and visited,
+and each resulting tree is shown if requested (lines 11 to 15).
+The last (or possibly only) visitor is created,
+the last tree is checked, and the visitor, tree, and trace pattern are returned (lines 19 to 21).</p>
+<p>In <a href="../?mode=stack&amp;eg=11/03">example 11/03</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the tree
+which is built for the expression in the <span class='a-program'></span>,
+followed by the result of interpreting the expression.</li>
+<li>Remove the <code>run</code> rule,</li>
+<li>press <span class='c-new'></span> to represent and check the new grammar,</li>
+<li>press <span class='c-parse'></span> to see the tree, and</li>
+<li>press <span class='c-run'></span> to interpret.</li>
+<li>Remove the <code>dump</code> rule, adjust the <code>main</code> rule, and repeat the steps.</li>
+<li>Finally, add a regular expression such as <code>/./</code> to the call to
+<a href="module-Eleven-Main.html"><code>Main()</code></a> near the end of the <span class='a-actions'></span> to trace interpretation.</li>
+</ul>
+<h4 id="representing-a-little-language">Representing a Little Language</h4>
+<p><a href="../?mode=stack&amp;eg=11/04">Example 11/04</a> adds variable names, comparisons,
+control structures, and a few other statements to the grammar:</p>
+<pre class="prettyprint source"><code>%nonassoc '=' '&lt;>' '>' '>=' '&lt;' '&lt;=';
+%left     '+' '-';
+  ...
+stmts:    stmt [{ ';' stmt }];
+stmt:     assign | print | loop | select;
+assign:   Name '=' expr;
+print:    'print' expr [{ ',' expr }];
+loop:     'while' expr 'do' stmts 'od';
+select:   'if' expr 'then' stmts [ 'else' stmts ] 'fi';
+
+expr:     eq | ne | gt | ge | lt | le
+          | add | ... | number | name;     
+eq:       expr '=' expr;
+  ...
+le:       expr '&lt;=' expr;
+add:      expr '+' expr;
+  ...
+name:     Name;
+</code></pre>
+<p>Comparisons have lower precedence than arithmetic operators (line 1 above)
+and — different from JavaScript — are not associative, i.e., they cannot be chained.
+They are added to the rule for expressions (line 11).
+Any expression can be the condition for a <code>while</code> loop (line 8) or an <code>if</code> statement (line 9)
+— this will be restricted later with type checking.</p>
+<p>A name can be a term in an expression (line 12).
+It can be used in an assignment statement<br>
+(line 6).</p>
+<p>Tree building reuses <a href="module-Eleven-Build_Number.html"><code>Build_Number()</code></a> to support arithmetic expressions
+and add the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>
+<a href="module-Eleven-Build_Number.html"><code>Build_Cmps()</code></a> for comparisons,
+<a href="module-Eleven-Build_Number.html"><code>Build_Stmts()</code></a> for statements, and
+<a href="module-Eleven-Build_Number.html"><code>Build_Names()</code></a> for names.
+Comparisons are represented just like arithmetic operations:</p>
+<pre class="prettyprint source"><code>const Build_Cmps = superclass => class extends superclass {
+  // eq: expr '=' expr;
+  eq (a, x, b) { return this._lineno([ 'eq', a, b ]); }
+  ...
+};
+</code></pre>
+<p>A single statement is just returned,
+but a list of two or more statements is collected into one <code>'stmts'</code> node:</p>
+<pre class="prettyprint source"><code>const Build_Stmts = superclass => class extends superclass {
+  // stmt: assign | print | loop | select;
+  stmt (stmt) { return stmt; }
+
+  // stmts: stmt [{ ';' stmt }];
+  stmts (stmt, many) { 
+    return many == null ? stmt :
+      this._lineno([ 'stmts', 
+        ...many[0].reduce(
+          (stmts, alt) => { stmts.push(alt[1]); return stmts; },
+          [ stmt ])
+      ]);
+  }
+</code></pre>
+<p>A <code>print</code> statement is represented as a <code>'print'</code> node with a list of expression subtrees:</p>
+<pre class="prettyprint source"><code>  // print: 'print' expr [{ ',' expr }];
+  print (x, expr, many) {
+    return this._lineno([ 'print', 
+      ...(many ? many[0] : [ ]).reduce(
+        (exprs, alt) => { exprs.push(alt[1]); return exprs; }, 
+        [ expr ])
+    ]);
+  }
+</code></pre>
+<p>A <code>while</code> loop is represented as a <code>'loop'</code> node with a condition expression
+and a single statement or a list of statements:</p>
+<pre class="prettyprint source"><code>  // loop: 'while' expr 'do' stmts 'od';
+  loop (w, expr, d, stmts, o) { 
+    return this._lineno([ 'loop', expr, stmts ]);
+  }
+</code></pre>
+<p>An <code>if</code> statement is represented as a <code>'select'</code> node with a condition
+and one or two dependent statements or lists:</p>
+<pre class="prettyprint source"><code>  // select: 'if' expr 'then' stmts [ 'else' stmts ] 'fi';
+  select (i, expr, t, left, opt, f) {
+    const result = this._lineno([ 'select', expr, left ]);
+    if (opt) result.push(opt[1]); return result;
+  }
+};
+</code></pre>
+<p>In this little language, names are simply <code>Name</code> tokens referencing variables;
+however, they could be references to functions or array elements, etc.
+Therefore, tree building actions for
+statements and operands involving names are collected into a separate <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a>:</p>
+<pre class="prettyprint source"><code>const Build_Names = superclass => class extends superclass {
+  // assign: Name '=' expr;
+  assign (name, x, expr) {
+    return this._lineno([ 'assign', name, expr ]);
+  }
+  // name: Name;
+  name (name) { return this._lineno([ 'name', name ]); }
+};
+</code></pre>
+<p>As an example, <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's Algorithm</a></p>
+<pre class="prettyprint source"><code>x = 36; y = 54;
+while x &lt;> y do
+  if x > y
+    then x = x - y
+    else y = y - x fi od;
+print x
+</code></pre>
+<p>is represented as the following tree:</p>
+<pre class="prettyprint source"><code>[ 'stmts'
+  [ 'assign' 'x' [ 'number' 36 ] ]
+  [ 'assign' 'y' [ 'number' 54 ] ]
+  [ 'loop' [ 'ne' [ 'name' 'x' ] [ 'name' 'y' ] ]
+    [ 'select' [ 'gt' [ 'name' 'x' ] [ 'name' 'y' ] ]
+      [ 'assign' 'x' [ 'subtract' [ 'name' 'x' ] [ 'name' 'y' ] ] ]
+      [ 'assign' 'y' [ 'subtract' [ 'name' 'y' ] [ 'name' 'x' ] ] ] ] ]
+  [ 'print' [ 'name' 'x' ] ] ]
+</code></pre>
+<p><a href="../?mode=stack&amp;eg=11/04">In example 11/04</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the tree.</li>
+<li>Change the grammar so that assignment uses a <code>name</code> reference rather
+than a <code>Name</code> token.
+How does the tree change and what would be the consequence for evaluation?</li>
+<li>Add a start rule to <code>dump</code> the resulting tree with line numbers and use the mix-in
+<a href="module-Eleven-Main.html"><code>Eleven.Main()</code></a> to provide the action.</li>
+</ul>
+<h4 id="interpreting-a-little-language">Interpreting a Little Language</h4>
+<p><a href="../?mode=stack&amp;eg=11/05">Example 11/05</a> reuses
+<a href="module-Eleven-Main.html"><code>Eleven.Main()</code></a> for the top-level rules
+and the classes and <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> discussed so far for the build actions
+and to interpret arithmetic expressions.
+It adds new <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>
+<a href="module-Eleven-Eval_Cmps.html"><code>Eval_Cmps()</code></a> to interpret comparisons,
+<a href="module-Eleven-Eval_Stmts.html"><code>Eval_Stmts()</code></a> to interpret statements,
+and <a href="module-Eleven-Eval_Names.html"><code>Eval_Names()</code></a> to interpret names with a symbol table:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // ... new mix-ins ...
+
+  // builder and interpreter-visitor
+  return Eleven.Main(Eleven.Build_Stmts(
+                       Eleven.Build_Names(
+                         Eleven.Build_Cmps(
+                           Eleven.Build_Number(Eleven.Build)))),
+                     Eval_Stmts(
+                       Eval_Names(
+                         Symbols(
+                           Eval_Cmps(
+                             Eleven.Eval_Number(Eleven.Visit))))));
+}) ()
+</code></pre>
+<p>Comparisons are interpreted just like arithmetic operations with a postorder traversal,
+i.e., the subtrees are visited and interpreted first
+and then the comparison is applied:</p>
+<pre class="prettyprint source"><code>// mix-in with comparisons
+const Eval_Cmps = superclass => class extends superclass {
+  // [ 'eq' a b ]
+  eq (node) { return this.visit(node[1]) == this.visit(node[2]); }
+    ...
+};
+</code></pre>
+<p>A list of statement nodes is interpreted one by one:</p>
+<pre class="prettyprint source"><code>// mix-in with statements and list evaluation
+const Eval_Stmts = superclass => class extends superclass {
+  // [ 'stmts' stmt ... ]
+  stmts (node) { node.slice(1).forEach(stmt => this.visit(stmt)); }
+</code></pre>
+<p>For a <code>'print'</code> node all expression subtrees are visited and interpreted
+and the results are displayed together,
+separated by blanks:</p>
+<pre class="prettyprint source"><code>  // [ 'print' value ... ]
+  print (node) { puts(...node.slice(1).map(value => this.visit(value))); }
+</code></pre>
+<p>A <code>'loop'</code> node is interpreted by repeatedly interpreting the condition subtree
+followed by the loop body subtree if the condition is true and returning as soon as
+the condition is false:</p>
+<pre class="prettyprint source"><code>  // [ 'loop' cond stmt ]
+  loop (node) { while (this.visit(node[1])) this.visit(node[2]); }
+</code></pre>
+<p>A <code>'select'</code> node is interpreted by evaluating the condition subtree
+followed by the <code>then</code> subtree if the condition is true
+or the <code>else</code> subtree if the condition is false and there is one:</p>
+<pre class="prettyprint source"><code>  // [ 'select' cond then else? ]
+  select (node) {
+    if (this.visit(node[1])) this.visit(node[2]);
+    else if (node.length > 3) this.visit(node[3]);
+  }
+};
+</code></pre>
+<p>In this little language, names are simply <code>Name</code> tokens referencing variables;
+however, they could be references to functions or array elements, etc.
+Therefore, statements and operands involving names are collected into a separate mix-in
+which requires a symbol table.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Symbols.html"><code>Symbols()</code></a> uses a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map">Map</a> to store
+objects with arbitrary properties as descriptions for names.
+If available, this <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map">Map</a> is imported from the preceding visitor
+so that a sequence of visitors can add more information (line 5 below):</p>
+<pre class="prettyprint source"><code>// mix-in with symbol table
+const Symbols = superclass => class extends superclass {
+  constructor (prev, ... more) {
+    super(prev, ... more);
+    this.symbols = prev?.symbols ?? new Map ();
+  }
+
+  _alloc (name) {
+    let symbol = this.symbols.get(name);         // check if exists
+    if (!symbol)                             // create with ordinal
+      this.symbols.set(name,
+        symbol = { ord: this.symbols.size + 1 });
+    return symbol;
+  }
+};
+</code></pre>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> construction creates an anonymous class which can have an explicit constructor.
+If it does one has to be careful how arguments are managed —
+it is probably best to assume that all <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> along the chain
+receive the same set of arguments (line 3 above).</p>
+<p>A private method <a href="module-Eleven-Symbols.html#_alloc"><code>_alloc()</code></a>
+returns a description for a name and
+creates one if none exists.
+Each symbol receives a property <code>.ord</code> which labels them in order of creation,
+starting with <code>1</code> (line 12)</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Eval_Names.html"><code>Eval_Names()</code></a>
+can use <a href="module-Eleven-Symbols.html"><code>Symbols()</code></a> to interpret operations on a <code>name</code>:</p>
+<pre class="prettyprint source"><code>// mix-in with name evaluation
+const Eval_Names = superclass => class extends superclass {
+  // [ 'name' name ]
+  name (node) {
+    const symbol = this._alloc(node[1]);
+    if (!('value' in symbol)) symbol.value = 0;
+    return symbol.value;
+  }
+
+  // [ 'assign' name value ]
+  assign (node) { this._alloc(node[1]).value = this.visit(node[2]); }
+};
+</code></pre>
+<p>When a reference to a name is interpreted,
+a description is located or created (line 5 above),
+initialized with zero if there is no value (line 6),
+and the current value is returned (line 7).</p>
+<p>To interpret an <code>'assign'</code> node
+a description for the name is located or created
+and the value is computed by a visit to the subtree and stored in the description.
+Note that the evaluation order of the implementation language
+might play a role:
+should the name be defined and initialized before or after the value to be assigned is computed?</p>
+<p><a href="../?mode=stack&amp;eg=11/05">In example 11/05</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to create the executable.</li>
+<li>Press <span class='c-run'></span> to execute; supply different values for <code>x</code> and <code>y</code>.</li>
+<li>Add a top-level <code>run</code> rule to interpret immediately and repeat the steps.</li>
+<li>Remove the <code>dump</code> rule, adjust the <code>main</code> rule, and repeat the steps.</li>
+<li>Add a regular expression such as <code>/./</code> to the call to
+<a href="module-Eleven-Main.html"><code>Main()</code></a> to trace interpretation.</li>
+<li>Finally, change the <span class='a-actions'></span>
+so that all code is imported from <a href="module-Eleven.html">module Eleven</a>
+(this just requires small changes to the <code>return</code> statement),
+recompile, and execute.</li>
+</ul>
+<h3 id="rewriting-a-tree">Rewriting a Tree</h3>
+<p>A visitor can copy a tree or modify it in place, e.g., when type checking a program.
+<a href="tutorial-07-features.html#type-checking-by-interpretation">In chapter seven</a> it was
+demonstrated <a href="../?eg=07/02">in example 7/02</a>
+that <a href="https://en.wikipedia.org/wiki/Type_system#Type_checking" title="type checking">type checking</a> is very similar to evaluation, with types
+replacing actual values.
+Result types are propagated from the leaves of the tree
+through the operator nodes to the statement nodes,
+and at each level the expectations are checked against the
+incoming types, e.g., a Boolean condition for a loop,
+or a string value for assignment to a variable declared with a string type.
+Mismatches can be reported as errors or corrected by applying implicit conversions.</p>
+<p>Alternatively, for <a href="https://en.wikipedia.org/wiki/Type_inference" title="type inference">type inference</a>, sets of types acceptable to operators
+are pushed to the leaves of the tree,
+pruned for literals, and act as constraints on variables.</p>
+<h4 id="typed-expressions">Typed Expressions</h4>
+<p><a href="../?mode=stack&amp;eg=11/06">Example 11/06</a> implements evaluation for expressions
+which include <code>bool</code>, <code>number</code>, and <code>string</code> values.
+The grammar is extended with the typical operations:</p>
+<pre class="prettyprint source"><code>%left     'or';
+%left     'and';
+%nonassoc '=' '&lt;>' '>' '>=' '&lt;' '&lt;=';
+  ...
+main:     expr;
+expr:     or | and | eq | ... | minus | not | len | input | cast
+          | '(' expr ')' | bool | number | string;
+  ...
+or:       expr 'or' expr;
+and:      expr 'and' expr;
+not:      'not' expr %prec Number;
+bool:     'true' | 'false';
+
+len:      'len' expr %prec Number;
+input:    'input' [ String String ];
+string:   String;
+
+cast:     '(' type ')' expr %prec Number;
+type:     'bool' | 'number' | 'string';
+  ...
+</code></pre>
+<p><code>String</code> is a new kind of token: a nonempty literal string value enclosed in single quotes,
+with single quotes, linefeeds, and backslashes escaped by backslashes:</p>
+<pre class="prettyprint source"><code>String: /'(?:\\['\\\n]|[^'\\\n])+'/
+</code></pre>
+<p>Extending the grammar requires a few new actions for tree building:</p>
+<pre class="prettyprint source"><code>const Build_Bool = superclass => class extends superclass {
+  // or: expr 'or' expr;
+  or (a, x, b) { return this._lineno([ 'or', a, b ]); }
+  ...
+</code></pre>
+<p><a href="module-Eleven-Build_Bool.html#or"><code>or()</code></a>, and similarly
+<a href="module-Eleven-Build_Bool.html#and"><code>and()</code></a> and <a href="module-Eleven-Build_Bool.html#not"><code>not()</code></a>,
+build nodes for the Boolean operations.
+It is left up to interpretation or code generation whether or not <code>and</code> and <code>or</code> are
+<a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation" title="short circuit evaluation">short circuited</a>.</p>
+<pre class="prettyprint source"><code>  // bool: 'true' | 'false';
+  bool (bool) { return this._lineno([ 'bool', bool == 'true' ]); }
+};
+</code></pre>
+<p><a href="module-Eleven-Build_Bool.html#bool"><code>bool()</code></a> represents one of the new literals
+<code>'true'</code> and <code>'false'</code> as a <code>'bool'</code> node with the corresponding raw Boolean value.</p>
+<pre class="prettyprint source"><code>const Build_String = superclass => class extends superclass {
+  // len: 'len' expr;
+  len (x, b) { return this._lineno([ 'len', b ]); }
+</code></pre>
+<p><a href="module-Eleven-Build_String.html#len"><code>len()</code></a> represents a unary operation
+which computes the length of a string as a <code>'len'</code> node.</p>
+<pre class="prettyprint source"><code>  // input: 'input' [ String String ];
+  input (i, opt) {
+    return (opt ? opt : [ ]).
+      reduce((r, s) =>
+        (r.push(s.slice(1, -1).replace(/\\(.)/g, '$1')), r),
+      [ 'input' ]);
+  }
+</code></pre>
+<p><a href="module-Eleven-Build_String.html#input"><code>input()</code></a> represents an input operation
+with optional prompt and default strings as an <code>'input'</code> node which contains the raw strings, if any,
+without the enclosing quotes and without backslash escapes (line 5 above).</p>
+<pre class="prettyprint source"><code>  // string: String;
+  string (string) {
+    return this._lineno([ 'string',
+      string.slice(1, -1).replace(/\\(.)/g, '$1') ]);
+  }
+};
+</code></pre>
+<p><a href="module-Eleven-Build_String.html#string"><code>string()</code></a> represents a <code>String</code> literal
+as a <code>'string'</code> node which contains the raw string value.</p>
+<pre class="prettyprint source"><code>const Build_Cast = superclass => class extends superclass {
+  // type: 'bool' | 'number' | 'string';
+  type (type) { return type; }
+  // cast: '(' type ')' expr;
+  cast (l, type, r, b) { return this._lineno([ 'cast', type, b ]); }
+};
+</code></pre>
+<p>Finally, <a href="module-Eleven-Build_Cast.html#cast"><code>cast()</code></a> represents an
+explicit type cast with a type name and a value subtree as a <code>'cast'</code> node.</p>
+<h4 id="interpreting-typed-expressions">Interpreting Typed Expressions</h4>
+<p>The implementation language JavaScript has enough (and sometimes surprising)
+implicit type conversions so that</p>
+<pre class="prettyprint source"><code>'2 ' == 2 && '2' * '1\\3'.length + String(true)
+</code></pre>
+<p>produces <code>6true</code>.
+Translated to conform to the little language grammar above, the expression</p>
+<pre class="prettyprint source"><code>'2 ' = 2 and
+  '2' * len '1\\3' +
+    (string) true
+</code></pre>
+<p>is represented as</p>
+<pre class="prettyprint source"><code>[ 'and'
+  [ 'eq' [ 'string' '2 ' ].1 [ 'number' 2 ].1 ].1
+  [ 'add'
+    [ 'multiply' [ 'string' '2' ].2 [ 'len' [ 'string' '1\\3' ].2 ].2 ].2
+    [ 'cast' 'string' [ 'bool' true ] ] ] ]
+</code></pre>
+<p>An evaluation visitor needs additional methods corresponding to the additional build actions:</p>
+<pre class="prettyprint source"><code>const Eval_Bool = superclass => class extends superclass {
+  // [ 'or' expr expr ]
+  or (node) {
+    return node.slice(1).reduce((result, tree) => {
+      if (result) return result;  // short-circuit
+      result = this.visit(tree);
+      if (typeof result != 'boolean')
+        this._error(node.lineno, &quot;'or' non-boolean&quot;);
+      return result;
+    }, false);
+  }
+  ...
+</code></pre>
+<p><a href="module-Eleven-Eval_Bool.html#or"><code>or()</code></a>, and similarly
+<a href="module-Eleven-Eval_Bool.html#and"><code>and()</code></a> and <a href="module-Eleven-Eval_Bool.html#not"><code>not()</code></a>,
+implement the Boolean operations.
+Both binary operations <a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation" title="short circuit evaluation">short-circuits</a> evaluation;
+e.g., in <a href="module-Eleven-Eval_Bool.html#or"><code>or()</code></a>
+subtrees are only visited until a true value is returned (line 5 above).
+The operations are only intended for Boolean values and report typing issues
+during evaluation (line 8).</p>
+<pre class="prettyprint source"><code>  // [ 'bool' literal-value ]
+  bool (node) {
+    if (typeof node[1] != 'boolean')
+      this._error(node.lineno, &quot;'bool' non-boolean&quot;);
+    return node[1];
+  }
+};
+</code></pre>
+<p><a href="module-Eleven-Eval_Bool.html#bool"><code>bool()</code></a> evaluates one of the new literals
+<code>'true'</code> and <code>'false'</code> which the build action has already converted.</p>
+<pre class="prettyprint source"><code>const Eval_String = superclass => class extends superclass {
+  // [ 'len' expr ]
+  len (node) {
+    const val = this.visit(node[1]);
+    if (typeof val != 'string')
+      this._error(node.lineno, &quot;'len' non-string&quot;);
+    return val.length;  // undefined if not string
+  }
+</code></pre>
+<p><a href="module-Eleven-Eval_String.html#len"><code>len()</code></a> implements the unary <code>len</code> operation
+which computes the length of a string.
+The result is undefined — and reported — if the subtree value is not a string.</p>
+<pre class="prettyprint source"><code>  // [ 'string' literal-value ]
+  string (node) {
+    if (typeof node[1] != 'string')
+      this._error(node.lineno, &quot;'string' non-string&quot;);
+    return node[1];
+  }
+</code></pre>
+<p><a href="module-Eleven-Eval_String.html#string"><code>string()</code></a> evaluates a <code>String</code> literal
+where the build action has already elaborated the backslash escapes.</p>
+<pre class="prettyprint source"><code>  // [ 'concat' a b ]
+  concat (node) {
+    const vals = node.slice(1).map(this.visit.bind(this));
+    if (vals.some(val => typeof val != 'string'))
+      this._error(node.lineno, &quot;'concat' non-string&quot;);
+    return vals[0] + vals[1];
+  }
+};
+</code></pre>
+<p>The little language is going to use <code>+</code> to designate both, number addition and string concatenation.
+Therefore,
+<a href="module-Eleven-Eval_String.html#concat"><code>concat()</code></a> is available to interpret a <code>'concat'</code>
+node by interpreting the subtrees and concatenating the result.</p>
+<pre class="prettyprint source"><code>const Eval_Cast = superclass => class extends superclass {
+  // [ 'cast' type value ]
+  cast (node) {
+    switch (node[1]) {
+    case 'bool':   return !! this.visit(node[2]);
+    case 'number': return Number(this.visit(node[2]));
+    case 'string': return String(this.visit(node[2]));
+    default:       throw node[1] + ': not expected for cast';
+    }
+  }
+</code></pre>
+<p>Finally, <a href="module-Eleven-Eval_Cast.html#cast"><code>cast()</code></a> implements an
+explicit type cast with a type and a value as a node.
+This method relies on conversions provided by the implementation language JavaScript.</p>
+<p>As before, builder and interpreter for typed expressions are imported or defined and combined in the <span class='a-actions'></span>:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // ... new mix-ins ...
+
+  // builder and interpreter for typed expressions
+  return Eleven.Main(Build_Cast(
+                       Build_String(
+                         Build_Bool(
+                           Eleven.Build_Cmps(
+                             Eleven.Build_Number(Eleven.Build))))),
+                     Eval_Cast(
+                       Eval_String(
+                         Eval_Bool(
+                           Eleven.Eval_Cmps(
+                             Eleven.Eval_Number(Eleven.Visit))))));
+}) ()
+</code></pre>
+<p><a href="../?mode=stack&amp;eg=11/06">In example 11/06</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the error message
+and the result <code>'6true'</code>.</li>
+<li>Finally, add a regular expression such as /./ to the call to Main()
+near the end of the <span class='a-actions'></span> to trace interpretation
+and try expressions like <code>true</code> <code>or</code> <code>0</code> and  <code>false</code> <code>and</code> <code>1</code> to see
+that the Boolean operations only evaluate as far as they have to.</li>
+</ul>
+<h4 id="checking-typed-expressions">Checking Typed Expressions</h4>
+<p>JavaScript is <em>dynamically typed</em>: every value belongs to a small set of types,
+variables accept values of any type,
+and operators implicitly convert argument values so that the operation can be applied.
+In particular, values can be passed to functions
+that are not specifically designed to deal with them — often resulting in confusing runtime errors.</p>
+<p><em>Statically typed</em> languages try to avoid most implicit conversions
+and require that variable declarations include types.
+In particular, function parameters must be declared with types
+so that unexpected argument types can be detected during compilation.</p>
+<p><a href="https://en.wikipedia.org/wiki/Type_system#Type_checking" title="type checking">Type checking</a> should be part of compilation and try to ensure
+that operations will only be applied to the type of values for which they are intended.
+It has a choice of silently inserting suitable <code>cast</code> operations
+or reporting errors to prevent execution.</p>
+<p><a href="../?mode=stack&amp;eg=11/07">Example 11/07</a> implements type checking for typed expressions
+and inserts implicit conversions so that, e.g., the evaluation methods in
+<a href="module-Eleven-Eval_Bool.html"><code>Eval_Bool()</code></a> will only receive Boolean values
+and the error message seen <a href="../?mode=stack&amp;eg=11/06">in example 11/06</a>
+is no longer triggered.
+The semantics of the typed expressions
+deliberately are defined to be different from the implementation language JavaScript,
+e.g., comparisons happen in the type of the left operand,
+they do not prefer the type 'number'.</p>
+<p>The grammar for typed expressions,
+builder,
+and interpreter remain unchanged <a href="../?mode=stack&amp;eg=11/06">from example 11/06</a>.
+Type checking is implemented as a new visitor
+based on a new set of <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>.
+This visitor is applied after building and before interpretation,
+i.e., the <span class='a-actions'></span> has the following structure:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // base class for type checking
+  class Check extends Eleven.Visit { ... }
+  
+  // ... type checking mix-ins ...
+
+  // builder, type-checker, and interpreter for typed expressions
+  return Eleven.Main(Eleven.Build_Cast(
+                       Eleven.Build_String(
+                         Eleven.Build_Bool(
+                           Eleven.Build_Cmps(
+                             Eleven.Build_Number(Eleven.Build))))),
+                     Check_Cast(
+                       Check_String(
+                         Check_Bool(
+                           Check_Cmps(
+                             Check_Number(Check))))),
+                     Eleven.Eval_Cast(
+                       Eleven.Eval_String(
+                         Eleven.Eval_Bool(
+                           Eleven.Eval_Cmps(
+                             Eleven.Eval_Number(Eleven.Visit))))));
+}) ()
+</code></pre>
+<p><a href="../?mode=stack&amp;eg=11/07">In example 11/07</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to see the new result <code>false</code>.</li>
+<li>Add <code>/./</code> as last parameter to the call to <a href="module-Eleven-Main.html"><code>Main()</code></a>,
+specifically to trace evaluation.</li>
+<li>Analyze why <code>'2 '</code> <code>=</code> <code>2</code> produces <code>false</code>.</li>
+<li>Remove the type checking visitor from the call to <a href="module-Eleven-Main.html"><code>Main()</code></a>
+and check out that <code>'2 '</code> <code>=</code> <code>2</code> now produces <code>true</code>.</li>
+<li>Consult the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than" title="&lt;">explanation of the JavaScript less than operator</a> to see why.</li>
+</ul>
+<p><a href="module-Eleven-Check.html"><code>Check</code></a>, the base class for type checking,
+inherits from <a href="module-Eleven-Visit.html"><code>Visit</code></a> and adds a few utility methods:</p>
+<pre class="prettyprint source"><code>// base class for type checking
+class Check extends Visit {
+  // [ 'bool' literal-value ] etc.
+  _literal (node) {
+    if (!(typeof node[1]).startsWith(node[0]))
+      this._error(node.lineno, `expected ${node[0]} literal`);
+    node.type = node[0]; return node;
+  }
+</code></pre>
+<p><a href="module-Eleven-Check.html#_literal"><code>_literal()</code></a> receives a node
+describing a literal value,
+makes sure that the literal value has the expected type (line 5 above),
+notes the type in the <code>.type</code> property for the node (line 7),
+and returns the typed node.</p>
+<p>JavaScript passes arrays by reference.
+Therefore, like all other type checking methods,
+<a href="module-Eleven-Check.html#_literal"><code>_literal()</code></a>
+can return the node it received and modified —
+type checking can rewrite the tree in place.</p>
+<pre class="prettyprint source"><code>  // [ tag expr ... ]
+  _toType (type, node, index) {
+    if (this.visit(node[index]).type != type)
+      (node[index] = [ 'cast', type, node[index] ]).type = type;
+    return node;
+  }
+</code></pre>
+<p><a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a> ensures that a subtree returns
+a specific type.
+<a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a> receives the type name,
+a node — which it will return —
+and an index selecting a subtree.
+<a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a> visits the subtree
+to perform type checking (line 3 above).
+If the subtree type is unexpected
+<a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a> modifies the node
+by inserting a <code>cast</code> node on top of the subtree in place of the subtree (line 4)
+— an error could be reported instead.</p>
+<pre class="prettyprint source"><code>  // [ tag expr ... ]
+  _require (type, node) {
+    node.slice(1).forEach((_, n) => this._toType(type, node, n+1));
+    node.type = type;
+    return node;
+  }
+</code></pre>
+<p><a href="module-Eleven-Check.html#_require"><code>_require()</code></a> receives a type name and a node
+and applies <a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a> to all subtrees
+to ensure that they return the type.
+It then notes the type in the <code>.type</code> property for the node,
+and returns the typed node.</p>
+<p><a href="module-Eleven-Check.html#_require"><code>_require()</code></a> and
+<a href="module-Eleven-Check.html#_literal"><code>_literal()</code></a> implement
+type checking for all operations on numbers and Boolean values:</p>
+<pre class="prettyprint source"><code>// mix-in to check arithmetic operations
+const Check_Number = superclass => class extends superclass {
+  // [ 'add' expr expr ]
+  add (node) { return this._require('number', node); }
+  ...
+  // [ 'number' value ]
+  number (node) { return this._literal(node); }
+};
+
+// mix-in to check Boolean operations
+const Check_Bool = superclass => class extends superclass {
+  // [ 'or' expr expr ]
+  or (node) { return this._require('bool', node); }
+  ...
+  // [ 'bool' value ]
+  bool (node) { return this._literal(node); }
+};
+</code></pre>
+<p>Arithmetic operations such as <code>add</code> return a <code>number</code> and
+all operands have to produce numbers (line 4 above).
+Logic operations such as <code>or</code> are defined to return <code>bool</code>
+and the operands should produce Boolean values (line 13).</p>
+<p>Comparisons are defined to employ the type of the left operand
+and return a Boolean value:</p>
+<pre class="prettyprint source"><code>// mix-in to check comparisons
+const Check_Cmps = superclass => class extends superclass {
+  // [ compare expr expr ]
+  _cmp (node) {
+    const type = this.visit(node[1]).type;
+    this._toType(type, node, 2);
+    node.type = 'bool';
+    return node;
+  }
+  // [ 'eq' expr expr ]
+  eq (node) { return this._cmp(node); }
+  ...
+};
+</code></pre>
+<p><a href="module-Eleven-Check_Cmps.html#_cmp"><code>_cmp()</code></a> uses
+<a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a> to convert the right operand
+if necessary (line 6 above) and marks that the node returns <code>bool</code> (line 7).
+<a href="module-Eleven-Check_Cmps.html#_cmp"><code>_cmp()</code></a> implements
+type checking for all comparisons (line 11).</p>
+<p>A string literal, input, and the <code>len</code> operation are straightforward to check:</p>
+<pre class="prettyprint source"><code>// mix-in to check string operations
+const Check_String = superclass => class extends superclass {
+  // [ 'string' value ]
+  string (node) { return this._literal(node); }
+  // [ 'input' prompt? default? ]
+  input (node) {
+    node.type = 'string'; return node;
+  }
+  // [ 'len' expr ]
+  len (node) {
+    this._require('string', node);
+    node.type = 'number'; return node;
+  }
+</code></pre>
+<p>String concatenation is more complicated because an
+<code>'add'</code> node should result in concatenation if a string value is involved
+and in addition if two numbers are involved:</p>
+<pre class="prettyprint source"><code>  // [ 'add' expr expr ]
+  add (node) {
+    const a = this.visit(node[1]), b = this.visit(node[2]);
+    if (a.type != 'string') {
+      if (b.type != 'string') return super.add(node);   // any  any
+      this._toType('string', node, 1);               // any  string
+    } else if (b.type != 'string')
+      this._toType('string', node, 2);                // string any
+    node[0] = 'concat';                            // string string
+    node.type = 'string'; return node;
+  }
+};
+</code></pre>
+<p><a href="module-Eleven-Check_String.html#add"><code>add()</code></a> overrides
+<a href="module-Eleven-Check_Number.html#add"><code>Check_Number.add()</code></a>, i.e.,
+the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Check_String.html"><code>Check_String()</code></a> has to be applied <em>after</em>
+the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Check_Number.html"><code>Check_Number()</code></a>.</p>
+<p><a href="module-Eleven-Check_String.html#add"><code>add()</code></a> visits both subtrees (line 3 above)
+and if neither has a string value it defers to
+<a href="module-Eleven-Check_Number.html#add"><code>super.add()</code></a>
+to handle a <code>number</code> result (line 5).
+Otherwise, the first or second operand might have to be converted
+into a string value (line 6 or line 8).
+Finally, the operation is changed to <code>'concat'</code> (line 9)
+and the node is marked to produce a <code>string</code> value as result (line 10).</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Check_Cast.html"><code>Check_Cast()</code></a> only has to deal with
+a <code>'cast'</code> node:</p>
+<pre class="prettyprint source"><code>// mix-in to check a cast operation
+const Check_Cast = superclass => class extends superclass {
+  // [ 'cast' type expr ]
+  cast (node) {
+    this.visit(node[2]);
+    node.type = node[1]; return node;
+  }
+};
+</code></pre>
+<p>The subtree has to be visited but the node is marked with the explicit type (line 6 above)
+— silently assuming that any kind of conversion is supported.</p>
+<h4 id="checking-a-typed-little-language">Checking a Typed Little Language</h4>
+<p><a href="../?mode=stack&amp;eg=11/08">Example 11/08</a> implements type checking for the little language
+introduced <a href="../?mode=stack&amp;eg=11/05">in example 11/05</a>.
+Variables have to be declared,
+assignments and <code>input</code> statements have to respect the types,
+<code>print</code> statements require strings,
+conditions should return Boolean values,
+and expressions include the Boolean, string, and cast operations
+introduced <a href="../?mode=stack&amp;eg=11/06">in example 11/06</a>.</p>
+<p>The grammars of the previous examples are merged
+and there is a small change at the top level to handle declarations:</p>
+<pre class="prettyprint source"><code>run:      main;
+main:     block;
+block:    item [{ ';' item }];
+item:     dcl | stmt;
+dcl:      type Name [{ ',' Name }];
+type:     'bool' | 'number' | 'string';
+</code></pre>
+<p>The <code>main</code> action will return type checking as a function
+which the action for <code>run</code> will execute.
+A sentence consists of one or more items, separated by semicolons (line 3 above).
+An item is a declaration or a statement (line 4).
+A declaration starts with one of the types (line 6)
+followed by one or more variable names, separated by commas (line 5).</p>
+<p>A <code>block</code> is <em>not</em> permitted at the statement level, i.e.,
+in the body of a loop or selection, but this would be the obvious hook
+to add block structure as described in <a href="tutorial-07-features.html#block-scopes">chapter seven</a>.</p>
+<p>The grammar permits declarations and statements in any order,
+i.e., variables can be used before they are declared,
+but the <a href="module-Eleven-Build_Dcl.html#block"><code>block()</code></a> action will build a node which puts things in order,
+declarations before statements:</p>
+<pre class="prettyprint source"><code>// mix-in with building for 'block' and 'dcl'
+const Build_Dcl = superclass => class extends superclass {
+  // block: item [{ ';' item }];
+  block (item, many) {
+    const items = (many ? many[0] : []).reduce(
+      (items, alt) => { items.push(alt[1][0]); return items; }, [ item[0] ]);
+    return this._lineno([ 'block' ].concat(
+      items.filter(item => item[0] == 'dcl'),
+      items.filter(item => item[0] != 'dcl')));
+  }
+  // dcl: type Name [{ ',' Name }];
+  dcl (type, name, many) {
+    return this._lineno([ 'dcl', type, name ].
+      concat(many ? many[0].map(alt => alt[1]) : []));
+  }
+};
+</code></pre>
+<p>The <a href="module-Eleven-Build_Dcl.html#block"><code>block()</code></a> action collects all items into one list (line 5 above).
+There is no action for <code>item</code>, i.e., the <code>item</code> rule will return a list with a single
+declaration or statement node which <a href="module-Eleven-Build_Dcl.html#block"><code>block()</code></a> has to extract (line 6).
+The list of all items is then split into declarations (line 8) and
+statements (line 9) and both are combined into a <code>'block'</code> node (line 7)
+because <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" title="concat()"><code>concat()</code></a> flattens one level of arrays.</p>
+<p>The <a href="module-Eleven-Build_Dcl.html#dcl"><code>dcl()</code></a> action builds a <code>'dcl'</code> node with the declared type and the list of names (line 13).</p>
+<p>There is not much to do to check <code>'block'</code> and <code>'dcl'</code> nodes:</p>
+<pre class="prettyprint source"><code>// mix-in with type checking for 'block' and 'dcl'
+const Check_Dcl = superclass => class extends superclass {
+  // [ 'block' dcl... stmt... ]
+  block (node) {
+    node.slice(1).forEach((item, n) => node[n + 1] = this.visit(item));
+    return node;
+  }
+  // [ 'dcl' type name ... ]
+  dcl (node) {
+    node.slice(2).forEach(name => {
+      if (this.symbols.has(name))
+        this._error(node.lineno, name + ': duplicate');
+      this._alloc(name).type = node[1];
+    });
+    return node;
+  }
+};
+</code></pre>
+<p>The <a href="module-Eleven-Check_Dcl.html#block"><code>block()</code></a> method visits each subtree (line 5 above),
+i.e., it executes declarations before it checks statements.</p>
+<p>The <a href="module-Eleven-Check_Dcl.html#dcl"><code>dcl()</code></a> method needs a <code>symbols</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map"><code>Map</code></a>, e.g., from the
+<a href="module-Eleven-Symbols.html"><code>Symbols</code></a> <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a>.
+It forbids that a name has already been declared (line 11)
+and creates a description with a <code>type</code> property (line 13).</p>
+<p>Most statements require little checking and they have no useful node type upon return:</p>
+<pre class="prettyprint source"><code>// mix-in with type checking for statements
+const Check_Stmts = superclass => class extends superclass {
+  // [ 'stmts' stmt... ]
+  stmts (node) {
+    node.slice(1).forEach(stmt => this.visit(stmt)); return node;
+  }
+  // [ 'print' expr ... ]
+  print (node) { return this._require('string', node); }
+  // [ 'loop' expr body ]
+  loop (node) {
+    this.visit(node[2]);
+    return this._toType('bool', node, 1);
+  }
+  // [ 'select' expr then else? ]
+  loop (node) {
+    this.visit(node[2]);
+    return this._toType('bool', node, 1);
+  }
+  /** `[ 'select' cond then else? ]` condition cast to `bool`.
+      @param {Array} node - to check.
+      @memberof module:Eleven~Check_Stmts
+      @instance */
+  select (node) {
+    node.slice(2).forEach(node => this.visit(node));
+    return this._toType('bool', node, 1);
+  }
+};
+</code></pre>
+<p>The <a href="module-Eleven-Check_Stmts.html#stmts"><code>stmts()</code></a> method visits each subtree (line 5 above).</p>
+<p>The <a href="module-Eleven-Check_Stmts.html#print"><code>print()</code></a> method uses <a href="module-Eleven-Check.html#_require"><code>_require()</code></a>
+to ensure that all arguments are strings (line 8).</p>
+<p>The <a href="module-Eleven-Check_Stmts.html#loop"><code>loop()</code></a> method visits both subtrees and uses
+<a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a>
+to ensure that the loop condition returns a Boolean value (line 12).</p>
+<p>The <a href="module-Eleven-Check_Stmts.html#select"><code>select()</code></a> method visits all subtrees and uses
+<a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a>
+to ensure that the condition returns a Boolean value (line 17).</p>
+<p>Checking the use of variables is more complicated.
+Just like <a href="module-Eleven-Check_Dcl.html#dcl"><code>dcl()</code></a>
+the methods in <a href="module-Eleven-Check_Names.html"><code>Check_Names()</code></a>
+require a <code>symbols</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map"><code>Map</code></a>:</p>
+<pre class="prettyprint source"><code>// mix-in with type checking for names
+const Check_Names = superclass => class extends superclass {
+  // [ 'name' name ]
+  name (node) {
+    node.type = this._type(node.lineno, node[1]);
+    return node;
+  }
+  // return the type of a name, or 'number'
+  _type (lineno, name) {
+    const symbol = this._alloc(name);
+    if (!('type' in symbol)) {
+      this._error(lineno, name + ': undefined');
+      symbol.type = 'number';
+    }
+    return symbol.type;
+  }
+  // [ 'assign' name expr ]
+  assign (node) {
+    return this._toType(this._type(node.lineno, node[1]), node, 2);
+  }
+};
+</code></pre>
+<p>The <a href="module-Eleven-Check_Names.html#name"><code>name()</code></a> method sets the node type to the declared type of the variable (line 5 above).
+It uses <a href="module-Eleven-Check_Names.html#_type"><code>_type()</code></a>
+to obtain the type from the symbol table (line 9).
+The type should have been declared!</p>
+<p>The <a href="module-Eleven-Check_Names.html#assign"><code>assign()</code></a> method uses <a href="module-Eleven-Check.html#_toType"><code>_toType()</code></a>
+to visit the expression subtree and ensure that the expression delivers
+the type which is expected by the variable — this information is delivered by
+<a href="module-Eleven-Check_Names.html#_type"><code>_type()</code></a>.</p>
+<p>The <span class='a-actions'></span> defines the new <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> discussed above
+and uses <a href="module-Eleven-Main.html"><code>Main()</code></a> to create the builder and type checker:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // mix-ins with building actions
+    ...
+  // mix-ins with methods for type checking
+    ...
+  // builder and checker for a typed little language
+  return Eleven.Main(Build_Dcl(
+                       Eleven.Build_Stmts(
+                         Eleven.Build_Names(
+                           Eleven.Build_Cast(
+                             Eleven.Build_String(
+                               Eleven.Build_Bool(
+                                 Eleven.Build_Cmps(
+                                   Eleven.Build_Number(Eleven.Build)))))))),
+                     Check_Dcl(
+                       Check_Stmts(
+                         Check_Names(
+                           Eleven.Symbols(
+                             Eleven.Check_Cast(
+                               Eleven.Check_String(
+                                 Eleven.Check_Bool(
+                                   Eleven.Check_Cmps(
+                                     Eleven.Check_Number(Eleven.Check))))))))));
+}) ()
+</code></pre>
+<p><a href="../?mode=stack&amp;eg=11/08">Example 11/08</a>
+contains a (rather contrived) typed version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's Algorithm</a>:</p>
+<pre class="prettyprint source"><code>x = input 'x' '36'; y = input 'y' '54'; string x; number y;
+eq = x = y; bool eq;
+while not eq do
+  if (number) x > y then
+    x = x - y
+  else
+    y = y - x 
+  fi;
+  eq = x = y
+od;
+print 'Greatest common divisor:', x
+</code></pre>
+<ul>
+<li>The very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Remove the <code>run</code> and <code>main</code> rules,</li>
+<li>press <span class='c-new'></span> to represent and check the grammar, and</li>
+<li>press <span class='c-parse'></span> to see the original tree.</li>
+</ul>
+<pre class="prettyprint source"><code>[ 'block'
+  [ 'dcl' 'string' 'x' ] [ 'dcl' 'number' 'y' ] [ 'dcl' 'bool' 'eq' ]
+  [ 'assign' 'x' [ 'input' 'x' '36' ] ] 
+  [ 'assign' 'y' [ 'input' 'y' '54' ] ] 
+  [ 'assign' 'eq' [ 'eq' [ 'name' 'x' ] [ 'name' 'y' ] ] ] 
+  [ 'loop' [ 'not' [ 'name' 'eq' ] ] [ 'stmts' 
+    [ 'select'
+      [ 'gt' [ 'cast' 'number' [ 'name' 'x' ] ] [ 'name' 'y' ] ]
+      [ 'assign' 'x' [ 'subtract' [ 'name' 'x' ] [ 'name' 'y' ] ] ] 
+      [ 'assign' 'y' [ 'subtract' [ 'name' 'y' ] [ 'name' 'x' ] ] ] ] 
+    [ 'assign' 'eq' [ 'eq' [ 'name' 'x' ] [ 'name' 'y' ] ] ] ] ] 
+  [ 'print' [ 'string' 'Greatest common divisor:' ] [ 'name' 'x' ] ] ]
+</code></pre>
+<ul>
+<li>Note that the <code>block</code> action has sorted the declarations before the statements.</li>
+<li>Restore the rules,</li>
+<li>press <span class='c-new'></span> to represent and check the grammar, and</li>
+<li>press <span class='c-parse'></span> to see the tree
+after it was modified by the type checker:</li>
+</ul>
+<pre class="prettyprint source"><code>[ 'block'
+  [ 'dcl' 'string' 'x' ] [ 'dcl' 'number' 'y' ] [ 'dcl' 'bool' 'eq' ]
+  [ 'assign' 'x' [ 'input' 'x' '36' ] ] 
+  [ 'assign' 'y' [ 'cast' 'number' [ 'input' 'y' '54' ] ] ] 
+  [ 'assign' 'eq' 
+    [ 'eq' [ 'name' 'x' ] [ 'cast' 'string' [ 'name' 'y' ] ] ] ] 
+  [ 'loop' [ 'not' [ 'name' 'eq' ] ] [ 'stmts' 
+    [ 'select' 
+      [ 'gt' [ 'cast' 'number' [ 'name' 'x' ] ] [ 'name' 'y' ] ]
+      [ 'assign' 'x' [ 'cast' 'string' 
+        [ 'subtract' 
+          [ 'cast' 'number' [ 'name' 'x' ] ] [ 'name' 'y' ] ] ] ] 
+      [ 'assign' 'y'
+        [ 'subtract' 
+          [ 'name' 'y' ] [ 'cast' 'number' [ 'name' 'x' ] ] ] ] ]
+    [ 'assign' 'eq' 
+      [ 'eq' [ 'name' 'x' ] [ 'cast' 'string' [ 'name' 'y' ] ] ] ] ] ]
+  [ 'print' [ 'string' 'Greatest common divisor:' ] [ 'name' 'x' ] ] ]
+</code></pre>
+<ul>
+<li>Remove or duplicate a declaration to see error messages from type checking.</li>
+<li>Change the variables' types to see how that changes what casts are inserted.</li>
+</ul>
+<h4 id="interpreting-a-typed-little-language">Interpreting a Typed Little Language</h4>
+<p><a href="../?mode=stack&amp;eg=11/09">Example 11/09</a> adds the necessary methods
+to interpret the typed version of the little language.
+The <span class='a-actions'></span> creates the new interpreter and uses
+<a href="module-Eleven-Main.html"><code>Main()</code></a> to create a new <code>main</code> action
+which will return the interpreter as a function:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // mix-in for blocks and declarations
+    ...
+  // builder, checker, and interpreter for a typed little language
+  return Eleven.Main(Eleven.Build_Dcl(
+                       Eleven.Build_Stmts(
+                         Eleven.Build_Names(
+                           Eleven.Build_Cast(
+                             Eleven.Build_String(
+                               Eleven.Build_Bool(
+                                 Eleven.Build_Cmps(
+                                   Eleven.Build_Number(Eleven.Build)))))))),
+                     Eleven.Check_Dcl(
+                       Eleven.Check_Stmts(
+                         Eleven.Check_Names(
+                           Eleven.Symbols(
+                             Eleven.Check_Cast(
+                               Eleven.Check_String(
+                                 Eleven.Check_Bool(
+                                   Eleven.Check_Cmps(
+                                     Eleven.Check_Number(Eleven.Check))))))))),
+                     Eval_Dcl(
+                       Eleven.Eval_Stmts(
+                         Eleven.Eval_Names(
+                           Eleven.Symbols(
+                             Eleven.Eval_Cast(
+                               Eleven.Eval_String(
+                                 Eleven.Eval_Bool(
+                                   Eleven.Eval_Cmps(
+                                     Eleven.Eval_Number(Eleven.Visit))))))))));
+}) ()
+</code></pre>
+<p>Most of the interpreter was developed <a href="../?mode=stack&amp;eg=11/05">in example 11/05</a>
+<a href="#interpreting-a-little-language">above</a>.
+Type checking adds <code>'block'</code> and <code>'dcl'</code> nodes.
+Therefore, just two visitor methods have to be added to the interpreter:</p>
+<pre class="prettyprint source"><code>  // mix-in to interpret 'block' and 'dcl'
+const Eval_Dcl = superclass => class extends superclass {
+  // [ 'block' dcl ... stmt ... ]
+  block (node) {  node.slice(1).forEach(item => this.visit(item)); }
+  // [ 'dcl' type name ... ]
+  dcl (node) {
+    node.slice(2).forEach(name => {
+      if (this.symbols.has(name) && 'value' in this.symbols.get(name))
+        this._error(node.lineno, name + ': duplicate');
+      switch (node[1]) {
+      case 'bool':    this._alloc(name).value = false; break;
+      case 'number':  this._alloc(name).value = 0; break;
+      case 'string':  this._alloc(name).value = ''; break;
+      default:        this._error(node.lineno, node[1] + &quot;: not in 'dcl'&quot;);
+      }
+    });
+  }
+</code></pre>
+<p>The <a href="module-Eleven-Eval_Dcl.html#block"><code>block()</code></a> method simply visits the subtrees, i.e.,
+the declarations followed by the statements (line 4 above).</p>
+<p>The <a href="module-Eleven-Eval_Dcl.html#dcl"><code>dcl()</code></a> method initializes the variables.
+The test for duplicates (line 8) should not be necessary because the interpreter
+uses the symbol table which was created by the type checker,
+i.e., duplicate variables would have been detected before
+and <a href="module-Eleven-Main.html"><code>Main()</code></a> does not continue
+from one visitor to the next if errors are reported.
+Variables are initialized to &quot;zero&quot;, but the value is type-specific (line 10).</p>
+<p><a href="../?mode=stack&amp;eg=11/09">In example 11/09</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>press <span class='c-parse'></span> to create the executable, and</li>
+<li>press <span class='c-run'></span> to interpret the program.</li>
+</ul>
+<pre class="prettyprint source"><code>&& 'value' in this.symbols.get(name)
+</code></pre>
+<ul>
+<li>Remove the phrase above
+from the body of the <code>dcl</code> method and press <span class='c-parse'></span> and
+<span class='c-run'></span> again to see three error messages
+because <code>x</code>, <code>y</code>, and <code>eq</code> are already in the symbol table.
+This demonstrates that the symbol table is copied from the type checker.</li>
+</ul>
+<pre class="prettyprint source"><code>bool b; print b
+</code></pre>
+<ul>
+<li>Change the program to the one shown above and check and interpret it.
+The output should be <code>false</code>.</li>
+<li>Remove the body of the <code>dcl</code> method and check and interpret again.
+The output is <code>0</code> because there is no initialization,
+the reference to a name defaults a missing value to zero,
+and the cast to a string for printing uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#string_primitives_and_string_objects" title="String()"><code>String()</code></a>
+which in JavaScript converts anything to a string.</li>
+</ul>
+<h3 id="generating-code">Generating Code</h3>
+<p>Code generation for a stack machine using action methods was introduced
+starting in <a href="tutorial-06-compile.html">chapter six</a> with examples
+<a href="../?eg=06/09">6/09</a> and <a href="../?eg=06/10">6/10</a> for arithmetic expressions
+and <a href="../?eg=06/11">example 6/11</a> for control structures.
+If a program is represented as a tree
+code generators are visitors
+which can apply some code optimization.
+The stack machines can be reused and extended
+with new instructions, e.g., for exponentiation or
+to operate on strings and Boolean values.</p>
+<h4 id="compiling-arithmetic-expressions">Compiling Arithmetic Expressions</h4>
+<p><a href="../?mode=stack&amp;eg=11/10">Example 11/10</a> implements code generation for trees of arithmetic expressions
+which include exponentiation.
+<a href="module-Eleven-Code.html"><code>Code</code></a> is the base class for code generators.
+It extends <a href="module-Eleven-Visit.html"><code>Visit</code></a> and manages stack machines.
+In particular, it reuses machine generators such as <a href="module-Six-Machine10.html"><code>Six.Machine10</code></a>
+and it implements an extension mechanism to add instructions:</p>
+<pre class="prettyprint source"><code>class Code extends Visit {
+  // machine generator class, allows replacement
+  get Machine () { return this.#Machine ??= Six.Machine10; }
+  #Machine;
+  // instructions mix-in, allows extensions
+  get Instructions () {
+    return this.#Instructions ??= superclass => superclass;
+  }
+  #Instructions;
+  // machine generator, should not change
+  get machine () { 
+    return this.#machine ??= new (this.Instructions(this.Machine)) ();
+  }
+  #machine;
+  // for 'compile' rule, overwrite to match machine generator
+  get executable () { return this.machine.run(0); }
+  // visit subtrees, generate 'op' instruction, returns end address
+  _postfix (node, op) {
+    node.slice(1).forEach(node => this.visit(node));
+    return this.machine.gen(op);
+  }
+}
+</code></pre>
+<p>The stack machine generators in <a href="tutorial-06-compile.html">chapter six</a> and <a href="tutorial-07-features.html">chapter seven</a>
+form a linear inheritance hierarchy and define the machine instructions.
+<a href="module-Eleven-Code.html"><code>Code</code></a> defines <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get" title="getter">getters</a> as hooks
+which can be overwritten in <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>
+to change which machine generator class will be used (line 3 above),
+to add new instructions in a cumulative fashion (line 6),
+and to access the executable as befits the underlying machine generator (line 16).</p>
+<p>The private method <a href="module-Eleven-Code.html#_postfix"><code>_postfix()</code></a> generates code for many operators.
+Given a node, the subtrees are visited to generate code to push values
+onto the runtime stack and then an instruction corresponding to the node
+is generated to operate on the values (lines 19 and 20).</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Code_Number.html"><code>Code_Number()</code></a>
+extends the <code>Instructions()</code> <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a>
+to add a <code>Power</code> instruction (lines 3 to 11 below)
+and it contains the methods to visit the trees built for arithmetic expressions:</p>
+<pre class="prettyprint source"><code>const Code_Number = superclass => class extends superclass {
+  // overwrite instructions mix-in, add 'Power'
+  get Instructions () {
+    return this.#Instructions ??=
+      superclass => class extends super.Instructions(superclass) {
+        /** `stack: ... a b -> ... a**b` */
+        Power (memory) {
+          memory.splice(-2, 2, memory.at(-2) ** memory.at(-1));
+        }
+      }; 
+  }
+  #Instructions;
+  ...
+  // [ 'power' a b ]
+  power (node) { return this._postfix(node, 'Power'); }
+  // [ 'minus' a ]
+  minus (node) { return this._postfix(node, 'Minus'); }
+  // [ 'number' n ]
+  number (node) {
+    if (typeof node[1] != 'number')
+      this._error(node.lineno, &quot;'number' non-number&quot;);
+    return this.machine.gen('Push', node[1]);
+  }
+};
+</code></pre>
+<p>For nodes like <code>'power'</code> or <code>'minus'</code> <a href="module-Eleven-Code.html#_postfix"><code>_postfix()</code></a>
+visits the subtrees from left to right for code generation
+and then generates the instruction required for the node (lines 15 and 17 above).
+For a <code>'number'</code> node <code>'Push'</code> is generated to load a constant onto the runtime stack (line 22).</p>
+<p>Finally, the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Compile.html"><code>Compile()</code></a>
+works exactly like the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Main.html"><code>Main()</code></a> <a href="#main-program">discussed above</a>:</p>
+<pre class="prettyprint source"><code>const Compile = (superclass, ...args) => class extends superclass {
+  // compile: expr;
+  compile (tree) {
+    const [lastVisitor, lastTree, trace] = this._doVisits(tree, args);
+    lastVisitor.visit(lastTree, trace);
+    if (trace) puts(lastVisitor.machine.toString());
+    return lastVisitor.executable;
+  }
+};
+</code></pre>
+<p>It defines a build action for a <code>compile</code> rule which expects a tree,
+runs a list of visitors such as type checking and code generation,
+and returns the <code>executable</code> from the last visitor.</p>
+<p>The <span class='a-actions'></span> contains the compiler for arithmetic expressions:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // mix-in to run the visitors
+  const Compile ...
+  
+  // base class to generate code
+  class Code ...
+  
+  // mix-in to generate code for arithmetic expressions
+  const Code_Number ...
+
+  // builder and code generator for arithmetic expressions
+  return Compile(
+           Eleven.Main(Eleven.Build_Number(Eleven.Build)),
+           Code_Number(Code));
+}) ()
+</code></pre>
+<p><a href="module-Eleven-Main.html"><code>Main()</code></a> is needed in the inheritance chain of <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>
+to supply <a href="module-Eleven-Main.html#_doVisits"><code>_doVisits()</code></a> which does the actual work for the
+<a href="module-Eleven-Compile.html#compile"><code>compile()</code></a> build action.
+The construction still supports <code>dump</code> and <code>run</code> rules to display the tree and
+immediately run the executable returned by <a href="module-Eleven-Compile.html#compile"><code>compile()</code></a>.</p>
+<p>The grammar for this example starts with:</p>
+<pre class="prettyprint source"><code>compile:  expr;
+expr:     add | subtract | multiply | divide | power
+          | minus | '(' expr ')' | number;
+</code></pre>
+<p>The precedence table,
+<code>expr</code>,
+and the remaining rules are unchanged from <a href="../?mode=stack&amp;eg=11/02">from example 11/02</a>.</p>
+<p><a href="../?mode=stack&amp;eg=11/10">In example 11/10</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>press <span class='c-parse'></span> to create the executable, and</li>
+<li>press <span class='c-run'></span> to execute the generated code.</li>
+<li>Insert <code>dump</code> between the <code>compile</code> and <code>expr</code> rules to display the expression tree.</li>
+<li>Add a regular expression such as <code>/./</code> to the call to
+<a href="module-Eleven-Compile.html"><code>Compile()</code></a> to trace code generation,
+i.e., display the successive last addresses and then dump code memory.</li>
+<li>Add <code>run</code> as the start rule to immediately execute the generated code:</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+[ 'subtract' [ 'add' [ 'number' 1 ].1 ...
+[ 'number' ].1 returns 1
+[ 'number' ].1 returns 2
+  ...
+[ 'subtract' ] returns 20
+0: memory => this.Push(1)(memory)
+1: memory => this.Push(2)(memory)
+  ...
+19: memory => this.Subtract(memory)
+[ -10 ]
+</code></pre>
+<h4 id="compiling-a-little-language">Compiling a Little Language</h4>
+<p><a href="../?mode=stack&amp;eg=11/11">Example 11/11</a> extends code generation to
+comparisons,
+variables,
+constrol structures,
+and a few other statements.
+It reuses the grammar and build actions <a href="../?mode=stack&amp;eg=11/04">from example 11/04</a>.
+The <span class='a-actions'></span> contains the compiler for a little language:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // mix-in to generate stack machine code for comparisons
+  const Code_Cmps = ...
+
+  // mix-in to generate stack machine code for names
+  const Code_Names = ...
+
+  // mix-in to generate stack machine code for statements
+  const Code_Stmts = ...
+
+    // builder and code generator for a little language
+    return Eleven.Compile(
+             Eleven.Main(Eleven.Build_Stmts(
+                           Eleven.Build_Names(
+                             Eleven.Symbols(
+                               Eleven.Build_Cmps(
+                                 Eleven.Build_Number(Eleven.Build)))))),
+             Code_Stmts(
+               Code_Names(
+                 Code_Cmps(
+                   Eleven.Symbols(
+                     Eleven.Code_Number(Eleven.Code))))));
+  }) ()
+</code></pre>
+<p>Code generation for comparisons is implemented
+using <a href="module-Eleven-Code.html#_postfix"><code>_postfix()</code></a>:</p>
+<pre class="prettyprint source"><code>const Code_Cmps = superclass => class extends superclass {
+  // [ 'eq' a b ]
+  eq (node) { return this._postfix(node, 'Eq'); }
+  ...
+</code></pre>
+<p>The necessary instructions were implemented in <a href="module-Six-Machine11.html"><code>Six.Machine11</code></a>
+which the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Code_Cmps.html"><code>Code_Cmps()</code></a> has to request:</p>
+<pre class="prettyprint source"><code>  // [override] use Six.Machine11
+  get Machine () { return this.#Machine ??= Six.Machine11; }
+  #Machine;
+</code></pre>
+<p>This stack machine generator significantly redefines
+<a href="module-Six-Machine11.html#run"><code>run()</code></a>,
+therefore, access to the executable has to be overwritten:</p>
+<pre class="prettyprint source"><code>  // [override] size memory, check for 'trace' variable
+  get executable () { 
+    const trace = this.symbols.get('trace');
+    return this.machine.run(this.symbols.size, 0,
+      trace ? trace.ord - 1 : false);
+  }
+};
+</code></pre>
+<p>As a consequence, <a href="module-Eleven-Code_Cmps.html"><code>Code_Cmps()</code></a> silently assumes that
+the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Symbols.html"><code>Symbols()</code></a> has been included.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Code_Names.html"><code>Code_Names()</code></a>
+implements code generation for name references:</p>
+<pre class="prettyprint source"><code>const Code_Names = superclass => class extends superclass {
+  // [ 'name' name ]
+  name (node) {
+    return this.machine.gen('Load', this._alloc(node[1]).ord - 1);
+  }
+  // [ 'assign' name value ]
+  assign (node) {
+    this.visit(node[2]);
+    this.machine.gen('Store', this._alloc(node[1]).ord - 1);
+    return this.machine.gen('Pop');
+  }
+};
+</code></pre>
+<p>The instructions <code>Load</code>, <code>Store</code>, and <code>Pop</code> were implemented in <a href="module-Six-Machine11.html"><code>Six.Machine11</code></a>
+and variable addresses are managed by <a href="module-Eleven-Symbols.html#_alloc"><code>_alloc()</code></a>
+which is part of the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Symbols.html"><code>Symbols()</code></a>.</p>
+<p>Generating optimized code for statements is a bit more interesting.
+First, the <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a> <a href="module-Eleven-Code_Stmts.html"><code>Code_Stmts()</code></a>
+adds a <code>Bnzero</code> instruction
+which pops the runtime stack and branches
+if the popped value was non-zero (lines 7 to 9 below).</p>
+<pre class="prettyprint source"><code>const Code_Stmts = superclass => class extends superclass {
+  // [ extend ] add 'Bnzero' to optimize 'while' loops
+  get Instructions () {
+    return this.#Instructions ??=
+      superclass => class extends super.Instructions(superclass) {
+        /** `stack: ... bool -> ... | pc: bool? a` */
+        Bnzero (a) {
+          return memory => { if (memory.pop()) memory.pc = a; }
+        }
+      };
+  }
+  #Instructions;
+</code></pre>
+<p>Referring to <code>super.Instructions</code> ensures that the <code>Power</code> instruction
+defined by <a href="module-Eleven-Code_Number.html"><code>Code_Number()</code></a> remains available (line 5 above).</p>
+<p>Code generation itself deals with <code>'stmts'</code>, <code>'print'</code>, <code>'select'</code>, and <code>'loop'</code> nodes:</p>
+<pre class="prettyprint source"><code>  // [ 'stmts' stmt ... ]
+  stmts (node) {
+    return node.slice(1).reduce((end, stmt) => this.visit(stmt), 0);
+  }
+  // [ 'print' value ... ]
+  print (node) {
+    node.slice(1).forEach(value => this.visit(value));
+    return this.machine.gen('Print', node.length - 1);
+  }
+</code></pre>
+<p><a href="module-Eleven-Code_Stmts.html#stmts"><code>stmts()</code></a>
+visits each subtree in turn to generate code for each statement (line 3 above).
+Like all of code generation it returns the end address of the generated code.</p>
+<p><a href="module-Eleven-Code_Stmts.html#print"><code>print()</code></a>
+visits each subtree in turn to generate code to push all values onto the runtime stack (line 7)
+and then generates a <a href="module-Six-Machine11.html#Print"><code>Print</code></a> instruction (line 8)
+which will print the values together and remove them from the stack.</p>
+<pre class="prettyprint source"><code>  // [ 'select' expr stmt stmt? ]
+  select (node) {
+    const a = this.visit(node[1]);         //      cond
+    this.machine.code.push(null);          // a:   Bzero b
+    let b = this.visit(node[2]), end = b;  //      then
+    if (node.length > 3) {                 // b:end:
+      this.machine.code.push(null);    //          Branch end
+      end = this.visit(node[3]);           // b:   else
+                                           // end:
+      this.machine.code[b ++] = this.machine.ins('Branch', end);
+    }
+    this.machine.code[a] = this.machine.ins('Bzero', b); // fixup
+    return end;
+  }
+</code></pre>
+<p><a href="module-Eleven-Code_Stmts.html#select"><code>select()</code></a>
+visits the first subtree to generate code for the condition of an <code>if</code> statement (line 3 above),
+leaves room for a conditional branch (line 4),
+and visits the second subtree to generate code for the <code>then</code> part (line 5).
+If there is no <code>else</code> part there is only one repair:
+the conditional branch has to bypass the <code>then</code> part (line 12).
+Otherwise
+there has to be room for an unconditional branch (line 7)
+followed by the code for the <code>else</code> part generated by a visit to the third subtree (line 8).
+In this case there are two repairs:
+the conditional branch has to reach the <code>else</code> part (line 10)
+and the unconditional branch has to bypass the <code>else </code> part (line 12).</p>
+<p>Either way, <a href="module-Eleven-Code_Stmts.html#select"><code>select()</code></a> returns the next code address (line 13).
+The comments above indicate with symbolic labels such as <code>a:</code>, <code>b:</code>, etc.,
+how convenient this is to generate the branch instructions
+for control structures.</p>
+<p><a href="module-Eleven-Code_Stmts.html#select"><code>select()</code></a>
+generates the same code <a href="../?eg=06/11">as example 6/11</a>
+but the tree representation collects branch address management into a single method
+rather than having to distribute it over a number of rules and actions.</p>
+<pre class="prettyprint source"><code>  // [ 'loop' expr stmt ]
+  loop (node) {
+    const a = this.machine.code.push(null) - 1,  // a:   Branch b
+      b = this.visit(node[2]);                   // a+1: stmt
+    this.visit(node[1]);                         // b:   cond
+    this.machine.code[a] = this.machine.ins('Branch', b); // fixup
+    return this.machine.gen('Bnzero', a + 1);    //      Bnzero a+1
+  }
+};
+</code></pre>
+<p>The tree representation makes it possible for <a href="module-Eleven-Code_Stmts.html#loop"><code>loop()</code></a>
+to generate code for the loop body (line 4 above) ahead of the code for the condition (line 5).
+An unconditional <a href="module-Six-Machine11.html#Branch"><code>Branch</code></a> instruction
+is inserted <em>before</em> the loop body (line 6) and is executed just once to initially transfer
+control to the condition.
+The conditional <a href="module-Eleven-Code_Stmts.html#Instructions"><code>Bnzero</code></a> instruction
+follows the condition (line 7) and transfers control each time back to the loop body.</p>
+<p>If the condition is false initially it takes two branch instruction cycles
+(rather than one <a href="../?eg=06/11">in example 6/11</a>) to bypass the loop,
+but once the loop takes place almost half the branch instruction cycles are saved!</p>
+<p><a href="../?mode=stack&amp;eg=11/11">In example 11/11</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>press <span class='c-parse'></span> to create the executable
+for <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>:</li>
+</ul>
+<pre class="prettyprint source"><code>trace = -1;
+input x, y;
+while x &lt;> y do
+  if x > y then
+    trace = 1; x = x - y; trace = -1
+  else y = y - x
+  fi
+od;
+print x
+</code></pre>
+<ul>
+<li>Add a regular expression such as <code>/./</code> to the call to
+<a href="module-Eleven-Compile.html"><code>Compile()</code></a> to trace code generation,
+i.e., display the successive last addresses and then dump code memory.</li>
+<li>Check out the <code>loop</code> optimization:</li>
+</ul>
+<pre class="prettyprint source"><code>  ...
+10: memory => this.Branch(33)(memory)
+11: memory => this.Load(1)(memory)      // if x > y
+12: memory => this.Load(2)(memory)
+13: memory => this.Gt(memory)
+14: memory => this.Bzero(28)(memory)
+  ... then ...
+27: memory => this.Branch(33)(memory)
+  ... else ...
+33: memory => this.Load(1)(memory)      // while x &lt;> y
+34: memory => this.Load(2)(memory)
+35: memory => this.Ne(memory)
+36: memory => this.Bnzero(11)(memory)
+  ...
+</code></pre>
+<h4 id="compiling-a-typed-little-language">Compiling a Typed Little Language</h4>
+<p><a href="../?mode=stack&amp;eg=11/12">Example 11/12</a>
+reuses the grammar,
+tree building actions,
+and type checker <a href="../?mode=stack&amp;eg=11/08">from example 11/08</a>
+and extends stack machine and code generation <a href="../?mode=stack&amp;eg=11/11">from example 11/11</a>
+to produce the last compiler in this book.
+The <span class='a-actions'></span> contains the compiler for a typed little language:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  // additional mix-ins to generate code for Boolean expressions
+  ...
+  // builder, type checker, and code generator for a typed little language
+  return Eleven.Compile(Eleven.Main(Eleven.Build_Dcl(
+                          Eleven.Build_Stmts(
+                            Eleven.Build_Names(
+                              Eleven.Symbols(
+                                Eleven.Build_Cast(
+                                  Eleven.Build_String(
+                                    Eleven.Build_Bool(
+                                      Eleven.Build_Cmps(
+                                        Eleven.Build_Number(Eleven.Build)))))))))),
+                        Eleven.Check_Dcl(
+                          Eleven.Check_Stmts(
+                            Eleven.Check_Names(
+                              Eleven.Symbols(
+                                Eleven.Check_Cast(
+                                  Eleven.Check_String(
+                                    Eleven.Check_Bool(
+                                      Eleven.Check_Cmps(
+                                        Eleven.Check_Number(Eleven.Check))))))))),
+                        Code_Dcl(
+                          Eleven.Code_Stmts(
+                            Eleven.Code_Names(
+                              Code_Cast(
+                                Code_String(
+                                  Code_Bool(
+                                   Eleven.Code_Cmps(
+                                     Eleven.Symbols(
+                                       Eleven.Code_Number(Eleven.Code))))))))));
+}) ()
+</code></pre>
+<p>The binary Boolean operations are a bit tricky:
+<a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation" title="short circuit evaluation">short-circuit evaluation</a> turns them into
+something akin to control structures but they still have to push a value onto the runtime stack:</p>
+<pre class="prettyprint source"><code>const Code_Bool = superclass => class extends superclass {
+  // [ 'or' a b ]
+  or (node) {
+    this.visit(node[1]);                        //    push a
+    const x = this.machine.code.push(null) - 1; // x: IfTrue y
+    this.machine.gen('Pop');                    //    pop a
+    const y = this.visit(node[2]);              //    push b
+                                                // y:
+    this.machine.code[x] = this.machine.ins('IfTrue', y); // fixup
+    return y;
+  }
+</code></pre>
+<p><a href="module-Eleven-Code_Bool.html#or"><code>or()</code></a> generates code to evaluate the left operand (line 4 above)
+and leaves room for a branch instruction (line 5).
+If the left operand leaves <code>false</code> on top of the runtime stack,
+this value has to be removed (line 6)
+and there has to be code to evaluate the right operand (line 7)
+which will leave the ultimate result of the <code>or</code> operation on the stack.
+Therefore, the branch instructions <code>IfTrue</code> and <code>IfFalse</code>
+should check the value on the stack but not remove it:</p>
+<pre class="prettyprint source"><code>  // [extend] add short-circuit branches and 'Not'
+  get Instructions () {
+    return this.#Instructions ??=
+      superclass => class extends super.Instructions(superclass) {
+        /** `stack: ... bool -> ... bool | pc: bool? a` */
+        IfTrue (a) {
+          return memory => { if (memory.at(-1)) memory.pc = a; };
+        }
+        /** `stack: ... bool -> ... bool | pc: !bool? a` */
+        IfFalse (a) {
+          return memory => { if (!memory.at(-1)) memory.pc = a; };
+        }
+        /** `stack: ... a -> ... !a` */
+        Not (memory) { memory.splice(-1, 1, !memory.at(-1)); }
+      };
+  }
+  #Instructions;
+</code></pre>
+<p><a href="module-Eleven-Code_Bool.html#and"><code>and()</code></a> follows the same pattern as
+<a href="module-Eleven-Code_Bool.html#or"><code>or()</code></a> but uses <code>IfFalse</code> instead:</p>
+<pre class="prettyprint source"><code>  // [ 'and' a b ]
+  and (node) {
+    this.visit(node[1]);                        //    push a
+    const x = this.machine.code.push(null) - 1; // x: IfFalse y
+    this.machine.gen('Pop');                    //    pop a
+    const y = this.visit(node[2]);              //    push b
+                                                // y:
+    this.machine.code[x] = this.machine.ins('IfFalse', y); // fixup
+    return y;
+  }
+</code></pre>
+<p>The comments again illustrate the advantage of
+generating control structure code in a single method for a tree node.</p>
+<pre class="prettyprint source"><code>  // [ 'not' a ]
+  not (node) { return this._postfix(node, 'Not'); }
+</code></pre>
+<p><a href="module-Eleven-Code_Bool.html#not"><code>not()</code></a> uses
+<a href="module-Eleven-Code.html#_postfix"><code>_postfix()</code></a> to
+generate code to push a Boolean value onto the stack and generates <code>Not</code> to complement it.</p>
+<pre class="prettyprint source"><code>  // [ 'bool' a ]
+  bool (node) {
+    if (typeof node[1] != 'boolean')
+      throw `[ 'bool' ${node[1]} ]: not boolean`;
+    return this.machine.gen('Push', node[1]);
+  }
+};
+</code></pre>
+<p>Finally,
+<a href="module-Eleven-Code_Bool.html#bool"><code>bool()</code></a> has a Boolean literal in the node
+and generates <code>Push</code>
+to push it onto the runtime stack.</p>
+<p>The rest of the additional code generation for the typed little language follows the usual pattern.
+<a href="module-Eleven-Code_Cast.html#cast"><code>cast()</code></a> visits the value subtree to generate code
+to push the value onto the stack (line 4 below) and generates a <code>Cast</code> instruction:</p>
+<pre class="prettyprint source"><code>const Code_Cast = superclass => class extends superclass {
+  // [ 'cast' type b ]
+  cast (node) {
+    this.visit(node[2]);
+    return this.machine.gen('Cast', `'${node[1]}'`, `'${node[2].type}'`);
+  }
+  // [extend] add 'Cast' instruction
+  get Instructions () {
+    return this.#Instructions ??=
+      superclass => class extends super.Instructions(superclass) {
+        /** `stack: ... a -> ... cast a` */
+        Cast (to, from) {
+          let cast;
+          switch (to + '-' + from) {
+          case 'bool-number':   cast = x => !!x; break;
+          case 'bool-string':   cast = x => /^\s*true\s*$/i.test(x); break;
+          case 'number-bool':
+          case 'number-string': cast = Number; break;
+          case 'string-bool':
+          case 'string-number': cast = String; break;
+          default: throw `Cast ${to} ${from}: illegal cast`;
+          }
+          return memory => 
+            memory.splice(-1, 1, cast(memory.at(-1)));
+        }
+      };
+  }
+  #Instructions;
+};
+</code></pre>
+<p>The <code>Cast</code> instruction is added to the stack machine generator as usual (lines 8 to 28 above).
+It selects one of several functions — based on on JavaScript conversions —
+depending on the combination of <code>to</code> and <code>from</code> types (lines 13 to 20)
+and creates an instruction which applies the selected function to the top of the
+runtime stack (line 24).
+The implementation verifies that the function is only applied to a value
+of the intended JavaScript type (line 21).</p>
+<p>Code generation for string nodes again uses <a href="module-Eleven-Code.html#_postfix"><code>_postfix()</code></a>
+but there have to be new machine instructions:</p>
+<pre class="prettyprint source"><code>const Code_String = superclass => class extends superclass {
+  // [ 'concat' value value ]
+  concat (node) { return this._postfix(node, 'Concat'); }
+  // [ 'len' value ]
+  len (node) { return this._postfix(node, 'Len'); }
+  // [ 'string' literal ]
+  string (node) {
+    if (typeof node[1] != 'string')
+      throw `[ 'string' ${node[1]} ]: not string`;
+    return this.machine.gen('Push', this._escape(node[1]));
+  }
+  // [ 'input' prompt? default? ]
+  input (node) {
+    return this.machine.gen('InputString',
+      this._escape(node[1] ?? &quot;''&quot;), this._escape(node[2] ?? &quot;''&quot;));
+  }
+  // [extend] add 'InputString', 'Len', and 'Concat' instructions
+  get Instructions () {
+    return this.#Instructions ??=
+      superclass => class extends super.Instructions(superclass) {
+        /** `stack: ... a b -> ... a+b` */
+        Concat (memory) {
+          memory.splice(-2, 2, memory.at(-2) + memory.at(-1));
+        }
+        /** `stack: ... a -> ... a.length` */
+        Len (memory) { 
+          memory.splice(-1, 1, memory.at(-1).length);
+        }
+        /** `stack: ... -> ... val` */
+        InputString (prmpt, dflt) { 
+          return memory => memory.push(prompt(prmpt, dflt));
+        }
+      };
+  }
+  #Instructions;
+</code></pre>
+<p><a href="module-Eleven-Code_String.html#concat"><code>concat()</code></a> and
+<a href="module-Eleven-Code_String.html#len"><code>len()</code></a> call
+<a href="module-Eleven-Code.html#_postfix"><code>_postfix()</code></a> to generate code (lines 3 and 5 above)
+using the new instructions
+<a href="module-Eleven-Code_String.html#Instructions"><code>Concat</code></a> (line 22) and
+<a href="module-Eleven-Code_String.html#Instructions"><code>Len</code></a> (line 26).
+It is assumed that a string requires just one memory slot, just like a number.
+Therefore,
+<a href="module-Eleven-Code_String.html#string"><code>string()</code></a> can use <code>Push</code> to push a string constant
+onto the runtime stack (line 10).
+Finally, <a href="module-Eleven-Code_String.html#input"><code>input()</code></a> generates an
+<a href="module-Eleven-Code_String.html#Instructions"><code>InputString</code></a> instruction (line 14)
+which is implemented using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" title="prompt()"><code>prompt()</code></a> (line 30).</p>
+<p>There is one glitch, however.
+The method <a href="module-Six-Machine10.html#gen"><code>gen()</code></a> was introduced in
+<a href="tutorial-06-compile.html#stack-evaluation">chapter six</a>.
+It uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a> so that the instructions can be displayed with meaningful names and argument values.
+Therefore, string arguments have to be escaped before they are handed to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a>.
+Assuming that backslash is only needed to escape backslashes, single quotes, and newlines,
+this can be handled by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace" title="replace()"><code>replace()</code></a>:</p>
+<pre class="prettyprint source"><code>  _escape (s) { return `'${s.replace(/['\n\\]/g, '\\$&')}'`; }
+</code></pre>
+<p>A more comprehensive method would be <a href="module-Base-Tuple.html#escape"><code>Tuple.escape()</code></a>.</p>
+<p>The stack machine's memory contains the variable values and the runtime stack.
+JavaScript will distinguish numbers and Boolean values for a trace or a memory dump.
+However, here too, string values need to be escaped:</p>
+<pre class="prettyprint source"><code>  get Machine () {
+    const escape = this._escape.bind(this);
+    return this.#Machine ??= class extends super.Machine {
+        /** Show strings in memory. */
+        get Memory () {
+            return this.#Memory ??= class extends super.Memory {
+              toString () {
+                return '[ ' + this.map(
+                    v => typeof v == 'string' ? escape(v) : v
+                  ).join(' ') + ' ]';
+              }
+            };
+        }
+        #Memory;
+      };
+  }
+  #Machine;
+};
+</code></pre>
+<p><a href="module-Six-Machine11_Memory.html"><code>Memory</code></a> is defined as a subclass of <code>Array</code>
+and <code>toString()</code> needs to be replaced (line 7 to 11 above).
+The actual work can be handled by <a href="module-Eleven-Code_String.html#_escape"><code>_escape()</code></a>;
+however, <a href="module-Eleven-Code_String.html#_escape"><code>_escape()</code></a> is a method in a <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-in</a>
+and cannot be <code>static</code> because there is no class name.
+It can be used as a function with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind"><code>bind()</code></a> (line 2).</p>
+<p>Finally, the mix-in <a href="module-Eleven-Code_Dcl.html"><code>Code_Dcl</code></a> handles <code>'block'</code> and <code>'dcl'</code> nodes
+and requires no new instructions:</p>
+<pre class="prettyprint source"><code>const Code_Dcl = superclass => class extends superclass {
+  // [ 'block' dcl ... stmt ... ]
+  block (node) {
+    return node.slice(1).reduce((end, node) => this.visit(node), 0);
+  }
+  // [ 'dcl' type name ... ]
+  dcl (node) {
+    return node.slice(2).reduce((end, name) => {
+      const addr = this._alloc(name).ord - 1;
+      switch (node[1]) {
+      case 'number': return this.machine.code.length;
+      case 'bool':   this.machine.gen('Push', false); break;
+      case 'string': this.machine.gen('Push', &quot;''&quot;); break;
+      }
+      this.machine.gen('Store', addr);
+      return this.machine.gen('Pop');
+    }, 0);
+  }
+};
+</code></pre>
+<p>Just as in the type checker,
+<a href="module-Eleven-Code_Dcl.html#block"><code>block()</code></a> visits each subtree in turn,
+declarations before statements (line 4 above).</p>
+<p><a href="module-Eleven-Code_Dcl.html#dcl"><code>dcl()</code></a> assumes that there is a symbol table
+and calls <a href="module-Eleven-Symbols.html#_alloc"><code>_alloc()</code></a> for each name (line 9).
+This will allocate a memory slot for new names if there is no type checking.
+Memory is initialized to zero, but variables of other types are initialized
+to <code>false</code> and empty strings, respectively (lines 12 and 13).</p>
+<p><a href="../?mode=stack&amp;eg=11/12">In example 11/12</a></p>
+<ul>
+<li>the very first button should show <span class='t-mode stack'></span>.
+If not, click it until it does.</li>
+<li>Press <span class='c-new'></span> to represent and check the grammar,</li>
+<li>press <span class='c-parse'></span> to create the executable
+for the typed version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> used before, and</li>
+<li>press <span class='c-100'></span> to run the program.</li>
+</ul>
+<p>The execution output shows how zero-filled memory is allocated for
+the <code>string</code> variable <code>x</code>, the <code>number</code> variable <code>y</code>, and the <code>bool</code> variable <code>eq</code>,
+and how the variables <code>x</code> and <code>eq</code> are initialized to values of proper type:</p>
+<pre class="prettyprint source"><code>> memory = run(null, 100)
+[ 0 0 0 ]
+[ 0 0 0 '' ] 0: memory => this.Push('')(memory)
+[ '' 0 0 '' ] 1: memory => this.Store(0)(memory)
+[ '' 0 0 ] 2: memory => this.Pop(memory)
+[ '' 0 0 false ] 3: memory => this.Push(false)(memory)
+[ '' 0 false false ] 4: memory => this.Store(2)(memory)
+[ '' 0 false ] 5: memory => this.Pop(memory)
+[ '' 0 false '36' ] 6: memory => this.InputString('x', '36')(memory)
+[ '36' 0 false '36' ] 7: memory => this.Store(0)(memory)
+[ '36' 0 false ] 8: memory => this.Pop(memory)
+  ...
+[ '18' 18 true 'Greatest common divisor:' ] 48: memory => this.Push('Greatest common divisor:')(memory)
+[ '18' 18 true 'Greatest common divisor:' '18' ] 49: memory => this.Load(0)(memory)
+Greatest common divisor: 18
+[ '18' 18 true ] 50: memory => this.Print(2)(memory)
+[ '18' 18 true ]
+</code></pre>
+<p>From that point on until the end of execution the types of the variables' memory cells
+don't change anymore.</p>
+<h4 id="and-more...">And More...</h4>
+<p><a href="../?mode=stack&amp;eg=11/12">In example 11/12</a>
+the nonsensical program</p>
+<pre class="prettyprint source"><code>if not trace or false then print 'ok' fi; bool trace
+</code></pre>
+<p>is compiled into</p>
+<pre class="prettyprint source"><code>0: memory => this.Push(false)(memory)     // bool trace = false
+1: memory => this.Store(0)(memory)
+2: memory => this.Pop(memory)
+3: memory => this.Load(0)(memory)         // if not trace
+4: memory => this.Not(memory)
+5: memory => this.IfTrue(8)(memory)       //    or
+6: memory => this.Pop(memory)
+7: memory => this.Push(false)(memory)     //    false
+8: memory => this.Bzero(11)(memory)
+9: memory => this.Push('ok')(memory)      // then print 'ok
+10: memory => this.Print(1)(memory)
+</code></pre>
+<p>and produces the expected <code>ok</code>.
+However, the code could be optimized:
+the <code>IfTrue</code> branch at address 5 should not end up at the <code>Bzero</code> branch at address 8,
+it should directly branch into <code>then</code> at address 9.
+More generally,
+if <a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation" title="short circuit evaluation">short-circuit evaluations</a> are at the top level of a control structure
+their branches should be integrated into the control structure.</p>
+<p>An intermediate representation such as tagged nested lists has many advantages.
+Code can be optimized by moving parts of the program — e.g., the condition of <code>loop</code>.
+Branching around nested function can be avoided.
+Type checking, interpretation, and code generation can be reused
+by targeting an existing intermediate representation from a new grammar.</p>
+<p>It is all about the <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" title="separation of concerns">separation of concerns</a>:
+the frontend uses a grammar to deal with recognition,
+the intermediate language is convenient for the <a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">visitor pattern</a>
+and different processing steps such as type checking, interpretation, optimization, and code generation
+can be implemented as separate visitors.</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/One-pass_compiler" title="One-pass compiler">One-pass compilation</a> uses the semantic actions
+executed when rules are reduced
+to immediately perform type checking and interpretation or code generation, all in the same action.</p>
+</li>
+<li>
+<p>Alternatively, there can be an intermediate representation of the recognized input,
+designed to be easy to create in the actions and to process in separate passes
+for type checking, memory allocation, interpretation, code generation, optimization, etc.</p>
+</li>
+<li>
+<p>In JavaScript, trees created from nested lists with leading, unique string tags
+are easy to create because they match grammar and program structure
+and they are easy to modify in place.</p>
+</li>
+<li>
+<p>The tags can be dispatched to methods of <a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">visitor</a> classes
+which facilitates <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" title="separation of concerns">separation of concerns</a>,
+i.e., a <a href="https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm" title="divide and conquer">divide and conquer</a> approach,
+and is very similar in spirit to the way semantic actions are selected by rules.</p>
+</li>
+<li>
+<p>Dispatching tags to methods creates a loose but precise coupling,
+i.e., it is easy to replace an implementation,
+e.g., to replace an interpreter by a code generator,
+retarget a code generator, or map a language to a processor.</p>
+</li>
+<li>
+<p>Singleton objects are very useful to provide a common context,
+e.g., access to a table of symbol descriptions,
+for visits to different nodes in a tree.</p>
+</li>
+<li>
+<p>Classes can be extended to add or replace functionality;
+however, overridden methods are not deleted even if they remain unused.</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">Mix-ins</a> are a way to add methods to classes,
+e.g., to package support for subsets of nodes,
+and they can be selectively added.</p>
+</li>
+<li>
+<p>In JavaScript, one way to implement a <a href="https://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/" title="mixin how-to">mix-in</a>
+is as a function which extends a class — creating an anonymous subclass.
+In this case, the new methods close over the function parameters,
+i.e., different invocations of the mix-in can create different methods.</p>
+</li>
+<li>
+<p>The technique can lead to a set of building blocks for compilers;
+however, creating a flexible and comprehensive architecture is still a challenge.</p>
+</li>
+</ul>
+<h4 id="previous%3A-%7B%40tutorial-10-bottom-up%7D">Previous: <a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

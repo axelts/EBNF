@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 4. Recognizing Sentences</title -->
+	<title>4. Recognizing Sentences</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>4. Recognizing Sentences</h2>
+</header>
+
+<article>
+    <h4 id="what's-in-a-sentence%3F">What's in a Sentence?</h4>
+<h4 id="check-before-you-call!">Check Before You Call!</h4>
+<hr>
+<p><a href="tutorial-02-grammars.html">Chapter two</a> explained how to write grammars
+and <a href="tutorial-03-scanner.html">chapter three</a> explained
+how to extract terminals from input.
+This chapter discusses how to decide if an input string,
+i.e., a sequence of terminals delivered by lexical analysis,
+is a sentence of a language described by a grammar.
+<a href="tutorial-01-overview.html">Chapter one</a> called this <em>syntax analysis</em>
+and it should result in a <em>syntax tree</em> for the sentence.</p>
+<p>A grammar contains all the information required to create
+a <a href="module-EBNF-Parser.html"><code>Parser</code></a> object
+with a method <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a>
+which implements syntax analysis — as long as the grammar is up to the job.
+This chapter also shows how to check a grammar
+to see if it can be used to create a <a href="module-EBNF-Parser.html"><code>Parser</code></a>.</p>
+<p>Both, this implementation of syntax analysis and the corresponding grammar check,
+are very intuitive and the technique is called <a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a> —
+left-to-right parsing with leftmost derivation.
+<a href="tutorial-10-bottom-up.html">Chapter 10</a> discusses <a href="https://en.wikipedia.org/wiki/Simple_LR_parser" title="SLR parser">SLR(1)</a>
+— left-to-right with rightmost derivation —
+an approach
+which is not quite as intuitive but which can use a larger class of grammars.</p>
+<h3 id="trees">Trees</h3>
+<p>Here is a grammar for a sum of at least two, optionally signed numbers:</p>
+<pre class="prettyprint source"><code>sum: term [{ more }];
+more: '+' term | '-' term;
+term: [ '+' | '-' ] Number | '(' sum ')';
+</code></pre>
+<p>The following input is in fact a sentence:</p>
+<pre class="prettyprint source"><code>1 - (2 + - 3)
+</code></pre>
+<p>Arithmetic expressions such as this sum
+are often represented as expression trees
+where branch nodes are labeled with operators
+and leaf nodes are the numbers and variables in the expression.</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/sum-operators.svg' alt='arithmetic tree'> </td>
+    </tr>
+  </table>
+</div>
+<p>The levels of such an expression tree imply precedence, i.e., evaluation order;
+parentheses will not appear in an expression tree.</p>
+<p>Similarly, we can visualize the rules of a grammar as trees.
+Here is <code>sum</code>:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-sum.svg' alt='rule sum'> </td>
+    </tr>
+  </table>
+</div>
+<p>Recall that the right-hand side of a rule such as <code>sum</code> consists of one or more alternatives.
+Each of these is a sequence.
+In this case there is only one
+and it consists of a reference <code>term</code> to another rule
+and something in braces to be repeated one or more times.</p>
+<p>Braces, in turn, contain alternatives, and each of those is again a sequence.
+In this case there is one alternative,
+namely a sequence consisting of a reference <code>more</code> to another rule.
+Here is the tree for the rule <code>more</code>:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-more.svg' alt='rule more'> </td>
+    </tr>
+  </table>
+</div>
+<p><code>more</code> has two alternatives.
+Each must again be a sequence.
+One contains the literal <code>'+'</code>, the other contains <code>'-'</code>,
+and each sequence then references the third rule, <code>term</code>:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-term.svg' alt='rule term'> </td>
+    </tr>
+  </table>
+</div>
+<p><code>term</code> also has two alternative sequences.
+One contains brackets with signs and a <code>Number</code> token,
+the other contains literals with parentheses enclosing a reference to a <code>sum</code>.</p>
+<p>Brackets indicate something optional and contain alternatives, just as braces do.
+In this case there are two sequences and each only contains a literal with a sign.</p>
+<h3 id="recognition">Recognition</h3>
+<p>For the purpose of recognition, rules can be viewed as functions.
+The diagrams suggest that the rule trees consist of objects
+which belong to a small set of classes
+each of which can have methods.</p>
+<p>At the top level, the <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method
+of the  <a href="module-EBNF-Parser.html"><code>Parser</code></a> object
+generated by the <a href="module-EBNF-Grammar.html#parser"><code>parser()</code></a>
+method from the grammar delegates the recognition problem to the start rule <code>sum</code>
+by calling a <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> method on the
+<a href="module-EBNF-Rule.html"><code>Rule</code></a> object which is the root of the tree:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-sum.svg' alt='rule sum'> </td>
+    </tr>
+  </table>
+</div>
+<p>Within the <code>sum</code> rule, there is only one alternative
+and that sequence delegates to its first element,
+which references and delegates to the rule <code>term</code>:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-term.svg' alt='rule term'> </td>
+    </tr>
+  </table>
+</div>
+<p><code>term</code> has two alternatives — time to look at the first terminal
+provided by lexical analysis.
+The proposed sentence is</p>
+<pre class="prettyprint source"><code>1 - (2 + - 3)
+</code></pre>
+<p>and it starts with <code>1</code>.
+This <code>Number</code> only fits the first alternative of <code>term</code>,
+and only after the optional part of the sequence is skipped.</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/parse-1.svg' alt='accept 1'> </td>
+    </tr>
+  </table>
+</div>
+<p>We are on our way to building the syntax tree
+which will prove that the input is a sentence.
+The process can be viewed in <a href="../?eg=04/01">example 4/01</a>:</p>
+<ul>
+<li>
+<p>Prepare the grammar by pressing <span class='c-new'></span>
+and press <span class='c-scan'></span>
+to see what tuples lexical analysis creates.</p>
+</li>
+<li>
+<p>Next toggle <span class='t-lookahead'></span>
+and press <span class='c-parse'></span>
+to watch how syntax analysis,
+i.e., the <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method
+of the <a href="module-EBNF-Parser.html"><code>Parser</code></a> object
+and the <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> methods in the rule tree,
+consume the tuples — one up front, and a next one whenever
+syntax analysis reaches the current terminal:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>> g.config.lookahead = true
+> g.parser().parse(program)
+parser lookahead: (1) &quot;1&quot; Number
+Number lookahead: (1) '-'
+'-' lookahead: (1) '('
+'(' lookahead: (1) &quot;2&quot; Number
+Number lookahead: (1) '+'
+'+' lookahead: (1) '-'
+'-' lookahead: (1) &quot;3&quot; Number
+Number lookahead: (1) ')'
+')' lookahead: end of input
+</code></pre>
+<p>Back in the <code>sum</code>, after <code>term</code> has found <code>Number</code> <code>1</code>,
+the sequence advances to the next element
+which requires finding <code>more</code> one or more times:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-more.svg' alt='rule more'> </td>
+    </tr>
+  </table>
+</div>
+<p>While there are two alternatives,
+the next input, literal <code>'-'</code>, only fits the second alternative
+and we get a little further in building the parse tree:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/parse-1-.svg' alt='accept 1 -'> </td>
+    </tr>
+  </table>
+</div>
+<p>Syntax analysis continues, the <code>parse()</code> methods keep calling.
+The next input is literal <code>'('</code> which rule <code>term</code> can match with the second alternative:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/parse-1-lpar.svg' alt='accept 1 - lpar'> </td>
+    </tr>
+  </table>
+</div>
+<p>Next, the sequence in <code>term</code> calls <code>sum</code> recursively before it will eventually match
+the trailing literal <code>')'</code>.
+Here is the result,
+where the rule calls and the terminals have been colored for emphasis:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/parse-all.svg' alt='parse tree'> </td>
+    </tr>
+  </table>
+</div>
+<p>The leaf nodes are all terminals, i.e., literals or tokens,
+and they match the proposed sentence</p>
+<pre class="prettyprint source"><code>1 - (2 + - 3)
+</code></pre>
+<p>in order, i.e., we have found a parse tree and confirmed that the input is a sentence!</p>
+<p>Strictly speaking,
+the diagram only shows that the input is a sequence of terminals (turquoise nodes)
+which are the leaves of an ordered tree.
+The definition of a syntax tree in <a href="tutorial-01-overview.html">chapter one</a> requires
+that each branch node is labeled with a rule name
+and that the rule name and the sequence of subtrees (branch nodes and leaves)
+correspond to an ordered pair among the rules of the grammar.
+<a href="tutorial-02-grammars.html">Chapter two</a> extended the grammar notation
+and the extensions account for the white nodes in the diagram —
+sequences and the iteration constructs with brackets <code>[ opt ]</code> and braces
+<code>{ some }</code>.
+Still, the red and white branch nodes interpreted together as extended notation
+must appear in the grammar.</p>
+<h3 id="parser-and-parse()"><a id='parser-and-parse'></a> <code>Parser</code> and <code>parse()</code></h3>
+<p>How do the <a href="module-EBNF-Parser.html"><code>Parser</code></a>'s <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method
+and the other <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> methods work?
+The grammar diagrams in the preceding section showed that the job can be
+elegantly distributed among the nodes in the grammar trees for the rules <code>sum</code>,
+<code>more</code>, and <code>term</code>:</p>
+<div class='diagram'>
+  <table>
+    <col style='width: 35%'>
+    <col style='width: 65%'>
+    <tr>
+      <td> <img src='04/rule-sum.svg' alt='rule sum'> </td>
+      <td> <img src='04/rule-more.svg' alt='rule more'> </td>
+    </tr>
+    <tr>
+      <td colspan='2'> <img src='04/rule-term.svg' alt='rule term'> </td>
+    </tr>
+  </table>
+</div>
+<p>The colors suggest that the nodes belong to the following classes:</p>
+<table>
+<thead>
+<tr>
+<th>object</th>
+<th>class</th>
+<th>purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="04/Rule.svg" alt="Rule"></td>
+<td><a href="module-EBNF-Rule.html"><code>Rule</code></a></td>
+<td>represents a rule with a name and sequences as alternative descendants.</td>
+</tr>
+<tr>
+<td><img src="04/Seq.svg" alt="Seq"></td>
+<td><a href="module-EBNF-Seq.html"><code>Seq</code></a></td>
+<td>represents a sequence with terminals, rule references, braces, and brackets as descendants.</td>
+</tr>
+<tr>
+<td><img src="04/Ref.svg" alt="NT"></td>
+<td><a href="module-EBNF-NT.html"><code>NT</code></a></td>
+<td>represents a reference to a rule.</td>
+</tr>
+<tr>
+<td><img src="04/Some.svg" alt="Some"></td>
+<td><a href="module-EBNF-Some.html"><code>Some</code></a></td>
+<td>represents braces with sequences as alternative descendants which are used one or more times.</td>
+</tr>
+<tr>
+<td><img src="04/Lit.svg" alt="Lit"></td>
+<td><a href="module-EBNF-Lit.html"><code>Lit</code></a></td>
+<td>represents a literal.</td>
+</tr>
+<tr>
+<td><img src="04/Token.svg" alt="Token"></td>
+<td><a href="module-EBNF-Token.html"><code>Token</code></a></td>
+<td>represents a token.</td>
+</tr>
+<tr>
+<td><img src="04/Opt.svg" alt="Opt"></td>
+<td><a href="module-EBNF-Opt.html"><code>Opt</code></a></td>
+<td>represents brackets with sequences as alternative descendants which are optional.</td>
+</tr>
+</tbody>
+</table>
+<p>For convenience there are two more classes:</p>
+<ul>
+<li>
+<p><a href="module-EBNF-Lit.html"><code>Lit</code></a> and <a href="module-EBNF-Token.html"><code>Token</code></a>
+extend the class <a href="module-Base-T.html"><code>T</code></a> which represents terminals in general.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Rule.html"><code>Rule</code></a>, <a href="module-EBNF-Some.html"><code>Some</code></a>,
+and <a href="module-EBNF-Opt.html"><code>Opt</code></a>
+extend the class <a href="module-EBNF-Alt.html"><code>Alt</code></a> which deals with alternative sequences in general.</p>
+</li>
+</ul>
+<p>We require that the branch nodes
+<a href="module-EBNF-Rule.html"><code>Rule</code></a>,
+<a href="module-EBNF-Seq.html"><code>Seq</code></a>,
+<a href="module-EBNF-Some.html"><code>Some</code></a>,
+and <a href="module-EBNF-Opt.html"><code>Opt</code></a>,
+always have one or more descendants,
+and that <a href="module-EBNF-Seq.html"><code>Seq</code></a>
+cannot only have <a href="module-EBNF-Opt.html"><code>Opt</code></a>
+as descendants.
+This means that every <code>parse()</code> method will eventually find <em>something</em>.</p>
+<p>Syntax analysis is implemented as <code>parse()</code> methods in six of the nine classes,
+the remaining three, <a href="module-EBNF-Opt.html"><code>Opt</code></a>, <a href="module-EBNF-Lit.html"><code>Lit</code></a>,
+and <a href="module-EBNF-Token.html"><code>Token</code></a>, simply inherit.
+The methods share a <a href="module-EBNF-Parser.html"><code>Parser</code></a> object which
+owns the input tuples; the <a href="module-EBNF-Parser.html#next"><code>next()</code></a> method
+is called to move on to the next tuple and it can trace lookahead.
+The actual implementation of syntax analysis is fairly simple:</p>
+<ul>
+<li>
+<p>The <a href="module-EBNF-Grammar.html"><code>Grammar</code></a>'s
+<a href="module-EBNF-Grammar.html#parser"><code>parser()</code></a> method creates the
+<a href="module-EBNF-Parser.html"><code>Parser</code></a> object and it's
+<a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method is the function
+which will be called with the input string
+to create the tuples,
+check that the start rule can handle the first tuple,
+and call the <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> method for the start rule.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Rule.html#parse"><code>parse()</code> for a <code>Rule</code></a> delegates to the superclass —
+<a href="tutorial-05-lists.html">chapter five</a> explains what else the method can do
+to create a convenient representation of the sentence.</p>
+</li>
+<li>
+<p>The superclass <a href="module-EBNF-Alt.html#parse"><code>Alt</code></a> delegates to the particular
+descendant which can actually deal with the current tuple.
+Such a descendant exists — otherwise the method calls would not have reached this point.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Some.html#parse"><code>parse()</code> for a <code>Some</code></a>, i.e., for braces,
+delegates to the superclass <a href="module-EBNF-Alt.html#parse"><code>Alt</code></a> until there is no longer a descendant
+which can deal with the current tuple —
+the <a href="#expect">next section</a> explains how this is determined.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Seq.html#parse"><code>parse()</code> for a <code>Seq</code></a> delegates to one descendant
+after another — after first checking that the descendant can handle the current tuple
+and throwing an error if not —
+with one exception:
+a descendant
+<a href="module-EBNF-Opt.html#parse"><code>Opt</code></a>
+is skipped if it cannot deal with the current tuple.</p>
+</li>
+<li>
+<p><a href="module-EBNF-NT.html#parse"><code>parse()</code> for a non-terminal</a>
+delegates to the referenced rule.</p>
+</li>
+<li>
+<p>Finally, <a href="module-EBNF-Node.html#parse"><code>parse()</code> for literals and tokens</a>
+calls the <a href="module-EBNF-Parser.html#next"><code>next()</code></a> method
+to move on to the next tuple.</p>
+</li>
+</ul>
+<p>Yes, all of this is just a lot of delegating the work
+— with the requirement to &quot;check before you call.&quot;
+<a href="module-EBNF-Alt.html#parse"><code>Alt</code></a> and <a href="module-EBNF-Seq.html#parse"><code>Seq</code></a> perform
+some traffic control and <a href="module-EBNF-Node.html#parse">literals and tokens</a>
+nudge the scanner when they are reached.</p>
+<p>The process can be observed in detail in <a href="../?eg=04/01">example 4/01</a>:</p>
+<ul>
+<li>
+<p>represent and check the grammar by pressing <span class='c-new'></span>.</p>
+</li>
+<li>
+<p>Toggle <span class='t-lookahead'></span>
+and <span class='t-parser'></span>
+and press <span class='c-parse'></span>
+to watch how syntax analysis proceeds:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>> g.config.lookahead = true
+> g.config.parse = true
+> g.parser().parse(program)
+parser lookahead: (1) &quot;1&quot; Number
+sum| Rule parse {
+sum| super(sum: term [ { more } ];) parse {
+sum| Seq(term [ { more } ]) parse {
+sum| NT(term) parse {
+  term| Rule parse {
+  term| super(term: [ '+' | '-' ] Number | '(' sum ')';) parse {
+  term| Seq([ '+' | '-' ] Number) parse {
+  term| Token(Number) parse {
+Number lookahead: (1) '-'
+  term| Token(Number) parse }: '1'
+  term| Seq([ '+' | '-' ] Number) parse }: [ null '1' ]
+  term| super(term: [ '+' | '-' ] Number | '(' sum ')';) parse }: [ null '1' ]
+  term| Rule parse }: [ null '1' ]
+sum| NT(term) parse }: [ null '1' ]
+</code></pre>
+<p>Each line of output is prefixed with the rule name which has been called,
+nested rule calls are indented.
+Each line contains the class name of the node in the rule tree
+— or <code>super</code> for a call to the superclass, e.g., <code>Rule</code> to <code>Alt</code> (line 6) —
+and the rule fragment corresponding to the node.
+If a line ends with <code>{</code> it traces a call,
+otherwise it ends with <code>}:</code> and the return value — which will be explained in <a href="tutorial-05-lists.html">chapter five</a>.</p>
+<p>The above shows in complete detail how
+the function created by the <a href="module-EBNF-Grammar.html#parser"><code>parser()</code></a> method
+calls on <code>sum</code> (line 5)
+which calls on <code>term</code> (line 9) to recognize the <code>Number</code> <code>1</code> (line 12).
+In particular, lines 12 to 14 above show that
+<a href="module-EBNF-Node.html#parse"><code>Token</code></a>
+advances to the next tuple.</p>
+<h3 id="expect"><code>expect</code></h3>
+<p>&quot;Check before you call&quot; seems like excellent advice,
+but just exactly what needs to be checked?</p>
+<p>The <code>parse()</code> methods described in <a href="#parser-and-parse">the previous section</a>
+could be implemented in an error-tolerant fashion
+so that every alternative could be tried
+before syntax analysis throws the towel when it really cannot determine
+that some input is in fact a sentence.
+This works if there is no left recursion,
+but it is horribly inefficient,
+and it would usually require to move backwards in the input
+in order to try some other alternative.</p>
+<p>Instead, each rule tree object
+contains a <a href="module-EBNF-Set.html"><code>Set</code></a>, called <code>expect</code>, of terminals,
+one of which the object wants to see as next tuple — the <em>lookahead</em> —
+when the object's <code>parse()</code> method is called.
+This can be seen in the output above and
+demonstrated in <a href="../?eg=04/01">example 4/01</a> as suggested above.</p>
+<p>Initially, the function created by the <a href="module-EBNF-Grammar.html#parser"><code>parser()</code></a> method
+sets the first lookahead up,
+and once the shared <a href="module-EBNF-Node.html#parse"><code>parse()</code></a> method
+for <a href="module-EBNF-Lit.html"><code>Lit</code></a> and <a href="module-EBNF-Token.html"><code>Token</code></a> is reached
+it calls the <a href="module-EBNF-Parser.html#next"><code>next()</code></a> method to move on
+to the next lookahead.</p>
+<p>&quot;Check before you call&quot; only allows to call <code>parse()</code> on an object
+if the current lookahead is in the object's <code>expect</code> set.</p>
+<p>Obviously, terminals expect themselves,
+i.e., <code>expect</code> for literals and tokens
+are singleton sets which can be defined during construction.
+What about the other objects in the rule tree?</p>
+<p>Naively</p>
+<ul>
+<li>
+<p>a sequence should get <code>expect</code> from its first descendant,</p>
+</li>
+<li>
+<p><code>expect</code> sets from alternative sequences should be merged,</p>
+</li>
+<li>
+<p>rules, braces and brackets, i.e., <a href="module-EBNF-Rule.html"><code>Rule</code></a>,
+<a href="module-EBNF-Some.html"><code>Some</code></a> and <a href="module-EBNF-Opt.html"><code>Opt</code></a>,
+let the superclass <a href="module-EBNF-Alt.html"><code>Alt</code></a> of alternative sequences
+worry about <code>expect</code>,</p>
+</li>
+</ul>
+<p>and we are done?</p>
+<p>Almost. Rule references, i.e., <a href="module-EBNF-NT.html"><code>NT</code></a>,
+have to take <code>expect</code> from their rules,
+and there things can get recursive...
+Therefore, computing <code>expect</code> takes two algorithms:</p>
+<ul>
+<li>
+<p><code>shallow</code> is applied to all rules, one after another,
+and proceeds along a sequence only far enough to determine <code>expect</code>
+for the sequence. It will detect (and fail for) left recursion.</p>
+</li>
+<li>
+<p><code>deep</code> is applied to the start rule, down to all descendants,
+and along each sequence to the end,
+to determine <code>expect</code> for all nodes in the entire rule tree.
+<code>deep</code> cannot fail after <code>shallow</code> succeeded,
+and it detects rules that cannot be reached from the start rule.</p>
+</li>
+</ul>
+<p>All objects representing rules have <code>expect</code> sets.
+Therefore, all classes representing rules define <code>expect</code>
+and two methods <a href="module-EBNF-Node.html#shallow"><code>shallow()</code></a> and <a href="module-EBNF-Node.html#deep"><code>deep()</code></a>.</p>
+<p>Representing <code>expect</code> is easy:
+all literal names are strings, single-quoted, and different,
+all token names are strings, not quoted, and different.
+<code>expect</code> is a JavaScript map from a name to <code>true</code> indicating presence in the set.
+For convenience, this is encapsulated in a
+dedicated class <a href="module-EBNF-Set.html"><code>Set</code></a>
+because the built-in class <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" title="Set"><code>Set</code></a> currently does not provide the operations
+needed here.</p>
+<p>The rule tree classes implement <code>shallow()</code> as follows:</p>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>shallow()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="module-EBNF-Lit.html"><code>Lit</code></a><br><a href="module-EBNF-Token.html"><code>Token</code></a></td>
+<td>set <code>expect</code> to a singleton set with the terminal's name.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Alt.html#shallow"><code>Alt</code></a></td>
+<td>delegates to all descendant sequences and merges their <code>expect</code> sets.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-NT.html#shallow"><code>NT</code></a></td>
+<td>delegates to <a href="module-EBNF-Rule.html#shallow"><code>Rule</code></a> and detects undefined rules.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Rule.html#shallow"><code>Rule</code></a></td>
+<td>marks, avoids, and complains about recursion, delegates to superclass <a href="module-EBNF-Alt.html#shallow"><code>Alt</code></a>.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Seq.html#shallow"><code>Seq</code></a></td>
+<td>proceeds from left to right merging descendant's <code>expect</code> until the descendant is not <a href="module-EBNF-Opt.html"><code>Opt</code></a>; note that we require that there will be such a descendant.</td>
+</tr>
+</tbody>
+</table>
+<p>The remaining classes <a href="module-EBNF-Opt.html"><code>Opt</code></a> and <a href="module-EBNF-Some.html"><code>Some</code></a>
+inherit from <a href="module-EBNF-Alt.html"><code>Alt</code></a>.</p>
+<p>The rule tree classes implement <code>deep()</code> as follows:</p>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>deep()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="module-EBNF-Alt.html#deep"><code>Alt</code></a></td>
+<td>needs to delegate and merge again to get to the end of all sequences.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-NT.html#deep"><code>NT</code></a></td>
+<td>delegates to <a href="module-EBNF-Rule.html#deep"><code>Rule</code></a> again and might detect more undefined rules.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Rule.html#deep"><code>Rule</code></a></td>
+<td>marks a rule as reached from the start rule, delegates to superclass <a href="module-EBNF-Alt.html#deep"><code>Alt</code></a> again to finish all sequences; recursion cannot happen.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Seq.html#deep"><code>Seq</code></a></td>
+<td>proceeds completely from <em>right to left</em> merging descendant's <code>expect</code> while the descendant is <a href="module-EBNF-Opt.html"><code>Opt</code></a>; the last <code>expect</code> is set for the sequence.</td>
+</tr>
+</tbody>
+</table>
+<p>For <a href="module-EBNF-Lit.html"><code>Lit</code></a> and <a href="module-EBNF-Token.html"><code>Token</code></a>
+there is nothing to do.
+<a href="module-EBNF-Opt.html"><code>Opt</code></a> and <a href="module-EBNF-Some.html"><code>Some</code></a>
+again inherit from <a href="module-EBNF-Alt.html"><code>Alt</code></a>.</p>
+<p>The effects of <code>shallow()</code> and <code>deep()</code> can be seen in <a href="../?eg=04/01">example 4/01</a>:</p>
+<ul>
+<li>Toggle <span class='t-shallow'></span>
+or <span class='t-deep'></span>
+and press <span class='c-new'></span>
+to watch how each algorithm proceeds.
+Note that the algorithms are only applied once — during grammar checking.</li>
+</ul>
+<p><code>shallow()</code> processes each rule, starting with <code>sum</code>:</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-sum.svg' alt='rule sum'> </td>
+    </tr>
+  </table>
+</div>
+<p>The (shortened) output shows that <code>term</code> has to be analyzed
+before the result for <code>sum</code> is known:</p>
+<pre class="prettyprint source"><code>> g = new EBNF.Grammar(grammar, tokens, { shallow: true })
+> g.check()
+sum| Rule shallow {
+sum| super(sum: term [ { more } ];) shallow {
+sum| Seq(term [ { more } ]) shallow {
+sum| NT(term) shallow {
+  term| Rule shallow {
+    ...
+  term| Rule shallow }: '+', '-', Number, '('
+sum| NT(term) shallow }: '+', '-', Number, '('
+sum| Seq(term [ { more } ]) shallow }: '+', '-', Number, '('
+sum| super(sum: term [ { more } ];) shallow }: '+', '-', Number, '('
+sum| Rule shallow }: '+', '-', Number, '('
+</code></pre>
+<p>As before, each line of output is prefixed with the rule name which has been called,
+nested rule calls are indented.
+Each line contains the class name of the node in the rule tree
+— or <code>super</code> for a call to the superclass, e.g., <code>Rule</code> to <code>Alt</code> (line 4) —
+and the rule fragment corresponding to the node.
+If a line ends with <code>{</code> it traces a call,
+otherwise it ends with <code>}:</code> and the elements of the resulting set.</p>
+<div class='diagram'>
+  <table>
+    <tr>
+      <td> <img src='04/rule-more.svg' alt='rule more'> </td>
+    </tr>
+  </table>
+</div>
+<p>The output shows that two alternative sequences have to be merged for <code>more</code>(line 11 below):</p>
+<pre class="prettyprint source"><code>more| Rule shallow {
+more| super(more: '+' term | '-' term;) shallow {
+more| Seq('+' term) shallow {
+more| Lit('+') shallow {
+more| Lit('+') shallow }: '+'
+more| Seq('+' term) shallow }: '+'
+more| Seq('-' term) shallow {
+more| Lit('-') shallow {
+more| Lit('-') shallow }: '-'
+more| Seq('-' term) shallow }: '-'
+more| super(more: '+' term | '-' term;) shallow }: '+', '-'
+more| Rule shallow }: '+', '-'
+</code></pre>
+<p>The output for <code>sum</code> also shows that <code>deep()</code> is required to compute <code>expect</code>
+for the sequence in <code>sum</code> hidden under the <code>Some</code> node at right.
+Here is the (shortened) output from <code>deep</code>:</p>
+<pre class="prettyprint source"><code>> g = new EBNF.Grammar(grammar, tokens, { deep: true })
+> g.check()
+sum| Rule deep {
+sum| super(sum: term [ { more } ];) deep {
+sum| Seq(term [ { more } ]) deep {
+sum| Opt([ { more } ]) deep {
+sum| Seq({ more }) deep {
+sum| Some({ more }) deep {
+sum| Seq(more) deep {
+sum| NT(more) deep {
+  more| Rule deep {
+      ...
+  more| NT(term) deep {
+    term| Rule deep {
+      ...
+    term| Rule deep }: '+', '-', Number, '('
+  more| NT(term) deep }: '+', '-', Number, '('
+      ...
+  more| Rule deep }: '+', '-'
+sum| NT(more) deep }: '+', '-'
+sum| Seq(more) deep }: '+', '-'
+sum| Some({ more }) deep }: '+', '-'
+sum| Seq({ more }) deep }: '+', '-'
+sum| Opt([ { more } ]) deep }: '+', '-'
+sum| NT(term) deep {
+  term| Rule deep {
+  term| Rule deep }: '+', '-', Number, '('
+sum| NT(term) deep }: '+', '-', Number, '('
+sum| Seq(term [ { more } ]) deep }: '+', '-', Number, '('
+sum| super(sum: term [ { more } ];) deep }: '+', '-', Number, '('
+sum| Rule deep }: '+', '-', Number, '('
+</code></pre>
+<p>The computation happens in lines 7 to 22 above.
+In a <a href="module-EBNF-Seq.html#deep"><code>Seq</code></a>, <code>deep()</code> proceeds from right to left,
+i.e., in this case <code>more</code> is entered in line 10 before <code>sum</code> references <code>term</code>.</p>
+<p>However, <code>more</code> depends on <code>term</code>,
+i.e., <code>term</code> will be processed in lines 14 to 16 before <code>more</code> is done in line 19.
+Later, when <code>sum</code> needs <code>term</code> in line 25,
+<code>deep()</code> does not have to enter the rule a second time.</p>
+<p>Of course, <code>deep()</code> does not change <code>expect</code> for any of the rules themselves
+— that has been computed by <code>shallow()</code>.</p>
+<h3 id="ambiguity">Ambiguity</h3>
+<p>Clearly, <code>expect</code> is essential for the &quot;check before you call&quot;
+policy of calling a <code>parse()</code> method only if the callee expects
+the next input symbol.</p>
+<p>Unfortunately, this is not the whole story as
+<a href="../?eg=04/02">example 4/02</a>
+demonstrates.
+Here, the grammar has a new start rule <code>sums</code>
+which should allow input to consist of more than one
+sum of signed numbers:</p>
+<pre class="prettyprint source"><code>sums: { sum };
+sum: term [{ more }];
+more: '+' term | '-' term;
+term: [ '+' | '-' ] Number | '(' sum ')';
+</code></pre>
+<p>The following input contains three sums:</p>
+<pre class="prettyprint source"><code>1 - (2 + - 3)
+4 + 5
+- 6 - 7
+</code></pre>
+<p>It looks as everything works just fine:</p>
+<ul>
+<li>
+<p>Toggle <span class='t-greedy'></span> to avoid the ambiguity check
+and represent the grammar by pressing <span class='c-new'></span>.</p>
+</li>
+<li>
+<p>Then toggle <span class='t-lookahead'></span>
+and <span class='t-parser'></span>
+and press <span class='c-parse'></span>
+to watch how syntax analysis proceeds.</p>
+</li>
+</ul>
+<p>There is voluminous output and there are no error messages.
+<a href="tutorial-05-lists.html">Chapter five</a> will explain
+why the output contains so many brackets.</p>
+<p>However, upon closer inspection (and considerable pruning) the output reveals a surprise:</p>
+<pre class="prettyprint source"><code>> g.config.lookahead = true
+> g.config.parse = true
+> g.parser().parse(program)
+parser lookahead: (1) &quot;1&quot; Number
+sums| Rule parse {
+        ...
+  sum| Rule parse {
+        ...
+')' lookahead: (2) &quot;4&quot; Number
+        ...
+  sum| Rule parse }: [ [ null '1' ] [ [ [ [ '-' [ '('
+         [ [ null '2' ] [ [ [ [ '+' [ [ '-' ] '3' ] ] ] ] ] ]
+         ')' ] ] ] ] ] ]
+        ...
+  sum| Rule parse {
+        ...
+    more| Rule parse {
+        ...
+      term| Token(Number) parse {
+Number lookahead: (3) '-'
+      term| Token(Number) parse }: '5'
+        ...
+    more| Rule parse }: [ '+' [ null '5' ] ]
+</code></pre>
+<p><code>1</code> <code>-</code> <code>(2</code> <code>+</code> <code>-</code> <code>3)</code>, the first <code>sum</code>, is recognized as before (line 11),
+and <code>4</code> <code>+</code> <code>5</code>, the second <code>sum</code>, is found as well.
+Unfortunately, <code>more</code> is happy to see <code>'-'</code> as a lookahead
+and continues to gobble up <code>-</code> <code>6</code> <code>-</code> <code>7</code> as part of a longer second <code>sum</code>:</p>
+<pre class="prettyprint source"><code>        ...
+  sum| Rule parse }: [ [ null '4' ] [ [ [ [ '+' [ null '5' ] ] ]
+         [ [ '-' [ null '6' ] ] ] [ [ '-' [ null '7' ] ] ] ] ] ]
+</code></pre>
+<p>Surprise:
+<code>expect</code> is consulted before descendants of
+<a href="module-EBNF-Some.html"><code>Some</code></a> or <a href="module-EBNF-Opt.html"><code>Opt</code></a>
+are asked to <code>parse()</code>,
+but the process is greedy,
+i.e., whatever follows in a sequence containing
+<a href="module-EBNF-Some.html"><code>Some</code></a> or <a href="module-EBNF-Opt.html"><code>Opt</code></a>
+only gets a chance if those two let go.</p>
+<p>A grammar is called <em>ambiguous</em>
+if different parse trees can be constructed for the same sentence.</p>
+<p>In this example, the rule <code>sum</code> could succeed three times</p>
+<pre class="prettyprint source"><code>1 - (2 + - 3)
+4 + 5
+- 6 - 7
+</code></pre>
+<p>as the three lines of input might suggest.
+However, the three lines are just one long string
+— white space is skipped by lexical analysis —
+and the output above shows that <code>sum</code> can recognize
+<code>4 + 5 - 6 - 7</code>
+as a longer second <code>sum</code>.
+Overall, there are two different parse trees,
+with two or three top-level <code>rule:sum</code> nodes.</p>
+<p>This grammar is ambiguous —
+a typical issue when two arithmetic expressions with signed numbers
+can follow each other.
+It is easy to repair,
+check out <a href="../?eg=04/03">example 4/03</a>.</p>
+<p><span class='c-new'></span>
+will complain about ambiguities —
+unless <span class='t-greedy'></span>
+suppresses the <code>follow()</code> and <code>check()</code> algorithms
+which normally are part of preparing the grammar.</p>
+<p>We have ambiguity issues</p>
+<ul>
+<li>if two or more alternative sequences have overlapping <code>expect</code> sets, or</li>
+<li>if braces, i.e., a <a href="module-EBNF-Some.html"><code>Some</code></a> object, and their
+successor in a sequence have overlapping <code>expect</code> sets, or</li>
+<li>if brackets, i.e., an <a href="module-EBNF-Opt.html"><code>Opt</code></a> object, and their
+successor in a sequence have overlapping <code>expect</code> sets.</li>
+</ul>
+<p>Another ambiguity issue would arise if a sequence had a way
+to avoid getting to any terminal — in this case the <code>expect</code>
+of the sequence could overlap with whatever can follow the sequence.
+This is why our grammar definitions do not permit a sequence
+to only consist of brackets.</p>
+<p>In all these cases &quot;check before you call&quot; has a choice within the overlaps,
+and blind trust in the closest <code>expect</code> set is not advisable.</p>
+<h3 id="follow()"><a id='follow'></a> <code>follow()</code></h3>
+<p>How do we check for these ambiguities?</p>
+<p>Overlapping <code>expect</code> sets among alternative sequences are easy to find,
+but the other cases involve two successive items in a sequence.
+Unfortunately, already in <a href="../?eg=04/02">example 4/02</a> of multiple sums</p>
+<pre class="prettyprint source"><code>sums: { sum };
+sum: term [{ more }];
+more: '+' term | '-' term;
+term: [ '+' | '-' ] Number | '(' sum ')';
+</code></pre>
+<p>it is not obvious which <code>expect</code> sets overlap.</p>
+<p>Rather than hunting for successive items,
+the <code>follow()</code> algorithm computes an individual <code>follow</code> set
+for each object in the grammar rules.
+The set contains all terminals which can directly follow in the input
+after whatever the object itself recognizes during syntax analysis.
+Given the <code>follow</code> set, we can reason about ambiguities
+on a per-object basis.</p>
+<p>Just like <code>shallow()</code> and <code>deep()</code>, the <code>follow()</code> algorithm
+is implemented as a method in the various classes which are used to represent grammar rules.
+The method is called for an object
+with the <a href="module-EBNF-Set.html"><code>Set</code></a> of all terminals that can follow the object as a parameter.</p>
+<p>The first step is that nothing can follow the start rule — at least at the top level.
+Therefore we call <code>follow()</code> for the start rule with an empty set to get things started.</p>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>follow(set)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="module-EBNF-Alt.html#follow"><code>Alt</code></a></td>
+<td>sends the incoming set to all descendant sequences because the set can follow each descendant.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Some.html#follow"><code>Some</code></a></td>
+<td>adds its own <code>expect</code> set to the incoming set and sends the result to the descendant sequences because each descendant can be repeated and thus follow any other.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Seq.html#follow"><code>Seq</code></a></td>
+<td>processes all descendants from right to left: it sends the current set to a descendant and sends its <code>expect</code> to the next one — moving from the end to the beginning of the sequence. If the current descendant is an <a href="module-EBNF-Opt.html"><code>Opt</code></a>, its <code>expect</code> is merged with the current set and sent to the predecessor because <a href="module-EBNF-Opt.html"><code>Opt</code></a>'s <code>expect</code> and <a href="module-EBNF-Opt.html"><code>Opt</code></a>'s <code>follow</code>, i.e., the current set, both, can follow the predecessor.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-NT.html#follow"><code>NT</code></a></td>
+<td>adds the parameter to the referenced rule, but only if that changes something.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="module-EBNF-Rule.html"><code>Rule</code></a> and <a href="module-EBNF-Opt.html"><code>Opt</code></a>
+inherit from their superclass <a href="module-EBNF-Alt.html#follow"><code>Alt</code></a>.</p>
+<p>There is nothing to do for <a href="module-EBNF-Lit.html"><code>Lit</code></a> and <a href="module-EBNF-Token.html"><code>Token</code></a>
+because they don't require checking.</p>
+<p><a href="module-EBNF-NT.html#follow"><code>NT</code></a> is tricky:
+obviously it has to send the parameter to the referenced <a href="module-EBNF-Rule.html"><code>Rule</code></a>
+because all the terminals in the incoming set can follow the rule.
+But at this point, e.g., the start rule might find out that there are more terminals
+which can follow and the entire process has to start over.
+Therefore,
+<a href="module-EBNF-NT.html#follow"><code>NT</code></a> will only send the parameter to the referenced rule
+if the parameter really is bigger than the current <code>follow</code> of the referenced rule.
+This prevents infinite recursion
+because all sets can at most contain the finite number of terminals which the grammar has.</p>
+<p>It should be noted that there is a more efficient way to compute <code>follow</code>:
+If the immediate <code>follow</code> relationship between any two items in all rules is noted
+in a matrix, <a href="https://en.wikipedia.org/wiki/Stephen_Warshall" title="Warshall's algorithm">Warshall's algorithm</a> is an efficient way to compute the
+&quot;infinite&quot; product of that matrix with itself and the resulting matrix
+describes the so-called <em>transitive closure</em> of the <code>follow</code> relation,
+which is just what we need. Brackets and braces, however, complicate the
+specification of the first matrix.</p>
+<h3 id="check()"><a id='check'></a> <code>check()</code></h3>
+<p>The <code>expect</code> sets enable syntax analysis to &quot;check before you call&quot; and avoid trial and error.</p>
+<p>The <code>follow</code> sets are used once during grammar preparation to ensure that &quot;check before you call&quot;
+always gets a unique answer, i.e., that syntax analysis cannot get greedy and must produce a unique
+parse tree.</p>
+<p>A context-free grammar is called <a href="https://en.wikipedia.org/wiki/LL_parser"><em>LL(1)</em></a> if syntax analysis can be performed
+by processing input left to right, looking for the left-most derivation, i.e.,
+starting with the start rule of the grammar, and with one terminal lookahead.
+The approach is also called <em>top-down</em> because it starts with the root of the
+syntax tree, i.e., the start rule of the grammar.</p>
+<p>The following <code>check()</code> determines if a grammar is <a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a>.
+It is based on the <code>expect</code> and <code>follow</code> sets and is again distributed
+over the classes for the objects representing the grammar rules.</p>
+<table>
+<thead>
+<tr>
+<th>class</th>
+<th>check()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="module-EBNF-Seq.html#check"><code>Seq</code></a></td>
+<td>each descendant must be checked.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Alt.html#check"><code>Alt</code></a></td>
+<td>the alternatives' <code>expect</code> sets must not overlap.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Opt.html#check"><code>Opt</code></a></td>
+<td><code>expect</code> and <code>follow</code> must not overlap.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Some.html#check"><code>Some</code></a></td>
+<td><code>expect</code> and <code>follow</code> must not overlap.</td>
+</tr>
+<tr>
+<td><a href="module-EBNF-Node.html#check"><code>NT</code></a></td>
+<td>does nothing(!) because <code>check()</code> is applied to every rule, not just recursively to the start rule.</td>
+</tr>
+</tbody>
+</table>
+<p>In <a href="module-EBNF-Alt.html#check"><code>Alt</code></a>, <code>check()</code> is very simple to implement:
+an <a href="module-EBNF-Alt.html"><code>Alt</code></a> node has its own <code>expect</code> set which is the
+union of all alternatives. Therefore, the sum of the number of elements in the
+alternatives' <code>expect</code> sets and the number of elements in the <a href="module-EBNF-Alt.html"><code>Alt</code></a> node's
+own <code>expect</code> set must be the same.</p>
+<h3 id="ambiguity-revisited">Ambiguity Revisited</h3>
+<p>An ambiguous grammar might still be useful —
+as long as it recognizes only what is intended.
+<a href="../?eg=04/04">Example 4/04</a> illustrates an <code>if</code> statement:</p>
+<pre class="prettyprint source"><code>stmt: Text | if;
+if: 'if' Text 'then' stmt [ 'else' stmt ] 'fi';
+</code></pre>
+<p>This grammar is not ambiguous and it recognizes for example
+the following program:</p>
+<pre class="prettyprint source"><code>if a then
+  if b then c
+  else d fi
+fi
+</code></pre>
+<ul>
+<li>Press <span class='c-new'></span> to represent and check the grammar and</li>
+<li>press <span class='c-parse'></span> to perform syntax analysis.</li>
+</ul>
+<p>The output can be reformatted</p>
+<pre class="prettyprint source"><code>[ [ 'if' 'a' 'then' [ 
+    [ 'if' 'b' 'then' [ 'c' ] [ 'else' [ 'd' ] ] 'fi' ]
+  ] null 'fi' ] ]
+</code></pre>
+<p>and shows that <code>else</code> <code>d</code> is recognized as part of the inner <code>if</code> statement.</p>
+<p>It turns out that this is due to the fact
+that in the grammar above <code>'if'</code> and <code>'fi'</code> are balanced.</p>
+<p><a href="../?eg=04/05">Example 4/05</a> illustrates a more typical <code>if</code> statement without <code>fi</code>:</p>
+<pre class="prettyprint source"><code>if a then
+  if b then c
+  else d
+</code></pre>
+<p>This grammar is reported to be ambiguous:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar.</p>
+</li>
+<li>
+<p>Toggle <span class='t-greedy'></span> to suppress ambiguity checking,</p>
+</li>
+<li>
+<p>press <span class='c-new'></span> to represent and check the grammar again, and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis.</p>
+</li>
+</ul>
+<p>Again, the output can be reformatted for clarity</p>
+<pre class="prettyprint source"><code>[ [ 'if' 'a' 'then' [
+    [ 'if' 'b' 'then' [ 'c' ] [ 'else' [ 'd' ] ] ]
+  ] null ] ]
+</code></pre>
+<p>Obviously, the output no longer contains the literal <code>'fi'</code>
+but it is otherwise unchanged!</p>
+<p>Recognition is greedy, i.e.,
+if it can accept an <code>else</code> because there is an <code>if</code> to be continued
+it will not check if there might be an outer <code>if</code>.
+Fortunately, this is how programming languages like to interpret <code>else</code> clauses,
+and in this particular case an ambiguous grammar does the right thing.</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p>Syntax analysis receives terminals from <a href="tutorial-03-scanner.html">lexical analysis</a>
+and determines if the input is a sentence conforming to a grammar.</p>
+</li>
+<li>
+<p>Grammar rules can be viewed as functions performing recognition,
+and syntax analysis starts &quot;top-down&quot; by calling the start rule of the grammar.</p>
+</li>
+<li>
+<p>A grammar rule can be represented as a tree of nodes,
+i.e., objects of a few classes such as <a href="module-EBNF-Rule.html"><code>Rule</code></a>.</p>
+</li>
+<li>
+<p>Algorithms, such as syntax analysis, are distributed as methods
+over these classes, such as <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a>.</p>
+</li>
+<li>
+<p>Top-down, deterministic syntax analysis is based on the principle of &quot;check before you call&quot;:
+<code>parse()</code> can only be called on a node if the <em>lookahead</em>,
+i.e., the next input symbol, matches what the node expects.</p>
+</li>
+<li>
+<p>&quot;check before you call&quot; is possible if a grammar is <a href="https://en.wikipedia.org/wiki/LL_parser"><em>LL(1)</em></a>
+(and therefore not <em>ambiguous</em>).
+This needs to be checked once when the rules are represented as trees.</p>
+</li>
+<li>
+<p>The algorithms <code>shallow()</code> and <code>deep()</code> compute for each tree node
+the set <code>expect</code> of terminals which can be in the lookahead.</p>
+</li>
+<li>
+<p>The algorithm <code>follow()</code> computes for each tree node the set
+of terminals that can follow the input that the node recognizes.</p>
+</li>
+<li>
+<p>The algorithm <code>check()</code> compares these sets for each tree node
+and determines if a grammar is <a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a> and can be used
+for this style of syntax analysis.</p>
+</li>
+<li>
+<p>Ambiguity is not always a bad thing;
+however, recognition based on an ambiguous grammar
+would have to be very carefully tested before it can be accepted for a project.</p>
+</li>
+<li>
+<p>Wherever classes and methods are mentioned in this book
+they are linked to the documentation and from there to the (syntax-colored) source lines.</p>
+</li>
+</ul>
+<h3 id="programming-note%3A-%7B%40linkcode-module%3Aebnf~set-set%7D">Programming Note: <a href="module-EBNF-Set.html"><code>Set</code></a></h3>
+<p>Implementing specific set operations for LL(1) checking and syntax analysis in JavaScript
+(rather than using the built-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" title="Set"><code>Set</code></a> class)
+turns out to be very easy.</p>
+<p>A <a href="module-EBNF-Set.html"><code>Set</code></a> is represented as an object with terminal names as properties
+which have an arbitrary value, e.g., <code>true</code>, just to denote their presence in the set.
+Note that token and literal names cannot overlap
+because literal names are single-quoted
+and tokens are not.</p>
+<ul>
+<li>
+<p><a href="module-EBNF-Set.html#match"><code>match()</code></a> uses the operator <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/in" title="in"><code>in</code></a>
+to check if a terminal belongs to a set.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" title="Object.assign()"><code>Object.assign</code></a> <a href="module-EBNF-Set.html#import">imports the elements of a second set</a>.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" title="Object.keys()"><code>Object.keys</code></a> returns the terminal names as an array,
+e.g., to count how many belong to the set.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every" title="every()"><code>every</code></a> can be used to <a href="module-EBNF-Set.html#includes">check if one set contains another</a>:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>Object.keys(other.set).every(key => key in this.set)
+</code></pre>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce</code></a> can be used to
+<a href="module-EBNF-Set.html#overlap">create a set of elements belonging to two sets</a>:</li>
+</ul>
+<pre class="prettyprint source"><code>Object.keys(this.set).reduce((result, key) => {
+  if (key in other.set) result.set[key] = true;
+  return result;
+}, new Set());
+</code></pre>
+<p>One word of caution:
+these sets are objects and, therefore, passed by reference.
+A new set has to be constructed, e.g., when
+a <a href="module-EBNF-Some.html"><code>Some</code></a> node adds its own <code>expect</code> and <code>follow</code> sets to
+send them to the descendants...</p>
+<h3 id="programming-note%3A-%7B%40linkcode-module%3Aebnf~grammar%23trace-trace()%7D">Programming Note: <a href="module-EBNF-Grammar.html#trace"><code>trace()</code></a></h3>
+<p>A prudent approach to programming is to assume a priori that something will go wrong
+and to always instrument code so that algorithms can be observed.
+Unfortunately, this is likely to hide the actual algorithm
+behind obscure scaffolding which should not be there for production runs, e.g.,</p>
+<pre class="prettyprint source"><code>if (debug) console.debug('some label', 'about to compute');
+  // compute something here
+if (debug) console.debug('some label', 'something to see');
+</code></pre>
+<p>In the object-oriented approach to syntax analysis described here,
+algorithms such as <code>parse()</code>, <code>shallow()</code>, <code>deep()</code>, <code>follow()</code>, and <code>check()</code>
+are distributed as methods of the classes involved in representing grammar rules.</p>
+<p>The job of each method is quite small but the methods call each other
+recursively across the classes and the return values get more and more
+complicated.
+<a href="../?eg=04/01">Example 4/01</a>
+illustrates how instructive it is to see method calls and return values.</p>
+<ul>
+<li>
+<p>Toggle some of <span class='t-shallow'></span>, <span class='t-deep'></span>, and
+<span class='t-follow'></span>,
+then press <span class='c-new'></span>
+and watch how the <code>expect</code> and <code>follow</code> sets are put together.</p>
+</li>
+<li>
+<p>Next toggle <span class='t-parser'></span>,
+then press <span class='c-parse'></span>
+and watch how the <a href="module-EBNF-Rule.html#parse"><code>parse()</code></a> methods call on each other.</p>
+</li>
+</ul>
+<p>Tracing function calls and return values amounts to function composition:</p>
+<ul>
+<li>
+<p>the algorithm is carried out by a method,</p>
+</li>
+<li>
+<p>a <em>tracer proxy</em> announces the method call and arguments,
+calls the algorithm method,
+reports the end of the method call and the result values,
+and returns the method's results.</p>
+</li>
+</ul>
+<p>Methods are functions stored in a class' prototype, i.e.,
+a method can be cached and replaced by a tracer proxy
+which informs about and internally calls the cached method, e.g.</p>
+<pre class="prettyprint source"><code>const cache = class_.prototype.method;          // cache
+class_.prototype.method = function (...arg) {   // proxy
+  console.debug('about to call', class_.name, cache.name);
+  const result = cache.call(this, ...arg);
+  console.debug('result:', result);
+  return result;
+}
+</code></pre>
+<p><a href="module-EBNF-Grammar.html#trace"><code>trace()</code></a> manages caching and reporting
+for the essential algorithms of syntax analysis.</p>
+<h4 id="previous%3A-%7B%40tutorial-03-scanner%7D-next%3A-%7B%40tutorial-05-lists%7D">Previous: <a href="tutorial-03-scanner.html">3. Scanning Input</a> Next: <a href="tutorial-05-lists.html">5. Translating Sentences</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

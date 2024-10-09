@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 3. Scanning Input</title -->
+	<title>3. Scanning Input</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>3. Scanning Input</h2>
+</header>
+
+<article>
+    <h4 id="terminals%2C-tokens%2C-and-literals">Terminals, Tokens, and Literals</h4>
+<h4 id="taking-input-apart">Taking Input Apart</h4>
+<hr>
+<p><a href="tutorial-01-overview.html">Chapter one</a> explained that
+<em>lexical analysis</em>,
+the first phase of the translation process in a compiler,
+breaks the source program
+— usually a string —
+into parts called <em>terminals</em>
+in order to simplify the job of the next phase,
+<em>syntax analysis</em>.</p>
+<p><a href="tutorial-02-grammars.html">Chapter two</a> explained that
+a grammar describes <em>sentences</em>,
+i.e., <em>sequences of terminals</em> which conform to the rules of the grammar.</p>
+<p>Therefore, a grammar will at least describe what terminals it needs for the rules,
+even if it does not really need to describe what the terminals look like in an actual source program.</p>
+<p>Our grammar notation distinguishes two kinds of terminals, literals and tokens:</p>
+<ul>
+<li>
+<p>A <em>literal</em> is a single-quoted string in a rule and the content of the string represents
+the literal in the source program.
+Backslashes are used to escape single quotes and backslashes in the string content in the rule.</p>
+</li>
+<li>
+<p>A <em>token</em> is just a name in a rule, different from all non-terminal names.
+Tokens are defined as key-value pairs (properties) of a JavaScript object
+where the key is the token name
+and the value is a <a href="https://en.wikipedia.org/wiki/Regular_expression" title="Regular Expression">regular expression</a> (search pattern)
+which describes how the token is represented in the source program.</p>
+</li>
+</ul>
+<p>If the grammar in <a href="../?eg=02/10">example 2/10</a> is represented and checked by pressing
+<span class='c-new'></span> the output is a short description of the grammar:</p>
+<pre class="prettyprint source"><code>  0 sum: Number { '+' Number | '-' Number };
+
+literals: '+', '-'
+tokens: Number
+</code></pre>
+<p>The description contains a numbered list of rules,
+a list of single-quoted literals,
+and a list of token names used in the rules.
+The token patterns are in the text of the <span class='a-tokens'></span>:</p>
+<pre class="prettyprint source"><code>{ Number: /[0-9]+/ }
+</code></pre>
+<p>Together with the convention to ignore white space
+this is enough information to break the source program up into terminals:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-scan'></span> to perform lexical analysis.</p>
+</li>
+</ul>
+<p>The output shows how the string in the <span class='a-program'></span></p>
+<pre class="prettyprint source"><code>12 - 345 + 6789
+</code></pre>
+<p>is cut into pieces:</p>
+<pre class="prettyprint source"><code>> g.scanner().pattern /(\s+)|([0-9]+)|(\-)|(\+)/gm
+> g.scanner().scan(program)
+(1) &quot;12&quot; Number
+(1) '-'
+(1) &quot;345&quot; Number
+(1) '+'
+(1) &quot;6789&quot; Number
+</code></pre>
+<p>The first line in the output displays the search pattern
+which is used for lexical analysis.
+It will be discussed <a href="#scanner">below</a>.
+The second line contains the JavaScript expression
+to create a scanner and perform lexical analysis.</p>
+<p>Each of the remaining lines in the output
+describes one <a href="module-Base-Tuple.html"><code>Tuple</code></a> object,
+consisting of a line number,
+a piece of the input,
+and a classification as a terminal:</p>
+<ul>
+<li>
+<p>For a literal the piece of input is enclosed in single quotes.</p>
+</li>
+<li>
+<p>For a token the piece of input is enclosed in double quotes
+and the token name is shown, too.</p>
+</li>
+<li>
+<p>Illegal input is enclosed in double quotes and there is no token name.</p>
+</li>
+</ul>
+<p>The output is independent of any white space which may or may not be in the <span class='a-program'></span>.
+If, for example, some newline characters are inserted between the numbers and operators,
+only the line numbers in the <a href="module-Base-Tuple.html"><code>Tuple</code></a> objects will change.</p>
+<p>The <span class='c-scan'></span> button uses the <a href="module-Base-Scanner.html#scan"><code>scan()</code></a> method
+of a <a href="module-Base-Scanner.html"><code>Scanner</code></a> object
+which is <a href="module-EBNF-Grammar.html#scanner">constructed from the grammar</a>.
+This chapter explains how an object of the <a href="module-Base-Scanner.html"><code>Scanner</code></a>
+class chops up the input.</p>
+<h3 id="search-patterns">Search Patterns</h3>
+<p>Computer users always search for specific pieces of text —
+buried in files or among collections of file names.
+Even the earliest versions of operating systems
+such as <a href="https://en.wikipedia.org/wiki/DOS" title="DOS">DOS</a>, <a href="https://en.wikipedia.org/wiki/Unix" title="The UNIX® Operating System">Unix®</a>, or <a href="https://en.wikipedia.org/wiki/Microsoft_Windows" title="Microsoft Windows">Windows</a>,
+provided more than &quot;literal&quot; searches — they supported search patterns.
+For example</p>
+<pre class="prettyprint source lang-none"><code>rm abc d?f g*i [0-9*a-z]\*
+</code></pre>
+<p>This Unix® command might not be terribly realistic, but it demonstrates the principle.
+It would remove</p>
+<ul>
+<li>the file literally named <code>abc</code>,</li>
+<li>all files with three-character names starting with <code>d</code> and ending with <code>f</code>,</li>
+<li>all files with names starting with <code>g</code>, ending with <code>i</code>, and containing
+zero or more characters in-between,</li>
+<li>and, finally, all files with a name consisting of a single digit, asterisk, or lower-case letter,
+followed by a literal asterisk.</li>
+</ul>
+<p>Search patterns are usually called <em>regular expressions</em>
+because they employ a very concise notation for
+<a href="https://en.wikipedia.org/wiki/Regular_grammar" title="Regular Grammar">regular grammars</a>
+which are <a href="https://en.wikipedia.org/wiki/Context-free_grammar" title="Context-Free Grammar">context-free grammars</a>
+where the right-hand side of rules can only use a terminal
+or a terminal followed by a single non-terminal.</p>
+<p>The patterns above demonstrate that this allows for iteration,
+but it does <em>not</em> allow, e.g., for a construction
+that can balance parentheses.</p>
+<p>Regular expressions can have very efficient implementations
+based on the theory of <a href="https://en.wikipedia.org/wiki/Finite-state_machine" title="Finite State Machine">finite state automata</a>.</p>
+<p>One has to be cautious, however.
+While most modern programming languages support
+regular expressions for searching and text validation,
+neither the syntax nor the semantics of regular expressions
+is consistent across different languages, e.g.,</p>
+<pre class="prettyprint source lang-none"><code>(a.*b)|[cde]+
+</code></pre>
+<p>should find <code>a</code> followed by any number of characters and then <code>b</code>,
+or find a sequence of one or more of the characters <code>c</code>, <code>d</code>, or <code>e</code>.
+However, depending on the platform,
+the expression might well find the first match, or the longest match,
+or even all matches...</p>
+<p>The <a href="module-EBNF.html">EBNF module/parser generator</a> is implemented in JavaScript;
+therefore these tutorials will use and discuss regular expressions
+as they are <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" title="Regular Expressions in JavaScript">supported in JavaScript</a>.</p>
+<p>Different flavors of regular expressions
+can be tested on the <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a>.</p>
+<h3 id="regular-expressions-101">Regular Expressions 101</h3>
+<p>This section is a crash course on patterns as they are <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" title="Regular Expressions in JavaScript">supported in JavaScript</a>,
+specifically, to deal with the question
+how typical terminals in programming languages can be expressed through patterns.
+Many of the more esoteric aspects of regular expressions are not covered here.</p>
+<p>A pattern is used to recognize part of an input string.
+Patterns are a shorthand notation for a type of grammars;
+therefore, we should expect that there is a concept of literals and tokens for patterns:</p>
+<ul>
+<li>Letters, digits, and (very few)	special characters
+are literals and recognize themselves.
+This can be used to recognize words in a programming language:</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>if then else while do
+</code></pre>
+<ul>
+<li>A period is a token in the language of regular expressions
+which recognizes any character with the exception of a line separator:</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>.
+</code></pre>
+<ul>
+<li>Brackets, <code>[</code> and <code>]</code>, enclose a sequence of characters, which is termed a <em>character class</em>.
+This token recognizes any single one of its constituent characters:</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>[0123456789]
+</code></pre>
+<ul>
+<li>If the sequence inside brackets starts with <code>^</code> the token will recognize
+any single character <em>not</em> in the sequence —
+most of the time this is more than one bargains for:</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>[^a-z]
+</code></pre>
+<ul>
+<li><code>-</code> between two characters <em>inside</em> the sequence denotes the inclusive range.</li>
+</ul>
+<p>All of this together can be used to recognize single digits,
+single lower-case letters, or
+all special characters in the <a href="https://www.w3schools.com/charsets/ref_html_ascii.asp" title="ASCII Character Set">ASCII character set</a></p>
+<pre class="prettyprint source lang-none"><code>[0-9] [a-z] [!-/:-@[-`{-~]
+</code></pre>
+<ul>
+<li>Most non-alphanumeric characters have a special meaning in a pattern.
+This can be defeated by preceding a character with the <code>\</code> (backslash) character.
+In particular, <code>\\</code> is the literal to recognize one backslash.</li>
+</ul>
+<p>Simply preceding every character in a pattern with backslash is unwise
+because some letters acquire special meaning when preceded by backslash.
+For example, this literal recognizes any single white space
+character, even <a href="https://en.wikipedia.org/wiki/Unicode" title="Unicode">outside the ASCII character set</a>:</p>
+<pre class="prettyprint source lang-none"><code>\s
+</code></pre>
+<p><a href="tutorial-02-grammars.html">Chapter two</a> explained
+that grammars use rules built from literals and tokens
+to describe more complicated sentences.</p>
+<p>Instead of rules, regular expressions use certain operators
+to build complicated patterns from simpler pieces.
+From a semantic perspective
+the constructs have much in common with the <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extensions to BNF</a>
+discussed previously.</p>
+<ul>
+<li>To begin with, a sequence of pattern pieces
+recognizes a sequence of input parts each of which matches
+the corresponding pattern piece.</li>
+</ul>
+<p>For example, this sequence recognizes command language
+variable names <code>$0</code> through <code>$9</code>:</p>
+<pre class="prettyprint source lang-none"><code>\$[0-9]
+</code></pre>
+<ul>
+<li>
+<p>One should always escape <code>$</code>
+because <code>$</code> at the end of a pattern <em>anchors</em> recognition,
+i.e., it demands that
+recognition extend all the way to the end of input.</p>
+</li>
+<li>
+<p><code>^</code> at the beginning of a pattern also anchors recognition,
+i.e., recognition must start at the beginning of input.</p>
+</li>
+</ul>
+<p>For example, this pattern recognizes a string only if it consists exactly
+of two command variable names separated by exactly one white space character:</p>
+<pre class="prettyprint source lang-none"><code>^\$[0-9]\s\$[0-9]$
+</code></pre>
+<ul>
+<li>Iteration is expressed  by <code>?</code>, <code>+</code>, or <code>*</code> directly following
+a pattern piece to indicate that the piece is
+optional, recognized one or more times, or both, in the input.</li>
+</ul>
+<p>This can be used, e.g., to recognize optionally signed integer numbers (line 1 below),
+alphanumeric variable names starting with a letter (line 2),
+or such a name and number optionally surrounded and definitely separated by white space
+as the only input (line 3):</p>
+<pre class="prettyprint source lang-none"><code>[-+]?[0-9]+
+[a-zA-Z][a-zA-Z0-9]* 
+^\s*[a-zA-Z][a-zA-Z0-9]*\s+[-+]?[0-9]+\s*$
+</code></pre>
+<ul>
+<li>
+<p>Patterns support alternatives: pattern pieces can be joined
+with the operator <code>|</code>.</p>
+</li>
+<li>
+<p>Just as in grammars, sequences take precedence over alternatives.</p>
+</li>
+<li>
+<p>Iterations take precedence over sequences.</p>
+</li>
+</ul>
+<p>Here is a pattern for a number
+which would be interpreted as decimal, hexadecimal, or octal,
+depending on the prefix:</p>
+<pre class="prettyprint source lang-none"><code>[1-9][0-9]*|0[xX][0-9a-fA-F]+|0[0-7]*
+</code></pre>
+<p>The order of alternatives can make a difference
+because JavaScript is happy with the first alternative that matches.
+Use the <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a>
+to see that the previous pattern will not recognize <code>0xA</code>
+if the last alternative is specified first, i.e.,</p>
+<pre class="prettyprint source lang-none"><code>0[0-7]*|[1-9][0-9]*|0[xX][0-9a-fA-F]+
+</code></pre>
+<ul>
+<li>Parentheses <code>(?:</code> and <code>)</code> can be used to group pattern pieces
+and thus change precedence and nest alternatives into sequences
+and both into iterations.</li>
+</ul>
+<p>Here is a pattern for a non-empty, single-quoted string
+which uses backslash to escape a single quote, backslash, or newline (represented as <code>\n</code>):</p>
+<pre class="prettyprint source lang-none"><code>'(?:\\['\\\n]|[^'\\\n])+'
+</code></pre>
+<p>Admittedly, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" title="Regular Expressions in JavaScript">JavaScript patterns</a> also allow simple parentheses;
+however, simple parentheses introduce <em>capture groups</em>
+which serve a very special purpose
+that is critical
+for the <a href="module-Base-Scanner.html#scan">scan()</a> method
+<a href="#scanner">developed in the next section</a>.</p>
+<p>We have already seen the patterns needed to describe
+most of the tokens for a typical programming language.
+Among them, strings are the most complicated but the last example
+showed how escape conventions and newlines can be handled.</p>
+<p>Slightly more complicated is the removal of comments from input.
+Patterns cannot balance nests of leading and trailing sequences; therefore,
+patterns cannot deal with nested comments.
+Other than that:</p>
+<ul>
+<li>Line comments are simple — they range from a leading sequence
+to the end of a line or of the input.</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>\/\/[^\n]*(?:\n|$)
+</code></pre>
+<ul>
+<li>
+<p>JavaScript uses <code>//</code> for the lead of a comment and also uses <code>/</code> to enclose regular expressions;
+therefore, the pattern above for JavaScript comments escapes the leading '//'.</p>
+</li>
+<li>
+<p>Comments enclosed by unique single characters use the same design.
+E.g., <a href="https://en.wikipedia.org/wiki/Pascal_(programming_language)" title="Pascal language">Pascal</a> encloses comments in braces and allows multiple lines in a comment:</p>
+</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>{[^}]*}
+</code></pre>
+<ul>
+<li>Finally, comments enclosed in overlapping sequences, such as <code>/*</code>
+and <code>*/</code> in JavaScript, require careful specification:</li>
+</ul>
+<pre class="prettyprint source lang-none"><code>\/\*(?:[^*]|\*+[^/*])*\*+\/
+</code></pre>
+<p>Here, zero or more character groups follow the opening <code>/*</code> and
+one or more asterisks precede the closing slash. Each character group
+consists of any single character but an asterisk, or of one or more
+asterisks followed by a single character which is neither a slash nor an asterisk.
+Use the <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a>
+to see that, e.g., <code>/***/</code> is recognized but <code>/*/</code> is not.</p>
+<p>As far as possible,
+<a href="../?eg=03/01">example 3/01</a> contains all the pattern examples in this section.</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar, and then</p>
+</li>
+<li>
+<p>press <span class='c-scan'></span> to see what tuples are found
+in the <span class='a-program'></span>.</p>
+</li>
+<li>
+<p>Some definitions in the <span class='a-tokens'></span> are <em>not</em> used in the grammar.
+Why not?</p>
+</li>
+<li>
+<p>Note that if you click on the label of a text area
+the area will expand.
+Shift-click will restore the default layout,
+and alt/option-click tries to open a separate,
+non-editable window with syntax highlighting.</p>
+</li>
+</ul>
+<h3 id="scan()"><a id='scanner'></a> <code>scan()</code></h3>
+<p>Given the literals and descriptions for tokens,
+how does the <a href="module-Base-Scanner.html#scan"><code>scan()</code></a> method
+perform lexical analysis,
+i.e., take an input string
+and return the list of <a href="module-Base-Tuple.html"><code>Tuple</code></a> objects
+which describe the terminals in the string?</p>
+<p>JavaScript represents regular expressions as objects of the class <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" title="RegExp"><code>RegExp</code></a>.
+An object can be constructed by enclosing a pattern in single slashes,
+or it can be constructed from a string — but then, backslash and quotes would have to be
+escaped according to string rules before they play their role in a pattern.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec" title="RegExp exec()"><code>exec()</code></a> method for a <code>RegExp</code> object accepts a string.
+If the regular expression matches the string somewhere
+the method returns an array, otherwise it returns <code>null</code>.
+The first element in the array is that part of the string which was matched.
+The remaining elements in the array, if any,
+contain the components of the matched part
+which the capture groups in the regular expression, if any, matched.</p>
+<p>This gets tricky if capture groups are nested,
+but here is a simple example
+which should suggest how <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec" title="RegExp exec()"><code>exec()</code></a> can be set up
+to do the job of lexical analysis.
+Consider a string with the alphabet</p>
+<pre class="prettyprint source lang-none"><code>abcdefghijklmnopqrstuvwxyz
+</code></pre>
+<p>and consider a pattern with three capture groups</p>
+<pre class="prettyprint source lang-none"><code>([a-f]+)(.*)([u-z]+)
+</code></pre>
+<ul>
+<li>
+<p>Matches are greedy,
+i.e., the first group matches the beginning of the alphabet,
+and it will grab <em>all</em> of the letters <code>abcdef</code>,</p>
+</li>
+<li>
+<p>the third group only matches the end of the alphabet, i.e., in this case <code>z</code>,</p>
+</li>
+<li>
+<p>because the second group is greedy, too, and matches all the letters in-between.</p>
+</li>
+</ul>
+<p>Therefore, the JavaScript function call</p>
+<pre class="prettyprint source"><code>/([a-f]+)(.*)([u-z]+)/.exec('abcdefghijklmnopqrstuvwxyz')
+</code></pre>
+<p>returns an array with four elements of length 26, 6, 19, and 1.</p>
+<p>The pattern would also match the string <code>JavaScript</code>
+because the first capture group is happy with the first <code>a</code>,
+the second group can match nothing,
+and the third group matches <code>v</code>.
+The resulting array again contains four strings,
+containing <code>JavaScript</code>, <code>a</code>, nothing, and <code>v</code> —
+check it out on the <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a>.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec" title="RegExp exec()"><code>exec()</code></a> can be configured by appending certain <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions#advanced_searching_with_flags" title="regex flags">flags</a> to the pattern,
+such as</p>
+<ul>
+<li>
+<p><code>g</code> (global) arranges that <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec" title="RegExp exec()"><code>exec()</code></a> can be called multiple times to
+find all matches of the pattern in the string.</p>
+</li>
+<li>
+<p><code>m</code> (multiline) allows the anchors <code>^</code> and <code>$</code> to match line feeds in the string.</p>
+</li>
+</ul>
+<p>A capture group extracts a piece of input
+and classifies it in the resulting list by the group's position in the pattern
+— extraction and classification is what lexical analysis has to do.</p>
+<p><a href="../?eg=03/02">Example 3/02</a> creates the following pattern with four alternatives,
+each a capture group,
+namely white space, &quot;names&quot; (which include literals like <code>if</code>),
+&quot;numbers&quot;, and the operator <code>&lt;=</code>:</p>
+<pre class="prettyprint source lang-none"><code>> g.scanner().pattern = /(\s+)|([a-z]+)|([0-9]+)|(\&lt;\=)/gm
+</code></pre>
+<p>Depending on the string matched against the pattern,
+exactly one group will capture something —
+unless the entire match fails.</p>
+<p>As for lexical analysis:</p>
+<ul>
+<li>
+<p>If nothing is matched or if the match does not start at the beginning of the input string
+there are illegal characters in the input.
+They can be represented by a specific <a href="module-Base-Tuple.html"><code>Tuple</code></a> object
+which does not classify the input.</p>
+</li>
+<li>
+<p>A match of the first group has to be trimmed off the input —
+the scanner skips, e.g., white space.</p>
+</li>
+<li>
+<p>The next set of groups consists of the tokens of the grammar
+which might have to be screened further.
+In this example, these are sequences of lower-case letters (&quot;names&quot;) and sequences of digits (&quot;numbers&quot;).</p>
+</li>
+<li>
+<p>Note that something like <code>iffy</code> should be recognized as a name
+and not as the literal <code>if</code> followed by the name <code>fy</code>.</p>
+</li>
+<li>
+<p>The last set of groups consists of the literals of the grammar
+which are not matched by the tokens,
+in this case <code>&lt;=</code>.</p>
+</li>
+</ul>
+<p>The lexical analysis pattern can be composed
+as alternatives of capture groups with</p>
+<ul>
+<li>
+<p>one pattern for white space and comments,</p>
+</li>
+<li>
+<p>one pattern for each token,</p>
+</li>
+<li>
+<p>and finally one pattern for each literal in order of decreasing length
+so that, e.g., <code>&lt;=</code> is recognized before <code>&lt;</code>.</p>
+</li>
+<li>
+<p>Patterns for literals which are matched by a token pattern can be omitted.</p>
+</li>
+</ul>
+<p>This assumes that white space and token patterns all
+match different input, and that the result of a token match such as &quot;names&quot;
+is screened,
+e.g., by looking the matched input up
+in a map of literal values which take precedence over the token.</p>
+<p>In general, overlapping patterns can cause problems.
+It is not possible to check that the patterns are &quot;different&quot; enough
+when the <a href="module-Base-Scanner.html"><code>Scanner</code></a> is constructed
+but <a href="../?eg=03/01">example 3/01</a> and <a href="../?eg=03/02">example 3/02</a>
+show how a grammar and some input can be used to test lexical analysis thoroughly:</p>
+<ul>
+<li>
+<p>The grammar should contain all tokens and literals as simple alternatives.
+Press <span class='c-new'></span> to represent the grammar.</p>
+</li>
+<li>
+<p>The <span class='a-program'></span> should contain representations of all tokens and literals to be tested —
+the input does not have to be a sentence.
+Press <span class='c-scan'></span> to see what tuples are found.</p>
+</li>
+</ul>
+<p><a href="../?eg=03/03">Example 3/03</a> illustrates that the token patterns may have to be ordered.
+Consider integer constants, represented as digit strings,
+and floating point constants, required to contain a decimal point:</p>
+<pre class="prettyprint source lang-none"><code>Int: /0|[1-9][0-9]*/,
+Real: /(?:0|[1-9][0-9]*)\.[0-9]*/
+</code></pre>
+<p>The input string in the <span class='a-program'></span> is</p>
+<pre class="prettyprint source lang-none"><code>1 2.3
+</code></pre>
+<p>If the <a href="module-EBNF-Grammar.html#scanner"><code>scanner()</code></a>
+places the <code>Int</code> pattern before the <code>Real</code> pattern
+lexical analysis will find three <code>Int</code> tokens and one illegal character:</p>
+<pre class="prettyprint source lang-none"><code>> g.scanner().pattern =
+  /(\s+)|(0|[1-9][0-9]*)|((?:0|[1-9][0-9]*)\.[0-9]*)/gm
+> g.scanner().scan(program)
+(1) &quot;1&quot; Int
+(1) &quot;2&quot; Int
+(1) &quot;.&quot;
+(1) &quot;3&quot; Int
+</code></pre>
+<p>As a crutch to fix this problem,
+the token patterns are sorted by name
+before they are combined for
+the lexical analysis pattern.
+In <a href="../?eg=03/04">example 3/04</a> the token name is changed from <code>Real</code> to <code>Float</code>.</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to prepare the grammar, and</p>
+</li>
+<li>
+<p>press <span class='c-scan'></span> to test the lexical analysis pattern.</p>
+</li>
+</ul>
+<p>Now the order of the token patterns is interchanged, <code>Float</code> before <code>Int</code>.
+The floating point pattern will find the floating point number
+and the output consists of two tuples:</p>
+<pre class="prettyprint source lang-none"><code>> g.scanner().pattern =
+  /(\s+)|((?:0|[1-9][0-9]*)\.[0-9]*)|(0|[1-9][0-9]*)/gm
+> g.scanner().scan(program)
+(1) &quot;1&quot; Int
+(1) &quot;2.3&quot; Float
+</code></pre>
+<p>Note that <code>0.</code> and <code>0.1</code> are valid but <code>.1</code> is not.
+This could be changed with an alternative in the <code>Float</code> pattern.</p>
+<h3 id="screening">Screening</h3>
+<p>Many programming languages use <a href="https://en.wikipedia.org/wiki/Reserved_word" title="reserved word">reserved words</a>,
+i.e., they forbid that literals such as <code>if</code>, <code>then</code>, and <code>else</code>
+are used as variable names — these literals should always
+indicate a control structure.</p>
+<p>From the perspective of a grammar for a programming language,
+variable names are a class of inputs,
+i.e., they are a token in the grammar,
+and the scanner must not report a reserved word
+like <code>if</code> as the particular token for variable names.</p>
+<p>Screening prevents that.</p>
+<p>A grammar is represented as a <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> object.
+The <a href="module-EBNF-Grammar.html#scanner"><code>scanner()</code></a> method
+is called with an optional pattern argument
+which describes the parts of input which should be ignored,
+by default white space.</p>
+<p><a href="module-EBNF-Grammar.html#scanner"><code>scanner()</code></a> returns a <a href="module-Base-Scanner.html"><code>Scanner</code></a> object
+which contains the lexical analysis <code>pattern</code> <a href="#scanner">described above</a> and a list, <code>terminals</code>,
+of the unique <a href="module-EBNF-Lit.html"><code>Lit</code></a> and <a href="module-EBNF-Token.html"><code>Token</code></a> objects
+corresponding by position to the capture groups of the pattern.</p>
+<p>The <a href="module-Base-Scanner.html#scan"><code>scan()</code></a> method
+of this <a href="module-Base-Scanner.html"><code>Scanner</code></a> object
+takes an input string,
+applies the lexical analysis pattern,
+and classifies the matching part of the input
+as a literal or token, represented as a
+<a href="module-EBNF-Lit.html"><code>Lit</code></a> or
+<a href="module-EBNF-Token.html"><code>Token</code></a> object,
+by using the index of the capture group and the <code>terminals</code> list.</p>
+<p>If the <a href="module-Base-Scanner.html#scan"><code>scan()</code></a> method
+proposes a part of the input as a token while it could be a literal
+it is used as an index into a map of literals with which the token overlaps —
+this should be an efficient operation in JavaScript.
+If the string is found, the result is the corresponding
+<a href="module-EBNF-Lit.html"><code>Lit</code></a> object
+in place of the proposed <a href="module-EBNF-Token.html"><code>Token</code></a> object.
+Thus, literals masquerading as tokens are detected
+and lexical analysis can report them properly.</p>
+<p>Screening slows input processing down
+and should be used only if really necessary;
+e.g., a token for numbers will not require screening
+if all reserved words in the language consist of letters
+and all operators consist of special characters.</p>
+<p>To streamline the process
+all literal values which can appear in the input
+are checked against all token patterns
+when the <a href="module-Base-Scanner.html"><code>Scanner</code></a> object is constructed.
+If a literal value is classified as a token
+the corresponding <a href="module-EBNF-Lit.html"><code>Lit</code></a> object
+is added to a map <code>.screen</code> for the <a href="module-EBNF-Token.html"><code>Token</code></a> object.
+If this map exists, it is consulted during <a href="module-Base-Scanner.html#scan"><code>scan()</code></a>
+as described above.
+Additionally, the literal value is dropped from the lexical analysis pattern
+because it would not match anything on its own.</p>
+<p><a href="../?eg=03/05">Example 3/05</a> shows that things can go really wrong
+if a token pattern <em>partially</em> overlaps a literal.
+Patterns for &quot;numbers&quot; and alphabetic &quot;names&quot; would both overlap the
+literal <code>'Formula1'</code>.</p>
+<p>Fortunately, this case is rare in the world of programming languages
+but the <a href="module-EBNF-Grammar.html#scanner"><code>scanner()</code></a> method has an optional parameter
+so that the pattern pieces can be sorted explicitly.
+The parameter can be used in a JavaScript program;
+<a href="../?eg=03/05">example 3/05</a> would be corrected as follows:</p>
+<pre class="prettyprint source"><code>import * as EBNF from 'modules/ebnf.js';
+const EBNF = await import(&quot;./ebnf.js&quot;);
+const grammar = &quot; examples: Name | Number | 'Formula1'; &quot;,
+  tokens = { Name: /[A-Za-z]+/, Number: /[0-9]+/ },
+  program = &quot; Formula 1 \n Formula1 &quot;;
+
+const g = new EBNF.Grammar(grammar, tokens); g.check();
+console.log(g.toString());
+console.log(g.scanner().pattern);
+console.log(g.scanner().scan(program).join('\n')); // the mistake
+
+const terminals = [ g.lit(&quot;'Formula1'&quot;), g.token('Name'), g.token('Number') ];
+const s = g.scanner(/\s+/, terminals); // the correction
+console.log(s.pattern);
+console.log(s.scan(program).join('\n')); // the intended output
+</code></pre>
+<p>In <a href="https://nodejs.org/en" title="Node.js">Node.js</a> this produces the intended output:</p>
+<pre class="prettyprint source"><code>> console.log(s.pattern);
+/(\s+)|(Formula1)|([A-Za-z]+)|([0-9]+)/gm
+> console.log(s.scan(program).join('\n')); // the intended output
+(1) &quot;Formula&quot; Name
+(1) &quot;1&quot; Number
+(2) 'Formula1'
+</code></pre>
+<p>Alternatively, an alphanumeric <code>Name</code></p>
+<pre class="prettyprint source"><code>Name: /[A-Za-z][A-Za-z0-9]*/
+</code></pre>
+<p>would overlap <code>Formula1</code> completely and screening would resolve <code>Formula1</code> correctly
+as a literal.</p>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p><em>Lexical analysis</em> breaks input into parts represented by the
+literals and tokens used in a grammar.
+It skips the irrelevant parts of the input —
+usually white space and comments.
+Sequences of one or more unrecognized input characters are also reported.</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Regular_expression" title="Regular Expression">Regular expressions</a> (search patterns) are the tool of choice
+to describe literals and tokens and they are the basis for automatic implementation
+of lexical analysis.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Grammar.html#scanner"><code>scanner()</code></a> creates a <a href="module-Base-Scanner.html"><code>Scanner</code></a> object
+with a <a href="module-Base-Scanner.html#scan"><code>scan()</code></a> method which accepts an input string and returns a list of
+<a href="module-Base-Tuple.html"><code>Tuple</code></a> objects describing the input parts.</p>
+</li>
+<li>
+<p><a href="module-Base-Scanner.html#scan"><code>scan()</code></a> uses a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" title="RegExp"><code>RegExp</code></a> composed of the
+patterns for all tokens and some literals in the grammar,
+plus a pattern for input parts to be skipped.</p>
+</li>
+<li>
+<p>The order of patterns is important: (usually) tokens, sorted by name, before literals,
+literals sorted by length in reverse order.</p>
+</li>
+<li>
+<p>Overlapping token patterns may cause issues,
+in particular, if a token pattern <em>partially</em> overlaps a literal.
+As a last resort,
+the pattern order can be set explicitly when the <a href="module-Base-Scanner.html"><code>Scanner</code></a> object is created.</p>
+</li>
+<li>
+<p>Some tokens, such as the class of identifiers in a programming language, might
+hide <em>reserved words</em>, i.e., literals such as <code>if</code> <code>then</code> <code>else</code> which have a special meaning
+as a control structure.</p>
+</li>
+<li>
+<p>Such tokens are marked when the <a href="module-Base-Scanner.html"><code>Scanner</code></a> object is created
+and matched input is checked against a token-specific map of hidden literals
+so that the input part can be reported correctly.</p>
+</li>
+<li>
+<p>The <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a> is great for testing.</p>
+</li>
+<li>
+<p><a href="../?eg=03/01">Example 3/01</a> contains many patterns for terminals used in
+programming languages. A few of these are too general to be used in the example...</p>
+</li>
+</ul>
+<h4 id="previous%3A-%7B%40tutorial-02-grammars%7D-next%3A-%7B%40tutorial-04-parser%7D">Previous: <a href="tutorial-02-grammars.html">2. Writing Grammars</a> Next: <a href="tutorial-04-parser.html">4. Recognizing Sentences</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

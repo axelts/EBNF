@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Source: 06.js</title -->
+	<title>Source: 06.js</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: 06.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/** This module contains the classes for all examples in chapter six.
+
+    @module Six
+    @author © 2023 Axel T. Schreiner &lt;axel@schreiner-family.net>
+    @version 2024-02-27
+*/
+
+/** [Example 6/02](../?eg=06/02): actions to support
+    signed numbers.
+*/
+class Eval02 {
+  // list:     sum [{ ',' sum }];
+  
+  /** `sum: product [{ add | subtract }];` */
+  sum (product, many) { puts(g.dump(product)); }
+
+  // add:      '+' product;
+  // subtract: '-' product;
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide:   '/' signed;
+
+  /** `signed: [ '-' ] term;` */
+  signed (minus, term) { return minus ? - term : term; }
+
+  /** `term: number | '(' sum ')';` */
+  term (...val) { return val.length == 1 ? val[0] : val[1]; }
+
+  /** `number: Number;` */
+  number (number) { return parseInt(number, 10); }
+}
+
+/** [Example 6/03](../?eg=06/03): adds actions to support multiplication and division. 
+    @extends module:Six~Eval02 */
+class Eval03 extends Eval02 {
+  // list:     sum [{ ',' sum }];
+  // sum:      product [{ add | subtract }];
+  // add:      '+' product;
+  // subtract: '-' product;
+
+  /** `product: signed [{ multiply | divide }];` */
+  product (signed, many) {
+    return (many ? many[0] : [ ]).
+      reduce((product, list) => list[0](product), signed);
+  }
+
+  /** `multiply: '*' signed;` */
+  multiply (_, right) { return left => left * right; }
+
+  /** `divide: '/' signed;` */
+  divide (_, right) { return left => left / right; }
+
+  // signed:   [ '-' ] term;
+  // term:     number | '(' sum ')';
+  // number:   Number;
+}
+
+/** [Example 6/04](../?eg=06/04): adds actions to support lists of numerical expressions.
+    @extends module:Six~Eval03 */
+class Eval04 extends Eval03 {
+  /** `list: sum [{ ',' sum }];` */
+  list (sum, many) {
+    puts(sum);
+    if (many) many[0].forEach(seq => puts(seq[1]));
+  }
+
+  /** `sum: product [{ add | subtract }];` */
+  sum (product, many) {
+    return this.product(product, many);
+  }
+
+  /** `add: '+' product;` */
+  add (_, right) { return left => left + right; }
+
+  /** `subtract: '-' product;` */
+  subtract (_, right) { return left => left - right; }
+
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide:   '/' signed;
+  // signed:   [ '-' ] term;
+  // term:     number | '(' sum ')';
+  // number:   Number;
+}
+
+/** [Example 6/05](../?eg=06/05): adds actions to support variable names.
+    @extends module:Six~Eval04 */
+class Functions05 extends Eval04 {
+  #parser;                                    // for error messages
+  get parser () { return this.#parser; }
+
+  constructor (parser) { super(); this.#parser = parser; }
+  
+  // list: sum [{ ',' sum }];
+  
+  /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+  // arg          [1]      [3]   [0]     [1]
+  sum (... arg) {
+    if (arg.length &lt; 4) return this.parser.call(this, super.sum, arg[0], arg[1]);
+    if (!this.memory) this.memory = { };
+    return this.memory[arg[1]] = arg[3];
+  }
+  
+  // add: '+' product;
+  // subtract: '-' product;
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide: '/' signed;
+  // signed: [ '-' ] term;
+  // term: number | name | '(' sum ')';
+  // number: Number;
+
+  /** `name: Name;` returns value or `0` */
+  name (name) {
+    if (!this.memory) this.memory = { };
+    return name in this.memory ? this.memory[name] : 0;
+  }
+}
+
+/** [Example 6/06](../?eg=06/06): changes actions to support
+    returning names, numbers, and input as functions.
+    @extends module:Six~Functions05 */
+class Functions06 extends Functions05 {
+  // sum: product [{ add | subtract }];
+  // add: '+' product;
+  // subtract: '-' product;
+  // product: signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide: '/' signed;
+  // signed: [ '-' ] term;
+  // term: input | number | name | '(' sum ')';
+
+  /** `input: 'input' [ Number ];` returns fct */
+  input (_, number) {
+    const dflt = String(number !== null ? number[0] : 0);
+    return () => parseInt(prompt('input', dflt), 10);
+  }
+
+  /** `number: Number;` returns fct */
+  number (number) {
+    const result = parseInt(number, 10);
+    return () => result;
+  }
+
+  /** `name: Name;` returns fct */
+  name (name) {
+    return memory => name in memory ? memory[name] : 0;
+  }
+}
+
+/** [Example 6/07](../?eg=06/07): changes remaining actions to support
+    returning arithmetic expressions as functions.
+    @extends module:Six~Functions06 */
+class Functions07 extends Functions06 {
+  /** `list: sum [{ ',' sum }];` returns executable  */
+  list (sum, many) {
+    const list = [ sum ].
+      concat(many ? many[0].map(seq => seq[1]) : [ ]);
+    return () => {
+      const memory = { };
+      puts(... list.map(fct => fct(memory)));
+    }
+  }
+
+  /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+  //              [1]      [3]   [0]     [1]
+  sum (... arg) {
+    if (arg.length == 4)
+      return memory => memory[arg[1]] = arg[3](memory);
+    else
+      return this.product(arg[0], arg[1]);
+  }
+
+  /** `add: '+' product;` returns fct for composition */
+  add (_, right) {
+    return left => memory => left(memory) + right(memory);
+  }
+
+  /** `subtract: '-' product;` returns fct for composition */
+  subtract (_, right) {
+    return left => memory => left(memory) - right(memory);
+  }
+
+  /** `product: signed [{ multiply | divide }];` returns fct */
+  product (signed, many) {
+    const c = (a, b) => b(a);  // function composition
+    return (many ? many[0] : []).
+      reduce((product, list) => c(product, list[0]), signed);
+  }
+
+  /** `multiply: '*' signed;` returns fct for composition */
+  multiply (_, right) {
+    return left => memory => left(memory) * right(memory);
+  }
+
+  /** `divide: '/' signed;` returns fct for composition */
+  divide (_, right) {
+    return left => memory => left(memory) / right(memory);
+  }
+
+  /** `signed: [ '-' ] term;` returns fct */
+  signed (minus, term) {
+    return minus ? memory => - term(memory) : term;
+  }
+
+  // term: input | number | name | '(' sum ')';
+  // input: 'input' [ Number ];
+  // number: Number;
+  // name: Name;
+}
+
+/** [Example 6/08](../?eg=06/08): actions to convert to postfix. */
+class Postfix08 {
+  // sum: product [{ add | subtract }];
+  
+  /** `add: '+' right;` */
+  add (_, r) { puts('add'); }
+
+  /** `subtract: '-' right;` */
+  subtract (_, r) { puts('subtract'); } 
+  
+  // product: signed [{ multiply | divide }];
+
+  /** `multiply: '*' right;` */
+  multiply (_, r) { puts('multiply'); }
+
+  /** `divide: '/' signed;` */
+  divide (_, r) { puts('divide'); } 
+
+  /** `signed: [ '-' ] term;` */
+  signed (minus, t) {  if (minus) puts('minus'); }
+
+  // term: input | number | name | '(' sum ')';
+
+  /** `input: 'input' [ Number ];` */
+  input (i, n) { puts('input'); }
+
+  /** `number: Number;` */
+  number (number) { puts(number); }
+
+  /** `name: Name;` */
+  name (name) { puts(name); } 
+}
+
+/** [Example 6/09](../?eg=06/09): stack machine. */
+class Machine09 {
+  code = [ ];                             // holds the instructions
+  
+  /** Represents `code` as text */
+  toString () {
+    return this.code.map((f, n) => n + ': ' + f).join('\n');
+  }
+
+  /** Creates stack machine */
+  run (memorySize) {
+    return () => {
+      const memory = Array(memorySize).fill(0);    // create memory
+      this.code.forEach(code => code(memory));           // execute
+      return memory;
+    };
+  }
+}
+
+/** [Example 6/09](../?eg=06/09): actions to generate stack machine code. */
+class Arithmetic09 {
+  #parser;                                    // for error messages
+  get parser () { return this.#parser; }
+  #machine;                                    // handles execution
+  get machine () { return this.#machine; }
+  #symbols = new Map();    // symbol table, maps names to addresses
+  get symbols () { return this.#symbols; }
+  
+  constructor (parser, machine = new Machine09 ()) {
+    this.#parser = parser;
+    this.#machine = machine;
+  }
+
+  /** Returns memory address for name */
+  _alloc (name) {
+    let addr = this.symbols.get(name);               // known name?
+    if (typeof addr == 'undefined')      
+      this.symbols.set(name,                            // new name
+        addr = this.symbols.size);       // allocate, starting at 0
+    return addr;
+  }
+
+  /** `list: stmt [{ ';' stmt }];` */
+  list (s, many) {
+    puts(this.machine.toString());                     // show code
+    this.symbols.forEach(                         // show variables
+      (value, name) => puts(name, 'at', value));
+    const size = this.symbols.size;          // number of variables
+    puts('stack starts at', size);
+    return this.machine.run(size);                 // stack machine
+  }
+
+  /** `stmt: sum;` */
+  stmt (s) {                                // print and clear stack
+    this.machine.code.push(memory => puts(memory.pop()));
+  }
+  
+  /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+  sum (...val) {
+    if (val.length &lt; 4) return;
+    const addr = this._alloc(val[1]);
+    this.machine.code.push(memory => memory[addr] = memory.at(-1));
+  }
+
+  /** `add: '+' right;` */
+  add (_, r) { 
+    this.machine.code.push(
+      memory => memory.splice(-2, 2, memory.at(-2) + memory.at(-1))
+    );
+  }
+
+  /** `subtract: '-' right;` */
+  subtract (_, r) {
+    this.machine.code.push(
+      memory => memory.splice(-2, 2, memory.at(-2) - memory.at(-1))
+    );
+  }
+  
+  // product: signed [{ multiply | divide }];
+
+  /** `multiply: '*' right;` */
+  multiply (_, r) { 
+    this.machine.code.push(
+      memory => memory.splice(-2, 2, memory.at(-2) * memory.at(-1))
+    );
+  }
+  
+  /** `divide: '/' signed;` */
+  divide (_, r) {
+    this.machine.code.push(
+      memory => memory.splice(-2, 2, memory.at(-2) / memory.at(-1))
+    );
+  }
+
+  /** `signed: [ '-' ] term;` */
+  signed (minus, t) { 
+    if (minus)
+      this.machine.code.push(
+        memory => memory.splice(-1, 1, -memory.at(-1))
+      );
+  }
+
+  // term: input | number | name | '(' sum ')';
+
+  /** `input: 'input' [ Number ];` */
+  input (_, number) {
+    const dflt = String(number !== null ? number[0] : 0);
+    this.machine.code.push(
+      memory => memory.push(parseInt(prompt('input', dflt), 10))
+    );
+  }
+
+  /** `number: Number;` */
+  number (number) { 
+    const result = parseInt(number, 10);
+    this.machine.code.push(memory => memory.push(result));
+  }
+
+  /** `name: Name;` */
+  name (name) {
+    const addr = this._alloc(name);
+    this.machine.code.push(memory => memory.push(memory[addr]));
+  }
+}
+
+/** [Example 6/10](../?eg=06/10): stack machine with mnemonics.
+    @extends module:Six~Machine09 */
+class Machine10 extends Machine09 {
+  /** returns `code.length` */
+  gen (name, ... args) {
+    return this.code.push(this.ins(name, ... args));
+  }
+
+  /** returns instruction function */
+  ins (name, ... args) {
+    return args.length ?
+      eval(`memory => this.${name}(${args.join(', ')})(memory)`) :
+      eval(`memory => this.${name}(memory)`);
+  }
+  
+  /** `stack: ... a b -> ... a+b` */                 Add (memory) {
+    memory.splice(-2, 2, memory.at(-2) + memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a/b` */              Divide (memory) {
+    memory.splice(-2, 2, memory.at(-2) / memory.at(-1));
+  }
+  /** `stack: ... -> ... input` */                   Input (dflt) {
+    dflt = String(dflt);
+    return memory =>
+      memory.push(parseInt(prompt('input', dflt), 10));
+  }
+  /** `stack: ... -> ... memory[addr]` */             Load (addr) {
+    return memory => memory.push(memory[addr]);
+  }
+  /** `stack: ... a -> ... -a` */                  Minus (memory) {
+    memory.splice(-1, 1, -memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a*b` */            Multiply (memory) {
+    memory.splice(-2, 2, memory.at(-2) * memory.at(-1));
+  }
+  /** `stack: ... val -> ...` */                     Pop (memory) {
+    memory.pop();
+  }
+  /** `stack: ... -> ... result` */                 Push (result) {
+    return memory => memory.push(result);
+  }
+  /** `stack: ... val -> ... | puts(val)` */        Puts (memory) {
+    puts(memory.at(-1));
+  }
+  /** `stack: ... val -> ... val  | memory[a]: val` */  Store (a) {
+    return memory => memory[a] = memory.at(-1);
+  }
+  /** `stack: ... a b -> ... a-b` */            Subtract (memory) {
+    memory.splice(-2, 2, memory.at(-2) - memory.at(-1));
+  }
+}
+
+/** [Example 6/10](../?eg=06/10): actions to generate mnemonic stack machine code.
+    @extends module:Six~Machine09 */
+class Arithmetic10 extends Arithmetic09 {
+  constructor (parser, machine = new Machine10()) {
+    super(parser, machine);
+  }
+
+  // list: stmt [{ ';' stmt }];
+
+  /** `stmt: sum;` */
+  stmt (s) {                               // print and clear stack
+    this.machine.gen('Puts');
+    this.machine.gen('Pop');
+  }
+
+  /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+  sum (...val) {
+    if (val.length &lt; 4) return;
+    this.machine.gen('Store', this._alloc(val[1]));
+  }
+
+  /** `add: '+' product;` */
+  add () { this.machine.gen('Add'); }
+
+  /** `subtract: '-' product;` */
+  subtract () { this.machine.gen('Subtract'); }
+  
+  // product: signed [{ multiply | divide }];
+
+  /** `multiply: '*' signed;` */
+  multiply () { this.machine.gen('Multiply'); }
+  
+  /** `divide: '/' signed;` */
+  divide () { this.machine.gen('Divide'); }  // 
+
+  /** `signed: [ '-' ] term;` */
+  signed (minus, t) { if (minus) this.machine.gen('Minus'); }
+
+  // term: input | number | name | '(' sum ')';
+
+  /** `input: 'input' [ Number ];` */
+  input (i, number) {
+    this.machine.gen('Input', number !== null ? number[0] : 0);
+  }
+
+  /** `number: Number;` */
+  number (number) { 
+    const result = parseInt(number, 10);
+    this.machine.gen('Push', result);
+  }
+
+  /** `name: Name;` */
+  name (name) {
+    this.machine.gen('Load', this._alloc(name));
+  }
+}
+
+/** [Example 6/11](../?eg=06/11): branches, stepping, and tracing.
+    @extends module:Six~Machine10 */
+class Machine11 extends Machine10 {
+  /** Returns trace function, if any */
+  trace (address) {
+    if (address === true)                    // unconditional trace
+      return (memory, pc) =>            // traces instruction at pc
+        puts(memory.toString(), pc+':', this.code[pc].toString());
+    if (typeof address == 'number') // address of control variable?
+      return (memory, pc) => {          // traces instruction at pc
+        if (memory[address] >= 0) // variable at addr non-negative?
+          puts(memory.toString(), pc+':', this.code[pc].toString());
+      };
+  }
+
+  /** Data memory.
+      @class extends Array
+      @property {number} pc - program counter.
+      @property {boolean} continue - true if execution can be continued.
+      @property {function} toString() - represents as text. */
+  get Memory () { return this.#Memory ??= class extends Array {
+      toString () { return '[ ' + this.join(' ') + ' ]'; }
+    };
+  }
+  #Memory;
+  
+  /** Returns stack machine executable */
+  run (size, startAddr = 0, traceAddr) {
+    let t;                      // [closure] trace function, if any
+    const StackMachine = (memory, steps) => {
+      if (!memory) {                                 // initialize?
+        if (steps) t = this.trace(true);  // steps? permanent trace
+        else {                           // no steps: don't suspend
+          t = this.trace(traceAddr); steps = Infinity;
+        }
+        memory = new this.Memory(size).fill(0);    // create memory
+        memory.pc = startAddr;        // initialize program counter
+        t &amp;&amp; puts(memory.toString());             // initial memory
+      }
+      while (steps -- &amp;&amp; memory.pc &lt; this.code.length) {  // steps?
+        const pc = memory.pc ++;         // advance program counter
+        this.code[pc](memory);            // execute at previous pc
+        t &amp;&amp; t(memory, pc);           // trace executed instruction
+      }
+      memory.continue = memory.pc &lt; this.code.length;     // again?
+      return memory;
+    };
+    return (memory, steps) => StackMachine(memory, steps);
+  }
+  
+  /** `stack: ... -> ... | pc: a` */                   Branch (a) {
+    return memory => memory.pc = a;
+  }
+  /** `stack: ... bool -> ... | pc: !bool? a` */        Bzero (a) {
+    return memory => { if (!memory.pop()) memory.pc = a; }
+  }
+  /** `stack: ... a b -> ... a == b` */               Eq (memory) {
+    memory.splice(-2, 2, memory.at(-2) == memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a >= b` */               Ge (memory) {
+    memory.splice(-2, 2, memory.at(-2) >= memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a > b` */                Gt (memory) {
+    memory.splice(-2, 2, memory.at(-2) > memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a &lt;= b` */               Le (memory) {
+    memory.splice(-2, 2, memory.at(-2) &lt;= memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a &lt; b` */                Lt (memory) {
+    memory.splice(-2, 2, memory.at(-2) &lt; memory.at(-1));
+  }
+  /** `stack: ... a b -> ... a != b` */               Ne (memory) {
+    memory.splice(-2, 2, memory.at(-2) != memory.at(-1));
+  }
+  /** `stack: ... n*val -> ...` */                      Print (n) {
+    return memory => puts(... memory.splice(- n));
+  }
+}
+
+/** [Example 6/11](../?eg=06/11): compile a little language into stack machine code.
+    @extends module:Six~Arithmetic10 */
+class Control11 extends Arithmetic10 {
+  constructor (parser, machine = new Machine11()) {
+    super(parser, machine);
+  }
+  
+  /** `prog: stmts;` returns executable */
+  prog (_) {
+    const size = this.symbols.size,          // number of variables
+      traceAddr = this.symbols.get('trace'); // if a variable named
+    if (typeof traceAddr != 'undefined') {     // ...'trace' exists
+      puts(this.machine.toString());                   // show code
+      this.symbols.forEach(              // show variable addresses
+        (addr, name) => puts(`${name} at ${addr}`)
+      );
+      puts('stack starts at', size);
+    }
+    return this.machine.run(size, 0, traceAddr);   // stack machine
+  }
+  
+  // stmts:    stmt [{ ';' stmt }];
+
+  /** `stmt: assign | print | loop | select;` [replace] no op */
+  stmt (stmt) { }
+
+  /** `assign: Name '=' sum;` stores and pops stack */
+  assign (name, e, s) {
+    this.machine.gen('Store', this._alloc(name));
+    this.machine.gen('Pop');
+  }
+
+  /** `print: 'print' sums;` */
+  print (_, sums) { this.machine.gen('Print', sums); }
+
+  /** `sums: sum [{ ',' sum }];` returns number of values */
+  sums (sum, many) { return 1 + (many ? many[0].length : 0); }
+  
+  /** `loop: While cmp Do stmts 'od';` */
+  loop (While, _, Do, s, o) {
+    const od = this.machine.gen('Branch', While);
+    this.machine.code[Do] = this.machine.ins('Bzero', od);
+  }
+
+  /** `While: 'while';` returns address for branch to `while` */
+  While (w) { return this.machine.code.length; }
+
+  /** `Do: 'do';` returns address of slot for bzero to `od` */
+  Do (d) { return this.machine.code.push(null) - 1; }
+
+  /** `select: 'if' cmp Then stmts [ Else stmts ] 'fi';` */
+  select (i, c, Then, s, Else, f) {
+    const fi = this.machine.code.length;         // address of 'fi'
+    if (Else) {
+      Else = Else[0];               // address after branch to 'fi'
+      this.machine.code[Then] = this.machine.ins('Bzero', Else);
+      this.machine.code[Else - 1] = this.machine.ins('Branch', fi);     
+    } else
+      this.machine.code[Then] = this.machine.ins('Bzero', fi);
+  }
+
+  /** `Then: 'then';` returns address for bzero to `else` `fi` */
+  Then (t) { return this.machine.code.push(null) - 1; }
+
+  /** `Else: 'else';` creates slot for branch to `fi`,
+      returns address of `else` */
+  Else (e) { return this.machine.code.push(null); }
+
+  // cmp:      sum rel;
+  // rel:      eq | ne | gt | ge | lt | le;
+
+  /** `eq: '=' sum;` */   eq () { this.machine.gen('Eq'); } 
+
+  /** `ne: '&lt;>' sum;` */  ne () { this.machine.gen('Ne'); }
+  
+  /** `gt: '>' sum;` */   gt () { this.machine.gen('Gt'); }
+
+  /** `ge: '>=' sum;` */  ge () { this.machine.gen('Ge'); }
+
+  /** `lt: '&lt;' sum;` */   lt () { this.machine.gen('Lt'); }
+   
+  /** `le: '&lt;=' sum;` */  le () { this.machine.gen('Le'); }
+
+  // sum:      product [{ add | subtract }];
+  // add:      '+' product;
+  // subtract: '-' product;
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide:   '/' signed;
+  // signed:   [ '-' ] term;
+  // term:     input | number | name | '(' sum ')';
+  // input:    'input' [ Number ];
+  // number:   Number;
+  // name:     Name;
+}
+
+/** [Example 6/12](../?eg=06/12): compile a little language
+    into JavaScript functions.
+    @extends module:Six~Functions07 */
+class Functions12 extends Functions07 {
+  /** `prog: stmts;` returns executable */
+  prog (stmts) { return () => stmts({ }); }
+
+  /** `stmts: stmt [{ ';' stmt }];` returns fct */
+  stmts (stmt, many) {
+    return (many ? many[0] : []).
+      reduce((left, list) => 
+        memory => (left(memory), list[1][0](memory)), stmt[0]);
+  }
+
+  // stmt:     assign | print | loop | select;
+
+  /** `assign: Name '=' sum;` returns fct */
+  assign (name, e, sum) {
+    return memory => memory[name] = sum(memory);
+  }
+
+  /** `print: 'print' sums;` returns function */
+  print (p, sums) {
+    return memory => puts(... sums.map(fct => fct(memory)));
+  }
+
+  /** `sums: sum [{ ',' sum }];` returns list of functions */
+  sums (sum, many) {
+    return [ sum ].concat(many ? many[0].map(seq => seq[1]) : []);
+  }
+
+  /** `loop: 'while' cmp 'do' stmts 'od';` returns fct */
+  loop (w, cmp, d, stmts, o) {
+    return memory => { while (cmp(memory)) stmts(memory); };
+  }
+
+  /** `select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';` returns fct */
+  select (i, cmp, t, stmts, opt, f) { 
+    return opt ?
+      (memory => cmp(memory) ? stmts(memory) : opt[1](memory)) :
+      (memory => { if (cmp(memory)) stmts(memory); });
+  }
+  
+  /** `cmp: sum rel;` returns fct */
+  cmp (sum, rel) { return memory => rel[0](sum)(memory); }
+
+  // rel:      eq | ne | gt | ge | lt | le;
+
+  /** `eq: '=' expr;` returns fct for composition */
+  eq (_, right) {
+    return left => memory => left(memory) == right(memory);
+  }
+  
+  /** `ne: '&lt;>' expr;` returns fct for composition */
+  ne (_, right) {
+    return left => memory => left(memory) != right(memory);
+  }
+
+  /** `gt: '>' expr;` returns fct for composition */
+  gt (_, right) {
+    return left => memory => left(memory) > right(memory);
+  }
+
+  /** `ge: '>=' expr;` returns fct for composition */
+  ge (_, right) {
+    return left => memory => left(memory) >= right(memory);
+  }
+
+  /** `lt: '&lt;' expr;` returns fct for composition */
+  lt (_, right) {
+    return left => memory => left(memory) &lt; right(memory);
+  }
+
+  /** `le: '&lt;=' expr;` returns fct for composition */
+  le (_, right) {
+    return left => memory => left(memory) &lt;= right(memory);
+  }
+
+  /** `sum: product [{ add | subtract }];` returns fct */
+  sum (product, many) { return this.product(product, many); }
+
+  // add:      '+' product;
+  // subtract: '-' product;
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide:   '/' signed;
+  // signed:   [ '-' ] term;
+  // term:     input | number | name | '(' sum ')';
+  // input:    'input' [ Number ];
+  // number:   Number;
+  // name:     Name;
+}
+
+export {
+  Eval02,
+  Eval03,
+  Eval04,
+  Functions05,
+  Functions06,
+  Functions07,
+  Postfix08,
+  Arithmetic09,
+  Machine09,
+  Arithmetic10,
+  Machine10,
+  Control11,
+  Machine11,
+  Functions12
+};
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

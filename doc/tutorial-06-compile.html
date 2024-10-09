@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 6. Compiling Little Languages</title -->
+	<title>6. Compiling Little Languages</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>6. Compiling Little Languages</h2>
+</header>
+
+<article>
+    <h4 id="interpret-now%2C-compile-for-later">Interpret Now, Compile for Later</h4>
+<h4 id="functions-and-a-stack-machine">Functions and a Stack Machine</h4>
+<hr>
+<p><a href="tutorial-02-grammars.html">Chapter two</a> discussed how to write grammars
+and <a href="../?eg=02/12">example 2/12</a> presented a typical grammar for a comma-separated list
+of arithmetic expressions:</p>
+<pre class="prettyprint source"><code>list: sum [{ ',' sum }];
+sum: product [{ '+' product | '-' product }];
+product: signed [{ '*' signed | '/' signed }];
+signed: [ '-' | '+' ] term;
+term: Number | '(' sum ')';
+</code></pre>
+<p><a href="tutorial-03-scanner.html">Chapter three</a> and <a href="tutorial-04-parser.html">chapter four</a> explained
+that a grammar,
+token patterns,
+and the classes of the <a href="module-EBNF.html">EBNF module</a> are all it takes
+to implement lexical and syntax analysis for sentences conforming to the grammar,
+in this case to recognize comma-separated lists of arithmetic expressions.</p>
+<p><a href="tutorial-05-lists.html">Chapter five</a> introduced <a href="module-Base.html#~Action"><code>Action</code></a> methods
+(which we will just call <em>actions</em> from now on)
+to interact with syntax analysis and produce useful output rather than deeply nested lists.</p>
+<p>This chapter looks at actions to evaluate arithmetic expressions
+or to translate them into different representations more suitable for interpretation, etc.
+Many examples reuse actions; all classes are available from the module
+<a href="module-Six.html"><code>Six</code></a>
+which is built into the practice page.</p>
+<p>Arithmetic expressions are at the core of programming languages.
+This chapter also presents a grammar for a little language,
+actions to compile the language into JavaScript functions,
+and actions to compile the language for execution on a stack machine
+which will be simulated in JavaScript.</p>
+<h3 id="immediate-evaluation">Immediate Evaluation</h3>
+<p>It makes sense to add a few more rules to the grammar above
+because they provide hooks for actions.
+For example, there is no point in letting syntax analysis distinguish
+addition and subtraction, only to have to check for <code>+</code> or <code>-</code> a second time
+when it comes to evaluation.
+<a href="../?eg=06/01">Example 6/01</a>
+recognizes the same list of arithmetic expressions:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis;</p>
+</li>
+<li>
+<p>compare to the original grammar in <a href="../?eg=02/12">example 2/12</a>
+to see that the additional rules result in more deeply nested lists.</p>
+</li>
+</ul>
+<p>Here is the modified grammar:</p>
+<pre class="prettyprint source"><code>list:     sum [{ ',' sum }];
+sum:      product [{ add | subtract }];
+add:      '+' product;
+subtract: '-' product;
+product:  signed [{ multiply | divide }];
+multiply: '*' signed;
+divide:   '/' signed;
+signed:   [ '-' ] term;  
+term:     number | '(' sum ')';
+number:   Number;
+</code></pre>
+<p>The goal is to immediately evaluate arithmetic expressions,
+i.e., each action should return the value
+which the corresponding rule has recognized.
+This results in obvious actions for the last three rules:</p>
+<pre class="prettyprint source"><code>class Eval02 {
+  // list:     sum [{ ',' sum }];
+  
+  /** `sum: product [{ add | subtract }];` */
+  sum (product, many) { puts(g.dump(product)); }
+
+  // add:      '+' product;
+  // subtract: '-' product;
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide:   '/' signed;
+
+  /** `signed: [ '-' ] term;` */
+  signed (minus, term) { return minus ? - term : term; }
+
+  /** `term: number | '(' sum ')';` */
+  term (...val) { return val.length == 1 ? val[0] : val[1]; }
+
+  /** `number: Number;` */
+  number (number) { return parseInt(number, 10); }
+}
+</code></pre>
+<p>Because of the placeholder for <code>sum</code> (line 5)
+very simple expressions can already be tested in <a href="../?eg=06/02">example 6/02</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis and invoke the actions.</p>
+</li>
+<li>
+<p>Toggle <span class='t-actions'></span> and
+press <span class='c-parse'></span> again
+to see how the values are computed by the actions.
+Why is so much output <code>undefined</code>?
+Why are some numbers followed by commas in the output?</p>
+</li>
+</ul>
+<p>The next three actions are tricky but representative
+for any evaluation based on this kind of a grammar:</p>
+<pre class="prettyprint source"><code>class Eval03 extends Six.Eval02 {
+  // list:     sum [{ ',' sum }];
+  // sum:      product [{ add | subtract }];
+  // add:      '+' product;
+  // subtract: '-' product;
+
+  /** `product: signed [{ multiply | divide }];` */
+  product (signed, many) {
+    return (many ? many[0] : [ ]).
+      reduce((product, list) => list[0](product), signed);
+  }
+
+  /** `multiply: '*' signed;` */
+  multiply (_, right) { return left => left * right; }
+
+  /** `divide: '/' signed;` */
+  divide (_, right) { return left => left / right; }
+
+  // signed:   [ '-' ] term;
+  // term:     number | '(' sum ')';
+  // number:   Number;
+}
+</code></pre>
+<p>Multiplication and division are left-associative operations,
+i.e., they are evaluated from left to right by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a>
+in the action for <code>product</code> (line 10 above).
+Therefore,
+the <code>multiply</code> and <code>divide</code> actions have to return functions
+which will take a left argument, combine it with the right argument which
+the <code>multiply</code> and <code>divide</code> rules have recognized and evaluated,
+and return the result of the computation (lines 14 and 17).</p>
+<p>The <code>product</code> action gets a first <code>signed</code> value
+which the <code>signed</code> rule has already evaluated,
+and it gets <code>many</code> of these functions for the remainder
+of the chain of products (line 9).</p>
+<p>The chain has to be processed
+as discussed in the <em>Idioms</em> in <a href="tutorial-05-lists.html#many">chapter five</a>
+using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a>:
+If there are no functions, the first <code>signed</code> value is the result.
+Otherwise the callback function (line 10) is applied from left to right
+and each time applies a multiplication or division to the previous product,
+starting with <code>signed</code>.</p>
+<p>Again, it might be a good idea to try this stage in <a href="../?eg=06/03">example 6/03</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis and invoke the actions.</p>
+</li>
+</ul>
+<p>It seems to work at first, but <code>2</code> <code>/</code> <code>(3*4)</code> produces the unexpected outputs <code>12</code> and <code>NaN</code>.</p>
+<ul>
+<li>Toggle <span class='t-actions'></span> and
+press <span class='c-parse'></span> again
+to see how the values are computed.
+Where do the <em>two</em> lines of output <code>12</code> and <code>NaN</code> come from?
+Which action has to be repaired?</li>
+</ul>
+<p>Check out the complete immediate expression evaluation in <a href="../?eg=06/04">example 6/04</a>.
+Addition and subtraction use the same pattern as multiplication and division:</p>
+<pre class="prettyprint source"><code>class Eval04 extends Six.Eval03 {
+  /** `list: sum [{ ',' sum }];` */
+  list (sum, many) {
+    puts(sum);
+    if (many) many[0].forEach(seq => puts(seq[1]));
+  }
+
+  /** `sum: product [{ add | subtract }];` */
+  sum (product, many) {
+    return this.product(product, many);
+  }
+
+  /** `add: '+' product;` */
+  add (_, right) { return left => left + right; }
+
+  /** `subtract: '-' product;` */
+  subtract (_, right) { return left => left - right; }
+
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide:   '/' signed;
+  // signed:   [ '-' ] term;
+  // term:     number | '(' sum ')';
+  // number:   Number;
+}
+</code></pre>
+<p><code>sum</code> is used recursively inside parentheses, i.e.,
+it needs to return a value and it cannot output the final result.
+Therefore, the action for the start rule has to display each top-level <code>sum</code> (lines 3 to 6 above).</p>
+<h3 id="functional-evaluation">Functional Evaluation</h3>
+<p>Returning functions for some arithmetic operations suggests
+that the <em>entire</em> evaluation could be delayed —
+every action returns a function,
+the result is stored as an &quot;executable&quot;
+and can be evaluated (executed) several times over.
+This is more useful if simple variables are added to the grammar in <a href="../?eg=06/05">example 6/05</a>.</p>
+<p>There has to be a token for names:</p>
+<pre class="prettyprint source"><code>Name: /[a-z]+/
+</code></pre>
+<p>There has to be a rule to recognize a name</p>
+<pre class="prettyprint source"><code>name: Name;
+</code></pre>
+<p>and the rule for <code>term</code> has to recognize a <code>name</code> just like a <code>number</code>:</p>
+<pre class="prettyprint source"><code>term: number | name | '(' sum ')';
+</code></pre>
+<p>The action for <code>name</code> (lines 27 to 30 below) has to return a value.
+For now, a local object <code>memory</code> maps names to values (line 29)
+and it is generated if needed (line 28).</p>
+<pre class="prettyprint source"><code>class Functions05 extends Six.Eval04 {
+  #parser;                                    // for error messages
+  get parser () { return this.#parser; }
+
+  constructor (parser) { super(); this.#parser = parser; }
+  
+  // list: sum [{ ',' sum }];
+  
+  /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+  // arg          [1]      [3]   [0]     [1]
+  sum (... arg) {
+    if (arg.length &lt; 4) return this.parser.call(this, super.sum, arg[0], arg[1]);
+    if (!this.memory) this.memory = { };
+    return this.memory[arg[1]] = arg[3];
+  }
+  
+  // add: '+' product;
+  // subtract: '-' product;
+  // product:  signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide: '/' signed;
+  // signed: [ '-' ] term;
+  // term: number | name | '(' sum ')';
+  // number: Number;
+
+  /** `name: Name;` returns value or `0` */
+  name (name) {
+    if (!this.memory) this.memory = { };
+    return name in this.memory ? this.memory[name] : 0;
+  }
+}
+</code></pre>
+<p>This is only useful if there is a way to assign a value to a name.
+Therefore, the rule for <code>sum</code> is modified
+as shown in the comment (line 9 above).</p>
+<p>The action for <code>sum</code> defers to the superclass for simple sums (line 12)
+or it creates <code>memory</code> if needed (line 13) and performs the assignment (line 14).</p>
+<p>Check this stage out <a href="../?eg=06/05">in example 6/05</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to evaluate
+the expressions in the <span class='a-program'></span>.</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>let x = 3,
+(x + 1) / (y - 2) * 3,
+y + (x + 1) / ((let y = 1) - 2) * 3
+</code></pre>
+<p>The assignment in line 1 returns <code>3</code>.
+So far, <code>y</code> is undefined, i.e., zero; therefore, line 2 produces <code>-6</code>.
+In line 3, <code>y</code> is set to <code>1</code> but only once the denominator is evaluated,
+i.e., the output is <code>-12</code> and not <code>-11</code>.</p>
+<p>At this point, expressions are evaluated as they are recognized
+and the top-level <code>list</code> action returns <code>undefined</code>
+to the <a href="module-EBNF-Parser.html#parse"><code>Parser</code>'s <code>parse()</code></a> method
+which returns it to be shown in the output area.</p>
+<p>If every action returns a function rather than a value
+we can execute the top-level function more than once.
+This is interesting if there is input during execution;
+therefore, <a href="../?eg=06/06">example 6/06</a> adds <code>input</code>
+as a &quot;reserved&quot; variable name, optionally with a default value:</p>
+<pre class="prettyprint source"><code>term: input | number | name | '(' sum ')';
+input: 'input' [ Number ];
+</code></pre>
+<p>Here are the first few modified actions which return functions:</p>
+<pre class="prettyprint source"><code>class Functions06 extends Six.Functions05 {
+  // sum: product [{ add | subtract }];
+  // add: '+' product;
+  // subtract: '-' product;
+  // product: signed [{ multiply | divide }];
+  // multiply: '*' signed;
+  // divide: '/' signed;
+  // signed: [ '-' ] term;
+  // term: input | number | name | '(' sum ')';
+
+  /** `input: 'input' [ Number ];` returns fct */
+  input (_, number) {
+    const dflt = String(number !== null ? number[0] : 0);
+    return () => parseInt(prompt('input', dflt), 10);
+  }
+
+  /** `number: Number;` returns fct */
+  number (number) {
+    const result = parseInt(number, 10);
+    return () => result;
+  }
+
+  /** `name: Name;` returns fct */
+  name (name) {
+    return memory => name in memory ? memory[name] : 0;
+  }
+}
+</code></pre>
+<p>The <code>number</code> action returns a function returning a constant value.
+The action optimizes and converts the string only once (line 19 above).
+The returned function takes advantage of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" title="closure">closure</a> (line 20).</p>
+<p>The <code>name</code> action returns a function which checks memory <em>at run time</em>,
+i.e., it expects to receive <code>memory</code> when the executable is run (line 25).</p>
+<p>Finally, the <code>input</code> action returns a function which invokes <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" title="prompt()"><code>prompt()</code></a>
+and converts the resulting string to a number if possible (line 14);
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt" title="parseInt()"><code>parseInt()</code></a> returns <code>NaN</code> if it cannot convert.</p>
+<p>The <code>term</code> action can be inherited because now it juggles functions:
+the action of every descendant of the rule must
+deliver a function and the <code>term</code> action picks it out of the list
+produced by recognition.</p>
+<p>If <code>sum</code> and <code>product</code> recognize a single descendant they will just pass on
+whatever the descendant's action returns, i.e.,
+if <code>sum</code> is the start rule the actions can be inherited and
+one simple expression such as <code>input</code> will be compiled into
+a JavaScript function.</p>
+<p>Again, it might be a good idea to try this stage <a href="../?eg=06/06">in example 6/06</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis and invoke the actions,
+i.e., to compile simple programs such as <code>10</code> or <code>(input)</code>.</p>
+</li>
+<li>
+<p>Press <span class='c-run'></span> to execute the compiled program.</p>
+</li>
+<li>
+<p>Note that a program consisting only of a variable name such as <code>x</code> is compiled into a function which expects
+<code>memory</code> as an argument, i.e., execution with <span class='c-run'></span> will fail:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+memory => name in memory ? memory[name] : 0
+> run()
+memory is not an Object. (evaluating 'name in memory')
+</code></pre>
+<p><a href="../?eg=06/07">Example 6/07</a> converts the remaining actions so that they return functions.
+The action for <code>signed</code> is patterned after those for <code>term</code> and <code>name</code>:</p>
+<pre class="prettyprint source"><code>class Functions07 extends Six.Functions06 {
+  // ...
+  signed (minus, term) {
+    return minus ? memory => - term(memory) : term;
+  }
+</code></pre>
+<p>If there really is a sign change, there has to be a new function,
+otherwise the old function will do.</p>
+<p>All of these functions have to accept <code>memory</code>
+because <code>term</code> could be the function created by <code>name</code> and,
+therefore, require that argument.</p>
+<p>Actions for <code>add</code>, <code>subtract</code>, <code>multiply</code>, and <code>divide</code> again are tricky, for example:</p>
+<pre class="prettyprint source"><code>  multiply (_, right) {
+    return left => memory => left(memory) * right(memory);
+  }
+</code></pre>
+<p><code>multiply</code> expects two functions, <code>left</code> and <code>right</code>,
+each with an argument <code>memory</code>,
+to return the left and right operand value for the multiplication.</p>
+<p>The function <code>right</code> is handed to the <code>multiply</code> action
+as the result of recognizing the right operand,
+i.e., it is the result of the <code>signed</code> action
+and as such expects <code>memory</code> as argument.</p>
+<p>The <code>multiply</code> action returns a function
+which expects a function <code>left</code> as an argument
+and returns the function which expects <code>memory</code> as an argument
+and produces the result of the multiplication,
+i.e., a function which fits the pattern of <code>signed</code> and <code>name</code>.</p>
+<p>This complicates the <code>product</code> and <code>sum</code> actions a bit, for example:</p>
+<pre class="prettyprint source"><code>  product (signed, many) {
+    const c = (a, b) => b(a);  // function composition
+    return (many ? many[0] : []).
+      reduce((product, list) => c(product, list[0]), signed);
+  }
+</code></pre>
+<p>The action for <code>product</code> fits
+the idiom discussed in <a href="tutorial-05-lists.html#many">chapter five</a>:
+there is one function <code>signed</code> and there can be <code>many</code> more.
+The functions have to be composed with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a>
+and the callback function (line 2) has to compose two functions:</p>
+<ul>
+<li>
+<p><code>a</code> is a function which expects <code>memory</code> as an argument,
+i.e., a function like the one returned by the action for <code>signed</code>.</p>
+</li>
+<li>
+<p><code>b</code> is a function which expects something like <code>a</code> as an argument,
+i.e., a function like the one returned by the action for <code>multiply</code>.</p>
+</li>
+<li>
+<p>As discussed for <code>multiply</code> above, <code>b(a)</code> is in fact a function.</p>
+</li>
+</ul>
+<p>The result of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> is the last function produced with the composition <code>c()</code>,
+i.e., it is a function which can be applied to <code>memory</code>
+to carry out the calculations required to evaluate the <code>product</code>.
+Note that <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> is executed at compile time, not at run time.</p>
+<p>The actions for <code>divide</code>, <code>add</code>, and <code>subtract</code> follow the pattern of <code>multiply</code>.
+The action for <code>sum</code> either produces a function to
+implement the assignment or it delegates to the action for <code>product</code>:</p>
+<pre class="prettyprint source"><code>  sum (... arg) {
+    if (arg.length == 4)
+      return memory => memory[arg[1]] = arg[3](memory);
+    else
+      return this.product(arg[0], arg[1]);
+  }
+</code></pre>
+<p>Finally, the action for <code>list</code> has to return the executable,
+i.e., a function which does not accept an argument
+and displays the result of each sum in the comma-separated list:</p>
+<pre class="prettyprint source"><code>  list (sum, many) {
+    const list = [ sum ].
+      concat(many ? many[0].map(seq => seq[1]) : [ ]);
+    return () => {
+      const memory = { };
+      puts(... list.map(fct => fct(memory)));
+    }
+  }
+}
+</code></pre>
+<p>The list of functions to be called can be produced during recognition (lines 2 and 3 above)
+based on the idiom discussed in <a href="tutorial-05-lists.html#many">chapter five</a>.
+The executable creates <code>memory</code> (line 5),
+uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" title="map()"><code>map()</code></a> to produce an array of results,
+and uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">spread syntax</a> to display it on one line,
+i.e., with a single call to <code>puts()</code> (line 6).</p>
+<p>Try the functional expression compiler <a href="../?eg=06/07">in example 6/07</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis and invoke the actions,
+i.e., to compile a program such as</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>let x = input 3, (x + 1) / (y - 2) * 3,
+y + ((let y = 2) + 1) / (x - 2) + y
+</code></pre>
+<ul>
+<li>Press <span class='c-run'></span> and execute the program for different inputs.</li>
+</ul>
+<h3 id="stack-evaluation">Stack Evaluation</h3>
+<p>In this section arithmetic expressions
+are compiled into code for a <a href="https://en.wikipedia.org/wiki/Stack_machine" title="stack machine">stack machine</a>.</p>
+<p><a href="../?eg=06/08">Example 6/08</a>
+contains new actions for the single expression grammar
+from <a href="../?eg=06/06">example 6/06</a>
+which simply output the operation to be performed:</p>
+<pre class="prettyprint source"><code>class Postfix08 {
+  // sum: product [{ add | subtract }];
+  
+  /** `add: '+' right;` */
+  add (_, r) { puts('add'); }
+
+  /** `subtract: '-' right;` */
+  subtract (_, r) { puts('subtract'); } 
+  
+  // product: signed [{ multiply | divide }];
+
+  /** `multiply: '*' right;` */
+  multiply (_, r) { puts('multiply'); }
+
+  /** `divide: '/' signed;` */
+  divide (_, r) { puts('divide'); } 
+
+  /** `signed: [ '-' ] term;` */
+  signed (minus, t) {  if (minus) puts('minus'); }
+
+  // term: input | number | name | '(' sum ')';
+
+  /** `input: 'input' [ Number ];` */
+  input (i, n) { puts('input'); }
+
+  /** `number: Number;` */
+  number (number) { puts(number); }
+
+  /** `name: Name;` */
+  name (name) { puts(name); } 
+}
+</code></pre>
+<p>There are no actions for <code>sum</code>, <code>product</code>, and <code>term</code>.
+The program</p>
+<pre class="prettyprint source"><code>  (x + 1) / (input - -2) * 3
+</code></pre>
+<p>produces the output (one item per line)</p>
+<pre class="prettyprint source"><code>x 1 add input 2 minus subtract divide 3 multiply
+</code></pre>
+<p>This is known as <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation" title="reverse Polish notation"><em>Reverse Polish Notation</em></a> — operators follow their operands
+and no parentheses are needed as long as it is clear how many operands
+belong to each operator.
+This notation can be viewed as machine language for a <a href="https://en.wikipedia.org/wiki/Stack_machine" title="stack machine">stack machine</a>:</p>
+<ul>
+<li>
+<p>operands are pushed onto the stack,</p>
+</li>
+<li>
+<p>operators are applied to the top entries on the stack,</p>
+</li>
+<li>
+<p>pop the entries off the stack, and</p>
+</li>
+<li>
+<p>push the result onto the stack.</p>
+</li>
+</ul>
+<p>The example suggests that syntax analysis with a grammar should make it near trivial
+to produce stack machine code to evaluate an arithmetic expression.</p>
+<p><a href="../?eg=06/09">Example 6/09</a> shows how to generate &quot;code&quot;
+and simulate a stack machine in JavaScript.
+The grammar from <a href="../?eg=06/07">example 6/07</a> can be used
+but the start rule has to be modified to avoid
+collecting all results of <code>sum</code> on the stack:</p>
+<pre class="prettyprint source"><code>list: stmt [{ ';' stmt }];
+stmt: sum;
+sum: 'let' Name '=' sum | product [{ add | subtract }];
+</code></pre>
+<p>A program is a <code>list</code> of statements,
+a statement is a <code>sum</code>
+and can start with an assignment prefixed by <code>let</code> to avoid an ambiguity.
+In the <code>list</code> above, statements are semicolon-separated.
+Alternatively</p>
+<pre class="prettyprint source"><code>list: { stmt ';' };
+</code></pre>
+<p>would make statements semicolon-terminated.</p>
+<p>Here is a small program:</p>
+<pre class="prettyprint source"><code>let x = let y = input 4; (x + 1) / (y - 2) * 3;
+y + ((let y = 2) + 1) / (x - 2) + y
+</code></pre>
+<p>Note that assignment is right-associative
+because it involves right recursion.</p>
+<p>It turns out to be a good idea to encapsulate the infrastructure for a stack machine
+as a class to separate it from the compiler:</p>
+<pre class="prettyprint source"><code>class Machine09 {
+  code = [ ];                             // holds the instructions
+  
+  /** Represents `code` as text */
+  toString () {
+    return this.code.map((f, n) => n + ': ' + f).join('\n');
+  }
+
+  /** Creates stack machine */
+  run (memorySize) {
+    return () => {
+      const memory = Array(memorySize).fill(0);    // create memory
+      this.code.forEach(code => code(memory));           // execute
+      return memory;
+    };
+  }
+}
+</code></pre>
+<p>A program is compiled into an array <code>code[]</code> of JavaScript functions (line 2 above)
+which simulate the instructions of the stack machine.
+The method <code>toString()</code> can be used to display the instructions (line 5).</p>
+<p>The method <code>run()</code> creates and returns the stack machine interpreter (line 10)
+which must be a parameterless function.</p>
+<p>Runtime values are stored in an array <code>memory[]</code>
+which contains the variables' values followed by the stack.
+Thankfully, JavaScript imposes no restrictions on array length.
+<code>memory[]</code> is created when the stack machine starts (line 12)
+and manipulated by the JavaScript functions
+which simulate the instructions of the stack machine (line 13).
+At this point, each instruction in <code>code[]</code> is executed sequentially just once.</p>
+<p>The actions need access to the stack machine infrastructure
+and to a symbol table which maps variable names to memory addresses.
+The actions class has construction parameters so that future subclasses
+can extend the machine infrastructure and/or the symbol table:</p>
+<pre class="prettyprint source"><code>class Arithmetic09 {
+  #parser;                                    // for error messages
+  get parser () { return this.#parser; }
+  #machine;                                    // handles execution
+  get machine () { return this.#machine; }
+  #symbols = new Map();    // symbol table, maps names to addresses
+  get symbols () { return this.#symbols; }
+  
+  constructor (parser, machine = new Machine09 ()) {
+    this.#parser = parser;
+    this.#machine = machine;
+  }
+  // ...
+</code></pre>
+<p>Every variable has an address that is determined at <em>compile time</em>,
+i.e., during syntax analysis, and stored in the symbol table.
+The symbol table is managed by a method <code>_alloc()</code>
+which assigns new addresses to as yet unknown names:</p>
+<pre class="prettyprint source"><code>  /** Returns memory address for name */
+  _alloc (name) {
+    let addr = this.symbols.get(name);               // known name?
+    if (typeof addr == 'undefined')      
+      this.symbols.set(name,                            // new name
+        addr = this.symbols.size);       // allocate, starting at 0
+    return addr;
+  }
+</code></pre>
+<p>With all of this in place,
+the actions for the operands are easy to write:</p>
+<pre class="prettyprint source"><code>  /** `input: 'input' [ Number ];` */
+  input (_, number) {
+    const dflt = String(number !== null ? number[0] : 0);
+    this.machine.code.push(
+      memory => memory.push(parseInt(prompt('input', dflt), 10))
+    );
+  }
+
+  /** `number: Number;` */
+  number (number) { 
+    const result = parseInt(number, 10);
+    this.machine.code.push(memory => memory.push(result));
+  }
+
+  /** `name: Name;` */
+  name (name) {
+    const addr = this._alloc(name);
+    this.machine.code.push(memory => memory.push(memory[addr]));
+  }
+</code></pre>
+<p>The <code>input</code> action creates a machine instruction which uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" title="prompt()"><code>prompt()</code></a>
+to obtain a string, converts it to a number, and pushes the value onto the stack (line 5 above).</p>
+<p>The <code>number</code> action &quot;compiles&quot; the numerical value of the string collected by the token
+(line 11 above)
+and stores a machine instruction as generated code
+which will push this numerical value onto the stack (line 12).</p>
+<p>The <code>name</code> action consults <code>_alloc()</code> for the address of the variable in <code>memory[]</code> (line 17)
+and creates a machine instruction to push the value of the variable onto the stack (line 18).</p>
+<p>Moving on to the arithmetic operations:</p>
+<pre class="prettyprint source"><code>  /** `add: '+' right;` */
+  add (_, r) { 
+    this.machine.code.push(
+      memory => memory.splice(-2, 2, memory.at(-2) + memory.at(-1))
+    );
+  }
+</code></pre>
+<p>The <code>add</code> action is a typical example.
+The machine instruction has to add the top two values on the stack
+and replace them by the single result value —
+a simple job for the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" title="splice()"><code>splice()</code></a> method.</p>
+<p>Just as in <a href="../?eg=06/08">example 6/08</a>
+there are no actions for <code>term</code> and <code>product</code>
+because their results are already on the stack,
+but <code>sum</code> has to implement the embedded assignment, if any:</p>
+<pre class="prettyprint source"><code>  /** `sum: 'let' Name '=' sum | product [{ add | subtract }];` */
+  sum (...val) {
+    if (val.length &lt; 4) return;
+    const addr = this._alloc(val[1]);
+    this.machine.code.push(memory => memory[addr] = memory.at(-1));
+  }
+</code></pre>
+<p><code>_alloc()</code> finds or creates an address (line 4 above)
+and the machine instruction copies the value from the top of the stack
+to that address in <code>memory[]</code> (line 5).
+Note that the value remains on top of the stack.</p>
+<p>The action for <code>stmt</code> generates a machine instruction to display
+the result of a top-level <code>sum</code> (or assignment)
+as it is popped off the stack (line 13 below).</p>
+<p>The action for the start rule <code>list</code> is executed after all statements have been compiled.
+It displays the results of the compilation (lines 3 to 7) and
+calls <code>run()</code> to create the stack machine function (line 8):</p>
+<pre class="prettyprint source"><code>  /** `list: stmt [{ ';' stmt }];` */
+  list (s, many) {
+    puts(this.machine.toString());                     // show code
+    this.symbols.forEach(                         // show variables
+      (value, name) => puts(name, 'at', value));
+    const size = this.symbols.size;          // number of variables
+    puts('stack starts at', size);
+    return this.machine.run(size);                 // stack machine
+  }
+
+  /** `stmt: sum;` */
+  stmt (s) {                                // print and clear stack
+    this.machine.code.push(memory => puts(memory.pop()));
+  }
+}
+</code></pre>
+<p><a id='anonymous'></a>
+The compiler is complete but it consist of two classes.
+The <span class='a-actions'></span> has to evaluate to a single class or object
+with the <a href="module-Base.html#~Action"><code>Action</code></a> methods for the parser.
+It takes a little trick to accomplish this:</p>
+<pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
+  class Machine09 { ... }
+  class Arithmetic09 { ... }
+  return Arithmetic09;
+}) ()
+</code></pre>
+<p>The two class definitions are placed into an anonymous function
+where <code>return</code> delivers the actual value for the <code>actions</code> (line 4)
+and the anonymous function is called immediately after being defined (line 5).</p>
+<p>It is instructive to see the actual code. For example <code>a</code> <code>-</code> <code>-</code> <code>b</code> compiles into</p>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+0: memory => memory.push(memory[addr])
+1: memory => memory.push(memory[addr])
+2: memory => memory.splice(-1, 1, -memory.at(-1))
+3: memory => memory.splice(-2, 2, memory.at(-2) - memory.at(-1))
+4: memory => puts(memory.pop())
+a at 0
+b at 1
+stack starts at 2
+</code></pre>
+<p>The output shows the machine instruction functions but not the variable addresses
+because the functions use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" title="closure">closure</a> to capture the addresses computed by <code>_alloc()</code>.
+Try out <a href="../?eg=06/09">example 6/09</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to compile the program in the <span class='a-program'></span>, and</p>
+</li>
+<li>
+<p>press <span class='c-run'></span> to execute the stack machine.</p>
+</li>
+</ul>
+<p>The output shown above is created by converting the values in <code>code[]</code>
+from JavaScript functions to strings,
+i.e., the output shows the actual JavaScript functions
+which simulate what hardware instructions would do to <code>memory[]</code>.
+As such, the output is precise but a bit hard to read.</p>
+<p><a href="../?eg=06/10">Example 6/10</a> is a slightly modified version of <a href="../?eg=06/09">example 6/09</a>
+which makes the generated machine instructions easier to read.
+The following output, again for <code>a - - b</code>,
+still consists of JavaScript functions converted to strings,
+but it looks like it is closer to the <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation" title="reverse Polish notation">reverse Polish notation</a> introduced
+at the <a href="#stack-evaluation">beginning of this section</a>:</p>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+0: memory => this.Load(0)(memory)
+1: memory => this.Load(1)(memory)
+2: memory => this.Minus(memory)
+3: memory => this.Subtract(memory)
+4: memory => this.Pop(memory)
+a at 0
+b at 1
+stack starts at 2
+</code></pre>
+<p>The infrastructure for the stack machine is extended.
+In <code>Machine10</code> the machine instructions are defined using methods
+so that they are more meaningful when displayed as strings, for example:</p>
+<pre class="prettyprint source"><code>class Machine10 extends Six.Machine09 {
+  // ...
+  /** `stack: ... a b -> ... a-b` */            Subtract (memory) {
+    memory.splice(-2, 2, memory.at(-2) - memory.at(-1));
+  }
+
+  /** `stack: ... -> ... memory[addr]` */             Load (addr) {
+    return memory => memory.push(memory[addr]);
+  }
+}
+</code></pre>
+<p><code>code[]</code> is local to the <code>Machine10</code> object
+and contains the functions shown in the output above where
+<code>this</code> refers to the <code>Machine10</code> object
+because the stack machine executable is defined in the <code>run()</code> method
+as an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" title="arrow functions">arrow function</a>, i.e.,
+it inherits <code>this</code> and uses it when interpreting <code>code[]</code>.</p>
+<p>As a result, <code>this.Subtract(memory)</code> acts just like a simple function
+with <code>memory</code> as argument (lines 3 to 5 above).
+<code>this.Load(0)(memory)</code> (line 2) is more costly because it generates the function
+to manipulate <code>memory</code> during execution (line 8)
+— the price to pay for the mnemonic display —
+but the address argument is computed at compile time.</p>
+<p>Actions generate code as follows:</p>
+<pre class="prettyprint source"><code>class Arithmetic10 extends Six.Arithmetic09 {
+  constructor (parser, machine = new Machine10()) {
+    super(parser, machine);
+  }
+  // ...
+
+  /** `subtract: '-' product;` */
+  subtract () { this.machine.gen('Subtract'); }
+
+  /** `name: Name;` */
+  name (name) {
+    this.machine.gen('Load', this._alloc(name));
+  }
+}
+</code></pre>
+<p><code>Arithmetic10</code> uses <code>Machine10</code> unless a subclass should decide otherwise (line 2 above).
+Code generation is implemented in <code>Machine10</code> as a method <code>gen()</code> (line 2 below)
+which takes the instruction name and an optional list of values,
+calls the method <code>ins()</code> to produce the machine instruction,
+and then adds the function to <code>code[]</code>:</p>
+<pre class="prettyprint source"><code>  /** returns `code.length` */
+  gen (name, ... args) {
+    return this.code.push(this.ins(name, ... args));
+  }
+
+  /** returns instruction function */
+  ins (name, ... args) {
+    return args.length ?
+      eval(`memory => this.${name}(${args.join(', ')})(memory)`) :
+      eval(`memory => this.${name}(memory)`);
+  }
+</code></pre>
+<p>The operations on <code>memory</code> are still the same JavaScript functions,
+but they are wrapped into outer functions with expressive names.</p>
+<p><code>ins()</code> uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a> (lines 9 and 10 above) to perform <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" title="closure">closure</a>
+so that, e.g., the address used in a <code>Load</code> instruction is visible when
+the function is converted into a string for display purposes.
+Using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a> constructor would be safer; however,
+the resulting function then has no display name.</p>
+<p>Unfortunately, extending to <code>Arithmetic10</code> and <code>Machine10</code> results in a lot of
+unused code:</p>
+<ul>
+<li>
+<p>All machine instruction functions have been copied from <code>Arithmetic09</code> into <code>Machine10</code>.</p>
+</li>
+<li>
+<p>All actions have been overwritten in <code>Arithmetic10</code>,
+only <code>_alloc()</code> has been inherited.</p>
+</li>
+</ul>
+<p>This could have been avoided if the mnemonic display of the instructions
+had been introduced immediately.</p>
+<h3 id="control-structures">Control Structures</h3>
+<p>In this section arithmetic expressions
+will be extended with typical control structures and implemented
+for the <a href="https://en.wikipedia.org/wiki/Stack_machine" title="stack machine">stack machine</a>.
+Changes to the grammar can be seen <a href="6.10-6.11.html">on this page</a>,
+new stack machine and action method classes can be seen
+<a href="../methods.html?file=modules/06.js&amp;item=Machine10&amp;item=Machine11&amp;item=Arithmetic10&amp;item=Control11">in the method browser</a>:</p>
+<ul>
+<li>press <strong>show</strong> to see the methods, sorted alphabetically,</li>
+<li>press <strong>by class or mix-in</strong> to sort by module, class or mix-in, and finally method name,</li>
+<li>select individual classes and/or methods to see less.</li>
+</ul>
+<p>Thus far the stack machine used <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" title="forEach()"><code>forEach()</code></a> to process the machine instructions in <code>code[]</code> just once, one after another.
+Real machines have a program counter which is advanced as an instruction is fetched from memory.
+Here is an idea for a modification to the stack machine:</p>
+<pre class="prettyprint source"><code>run (size, startAddr) {                     // create stack machine
+  return () => {
+    memory.pc = startAddr;            // initialize program counter
+    ...
+</code></pre>
+<p>Once properties are added to <code>memory</code>
+to simulate machine registers such as a &quot;program counter&quot;
+there can be simulated branch instructions, for example:</p>
+<pre class="prettyprint source"><code>class Machine11 extends Six.Machine10 {
+  // ...
+  Branch (a) {                           // stack: ... -> ... | pc: a
+    return memory => memory.pc = a;
+  }
+  Bzero (a) {                // stack: ... bool -> ... | pc: !bool? a
+    return memory => { if (!memory.pop()) memory.pc = a; }
+  }
+</code></pre>
+<p>If <code>this.Branch(a)(memory)</code> is executed
+the stack machine takes the next instruction from address <code>a</code>.</p>
+<p>If <code>this.Bzero(a)(memory)</code> is executed the stack is checked and popped,
+and if the top value was zero
+the stack machine takes the next instruction from address <code>a</code>.</p>
+<p>It is helpful
+if the <a href="https://en.wikipedia.org/wiki/Stack_machine" title="stack machine">stack machine</a> can display instructions as they are executed,
+and if tracing can be controlled from within a program,
+e.g.,
+tracing could be unconditional or depend on the current value of a variable.
+<code>Machine11</code> adds a method <code>trace()</code> which accepts <code>true</code>
+to create an unconditional tracing function (lines 3 to 5 below)
+or a numerical memory <code>address</code> to create a function which traces
+if the current value in <code>memory[address]</code> is non-negative (lines 6 to 10):</p>
+<pre class="prettyprint source"><code>  /** Returns trace function, if any */
+  trace (address) {
+    if (address === true)                    // unconditional trace
+      return (memory, pc) =>            // traces instruction at pc
+        puts(memory.toString(), pc+':', this.code[pc].toString());
+    if (typeof address == 'number') // address of control variable?
+      return (memory, pc) => {          // traces instruction at pc
+        if (memory[address] >= 0) // variable at addr non-negative?
+          puts(memory.toString(), pc+':', this.code[pc].toString());
+      };
+  }
+
+  get Memory () { return this.#Memory ??= class extends Array {
+      toString () { return '[ ' + this.join(' ') + ' ]'; }
+    };
+  }
+  #Memory;
+</code></pre>
+<p>Either function displays the instruction stored in <code>code[pc]</code>.
+Each trace output includes a display of the current memory contents
+produced by a locally modified <code>toString()</code> method (lines 13 to 17 above).
+Eventually, <code>memory[]</code> will be more than just a linear list
+and <code>toString()</code> can be overwritten again.</p>
+<p><a id='run'></a>
+The stack machine interpreter, i.e., the executable returned by <code>run()</code>,
+still creates <code>memory[]</code> and initializes the variables to zero
+but it now has to consider the program counter and tracing:</p>
+<pre class="prettyprint source"><code>  run (size, startAddr = 0, traceAddr) {
+    let t;                      // [closure] trace function, if any
+    const StackMachine = (memory, steps) => {
+      if (!memory) {                                 // initialize?
+        if (steps) t = this.trace(true);  // steps? permanent trace
+        else {                           // no steps: don't suspend
+          t = this.trace(traceAddr); steps = Infinity;
+        }
+        memory = new this.Memory(size).fill(0);    // create memory
+        memory.pc = startAddr;        // initialize program counter
+        t && puts(memory.toString());             // initial memory
+      }
+      while (steps -- && memory.pc &lt; this.code.length) {  // steps?
+        const pc = memory.pc ++;         // advance program counter
+        this.code[pc](memory);            // execute at previous pc
+        t && t(memory, pc);           // trace executed instruction
+      }
+      memory.continue = memory.pc &lt; this.code.length;     // again?
+      return memory;
+    };
+    return (memory, steps) => StackMachine(memory, steps);
+  }
+</code></pre>
+<p><code>run()</code> is called with the <code>size</code> of the initialized part of memory,
+the start address for the program counter,
+and an address to control tracing if any (line 1 above).</p>
+<p>The resulting <code>StackMachine</code> accepts two optional arguments,
+the <code>memory[]</code> array and <code>steps</code>, the number of instructions to execute (line 3),
+and eventually returns the modified <code>memory[]</code> (line 19).</p>
+<ul>
+<li>
+<p><code>StackMachine()</code> will create <code>memory[]</code> and run without limit.</p>
+</li>
+<li>
+<p><code>StackMachine(null, 10)</code> will create <code>memory[]</code> and execute and trace 10 instructions.</p>
+</li>
+<li>
+<p><code>StackMachine(memory, 10)</code> will then execute another 10 instructions.</p>
+</li>
+</ul>
+<p>Initialization happens if there is no <code>memory[]</code> (line 4):</p>
+<ul>
+<li>
+<p>Permanent tracing is set up if <code>steps</code> is defined and not zero (line 5),
+otherwise tracing depends on the control address handed to <code>run()</code>
+and there is no limit on <code>steps</code> (line 7).</p>
+</li>
+<li>
+<p><code>memory[]</code> is created and zero-filled (line 9),
+the program counter at <code>memory.pc</code> is initialized (line 10),
+and the initial <code>memory[]</code> is shown if there is tracing (line 11).</p>
+</li>
+</ul>
+<p>Instructions are executed as long as there are <code>steps</code> left
+and if the program counter does not point beyond <code>code[]</code> (line 13).
+The program counter is incremented (line 14),
+the instruction is executed (line 15) and
+traced if tracing was set up (line 16).</p>
+<p>Once there are no more <code>steps</code>,
+a property is set to indicate if more steps could be executed (line 18)
+and <code>memory[]</code> is returned.</p>
+<p>These modifications do not change the basic behavior of the stack machine,
+i.e., arithmetic expressions <a href="../?eg=06/09">from example 6/09</a>
+— but for embedded assignment —
+can be part of a little language that has control structures.</p>
+<p><a href="../?eg=06/11">Example 6/11</a> uses <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> to compute the
+greatest common divisor of two numbers with a trace of one of the subtractions:</p>
+<pre class="prettyprint source"><code>x = input 36; y = input 54;
+while x &lt;> y do
+  if x > y then x = x - y
+  else y = y - x
+  fi
+od;
+print x
+</code></pre>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis and generate code, and</p>
+</li>
+<li>
+<p>press <span class='c-run'></span> to execute the program,
+reply <code>36</code> and <code>54</code> to the requests for input, and see the output:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>> run()
+18
+[ 18 18 ]
+</code></pre>
+<p>The program requires that the grammar <a href="../?eg=06/09">from example 6/09</a>
+is extended to support control structures:</p>
+<pre class="prettyprint source"><code>prog:     stmts;
+stmts:    stmt [{ ';' stmt }];
+stmt:     assign | print | loop | select;
+assign:   Name '=' sum;
+print:    'print' sums;
+sums:     sum [{ ',' sum }];
+loop:     While cmp Do stmts 'od';
+While:    'while';
+Do:       'do';
+select:   'if' cmp Then stmts [ Else stmts ] 'fi';
+Then:     'then';
+Else:     'else';
+sum: ...
+</code></pre>
+<p>This grammar makes a clear distinction between statements (<code>stmt</code>),
+expressions (<code>sum</code>),
+and conditions (<code>cmp</code>).
+This avoids a possible ambiguity between an expression and an assignment:
+without <code>let</code> both can start with a variable name.</p>
+<p>This grammar for control structures uses terminating literals
+to avoid ambiguity issues like the <a href="https://en.wikipedia.org/wiki/Dangling_else" title="dangling else"><em>dangling else</em></a> problem
+presented <a href="../?eg=04/05">in example 4/05</a>.
+Some control structure literals such as <code>'while'</code> have been turned into simple rules
+so that actions can be attached — this is discussed below.</p>
+<p>Conditions could be about as complex as arithmetic expressions;
+however, for the little language comparisons will suffice, e.g.,</p>
+<pre class="prettyprint source"><code>cmp: eq | ne;
+eq: sum '=' sum;
+ne: sum '&lt;>' sum;
+</code></pre>
+<p>Unfortunately, these rules are ambiguous because both alternatives
+start with <code>sum</code>.
+Here is a better approach:</p>
+<pre class="prettyprint source"><code>cmp:      sum rel;
+rel:      eq | ne | gt | ge | lt | le;
+eq:       '=' sum;
+ne:       '&lt;>' sum;
+gt:       '>' sum;
+ge:       '>=' sum;
+lt:       '&lt;' sum;
+le:       '&lt;=' sum;   
+</code></pre>
+<p>While this is patterned after <code>sum</code> and <code>product</code>,
+this grammar does not allow cascading comparisons (which, e.g., JavaScript does).</p>
+<p>Here is the action for one of the comparisons:</p>
+<pre class="prettyprint source"><code>class Control11 extends Six.Arithmetic10 {
+  constructor (parser, machine = new Machine11()) {
+    super(parser, machine);
+  }
+
+  /** `eq: '=' sum;` */   eq () { this.machine.gen('Eq'); } 
+</code></pre>
+<p>The extended actions class requires additional machine instructions
+and, therefore, inserts <code>Machine11</code> during construction (line 2 above).
+Here is one of the comparison instructions in <code>Machine11</code>:</p>
+<pre class="prettyprint source"><code>Eq (memory) {                       // stack: ... a b -> ... a == b
+  memory.splice(-2, 2, memory.at(-2) == memory.at(-1));
+}
+</code></pre>
+<p>This instruction will replace the top two values on the stack
+with the result of the comparison, i.e., <code>true</code> or <code>false</code>.
+Technically, these are very special values in the little language.
+The syntax does not permit them to be assigned to variables.
+Instead,
+they will be consumed by branch instructions for the control structures.</p>
+<p>Just like compiling sums,
+compiling comparisons also amounts to <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation" title="reverse Polish notation">reverse Polish notation</a>, i.e.,
+the rules <code>rel</code> and <code>cmp</code> require no actions.</p>
+<p>However, the <code>assign</code> and <code>print</code> statements consume sums and require actions:</p>
+<pre class="prettyprint source"><code>  /** `assign: Name '=' sum;` stores and pops stack */
+  assign (name, e, s) {
+    this.machine.gen('Store', this._alloc(name));
+    this.machine.gen('Pop');
+  }
+
+  /** `print: 'print' sums;` */
+  print (_, sums) { this.machine.gen('Print', sums); }
+
+  /** `sums: sum [{ ',' sum }];` returns number of values */
+  sums (sum, many) { return 1 + (many ? many[0].length : 0); }
+</code></pre>
+<p>The machine instructions <code>Store</code> and <code>Pop</code> were already defined in <code>Machine10</code>,
+i.e., <a href="../?eg=06/10">in example 6/10</a>.
+The <code>assign</code> action generates them to copy the top value on the stack
+into the memory location for the variable (line 3 above)
+and to clear the stack at the end of the statement (line 4).</p>
+<p>A <code>print</code> statement displays a list of <code>sum</code> values.
+It receives all arguments on the stack.
+The number of arguments is counted at compile time (line 11)
+and compiled into the <code>Print</code> instruction (line 8).
+At run time the <code>Print</code> instruction pops the arguments off the stack
+and hands them to <code>puts()</code> for display:</p>
+<pre class="prettyprint source"><code>Print (n) {                              // stack: ... n*val -> ...
+  return memory => puts(... memory.splice(- n));
+}
+</code></pre>
+<p>This little language supports control structures.
+The actions for <code>loop</code>, <code>While</code>, and <code>Do</code>
+have to implement the following branch structure:</p>
+<table>
+<thead>
+<tr>
+<th>label</th>
+<th>code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>While:</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>cmp</code></td>
+</tr>
+<tr>
+<td><code>Do:</code></td>
+<td><code>branch if zero to 'od'</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>stmts</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>branch to 'While'</code></td>
+</tr>
+<tr>
+<td><code>od:</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>This explains what the actions have to do:</p>
+<pre class="prettyprint source"><code>  /** `While: 'while';` returns address for branch to `while` */
+  While (w) { return this.machine.code.length; }
+
+  /** `Do: 'do';` returns address of slot for bzero to `od` */
+  Do (d) { return this.machine.code.push(null) - 1; }
+
+  /** `loop: While cmp Do stmts 'od';` */
+  loop (While, _, Do, s, o) {
+    const od = this.machine.gen('Branch', While);
+    this.machine.code[Do] = this.machine.ins('Bzero', od);
+  }
+</code></pre>
+<p>The <code>While</code> action just returns the next address in the generated code (line 2 above).</p>
+<p>The <code>Do</code> action allocates a slot in the generated code
+and returns the address of the slot (line 5)
+because <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push" title="push()"><code>push()</code></a> always returns the new array length.</p>
+<p>Finally, <code>loop</code> puts it all together:
+the action adds an unconditional branch
+from the end of the loop body back to <code>While</code> (line 9)
+and populates the slot allocated by <code>Do</code> with a
+conditional branch to <code>od</code> to terminate the loop (line 10).</p>
+<p>Yes, the conditional branch at <code>Do</code> fails each time through the loop
+until it succeeds only once, at the end of the loop.
+An obvious optimization is to reverse the order of the loop body
+and the condition in the generated code and cut the number of branch executions in half;
+however, moving code when syntax analysis generates it directly
+is not really an option — absolute branches like the ones used here would break.</p>
+<p><code>select</code> is a little harder because there are two possibilities:</p>
+<table>
+<thead>
+<tr>
+<th>label</th>
+<th>code with <code>else</code></th>
+<th>code without <code>else</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><code>cmp</code></td>
+<td><code>cmp</code></td>
+</tr>
+<tr>
+<td><code>Then:</code></td>
+<td><code>branch if zero to 'Else'</code></td>
+<td><code>branch if zero to 'fi'</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>stmts</code></td>
+<td><code>stmts</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>branch to 'fi'</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Else:</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>stmts</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fi:</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The actions have to create the appropriate branch instructions:</p>
+<pre class="prettyprint source"><code>  /** `Then: 'then';` returns address for bzero to `else` `fi` */
+  Then (t) { return this.machine.code.push(null) - 1; }
+
+  /** `Else: 'else';` creates slot for branch to `fi`,
+      returns address of `else` */
+  Else (e) { return this.machine.code.push(null); }
+
+  /** `select: 'if' cmp Then stmts [ Else stmts ] 'fi';` */
+  select (i, c, Then, s, Else, f) {
+    const fi = this.machine.code.length;         // address of 'fi'
+    if (Else) {
+      Else = Else[0];               // address after branch to 'fi'
+      this.machine.code[Then] = this.machine.ins('Bzero', Else);
+      this.machine.code[Else - 1] = this.machine.ins('Branch', fi);     
+    } else
+      this.machine.code[Then] = this.machine.ins('Bzero', fi);
+  }
+</code></pre>
+<p>The <code>Then</code> action allocates a slot in the generated code
+and returns the address of the slot (line 2 above).</p>
+<p>The <code>Else</code> action, if called,
+also allocates a slot in the generated code (for a branch to bypass the <code>else</code> clause)
+but it returns the address following the slot (line 6).</p>
+<p>Finally, the <code>select</code> action checks if there is an argument created by <code>else</code> (line 11)
+and creates and inserts the branch instructions
+as described in the pseudo code above.</p>
+<p><a id='prog-11'></a>Code generation is complete.
+The top-level action for <code>prog</code> shows the generated code
+and provides tracing if a variable <code>trace</code> is in the program:</p>
+<pre class="prettyprint source"><code>  /** `prog: stmts;` returns executable */
+  prog (_) {
+    const size = this.symbols.size,          // number of variables
+      traceAddr = this.symbols.get('trace'); // if a variable named
+    if (typeof traceAddr != 'undefined') {     // ...'trace' exists
+      puts(this.machine.toString());                   // show code
+      this.symbols.forEach(              // show variable addresses
+        (addr, name) => puts(`${name} at ${addr}`)
+      );
+      puts('stack starts at', size);
+    }
+    return this.machine.run(size, 0, traceAddr);   // stack machine
+  }
+</code></pre>
+<p>If the variable exists (lines 4 and 5 above)
+the generated code and variable addresses are shown (lines 6 to 10).
+The <code>run()</code> method of <code>Machine11</code> <a href="#run">discussed earlier</a>
+is called (line 12) to create the stack machine.</p>
+<p>In <a href="../?eg=06/11">example 6/11</a></p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar,</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to perform syntax analysis and generate code, and</p>
+</li>
+<li>
+<p>press <span class='c-1'></span>, <span class='c-10'></span>, or <span class='c-100'></span>
+to step through the program:</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>> memory = run(null, 1)
+0:[ 0 0 ]
+[ 0 0 36 ] 0: memory => this.Input(memory)
+> memory = run(memory, 1)
+[ 36 0 36 ] 1: memory => this.Store(1)(memory)
+  ...
+</code></pre>
+<ul>
+<li>Add statements like <code>trace = -1</code> or <code>trace = 1</code>
+to display the generated code and
+to turn tracing off and on within the program:</li>
+</ul>
+<pre class="prettyprint source"><code>trace = -1; x = input 36; y = input 54;
+  ...
+</code></pre>
+<ul>
+<li>Again, press <span class='c-parse'></span> to perform syntax analysis and generate code:</li>
+</ul>
+<pre class="prettyprint source"><code>> run = g.parser().parse(program, actions)
+0: memory => this.Push(1)(memory)
+1: memory => this.Minus(memory)
+2: memory => this.Store(1)(memory)
+  ...
+program counter at 0
+trace at 1
+x at 2
+y at 3
+stack starts at 4
+(memory, steps) => StackMachine(memory, steps)
+</code></pre>
+<ul>
+<li>Now press <span class='c-run'></span> to execute the program and see the trace:</li>
+</ul>
+<pre class="prettyprint source"><code>> run()
+0:[ 0 0 0 ]
+[ 0 0 0 1 ] 0: memory => this.Push(1)(memory)
+[ 0 0 0 -1 ] 1: memory => this.Minus(memory)
+18
+[ -1 18 18 ]
+</code></pre>
+<p>The stack is cleared at the end of each statement because
+the value of each <code>sum</code> is assigned or printed and then popped of the stack
+or two sums are compared and popped and
+the result of the comparison is tested and popped,
+i.e., the stack will grow and shrink during expression evaluation
+but it cannot grow out of bounds.
+However, the little language can still be used to crash the practice page —
+just program an infinite loop and don't step execution...</p>
+<h3 id="functional-programming">Functional Programming</h3>
+<p>Fans of functional programming — especially in JavaScript —
+should enjoy <a href="../?eg=06/12">example 6/12</a>,
+the implementation of the little language in the style of the functional evaluation
+of arithmetic expressions <a href="#functional-evaluation">as discussed previously</a>.
+Functional programming can be very elegant,
+but — unlike the stack machine &quot;instructions&quot; —
+functions created by composition cannot be decomposed for display.
+At least, <span class='t-actions'></span> can be toggled
+to see what functions the actions create.</p>
+<p>The grammar is almost the same as in <a href="../?eg=06/11">example 6/11</a> —
+the extra rules for the keywords in <code>loop</code> and <code>select</code> are not needed:</p>
+<pre class="prettyprint source"><code>  loop:     'while' cmp 'do' stmts 'od';
+  select:   'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
+</code></pre>
+<p>The actions for <code>sum</code> and all the other rules for arithmetic expressions
+remain unchanged from <a href="../?eg=06/07">example 6/07</a> discussed <a href="#functional-evaluation">previously</a>.</p>
+<p>Comparisons are implemented just like <code>add</code>, and they return functions
+which compute the right operand and still need a function to compute the left operand value
+(lines 9 to 11 below):</p>
+<pre class="prettyprint source"><code>class Functions12 extends Six.Functions07 {
+  
+  /** `cmp: sum rel;` returns fct */
+  cmp (sum, rel) { return memory => rel[0](sum)(memory); }
+
+  // rel:      eq | ne | gt | ge | lt | le;
+
+  /** `eq: '=' expr;` returns fct for composition */
+  eq (_, right) {
+    return left => memory => left(memory) == right(memory);
+  }
+</code></pre>
+<p>The grammar does not allow cascading comparisons.
+Therefore, the action for <code>cmp</code> is a single function composition and does not require <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a>
+(line 4 above).</p>
+<p>Compiling into functions is particularly elegant for control structures.
+Instead of returning addresses and inserting branch instructions later,
+the control structures of the little language
+are simply turned into JavaScript control structures
+inside functions.
+Here is the action for <code>loop</code>:</p>
+<pre class="prettyprint source"><code>  /** `loop: 'while' cmp 'do' stmts 'od';` returns fct */
+  loop (w, cmp, d, stmts, o) {
+    return memory => { while (cmp(memory)) stmts(memory); };
+  }
+</code></pre>
+<p>The action for <code>select</code> returns one of two functions
+depending on the presence of <code>else</code>:</p>
+<pre class="prettyprint source"><code>  /** `select: 'if' cmp 'then' stmts [ 'else' stmts ] 'fi';` returns fct */
+  select (i, cmp, t, stmts, opt, f) { 
+    return opt ?
+      (memory => cmp(memory) ? stmts(memory) : opt[1](memory)) :
+      (memory => { if (cmp(memory)) stmts(memory); });
+  }
+</code></pre>
+<p>If <code>else</code> is present, the returned function uses conditional evaluation (line 4 above),
+otherwise it uses an <code>if</code> statement in JavaScript (line 5).</p>
+<p><code>loop</code> and <code>select</code> are the only places where the result of the <code>cmp</code> action is used.
+No matter which type JavaScript uses to represent the result of a comparison
+in the compiled comparisons,
+the use of this type is consistent with the intent of the compiled
+control structures — the joy of translating from one language to another...</p>
+<p>Assignment now is a statement;
+therefore, the action for <code>sum</code> is overwritten (to omit assignment there)
+and a new action for <code>assign</code> creates the function to perform assignment:</p>
+<pre class="prettyprint source"><code>  /** `assign: Name '=' sum;` returns fct */
+  assign (name, e, sum) {
+    return memory => memory[name] = sum(memory);
+  }
+</code></pre>
+<p>The stack machine implementation had to pop the <code>sum</code> off the stack,
+but there is no stack in the functional implementation.</p>
+<p>The action for <code>sums</code> creates a list of functions (line 8 below)
+and the action for <code>print</code> creates a function which elaborates the list to get the values
+and display them with <code>puts()</code> (line 3):</p>
+<pre class="prettyprint source"><code>  /** `print: 'print' sums;` returns function */
+  print (p, sums) {
+    return memory => puts(... sums.map(fct => fct(memory)));
+  }
+
+  /** `sums: sum [{ ',' sum }];` returns list of functions */
+  sums (sum, many) {
+    return [ sum ].concat(many ? many[0].map(seq => seq[1]) : []);
+  }
+</code></pre>
+<p>The action for <code>stmts</code> uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" title="reduce()"><code>reduce()</code></a> and the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_operator" title="comma operator">comma operator</a> to create a function
+which will execute the statement functions, one after another:</p>
+<pre class="prettyprint source"><code>  /** `stmts: stmt [{ ';' stmt }];` returns fct */
+  stmts (stmt, many) {
+    return (many ? many[0] : []).
+      reduce((left, list) => 
+        memory => (left(memory), list[1][0](memory)), stmt[0]);
+  }
+</code></pre>
+<p>As before, all the functions expect a <code>memory</code> object as an argument
+which is used to map names to values.
+The start rule of the grammar has to create this object.
+<code>stmts</code> is referenced in <code>loop</code> and <code>select</code>;
+therefore, there is an extra top-level start rule
+to create <code>memory</code> in a parameter-less executable:</p>
+<pre class="prettyprint source"><code>  /** `prog: stmts;` returns executable */
+  prog (stmts) { return () => stmts({ }); }
+</code></pre>
+<p>Check out <a href="../?eg=06/12">example 6/12</a>:</p>
+<ul>
+<li>
+<p>Press <span class='c-new'></span> to represent and check the grammar and</p>
+</li>
+<li>
+<p>press <span class='c-parse'></span> to compile the program.</p>
+</li>
+<li>
+<p>Toggle <span class='t-actions'></span> and
+press <span class='c-parse'></span> again
+to see some of the functions created by the actions.</p>
+</li>
+</ul>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p><a href="module-Base.html#~Action">Action methods</a>
+can be used in syntax analysis to interpret —
+rather than just recognize — a sentence.
+For example,
+an arithmetic expression can be translated into <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation" title="reverse Polish notation">reverse Polish notation</a>
+or evaluated while it is recognized.</p>
+</li>
+<li>
+<p>Variable values (or their descriptions) can be stored as properties of a JavaScript object
+or in a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" title="Map"><code>Map</code></a>.</p>
+</li>
+<li>
+<p>Programming languages contain control structures
+and interpretation of a program requires an intermediate representation
+so that loops can be interpreted more than once
+and selections can be partially skipped.</p>
+</li>
+<li>
+<p>A <a href="https://en.wikipedia.org/wiki/Stack_machine" title="stack machine">stack machine</a><a href="tutorial-b-machine.html">B: The Stack Machine</a> is both, very easy to simulate, and very easy to generate code for.
+It can use a fixed-size array as program storage
+and a variable-size array as data stack.
+A program counter can be a property of either array.
+Global variables can be persistent at the beginning of the data stack.
+Machine instructions are JavaScript functions which manipulate the data stack,
+fetch and store variable values in that array,
+and change the program counter for branching.</p>
+</li>
+<li>
+<p>Alternatively, composition of JavaScript functions can also be used as
+an executable intermediate representation.
+Unlike the stack machine, however,
+the internals of this representation
+cannot be displayed as text.</p>
+</li>
+</ul>
+<h4 id="previous%3A-%7B%40tutorial-05-lists%7D-next%3A-%7B%40tutorial-07-features%7D">Previous: <a href="tutorial-05-lists.html">5. Translating Sentences</a> Next: <a href="tutorial-07-features.html">7. Language Features</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

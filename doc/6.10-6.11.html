@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>expressions ➡️ control structures</title>
+    <link type="text/css" rel="stylesheet" href="diff.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="diff.js"></script>
+  </head>
+  <body>
+      <div class="grid output">
+      </div>
+      <div class="grid grammar">
+        <pre class="A">list: stmt [{ ';' stmt }];</pre>
+        <pre class="B">prog:     stmts;</pre>
+        <pre class="A">stmt: sum;</pre>
+        <pre class="B">stmts:    stmt [{ ';' stmt }];</pre>
+        <pre class="A">sum: 'let' Name '=' sum | product [{ add | subtract }];</pre>
+        <pre class="B">stmt:     assign | print | loop | select;</pre>
+        <pre class=a></pre>
+        <pre class="B">assign:   Name '=' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">print:    'print' sums;</pre>
+        <pre class=a></pre>
+        <pre class="B">sums:     sum [{ ',' sum }];</pre>
+        <pre class=a></pre>
+        <pre class="B">loop:     While cmp Do stmts 'od';</pre>
+        <pre class=a></pre>
+        <pre class="B">While:    'while';</pre>
+        <pre class=a></pre>
+        <pre class="B">Do:       'do';</pre>
+        <pre class=a></pre>
+        <pre class="B">select:   'if' cmp Then stmts [ Else stmts ] 'fi';</pre>
+        <pre class=a></pre>
+        <pre class="B">Then:     'then';</pre>
+        <pre class=a></pre>
+        <pre class="B">Else:     'else';</pre>
+        <pre class=a></pre>
+        <pre class="B">cmp:      sum rel;</pre>
+        <pre class=a></pre>
+        <pre class="B">rel:      eq | ne | gt | ge | lt | le;</pre>
+        <pre class=a></pre>
+        <pre class="B">eq:       '=' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">ne:       '&lt;>' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">gt:       '>' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">ge:       '>=' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">lt:       '&lt;' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">le:       '&lt;=' sum;</pre>
+        <pre class=a></pre>
+        <pre class="B">sum:      product [{ add | subtract }];</pre>
+        <pre class=a>add: '+' product;</pre>
+        <pre class=b>add:      '+' product;</pre>
+        <pre class=a>subtract: '-' product;</pre>
+        <pre class=b>subtract: '-' product;</pre>
+        <pre class=a>product: signed [{ multiply | divide }];</pre>
+        <pre class=b>product:  signed [{ multiply | divide }];</pre>
+        <pre class=a>multiply: '*' signed;</pre>
+        <pre class=b>multiply: '*' signed;</pre>
+        <pre class=a>divide: '/' signed;</pre>
+        <pre class=b>divide:   '/' signed;</pre>
+        <pre class=a>signed: [ '-' ] term;</pre>
+        <pre class=b>signed:   [ '-' ] term;</pre>
+        <pre class=a>term: input | number | name | '(' sum ')';</pre>
+        <pre class=b>term:     input | number | name | '(' sum ')';</pre>
+        <pre class=a>input: 'input' [ Number ];</pre>
+        <pre class=b>input:    'input' [ Number ];</pre>
+        <pre class=a>number: Number;</pre>
+        <pre class=b>number:   Number;</pre>
+        <pre class=a>name: Name;</pre>
+        <pre class=b>name:     Name;</pre>
+      </div>
+      <div class="grid tokens">
+      </div>
+      <div class="grid program">
+      </div>
+      <div class="grid actions">
+      </div>
+  </body>
+</html>

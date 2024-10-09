@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: 9. Compiling Grammars</title -->
+	<title>9. Compiling Grammars</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>9. Compiling Grammars</h2>
+</header>
+
+<article>
+    <h4 id="what's-in-a-parser-generator%3F">What's in a Parser Generator?</h4>
+<h4 id="%7B%40linkcode-module%3Aebnf~grammar-grammar%7D-(de-)constructed"><a href="module-EBNF-Grammar.html"><code>Grammar</code></a> (De-)Constructed</h4>
+<hr>
+<p>Among other things,
+<a href="tutorial-01-overview.html">chapter one</a> defined
+<a href="https://en.wikipedia.org/wiki/Context-free_grammar" title="Context-Free Grammar">context-free grammars</a>
+and <a href="tutorial-02-grammars.html">chapter two</a>
+introduced the version of
+<a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extended BNF</a>
+to specify grammars which we have been used throughout.</p>
+<p>Given some grammar rules written in this notation,
+<a href="tutorial-03-scanner.html">chapter three</a>
+explained how to mechanically create a scanner function from a grammar
+to break up an input string into the literals and tokens
+used as terminal alphabet in the grammar.
+<a href="tutorial-04-parser.html">Chapter four</a>
+introduced classes for objects that can represent grammar rules
+as trees in such a way that a grammar rule can be viewed
+as a function to recognize a piece of input and,
+in particular, the start rule will recognize sentences
+of the language described by the grammar.</p>
+<p>Finally, <a href="tutorial-05-lists.html">chapter five</a>
+explained how the rules, i.e., recognition functions,
+can be augmented by action methods to translate a sentence from the input terminals
+into some convenient representation, or to manipulate it in other ways.</p>
+<p>All of this works as soon as the grammar rules are represented
+with objects from <a href="module-EBNF-Rule.html"><code>Rule</code></a> and the other magic classes.
+This chapter shows how this is done.</p>
+<h3 id="the-grammars'-grammar">The Grammars' Grammar</h3>
+<p>Throughout, grammars have been written in a specific version of <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extended BNF notation</a>.
+Formally speaking, the notation amounts to a language where the sentences are grammars,
+and as such there has to be a grammar describing this language.
+Indeed, this <em>grammars' grammar</em> is
+<a href="module-EBNF-Grammar.html#.ebnf"><code>Grammar.ebnf</code></a>,
+a static ingredient of the <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> class,
+and it is another sentence in the language of grammars:</p>
+<pre class="prettyprint source"><code>grammar: { rule };
+rule:    Token ':' alt ';';
+alt:     seq [{ '|' seq }];
+seq:     { lit | ref | opt | some };
+lit:     Lit;
+ref:     Token;
+opt:     '[' alt ']';
+some:    '{' alt '}';
+</code></pre>
+<p>To begin with,
+the above is just another grammar which can be studied in
+<a href="../?eg=09/01">example 9/01</a>.</p>
+<ul>
+<li>As usual, press <span class='c-new'></span>
+to represent and check the grammar and see that there are no issues — the grammars' grammar is <a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a>.</li>
+</ul>
+<p>The output shows the usual grammar description
+created by <a href="module-EBNF-Grammar.html#toString"><code>Grammar.toString()</code></a> with the literals</p>
+<ul>
+<li><code>':'</code> and <code>';'</code> to separate a rule name from the right-hand side
+and to terminate a rule (line 2 above),</li>
+<li>the literal <code>'|'</code> to separate alternatives (line 3),</li>
+<li>brackets, <code>'['</code> and <code>']'</code>, to enclose an optional list of alternatives (line 7), and</li>
+<li>braces, <code>'{'</code> and <code>'}'</code>, to enclose a list of alternatives which can be repeated (line 8).</li>
+</ul>
+<p>Such a self-referential description tends to be confusing, but the output also shows
+that this grammar has two tokens, aptly named <code>Token</code> and <code>Lit</code>:</p>
+<ul>
+<li>
+<p><code>Token</code> appears in line 2 at the beginning of the grammar rule for a grammar rule (ouch!)
+and, therefore, corresponds to anything in the input which can be a rule name.</p>
+</li>
+<li>
+<p><code>Lit</code> is the other token (ouch!) and appears in line 5 and by reference in line 4.
+From the looks of the grammars' grammar, line 4 describes what can be in a sequence;
+therefore, <code>Lit</code> must correspond to anything in the input which can be a literal.</p>
+</li>
+</ul>
+<p>Unfortunately, lines 4 and 6 together point out a problem:
+<code>Token</code> stands for <em>any</em> name used in a grammar, i.e., for a rule name or a token name.
+One could have taken the position that any name <em>not</em> defined as a rule name
+must eventually be defined as a token name and provided with a pattern.
+Instead, <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> construction requires the token
+definitions up front and complains if they are used as rule names.</p>
+<p>The token definitions for the grammars' grammar
+must be specified in the <span class='a-tokens'></span> and
+are as expected:</p>
+<pre class="prettyprint source"><code>Lit /'(?:[^'\\]|\\['\\])+'/
+Token /[A-Za-z][A-Za-z0-9_]*/
+</code></pre>
+<p>i.e., when represented in the input, <code>Lit</code> are surrounded by single quotes, with single quotes
+and backslashes escaped by backslashes, and <code>Token</code> are alphanumeric.
+The <span class='a-tokens'></span> references
+<a href="module-EBNF-Grammar.html#.terminals"><code>Grammar.terminals</code></a>,
+another static ingredient of the <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> class.</p>
+<p>This suggests two experiments. In <a href="../?eg=09/01">example 9/01</a>:</p>
+<ul>
+<li>Press <span class='c-new'></span>
+to represent and check the grammars' grammar for use.</li>
+<li>Copy the <span class='a-grammar'></span>
+to the <span class='a-program'></span> and</li>
+<li>press <span class='c-parse'></span>
+to see that the grammars' grammar recognizes itself, i.e.,
+the grammars' grammar is a sentence in the language described by the grammars' grammar.</li>
+</ul>
+<p>Is it the only one?</p>
+<pre class="prettyprint source"><code>grammar is do rule end end
+rule    is Token \: alt \; end
+alt     is seq maybe do \| seq end end end
+seq     is do lit or ref or opt or some end end
+lit     is Lit end
+ref     is Token end
+opt     is \[ alt \] end
+some    is \{ alt \} end
+</code></pre>
+<p>The grammars' grammar would not recognize the above as a sentence —
+literals are just backslash-escaped single characters,
+rules are not marked up with colons and semicolons, etc.</p>
+<p>However, you can check in <a href="../?eg=09/02">example 9/02</a>
+that it just takes minor tweaks to literals and token definitions
+for the grammars' grammar to recognize the above as a sentence:</p>
+<ul>
+<li>Press <span class='c-new'></span>
+to represent and check the tweaked grammars' grammar for use, and</li>
+<li>press <span class='c-parse'></span>
+to see that the above is a sentence for the tweaked grammars' grammar.</li>
+</ul>
+<h3 id="representing-the-grammars'-grammar"><a id='representing'></a>Representing the Grammars' Grammar</h3>
+<p>The examples suggest that there are different ways to spell grammar rules —
+there might even be extensions to the notation used so far.
+<a href="../?eg=09/03">Example 9/03</a> contains:</p>
+<pre class="prettyprint source"><code>seq:    { lit | ref | opt | some | parens };
+parens: '(' alt ')';
+</code></pre>
+<p>This addition would allow parentheses containing one or more alternatives —
+just like brackets and braces —
+to be part of a sequence,
+i.e., the parentheses would arrange for precedence
+and we could embed alternatives
+for something that appears exactly once
+right into a sequence.
+If this were the grammars' grammar, a grammar for a sum could be</p>
+<pre class="prettyprint source"><code>sum: Number [{ ( '+' | '-' ) Number }];
+</code></pre>
+<p>Extending the grammars' grammar is the subject of <a href="#extending">an upcoming section</a>.</p>
+<p>First, however, there is still the question:
+how does the <span class='c-new'></span> button
+on the practice page represent a grammar — specified only as a string in the
+<span class='a-grammar'></span> —
+with objects from
+<a href="module-EBNF-Rule.html"><code>Rule</code></a> and all the other magic classes
+so that functions to perform lexical and syntax analysis based on that grammar
+can be called by the <span class='c-parse'></span> button?</p>
+<p><a href="module-EBNF-Grammar.html">The documentation of the <code>Grammar</code> constructor</a> makes it look very easy:</p>
+<pre class="prettyprint source"><code>const g = new Grammar(grammar, tokens);
+</code></pre>
+<p>The construction only requires a string <code>grammar</code>
+straight from the <span class='a-grammar'></span>
+and an object <code>tokens</code> which maps token names to regular expressions
+describing their representation.</p>
+<p>An empty string can even be mapped to a regular expression
+which describes everything  which is to be ignored
+in the <span class='a-grammar'></span> and the <span class='a-program'></span>,
+such as white space and comments.</p>
+<p>The practice page cannot hand the <em>string</em> from the <span class='a-tokens'></span>
+to the <a href="module-EBNF-Grammar.html"><code>Grammar</code> constructor</a> directly,
+but it can apply
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()">eval</a> to the string and hand the resulting JavaScript object to the constructor.</p>
+<p>So, the <a href="module-EBNF-Grammar.html"><code>Grammar</code> constructor</a> must recognize
+an arbitrary <code>grammar</code> string as a sentence — that is a job for syntax analysis based on
+the grammars' grammar represented in the magic objects.</p>
+<p>If we had this representation, we could apply it to get it —
+a clear case of <a href="https://en.wikipedia.org/wiki/Bootstrapping" title="Bootstrapping">bootstrapping</a>.</p>
+<p>A <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> object has factory methods such as
+<a href="module-EBNF-Grammar.html#rule"><code>rule()</code></a>
+which construct <a href="module-EBNF-Rule.html"><code>Rule</code></a> and all the other magic objects
+and handle all the bookkeeping, too.
+A rule of the grammars' grammar such as</p>
+<pre class="prettyprint source"><code>rule: Token ':' alt ';';
+</code></pre>
+<p>is represented manually as follows:</p>
+<pre class="prettyprint source"><code>Grammar.grammar = new Grammar(Grammar.terminals);
+Grammar.grammar.rule(Grammar.grammar.nt('rule'),
+  Grammar.grammar.seq([
+    Grammar.grammar.token('Token'),
+    Grammar.grammar.lit(&quot;':'&quot;),
+    Grammar.grammar.nt('alt'),
+    Grammar.grammar.lit(&quot;';'&quot;)
+  ], null)
+);
+</code></pre>
+<p>Thankfully, this has to be done manually only once,
+for the grammars' grammar, and the resulting JavaScript code,
+<a href="module-EBNF-Grammar.html#.grammar"><code>Grammar.grammar</code></a>,
+is another static ingredient of the class.</p>
+<p>Any other grammar — as long as it is a sentence for the grammars' grammar —
+is recognized using the <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method of a
+<a href="module-EBNF-Parser.html"><code>Parser</code></a>
+created by the <a href="module-EBNF-Grammar.html#parser"><code>Grammar.parser()</code></a> method
+which only depends on the fact that the rules of the grammars' grammar
+have been represented using <a href="module-EBNF-Rule.html"><code>Rule</code></a> and all the other magic classes,
+and that the grammar tree has been checked as described in
+<a href="tutorial-04-parser.html">chapter four</a>.</p>
+<pre class="prettyprint source"><code>class Grammar {
+  constructor (grammar, tokens, configuration) {
+    ...
+    Grammar.grammar.parser().parse(grammar, ... );
+</code></pre>
+<p>The <a href="module-EBNF-Grammar.html#parser"><code>Grammar.parser()</code></a> factory method
+creates a <a href="module-EBNF-Parser.html"><code>Parser</code></a> which calls the factory method
+<a href="module-EBNF-Grammar.html#scanner"><code>Grammar.scanner()</code></a> to create a <a href="module-Base-Scanner.html"><code>Scanner</code></a>.
+The <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> method accepts a string,
+uses the <a href="module-Base-Scanner.html"><code>Scanner</code></a> to break it up into a list of
+<a href="module-Base-Tuple.html"><code>Tuple</code></a> objects
+each of which contains an input position, part of the input string,
+and a <a href="module-Base-Lit.html"><code>Lit</code></a> or <a href="module-Base-Token.html"><code>Token</code></a> object
+representing this piece of the input.
+Finally, the <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> method
+starts syntax analysis
+by calling the <a href="module-EBNF-Rule.html#parse"><code>Rule.parse()</code></a> method of the start rule
+if the terminal in the first <a href="module-Base-Tuple.html"><code>Tuple</code></a> is in the <code>expect</code> set of the rule.</p>
+<h3 id="representing-any-grammar">Representing Any Grammar</h3>
+<p>So far,
+<a href="module-EBNF-Grammar.html#.grammar"><code>Grammar.grammar</code></a> can recognize any grammar
+that is a sentence conforming to the grammars' grammar.</p>
+<p>However, mere recognition of some other grammar does not mean that there is
+lexical and syntax analysis for the other grammar.
+To get that, the rules of the other grammar have to be represented with
+<a href="module-EBNF-Rule.html"><code>Rule</code></a> and all the other magic classes.</p>
+<p>This could again be done manually, but that's an error-prone process.
+If the <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> function
+can <em>recognize</em> grammars, it can call action methods so that grammars
+can be <em>represented</em> — using the very same classes that are involved
+in recognition in the first place.
+That is <em>bootstrapping</em>!</p>
+<p>The <a href="module-EBNF-Actions.html"><code>Actions</code></a> class contains the action methods
+which are used during construction of a
+<a href="module-EBNF-Grammar.html"><code>Grammar</code></a> object for some grammar string
+describing a sentence conforming to the grammars' grammar:</p>
+<pre class="prettyprint source"><code>class Grammar {
+  constructor (grammar, tokens, configuration) {
+    ...
+    Grammar.grammar.parser().parse(grammar, new Actions(this));
+</code></pre>
+<p>The <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> function takes the sentence string
+and the action methods corresponding to the rules of the grammars' grammar
+which build and check the trees for the rules in the sentence.
+All action methods have access to a new, empty <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> object <code>this.g</code>,
+set by the constructor,
+and can use factory methods such as <a href="module-EBNF-Grammar.html#rule"><code>Grammar.rule()</code></a>
+to build the trees just as it was done manually once only for the grammar's grammar.
+No more manual labor!</p>
+<p>The action methods of the class <a href="module-EBNF-Actions.html"><code>Actions</code></a> are surprisingly simple.
+Each action method receives the items collected by the <a href="module-EBNF-Rule.html#parse">rule's <code>parse()</code> method</a>
+and returns a new object. For example:</p>
+<pre class="prettyprint source"><code>// lit: Lit;
+lit (literal) { return this.g.lit(literal, true); }
+</code></pre>
+<p>If a literal is recognized, the name is collected by the <a href="module-EBNF-Lit.html"><code>Lit</code></a>
+object in the rule tree.
+The action method uses the factory method of <code>this.g</code>
+to create a <a href="module-EBNF-Lit.html"><code>Lit</code></a> object for the new grammar.</p>
+<pre class="prettyprint source"><code>// ref: Token;
+ref (name) { 
+  if (name in this.g.tokensByName) return this.g.token(name, undefined, true);
+  return this.g.nt(name);
+}
+</code></pre>
+<p>Similarly, a <a href="module-EBNF-Token.html"><code>Token</code></a> object collects a name and creates
+either a <a href="module-EBNF-Token.html"><code>Token</code></a> or an <a href="module-EBNF-NT.html"><code>NT</code></a> object for the new grammar.</p>
+<pre class="prettyprint source"><code>// seq: { lit | ref | opt | some };
+seq (some) {
+  if (some.flat().every(node => node instanceof Opt))
+    throw this.g.error(some.flat().join(', ') +
+      ': all sequence elements are optional');
+  return this.g.seq(some.flat(), null);
+}
+</code></pre>
+<p>Braces collect a list of lists.
+Here, the content of each of the inner lists is produced by a rule,
+i.e., it will be new objects such as the two produced above.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat" title="flat()"><code>flat()</code></a> moves these objects to the outer list.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">Spread syntax</a>, i.e., <code>...</code>, passes the objects collected by the braces
+as individual arguments to
+<a href="module-EBNF-Grammar.html#seq"><code>Grammar.seq()</code></a>, the factory method to represent a sequence.</p>
+<pre class="prettyprint source"><code>// alt: seq [{ '|' seq }];
+alt (seq, many) { 
+  return many ?
+    this.g.alt(seq, ... many.flat(1).map(elt => elt[1])) :
+    this.g.alt(seq);
+}
+</code></pre>
+<p>Alternatives are easy if there is only one — it was represented as a
+<a href="module-EBNF-Seq.html"><code>Seq</code></a> object by the previous action
+and it needs to be wrapped into an <a href="module-EBNF-Alt.html"><code>Alt</code></a> object.</p>
+<p>Otherwise the brackets collect a list which contains the list of lists
+produced by the braces.
+<code>many.flat()</code> lifts the innermost lists up where
+<code>map()</code> can pick the second element of each of the innermost lists.
+Each <code>elt[0]</code> would have been the string representing the <code>'|'</code>,
+each <code>elt[1]</code> is a <a href="module-EBNF-Seq.html"><code>Seq</code></a> object.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">Spread syntax</a> and the factory method <a href="module-EBNF-Grammar.html#alt"><code>Grammar.alt()</code></a>
+take care of representing the list of alternative sequences.</p>
+<p><a href="module-EBNF-Alt.html"><code>Alt</code></a> objects never show up in a grammar tree —
+<a href="module-EBNF-Alt.html"><code>Alt</code></a> is the hidden superclass to represent
+rules, brackets, and braces.
+The next three actions use spread syntax and factory methods
+to revise the representation:</p>
+<pre class="prettyprint source"><code>// rule: Token ':' alt ';';
+rule (name, _, alt, s) { return this.g.rule(this.g.nt(name), ...alt.seqs); }
+
+// opt: '[' alt ']';
+opt (lb, alt, rb) { return this.g.opt(...alt.seqs); }
+
+// some: '{' alt '}';
+some (lb, alt, rb) { return this.g.some(...alt.seqs); }
+</code></pre>
+<p>A grammar contains some rules.
+By now they have been collected and the factory methods
+have attached everything to the new grammar.
+Finally, the start rule action just returns the grammar, not yet checked:</p>
+<pre class="prettyprint source"><code>// grammar: { rule };
+grammar (r) { return this.g; }
+</code></pre>
+<p>It is up to the caller of the <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> function
+to check the grammar, at least far enough to create the <code>expect</code> sets.</p>
+<p>In retrospect, a few comments:</p>
+<ul>
+<li>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">spread syntax</a> <code>...</code> seems unnecessary —
+the factory methods could have been designed to accept arrays instead.
+However, the grammars' grammar had to be represented manually.
+A look at the source of <a href="module-EBNF-Grammar.html#.grammar"><code>Grammar.grammar</code></a>
+shows how requiring individual descendants as arguments
+facilitates nested calls to the factory methods.</p>
+</li>
+<li>
+<p>Creating and immediately destroying the <a href="module-EBNF-Alt.html"><code>Alt</code></a> objects
+could have been avoided.
+Instead, the <code>alt</code> action could have returned a list of alternative
+sequences.
+However, some action is necessary to smooth out the different nesting depths
+of one and more alternatives.</p>
+</li>
+<li>
+<p><a href="module-EBNF-Alt.html"><code>Alt</code></a> objects seem to be destined to represent
+alternative sequences nested into a sequence when the grammars' grammar
+is extended with parentheses for grouping.
+Could there be an obstacle?</p>
+</li>
+</ul>
+<h3 id="quick-summary">Quick Summary</h3>
+<ul>
+<li>
+<p>Grammar rules can be represented as nested constructor or factory method calls
+to create <a href="module-EBNF-Rule.html"><code>Rule</code></a> and other objects.</p>
+</li>
+<li>
+<p>The classes implement algorithms for grammar checking such as
+<a href="module-EBNF-Seq.html#shallow"><code>shallow()</code></a>, <a href="module-EBNF-Seq.html#deep"><code>deep()</code></a>,
+and <a href="module-EBNF-Seq.html#check"><code>check()</code></a>, and recognition, i.e.,
+<a href="module-EBNF-Seq.html#parse"><code>parse()</code></a>.</p>
+</li>
+<li>
+<p>As a result. once the grammars' grammar is (manually) represented,
+any grammar can be recognized.</p>
+</li>
+<li>
+<p>Following recognition, action methods for the rules of the grammars' grammar
+take care of representing the rules of any grammar string which is a sentence.</p>
+</li>
+<li>
+<p>In summary, the grammars' grammar, once represented, can represent other grammars,
+and this in turn implements lexical and syntax analysis for other grammars.
+Their rules, too, can be augmented with actions to implement translations.</p>
+</li>
+</ul>
+<h3 id="bootstrap-example">Bootstrap Example</h3>
+<p><a href="../?eg=09/04">Example 9/04</a> demonstrates that
+the grammars' grammar can recognize and represent itself.</p>
+<pre class="prettyprint source"><code>class Actions extends EBNF.Actions {  // modify top-level action
+  static count = 0;                   // count created grammars
+
+  constructor () {                    // create next grammar
+    super(new EBNF.Grammar(EBNF.Grammar.terminals));
+    this.g.count = ++ Actions.count;
+  }
+  
+  grammar (some) { 
+    this.g.check();                   // check next grammar
+    puts(this.g.toString());          // display next grammar
+    puts('count', this.g.count);      // display it's count
+    
+    // executable uses next grammar to parse it's own rules
+    return () => this.g.parser().parse(
+      this.g.count % 2 ? program : grammar, Actions);
+  }
+}
+</code></pre>
+<p>The <a href="module-EBNF-Actions.html"><code>Actions</code></a> class is extended and contains
+a <code>static</code> variable <code>count</code> to identify how often an object is created (lines 2 and 6 above).
+Whenever an object is created it uses a new, empty <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> object (line 5).</p>
+<p>The top-level action is replaced to check and display the grammar, together with it's <code>count</code> (lines 10 to 12).
+Rather than returning the grammar it returns a function
+which will use the new <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> object to parse
+the text in the <span class='a-grammar'></span> or the <span class='a-program'></span>
+and represent it using a new <a href="module-EBNF-Actions.html"><code>Actions</code></a> object (lines 15 and 16).</p>
+<ul>
+<li>Press <span class='c-new'></span>
+to represent and check the grammars' grammar.</li>
+<li>Press <span class='c-parse'></span>
+to let the grammars' grammar represent and check itself and store the parser
+from the new representation as the result in <code>run</code>.</li>
+<li>Press <span class='c-run'></span> to apply
+this parser to the <span class='a-grammar'></span> or the <span class='a-program'></span>
+which both contain the grammar's grammar.</li>
+<li>Press <span class='c-run'></span> a few more times:
+the <code>count</code> value in the <span class='a-output'></span> increases
+because the grammar keeps representing itself.</li>
+</ul>
+<h3 id="extending-the-grammars'-grammar"><a id='extending'></a>Extending the Grammars' Grammar</h3>
+<p>The grammars' grammar can represent itself.
+Therefore, it is possible to extend the grammars' grammar,
+i.e., to modify or extend the notation in which we have been writing grammars.
+<a href="../?eg=09/05">Example 9/05</a> tries to add parentheses
+to the notation <a href="#representing">as discussed earlier</a>, so that alternatives
+can be embedded into sequences.</p>
+<p>The extended grammar's grammar is in the <span class='a-grammar'></span>.
+The modifications are</p>
+<pre class="prettyprint source"><code>seq:     { lit | ref | opt | some | parens };
+parens:  '(' alt ')';
+</code></pre>
+<ul>
+<li>Press <span class='c-new'></span> to represent and check it: it is a sentence!</li>
+</ul>
+<p>The new grammar for <code>sum</code></p>
+<pre class="prettyprint source"><code>sum: Number [{ ( '+' | '-' ) Number }];
+</code></pre>
+<p>is in the <span class='a-program'></span>.</p>
+<p>The <span class='a-actions'></span> again extends the <a href="module-EBNF-Actions.html"><code>Actions</code></a> class
+to provide a definition for <code>Number</code> and
+replace the top-level action for <code>grammar</code>
+to check and display the new grammar
+and return an executable which will call the <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> method
+based on the new grammar with a sum <code>1</code> <code>+</code> <code>2</code> <code>-</code> <code>3</code>.
+It also contains an action for <code>parens</code></p>
+<pre class="prettyprint source"><code>// parens: '(' alt ')';
+parens (lp, alt, rp) {              // returns the alternatives
+  return alt;
+}
+</code></pre>
+<p>which simply returns the
+<a href="module-EBNF-Alt.html"><code>Alt</code></a> object to be included in the sequence.</p>
+<ul>
+<li>Press <span class='c-parse'></span>
+to represent and check the grammar for <code>sum</code>.</li>
+</ul>
+<p>Unfortunately...</p>
+<p>An <a href="module-EBNF-Alt.html"><code>Alt</code></a> object cannot be
+a descendant of a <a href="module-EBNF-Seq.html"><code>Seq</code></a> object —
+sequences were supposed to only contain terminals, rule references,
+brackets and braces.
+Not allowing parentheses in sequences is a syntax issue,
+checking that there are no other descendants is a semantic issue.
+The semantic check is part of the <a href="module-EBNF-Seq.html"><code>Seq</code></a> constructor.</p>
+<p>A rule reference is allowed in a sequence,
+and a rule contains alternatives.
+<a href="../?eg=09/06">Example 9/06</a>, the next attempt, tries to add a hidden rule:</p>
+<pre class="prettyprint source"><code>// parens: '(' alt ')';
+parens (lp, alt, rp) {   // returns reference to auxiliary rule
+  const uniq = this.g.nt();              // unique non-terminal
+  this.g.rule(uniq, ... alt.seqs);                // uniq: alt;
+  return uniq;
+}
+</code></pre>
+<p>The only change from the previous example is a different action for <code>parens</code>.
+This action creates a rule with a unique name
+and returns a reference to it which will be added to the parent sequence.</p>
+<ul>
+<li>Press <span class='c-new'></span> to represent and check
+the extended grammars' grammar and
+press <span class='c-parse'></span>
+to let the extended grammars' grammar represent and check the
+new grammar for <code>sum</code> found in the <span class='a-program'></span>.</li>
+</ul>
+<p>Unfortunately...</p>
+<p>The rule for <code>sum</code> got lost: the <a href="module-EBNF-Parser.html#parse"><code>Parser.parse()</code></a> method looks for a <code>grammar</code>,
+from there for a <code>rule</code>, <code>alt</code>, <code>seq</code>, and eventually <code>parens</code> —
+this is the stack of open calls on the <code>parse()</code> methods
+by the time we reach the new action which creates the hidden rule.
+This action happens to create the first <a href="module-EBNF-Rule.html"><code>Rule</code></a> object ever
+which becomes the start rule, rather than <code>sum</code>.</p>
+<p>Third time is a charm:
+the action for <code>parens</code> in <a href="../?eg=09/07">example 9/07</a> is more careful
+and moves the new rule to the end of the list of rules (lines 2, 8, and 14 below):</p>
+<pre class="prettyprint source"><code>class Actions extends EBNF.Actions {
+  #hidden = [];
+  
+  // parens: '(' alt ')';
+  parens (lp, alt, rp) {   // returns reference to auxiliary rule
+    const uniq = this.g.nt();              // unique non-terminal
+    this.g.rule(uniq, ... alt.seqs);                // uniq: alt;
+    this.#hidden.push(this.g.rules.pop()); // can't be start rule
+    return uniq;
+  }
+
+  // grammar: { rule };
+  grammar (some) {
+    this.g.rules.push(... this.#hidden);   // append hidden rules
+      ...
+</code></pre>
+<ul>
+<li>Again, press <span class='c-new'></span> to represent and check
+the extended grammars' grammar,</li>
+<li>press <span class='c-parse'></span>
+to let the extended grammars' grammar represent and check the
+new grammar for <code>sum</code> found in the <span class='a-program'></span>, and</li>
+<li>finally, press <span class='c-run'></span> to apply the
+new grammar for <code>sum</code> to the expression <code>1</code> <code>+</code> <code>2</code> <code>-</code> <code>3</code>.</li>
+</ul>
+<p>Bottom line: the grammars' grammar can translate itself and this allows for
+changes to the notation as long as <a href="module-EBNF-Rule.html"><code>Rule</code></a>
+and the other magic classes support the semantics or new classes are added
+to support entirely new constructs.</p>
+<p>According to the <a href="https://en.wikipedia.org/wiki/Bootstrapping" title="Bootstrapping">definition of bootstrapping</a> this can go on
+for many iterations — but it will eventually reach the limits of the practice page...</p>
+<h4 id="previous%3A-%7B%40tutorial-08-functions%7D-next%3A-%7B%40tutorial-10-bottom-up%7D">Previous: <a href="tutorial-08-functions.html">8. Functions as Values</a> Next: <a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></h4>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+@font-face {
+	font-family: "Mono";
+	font-weight: normal;
+	font-style: normal;
+	src: url("UbuntuMono-Regular.otf") format("opentype");
+}
+@font-face {
+	font-family: "Mono";
+	font-weight: bold;
+	font-style: normal;
+	src: url("UbuntuMono-Bold.otf") format("opentype");
+}
+@font-face {
+	font-family: "Mono";
+	font-weight: bold;
+	font-style: italic;
+	src: url("UbuntuMono-BoldItalic.otf") format("opentype");
+}
+@font-face {
+	font-family: "Mono";
+	font-weight: normal;
+	font-style: italic;
+	src: url("UbuntuMono-Italic.otf") format("opentype");
+}
+@font-face {
+	font-family: "Icons";
+	font-weight: normal;
+	font-style: normal;
+	src: url("Icons.otf") format("opentype");
+}
+:root { 
+  --red:       #ec5800; 
+  --green:     #50c878; 
+  --darkgreen: #449436;
+  --blue:      rgb(41, 98, 217);
+}
+span.red, span.red-bracket { color: var(--red) !important; }
+span.red-bracket { font-weight: bold; }
+pre, tt, code, kbd, samp {
+  font-family: Mono, "Times New Roman";
+  color: black;
+}
+tt, code, kbd, samp {
+  padding: 0;
+}
+pre {
+	font-size: 100%;
+}
+.tutorial-section a, .tutorial-section a code { color: var(--blue) !important; text-decoration: none !important; }
+.tutorial-section a.to-book             { }
+.tutorial-section a::after              { color: var(--red); }
+.tutorial-section a.to-book::after      { content: none; }
+.tutorial-section a.to-doc::after       { content: "\00b2"; } /* ² */
+.tutorial-section a.to-eg::after        { content: "\00b9"; } /* ¹ */
+.tutorial-section a.to-mdn::after       { content: "\2020"; } /* † */
+.tutorial-section a.to-methods::after   { content: "\00b3"; } /* ³ */
+.tutorial-section a.to-other::after     { content: "\2020"; } /* † */
+.tutorial-section a.to-server::after    { content: "\2026"; } /* … */
+.tutorial-section a.to-wikipedia::after { content: "\2021"; } /* ‡ */
+.tutorial-section a.to-mdn::after,
+.tutorial-section a.to-other::after,
+.tutorial-section a.to-wikipedia::after { line-height: 0; position: relative; top: -0.3ex; }
+.material-symbols-outlined {
+  font-family: Icons;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 125%;
+  line-height: 0; 
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+table.tutorial-toc { display: none; }
+.tutorial-section { max-width: 600px; margin: auto; }
+@media (min-width: 992px) {
+  table.tutorial-toc {
+    position: fixed; top: 10%; right: 1em;
+    border-left: thin lightgray solid;
+    display: table;
+    width: max-content;
+  }
+  .tutorial-section { margin-left: 2em; }
+}
+ul, ol { padding-inline-start: 20px; }
+h1, h2, h3, h4 { font-weight: 500; }
+li p { margin-bottom: 5px; }
+.diagram table { width: 100%; margin: 1em auto; }
+.diagram td { text-align: center; border-top: none; }
+span.t-mode::before       { content: "descent"; }
+span.t-mode.stack::before { content: "stack-based"; }
+span.t-mode.bnf::before   { content: "bnf"; }
+span.t-mode::before       { 
+  display: inline-block; border-radius: 10px; padding: 1px 8px;
+  font-family: sans-serif; font-size: 9pt; color: white; background: var(--blue);
+}
+span.t-mode.stack::before { background: var(--green); }
+span.t-mode.bnf::before   { background: var(--red); }
+span.blue                 { color: var(--blue); }
+span.green                { color: var(--green); }
+span.red                  { color: var(--red); }
+span.c-new::before        { content: "new grammar"; }
+span.c-scan::before       { content: "scan"; }
+span.c-parse::before      { content: "parse"; }
+span.c-run::before        { content: "run"; }
+span.c-1::before          { content: "1"; }
+span.c-10::before         { content: "10"; }
+span.c-100::before        { content: "100"; }
+span.c-new::before, span.c-scan::before, span.c-parse::before,
+span.c-run::before, span.c-1::before, span.c-10::before,
+span.c-100::before        { font-family: sans-serif; font-weight: bold; color: black; }
+span.c-book::before       { content: "book";
+  display: inline-block; border-radius: 10px; padding: 1px 8px;
+  font-family: sans-serif; font-size: 9pt; color: white; background: var(--blue);
+}
+span.t-greedy::before     { content: "no check"; }
+span.t-shallow::before    { content: "shallow"; }
+span.t-deep::before       { content: "deep"; }
+span.t-follow::before     { content: "follow"; }
+span.t-lookahead::before  { content: "lookahead"; }
+span.t-parser::before     { content: "parser"; }
+span.t-actions::before    { content: "actions"; }
+span.t-noargs::before     { content: "no args"; }
+span.t-error::before      { content: "insert $error"; }
+span.t-sets::before       { content: "sets"; }
+span.t-states::before     { content: "states"; }
+span.t-build::before      { content: "build lists"; }
+span.t-greedy::before, span.t-shallow::before, span.t-deep::before, span.t-follow::before, 
+span.t-lookahead::before, span.t-parser::before, span.t-actions::before, span.t-noargs::before,
+span.t-error::before, span.t-sets::before, span.t-states::before, span.t-build::before {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+span.a-grammar::before    { content: "grammar"; }
+span.a-tokens::before     { content: "tokens"; }
+span.a-actions::before    { content: "actions"; }
+span.a-program::before    { content: "program"; }
+span.a-output::before     { content: "output"; }
+span.a-grammar::before, span.a-tokens::before,
+span.a-actions::before, span.a-program::before,
+span.a-output::before     { font-family: Mono, "Times New Roman"; color: black; }
+span.a-grammar::after, span.a-tokens::after,
+span.a-actions::after, span.a-program::after,
+span.a-output::after      { content: " area"; }

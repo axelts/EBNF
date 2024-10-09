@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<!-- title>EBNF  Tutorial: D: The Compiler Kit</title -->
+	<title>D: The Compiler Kit</title> <!-- ats -->
+
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+	<link type="text/css" rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
+		alt="logo"/>EBNF</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF.html">BNF</a></li><li><a href="module-Base.html">Base</a></li><li><a href="module-EBNF.html">EBNF</a></li><li><a href="module-Eight.html">Eight</a></li><li><a href="module-Eleven.html">Eleven</a></li><li><a href="module-Five.html">Five</a></li><li><a href="module-GUI.html">GUI</a></li><li><a href="module-Practice.html">Practice</a></li><li><a href="module-Script.html">Script</a></li><li><a href="module-Seven.html">Seven</a></li><li><a href="module-Six.html">Six</a></li><li><a href="module-Ten.html">Ten</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-Actions.html">BNF~Actions</a></li><li><a href="module-BNF-Grammar.html">BNF~Grammar</a></li><li><a href="module-BNF-Lit.html">BNF~Lit</a></li><li><a href="module-BNF-Mark.html">BNF~Mark</a></li><li><a href="module-BNF-Message.html">BNF~Message</a></li><li><a href="module-BNF-NT.html">BNF~NT</a></li><li><a href="module-BNF-Parser.html">BNF~Parser</a></li><li><a href="module-BNF-Rule.html">BNF~Rule</a></li><li><a href="module-BNF-State.html">BNF~State</a></li><li><a href="module-BNF-Token.html">BNF~Token</a></li><li><a href="module-Base-Factory.html">Base~Factory</a></li><li><a href="module-Base-Lit.html">Base~Lit</a></li><li><a href="module-Base-NT.html">Base~NT</a></li><li><a href="module-Base-Parser.html">Base~Parser</a></li><li><a href="module-Base-Precedence.html">Base~Precedence</a></li><li><a href="module-Base-Scanner.html">Base~Scanner</a></li><li><a href="module-Base-Symbol.html">Base~Symbol</a></li><li><a href="module-Base-T.html">Base~T</a></li><li><a href="module-Base-Token.html">Base~Token</a></li><li><a href="module-Base-Tuple.html">Base~Tuple</a></li><li><a href="module-EBNF-Actions.html">EBNF~Actions</a></li><li><a href="module-EBNF-Alt.html">EBNF~Alt</a></li><li><a href="module-EBNF-Grammar.html">EBNF~Grammar</a></li><li><a href="module-EBNF-Lit.html">EBNF~Lit</a></li><li><a href="module-EBNF-NT.html">EBNF~NT</a></li><li><a href="module-EBNF-Opt.html">EBNF~Opt</a></li><li><a href="module-EBNF-Parser.html">EBNF~Parser</a></li><li><a href="module-EBNF-Rule.html">EBNF~Rule</a></li><li><a href="module-EBNF-Seq.html">EBNF~Seq</a></li><li><a href="module-EBNF-Set.html">EBNF~Set</a></li><li><a href="module-EBNF-Some.html">EBNF~Some</a></li><li><a href="module-EBNF-Token.html">EBNF~Token</a></li><li><a href="module-Eight-First14_Fun.html">Eight~First14#Fun</a></li><li><a href="module-Eight-First14_Var.html">Eight~First14#Var</a></li><li><a href="module-Eight-Global01_Fun.html">Eight~Global01#Fun</a></li><li><a href="module-Eight-Global01_Type.html">Eight~Global01#Type</a></li><li><a href="module-Eight-Global01_Var.html">Eight~Global01#Var</a></li><li><a href="module-Eight-Machine14_Memory.html">Eight~Machine14#Memory</a></li><li><a href="module-Eight-Pass08_Fun.html">Eight~Pass08#Fun</a></li><li><a href="module-Eight-Pass08_Var.html">Eight~Pass08#Var</a></li><li><a href="module-Eleven-Build.html">Eleven~Build</a></li><li><a href="module-Eleven-Check.html">Eleven~Check</a></li><li><a href="module-Eleven-Code.html">Eleven~Code</a></li><li><a href="module-Eleven-Visit.html">Eleven~Visit</a></li><li><a href="module-Five-Actions14.html">Five~Actions14</a></li><li><a href="module-Five-Actions15.html">Five~Actions15</a></li><li><a href="module-Five-Actions16.html">Five~Actions16</a></li><li><a href="module-Practice-Model.html">Practice~Model</a></li><li><a href="module-Seven-Blocks09.html">Seven~Blocks09</a></li><li><a href="module-Seven-Blocks09_Block.html">Seven~Blocks09#Block</a></li><li><a href="module-Seven-Blocks09_Fun.html">Seven~Blocks09#Fun</a></li><li><a href="module-Seven-Blocks09_Symbol.html">Seven~Blocks09#Symbol</a></li><li><a href="module-Seven-Blocks09_Var.html">Seven~Blocks09#Var</a></li><li><a href="module-Seven-Functions04.html">Seven~Functions04</a></li><li><a href="module-Seven-Functions04_Fun.html">Seven~Functions04#Fun</a></li><li><a href="module-Seven-Functions04_Symbol.html">Seven~Functions04#Symbol</a></li><li><a href="module-Seven-Functions04_Var.html">Seven~Functions04#Var</a></li><li><a href="module-Seven-Machine04.html">Seven~Machine04</a></li><li><a href="module-Seven-Machine04_Memory.html">Seven~Machine04#Memory</a></li><li><a href="module-Seven-Machine06.html">Seven~Machine06</a></li><li><a href="module-Seven-Machine06_Memory.html">Seven~Machine06#Memory</a></li><li><a href="module-Seven-Machine13.html">Seven~Machine13</a></li><li><a href="module-Seven-Machine13_Memory.html">Seven~Machine13#Memory</a></li><li><a href="module-Seven-Nest13_Fun.html">Seven~Nest13#Fun</a></li><li><a href="module-Seven-Nest13_Var.html">Seven~Nest13#Var</a></li><li><a href="module-Seven-Parameters06.html">Seven~Parameters06</a></li><li><a href="module-Seven-Parameters06_Fun.html">Seven~Parameters06#Fun</a></li><li><a href="module-Seven-Parameters06_Symbol.html">Seven~Parameters06#Symbol</a></li><li><a href="module-Seven-Parameters06_Var.html">Seven~Parameters06#Var</a></li><li><a href="module-Seven-TCheck01.html">Seven~TCheck01</a></li><li><a href="module-Seven-TCheck02.html">Seven~TCheck02</a></li><li><a href="module-Six-Arithmetic09.html">Six~Arithmetic09</a></li><li><a href="module-Six-Arithmetic10.html">Six~Arithmetic10</a></li><li><a href="module-Six-Control11.html">Six~Control11</a></li><li><a href="module-Six-Eval02.html">Six~Eval02</a></li><li><a href="module-Six-Eval03.html">Six~Eval03</a></li><li><a href="module-Six-Eval04.html">Six~Eval04</a></li><li><a href="module-Six-Functions05.html">Six~Functions05</a></li><li><a href="module-Six-Functions06.html">Six~Functions06</a></li><li><a href="module-Six-Functions07.html">Six~Functions07</a></li><li><a href="module-Six-Functions12.html">Six~Functions12</a></li><li><a href="module-Six-Machine09.html">Six~Machine09</a></li><li><a href="module-Six-Machine10.html">Six~Machine10</a></li><li><a href="module-Six-Machine11.html">Six~Machine11</a></li><li><a href="module-Six-Machine11_Memory.html">Six~Machine11#Memory</a></li><li><a href="module-Six-Postfix08.html">Six~Postfix08</a></li><li><a href="module-Ten-Actions07.html">Ten~Actions07</a></li><li><a href="module-Ten-Actions09.html">Ten~Actions09</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="mixins.list.html" class="dropdown-toggle" data-toggle="dropdown">Mixins<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-BNF-T.html">BNF~T</a></li><li><a href="module-EBNF-Node.html">EBNF~Node</a></li><li><a href="module-Eight-First14.html">Eight~First14</a></li><li><a href="module-Eight-Global01.html">Eight~Global01</a></li><li><a href="module-Eight-Machine01.html">Eight~Machine01</a></li><li><a href="module-Eight-Machine08.html">Eight~Machine08</a></li><li><a href="module-Eight-Machine14.html">Eight~Machine14</a></li><li><a href="module-Eight-Pass08.html">Eight~Pass08</a></li><li><a href="module-Eleven-Build_Bool.html">Eleven~Build_Bool</a></li><li><a href="module-Eleven-Build_Cast.html">Eleven~Build_Cast</a></li><li><a href="module-Eleven-Build_Cmps.html">Eleven~Build_Cmps</a></li><li><a href="module-Eleven-Build_Dcl.html">Eleven~Build_Dcl</a></li><li><a href="module-Eleven-Build_Names.html">Eleven~Build_Names</a></li><li><a href="module-Eleven-Build_Number.html">Eleven~Build_Number</a></li><li><a href="module-Eleven-Build_RD.html">Eleven~Build_RD</a></li><li><a href="module-Eleven-Build_Stmts.html">Eleven~Build_Stmts</a></li><li><a href="module-Eleven-Build_String.html">Eleven~Build_String</a></li><li><a href="module-Eleven-Check_Bool.html">Eleven~Check_Bool</a></li><li><a href="module-Eleven-Check_Cast.html">Eleven~Check_Cast</a></li><li><a href="module-Eleven-Check_Cmps.html">Eleven~Check_Cmps</a></li><li><a href="module-Eleven-Check_Dcl.html">Eleven~Check_Dcl</a></li><li><a href="module-Eleven-Check_Names.html">Eleven~Check_Names</a></li><li><a href="module-Eleven-Check_Number.html">Eleven~Check_Number</a></li><li><a href="module-Eleven-Check_Stmts.html">Eleven~Check_Stmts</a></li><li><a href="module-Eleven-Check_String.html">Eleven~Check_String</a></li><li><a href="module-Eleven-Code_Bool.html">Eleven~Code_Bool</a></li><li><a href="module-Eleven-Code_Cast.html">Eleven~Code_Cast</a></li><li><a href="module-Eleven-Code_Cmps.html">Eleven~Code_Cmps</a></li><li><a href="module-Eleven-Code_Dcl.html">Eleven~Code_Dcl</a></li><li><a href="module-Eleven-Code_Names.html">Eleven~Code_Names</a></li><li><a href="module-Eleven-Code_Number.html">Eleven~Code_Number</a></li><li><a href="module-Eleven-Code_Stmts.html">Eleven~Code_Stmts</a></li><li><a href="module-Eleven-Code_String.html">Eleven~Code_String</a></li><li><a href="module-Eleven-Compile.html">Eleven~Compile</a></li><li><a href="module-Eleven-Eval_Bool.html">Eleven~Eval_Bool</a></li><li><a href="module-Eleven-Eval_Cast.html">Eleven~Eval_Cast</a></li><li><a href="module-Eleven-Eval_Cmps.html">Eleven~Eval_Cmps</a></li><li><a href="module-Eleven-Eval_Dcl.html">Eleven~Eval_Dcl</a></li><li><a href="module-Eleven-Eval_Names.html">Eleven~Eval_Names</a></li><li><a href="module-Eleven-Eval_Number.html">Eleven~Eval_Number</a></li><li><a href="module-Eleven-Eval_Stmts.html">Eleven~Eval_Stmts</a></li><li><a href="module-Eleven-Eval_String.html">Eleven~Eval_String</a></li><li><a href="module-Eleven-Main.html">Eleven~Main</a></li><li><a href="module-Eleven-Symbols.html">Eleven~Symbols</a></li><li><a href="module-Seven-Nest13.html">Seven~Nest13</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>D: The Compiler Kit</h2>
+</header>
+
+<article>
+    <h4 id="tree-builders">Tree Builders</h4>
+<h4 id="visitors">Visitors</h4>
+<hr>
+<p>This appendix contains tables which index the tree builders, interpreters, type checkers,
+and stack machine code generators for the little language
+developed in <a href="tutorial-11-trees.html">chapter eleven</a>.
+The table entries are linked to the examples, to the documentation, and from there to the sources.</p>
+<p>All code is structured as <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> which are mostly independent of each other
+to be combined for different types of language processing.
+All classes and mix-ins are contained in <a href="module-Eleven.html">module <code>Eleven</code></a>.</p>
+<p>The <a href="../methods.html?file=modules/11.js">method browser</a> <a href="tutorial-c-compilers.html#the-method-browser-1">described in appendix C</a>
+can be used to compare the action methods
+for the tree builders and the processing methods in the visitors.</p>
+<h3 id="tree-builders-1">Tree Builders</h3>
+<p>Trees are built during recognition, i.e., in action methods.
+Tree builder mix-ins are applied to the base class <a href="module-Eleven-Build.html"><code>Build</code></a>
+which provides a small amount of infrastructure.</p>
+<p>Tree building employs an <a href="https://en.wikipedia.org/wiki/Simple_LR_parser" title="SLR parser">SLR(1) grammar</a> with a precedence table
+which allows a symmetric definition of the operations in expressions.
+This table links the precedence levels to the builders and examples which require them:</p>
+<table>
+<thead>
+<tr>
+<th>precedence<br><div style='width:21em'></div></th>
+<th>builder mix-in<br><div style='width:7em'></div></th>
+<th>used in<br><div style='width:10em'></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%left 'or';</code><br><code>%left 'and';</code></td>
+<td><a href="module-Eleven-Build_Bool.html"><code>Build_Bool</code></a></td>
+<td><a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></td>
+</tr>
+<tr>
+<td><code>%nonassoc '=' '&lt;&gt;' '&gt;' '&gt;=' '&lt;' '&lt;=';</code></td>
+<td><a href="module-Eleven-Build_Cmps.html"><code>Build_Cmps</code></a></td>
+<td><a href="../?mode=stack&amp;eg=11/04" title="11/04">04</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></td>
+</tr>
+<tr>
+<td><code>%left '+' '-';</code><br><code>%left '*' '/';</code><br><code>%right '**';</code><br><code>%right Number;</code></td>
+<td><a href="module-Eleven-Build_Number.html"><code>Build_Number</code></a></td>
+<td><a href="../?mode=stack&amp;eg=11/02" title="11/02">02</a> <a href="../?mode=stack&amp;eg=11/03" title="11/03">03</a> <a href="../?mode=stack&amp;eg=11/04" title="11/04">04</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/10" title="11/10">10</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></td>
+</tr>
+</tbody>
+</table>
+<p>The following table links tree builder mix-ins to the examples which use them,
+lists their grammar rules and links them to the builder actions and from there to the sources,
+and specifies the resulting tree nodes or values.
+The table in the next section of this appendix relates the tree nodes
+to visitor mix-ins which can process them and to the examples which use the visitors.</p>
+<p>The <a href="module-Eleven-Main.html"><code>Main</code></a> mix-in
+supports a build rule <code>main:</code> <em>tree</em><code>;</code> which applies a list of visitors,
+specified as mix-in arguments, to the <em>tree</em> and returns a function which will apply the last visitor.
+Convenience methods support build rules <code>dump:</code> <em>tree</em><code>;</code> to dump a tree and <code>run:</code> <em>function</em><code>;</code> to execute the function.</p>
+<p>The <a href="module-Eleven-Compile.html"><code>Compile</code></a> mix-in
+supports a build rule <code>compile:</code> <em>tree</em><code>;</code> which applies a list of visitors,
+specified as mix-in arguments, to the <em>tree</em>
+and returns the executable created by the last visitor which must be a code generator.</p>
+<p>Operations on names require a symbol table which is supported by the
+<a href="module-Eleven-Symbols.html"><code>Symbols</code></a> mix-in
+and forwarded from one visitor to the next.</p>
+<table>
+<thead>
+<tr>
+<th><a href="module-Eleven-Compile.html"><code>Compile</code></a>, used in <a href="../?mode=stack&amp;eg=11/10" title="11/10">10</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a><br><div style='width:29em'></div></th>
+<th>action</th>
+<th>returns<br><div style='width:25em'></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>compile: </code><em>tree</em><code>;</code></td>
+<td><a href="module-Eleven-Compile.html#compile"><code>compile()</code></a></td>
+<td><code>(memory, steps) =&gt; StackMachine(memory, steps)</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Main.html"><code>Main</code></a>, used in <a href="../?mode=stack&amp;eg=11/03" title="11/03">03</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/10" title="11/10">10</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>run: </code><em>function</em><code>;</code></td>
+<td><a href="module-Eleven-Main.html#run"><code>run()</code></a></td>
+<td><em>function's result</em></td>
+</tr>
+<tr>
+<td><code>main: </code><em>tree</em><code>;</code></td>
+<td><a href="module-Eleven-Main.html#main"><code>main()</code></a></td>
+<td><code>()</code> <code>=&gt;</code> <em>last visitor</em><code>(</code><em>tree</em><code>)</code></td>
+</tr>
+<tr>
+<td><code>dump: </code><em>tree</em><code>;</code></td>
+<td><a href="module-Eleven-Main.html#dump"><code>dump()</code></a></td>
+<td><em>tree</em></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Dcl.html"><code>Build_Dcl</code></a>, used in <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>block: item [{ ';' item }];</code></td>
+<td><a href="module-Eleven-Build_Dcl.html#block"><code>block()</code></a></td>
+<td><code>[ 'block' dcl ... stmt ... ]</code></td>
+</tr>
+<tr>
+<td><code>item: dcl | stmt;</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>dcl: type Name [{ ',' Name }];</code></td>
+<td><a href="module-Eleven-Build_Dcl.html#dcl"><code>dcl()</code></a></td>
+<td><code>[ 'dcl' type Name ... ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Stmts.html"><code>Build_Stmts</code></a>, used in <a href="../?mode=stack&amp;eg=11/04" title="11/04">04</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>stmts: stmt [{ ';' stmt }];</code></td>
+<td><a href="module-Eleven-Build_Stmts.html#stmts"><code>stmts()</code></a></td>
+<td><code>stmt</code> | <code>[ 'stmts' stmt ... ]</code></td>
+</tr>
+<tr>
+<td><code>stmt: print | ...;</code></td>
+<td><a href="module-Eleven-Build_Stmts.html#stmt"><code>stmt()</code></a></td>
+<td><em>tree</em></td>
+</tr>
+<tr>
+<td><code>print: 'print' expr [{ ',' expr }];</code></td>
+<td><a href="module-Eleven-Build_Stmts.html#print"><code>print()</code></a></td>
+<td><code>[ 'print' expr ... ]</code></td>
+</tr>
+<tr>
+<td><code>loop: 'while' expr 'do' stmts 'od';</code></td>
+<td><a href="module-Eleven-Build_Stmts.html#loop"><code>loop()</code></a></td>
+<td><code>[ 'loop' expr stmts ]</code></td>
+</tr>
+<tr>
+<td><code>select: 'if' expr 'then' stmts [ 'else' stmts ] 'fi';</code></td>
+<td><a href="module-Eleven-Build_Stmts.html#select"><code>select()</code></a></td>
+<td><code>[ 'if' expr stmts stmts? ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Names.html"><code>Build_Names</code></a>, used in <a href="../?mode=stack&amp;eg=11/04" title="11/04">04</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>assign: Name '=' expr;</code></td>
+<td><a href="module-Eleven-Build_Names.html#assign"><code>assign()</code></a></td>
+<td><code>[ 'assign' Name expr ]</code></td>
+</tr>
+<tr>
+<td><code>name: Name;</code></td>
+<td><a href="module-Eleven-Build_Names.html#name"><code>name()</code></a></td>
+<td><code>[ 'name' Name ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Cast.html"><code>Build_Cast</code></a>, used in <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>type: 'bool' | 'number' | 'string';</code></td>
+<td><a href="module-Eleven-Build_Cast.html#type"><code>type()</code></a></td>
+<td><em>typename</em></td>
+</tr>
+<tr>
+<td><code>cast: '(' type ')' expr %prec Number;</code></td>
+<td><a href="module-Eleven-Build_Cast.html#cast"><code>cast()</code></a></td>
+<td><code>[ 'cast' type expr ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_String.html"><code>Build_String</code></a>, used in <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>input: 'input' [ String String ];</code></td>
+<td><a href="module-Eleven-Build_String.html#input"><code>input()</code></a></td>
+<td><code>[ 'input' String? String? ]</code></td>
+</tr>
+<tr>
+<td><code>len: 'len' expr %prec Number;</code></td>
+<td><a href="module-Eleven-Build_String.html#len"><code>len()</code></a></td>
+<td><code>[ 'len' expr ]</code></td>
+</tr>
+<tr>
+<td><code>string: String;</code></td>
+<td><a href="module-Eleven-Build_String.html#string"><code>string()</code></a></td>
+<td><code>[ 'string' String ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Bool.html"><code>Build_Bool</code></a>, used in <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>or: expr 'or' expr;</code></td>
+<td><a href="module-Eleven-Build_Bool.html#or"><code>or()</code></a></td>
+<td><code>[ 'or' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>and: expr 'and' expr;</code></td>
+<td><a href="module-Eleven-Build_Bool.html#and"><code>and()</code></a></td>
+<td><code>[ 'and' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>not: 'not' expr %prec Number;</code></td>
+<td><a href="module-Eleven-Build_Bool.html#not"><code>not()</code></a></td>
+<td><code>[ 'not' expr ]</code></td>
+</tr>
+<tr>
+<td><code>bool: 'true' | 'false';</code></td>
+<td><a href="module-Eleven-Build_Bool.html#bool"><code>bool()</code></a></td>
+<td><code>[ 'bool' Boolean ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Cmps.html"><code>Build_Cmps</code></a>, used in <a href="../?mode=stack&amp;eg=11/04" title="11/04">04</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>eq: expr '=' expr;</code></td>
+<td><a href="module-Eleven-Build_Cmps.html#eq"><code>eq()</code></a></td>
+<td><code>[ 'eq' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>ne: expr '&lt;&gt;' expr;</code></td>
+<td><a href="module-Eleven-Build_Cmps.html#ne"><code>ne()</code></a></td>
+<td><code>[ 'ne' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>gt: expr '&gt;' expr;</code></td>
+<td><a href="module-Eleven-Build_Cmps.html#gt"><code>gt()</code></a></td>
+<td><code>[ 'gt' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>ge: expr '&gt;=' expr;</code></td>
+<td><a href="module-Eleven-Build_Cmps.html#ge"><code>ge()</code></a></td>
+<td><code>[ 'ge' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>lt: expr '&lt;' expr;</code></td>
+<td><a href="module-Eleven-Build_Cmps.html#lt"><code>lt()</code></a></td>
+<td><code>[ 'lt' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>le: expr '&lt;=' expr;</code></td>
+<td><a href="module-Eleven-Build_Cmps.html#le"><code>le()</code></a></td>
+<td><code>[ 'le' expr expr ]</code></td>
+</tr>
+<tr>
+<td><strong><a href="module-Eleven-Build_Number.html"><code>Build_Number</code></a>, used in <a href="../?mode=stack&amp;eg=11/02" title="11/02">02</a> <a href="../?mode=stack&amp;eg=11/03" title="11/03">03</a> <a href="../?mode=stack&amp;eg=11/04" title="11/04">04</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/10" title="11/10">10</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong>action</strong></td>
+<td><strong>returns</strong></td>
+</tr>
+<tr>
+<td><code>expr: add | ... | '(' expr ')';</code></td>
+<td><a href="module-Eleven-Build_Number.html#expr"><code>expr()</code></a></td>
+<td><em>tree</em></td>
+</tr>
+<tr>
+<td><code>add: expr '+' expr;</code></td>
+<td><a href="module-Eleven-Build_Number.html#add"><code>add()</code></a></td>
+<td><code>[ 'add' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>subtract: expr '+' expr;</code></td>
+<td><a href="module-Eleven-Build_Number.html#subtract"><code>subtract()</code></a></td>
+<td><code>[ 'subtract' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>multiply: expr '+' expr;</code></td>
+<td><a href="module-Eleven-Build_Number.html#multiply"><code>multiply()</code></a></td>
+<td><code>[ 'multiply' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>divide: expr '+' expr;</code></td>
+<td><a href="module-Eleven-Build_Number.html#divide"><code>divide()</code></a></td>
+<td><code>[ 'divide' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>power: expr '+' expr;</code></td>
+<td><a href="module-Eleven-Build_Number.html#power"><code>power()</code></a></td>
+<td><code>[ 'power' expr expr ]</code></td>
+</tr>
+<tr>
+<td><code>minus: '-' expr %prec Number;</code></td>
+<td><a href="module-Eleven-Build_Number.html#minus"><code>minus()</code></a></td>
+<td><code>[ 'minus' expr ]</code></td>
+</tr>
+<tr>
+<td><code>number: Number;</code></td>
+<td><a href="module-Eleven-Build_Number.html#number"><code>number()</code></a></td>
+<td><code>[ 'number' Number ]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="visitors-1">Visitors</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">visitor pattern</a> is useful to process trees.
+<a href="module-Eleven.html">Module <code>Eleven</code></a> implements three kinds of <a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">visitors</a>:</p>
+<ul>
+<li>
+<p><span class='material-symbols-outlined'>Ⓔ</span> Interpreters visit trees and evaluate the nodes — basically in <a href="https://en.wikipedia.org/wiki/Tree_traversal" title="tree traversal">postorder</a>.
+Interpreter mix-ins are applied to the base class <a href="module-Eleven-Visit.html"><code>Visit</code></a>
+which implements the <a href="https://en.wikipedia.org/wiki/Visitor_pattern" title="Visitor Pattern">visitor pattern</a> and provides tracing.</p>
+</li>
+<li>
+<p><span class='material-symbols-outlined'>Ⓒ</span> Type Checkers visit, annotate, and modify trees in place prior to interpretation or code generation.
+Type checker mix-ins are applied to the base class <a href="module-Eleven-Check.html"><code>Check</code></a>
+which extends <a href="module-Eleven-Visit.html"><code>Visit</code></a>
+and implements convenience methods.</p>
+</li>
+<li>
+<p><span class='material-symbols-outlined'>Ⓖ</span> Code generators visit trees, perhaps modified by type checking.
+Code generators use a stack machine generator ultimately based on <a href="module-Six-Machine10.html"><code>Machine10</code></a>
+to generate code and create a stack machine executable.
+Code generator mix-ins are applied to the base class <a href="module-Eleven-Code.html"><code>Code</code></a>
+which extends <a href="module-Eleven-Visit.html"><code>Visit</code></a>,
+implements convenience methods,
+and by default imports <a href="module-Six-Machine10.html"><code>Machine10</code></a>.</p>
+</li>
+</ul>
+<p>Visiting names requires a symbol table which is supported by the
+<a href="module-Eleven-Symbols.html"><code>Symbols</code></a> mix-in
+and forwarded from one visitor to the next.</p>
+<p>The following table links visitor mix-ins to the examples which use them,
+lists their tree nodes and links them to the visitor methods and from there to the source code, and specifies the results.</p>
+<table>
+<thead>
+<tr>
+<th><code>[</code> node <code>]</code><br><br><br><div style='width:14em'></div></th>
+<th>method<br><br><br></th>
+<th><a href="module-Eleven-Eval_Dcl.html"><code>Eval_Dcl</code></a><br><a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a><br>returns<br><div style='width:11em'></div></th>
+<th><a href="module-Eleven-Check_Dcl.html"><code>Check_Dcl</code></a><br><a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a><br>sets <code>.type</code><br><div style='width:10em'></div></th>
+<th><a href="module-Eleven-Code_Dcl.html"><code>Code_Dcl</code></a><br><a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a><br>generates<br><div style='width:9em'></div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'block' dcl... stmt...</code></td>
+<td><code>block()</code></td>
+<td><a href="module-Eleven-Eval_Dcl.html#block"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Dcl.html#block"><span class="material-symbols-outlined">Ⓒ</span> not set</a></td>
+<td><a href="module-Eleven-Code_Dcl.html#block"><code><span class="material-symbols-outlined">Ⓖ</span></code></a></td>
+</tr>
+<tr>
+<td><code>'dcl' type Name ...</code></td>
+<td><code>dcl()</code></td>
+<td><a href="module-Eleven-Eval_Dcl.html#dcl"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Dcl.html#dcl"><span class="material-symbols-outlined">Ⓒ</span> sets each <code>Name</code></a></td>
+<td><a href="module-Eleven-Code_Dcl.html#dcl"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Push"><code>Push</code></a> <a href="module-Six-Machine11.html#Store"><code>Store</code></a> <a href="module-Six-Machine11.html#Pop"><code>Pop</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_Stmts.html"><code>Eval_Stmts</code></a><br><a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_Stmts.html"><code>Check_Stmts</code></a><br><a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_Stmts.html"><code>Code_Stmts</code></a><br><a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'stmts' stmt ...</code></td>
+<td><code>stmts()</code></td>
+<td><a href="module-Eleven-Eval_Stmts.html#stmts"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Stmts.html#stmts"><span class="material-symbols-outlined">Ⓒ</span> not set</a></td>
+<td><a href="module-Eleven-Code_Stmts.html#stmts"><code><span class="material-symbols-outlined">Ⓖ</span></code></a></td>
+</tr>
+<tr>
+<td><code>'print' value ...</code></td>
+<td><code>print()</code></td>
+<td><a href="module-Eleven-Eval_Stmts.html#print"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Stmts.html#print"><span class="material-symbols-outlined">Ⓒ</span> not set</a></td>
+<td><a href="module-Eleven-Code_Stmts.html#print"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Print"><code>Print</code></a></td>
+</tr>
+<tr>
+<td><code>'loop' cond stmt</code></td>
+<td><code>loop()</code></td>
+<td><a href="module-Eleven-Eval_Stmts.html#loop"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Stmts.html#loop"><span class="material-symbols-outlined">Ⓒ</span> not set</a></td>
+<td><a href="module-Eleven-Code_Stmts.html#loop"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Branch"><code>Branch</code></a></td>
+</tr>
+<tr>
+<td><code>'select' cond then else?</code></td>
+<td><code>select()</code></td>
+<td><a href="module-Eleven-Eval_Stmts.html#select"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Stmts.html#select"><span class="material-symbols-outlined">Ⓒ</span> not set</a></td>
+<td><a href="module-Eleven-Code_Stmts.html#select"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Branch"><code>Branch</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_Names.html"><code>Eval_Names</code></a><br><a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_Names.html"><code>Check_Names</code></a><br><a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_Names.html"><code>Code_Names</code></a><br><a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'name' Name</code></td>
+<td><code>name()</code></td>
+<td><a href="module-Eleven-Eval_Names.html#name"><span class="material-symbols-outlined">Ⓔ</span> <code>Name</code>'s value</a></td>
+<td><a href="module-Eleven-Check_Names.html#name"><span class="material-symbols-outlined">Ⓒ</span> <code>Name</code>'s type</a></td>
+<td><a href="module-Eleven-Code_Names.html#name"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Load"><code>Load</code></a></td>
+</tr>
+<tr>
+<td><code>'assign' Name value</code></td>
+<td><code>assign()</code></td>
+<td><a href="module-Eleven-Eval_Names.html#assign"><span class="material-symbols-outlined">Ⓔ</span> undefined</a></td>
+<td><a href="module-Eleven-Check_Names.html#assign"><span class="material-symbols-outlined">Ⓒ</span> not set</a></td>
+<td><a href="module-Eleven-Code_Names.html#assign"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Store"><code>Store</code></a> <a href="module-Six-Machine11.html#Pop"><code>Pop</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_Cast.html"><code>Eval_Cast</code></a><br><a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_Cast.html"><code>Check_Cast</code></a><br><a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_Cast.html"><code>Code_Cast</code></a><br><a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'cast' type expr</code></td>
+<td><code>cast()</code></td>
+<td><a href="module-Eleven-Eval_Cast.html#cast"><span class="material-symbols-outlined">Ⓔ</span> <code>type</code>'ed value</a></td>
+<td><a href="module-Eleven-Check_Cast.html#cast"><span class="material-symbols-outlined">Ⓒ</span> <code>type</code></a></td>
+<td><a href="module-Eleven-Code_Cast.html#cast"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_Cast.html#Instructions"><code>Cast</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_String.html"><code>Eval_String</code></a><br><a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_String.html"><code>Check_String</code></a><br><a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_String.html"><code>Code_String</code></a><br><a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'input' prompt? default?</code></td>
+<td><code>input()</code></td>
+<td><a href="module-Eleven-Eval_String.html#input"><span class="material-symbols-outlined">Ⓔ</span> <code>String</code></a></td>
+<td><a href="module-Eleven-Check_String.html#input"><span class="material-symbols-outlined">Ⓒ</span> <code>'string'</code></a></td>
+<td><a href="module-Eleven-Code_String.html#input"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_String.html#Instructions"><code>InputString</code></a></td>
+</tr>
+<tr>
+<td><code>'concat' a b</code></td>
+<td><code>concat()</code></td>
+<td><a href="module-Eleven-Eval_String.html#concat"><span class="material-symbols-outlined">Ⓔ</span> <code>String</code></a></td>
+<td><a href="module-Eleven-Check_String.html#add"><span class="material-symbols-outlined">Ⓒ</span> <code>'string'</code></a></td>
+<td><a href="module-Eleven-Code_String.html#concat"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_String.html#Instructions"><code>Concat</code></a></td>
+</tr>
+<tr>
+<td><code>'len' a</code></td>
+<td><code>len()</code></td>
+<td><a href="module-Eleven-Eval_String.html#len"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_String.html#len"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_String.html#len"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_String.html#Instructions"><code>Len</code></a></td>
+</tr>
+<tr>
+<td><code>'string' String</code></td>
+<td><code>string()</code></td>
+<td><a href="module-Eleven-Eval_String.html#string"><span class="material-symbols-outlined">Ⓔ</span> <code>String</code></a></td>
+<td><a href="module-Eleven-Check_String.html#string"><span class="material-symbols-outlined">Ⓒ</span> <code>'string'</code></a></td>
+<td><a href="module-Eleven-Code_String.html#string"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Push"><code>Push</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_Bool.html"><code>Eval_Bool</code></a><br><a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_Bool.html"><code>Check_Bool</code></a><br><a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_Bool.html"><code>Code_Bool</code></a><br><a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'or' a b</code></td>
+<td><code>or()</code></td>
+<td><a href="module-Eleven-Eval_Bool.html#or"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Bool.html#or"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Bool.html#or"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_Bool.html#Instructions"><code>IfTrue</code></a></td>
+</tr>
+<tr>
+<td><code>'and' a b</code></td>
+<td><code>and()</code></td>
+<td><a href="module-Eleven-Eval_Bool.html#and"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Bool.html#and"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Bool.html#and"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_Bool.html#Instructions"><code>IfFalse</code></a></td>
+</tr>
+<tr>
+<td><code>'not' a</code></td>
+<td><code>not()</code></td>
+<td><a href="module-Eleven-Eval_Bool.html#not"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Bool.html#not"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Bool.html#not"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Eleven-Code_Bool.html#Instructions"><code>Not</code></a></td>
+</tr>
+<tr>
+<td><code>'bool' Boolean</code></td>
+<td><code>bool()</code></td>
+<td><a href="module-Eleven-Eval_Bool.html#bool"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Bool.html#bool"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Bool.html#bool"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Push"><code>Push</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_Cmps.html"><code>Eval_Cmps</code></a><br><a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_Cmps.html"><code>Check_Cmps</code></a><br><a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_Cmps.html"><code>Code_Cmps</code></a><br><a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'eq' a b</code></td>
+<td><code>eq()</code></td>
+<td><a href="module-Eleven-Eval_Cmps.html#eq"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Cmps.html#eq"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Cmps.html#eq"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Eq"><code>Eq</code></a></td>
+</tr>
+<tr>
+<td><code>'ne' a b</code></td>
+<td><code>ne()</code></td>
+<td><a href="module-Eleven-Eval_Cmps.html#ne"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Cmps.html#ne"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Cmps.html#ne"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Ne"><code>Ne</code></a></td>
+</tr>
+<tr>
+<td><code>'gt' a b</code></td>
+<td><code>gt()</code></td>
+<td><a href="module-Eleven-Eval_Cmps.html#gt"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Cmps.html#gt"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Cmps.html#gt"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Gt"><code>Gt</code></a></td>
+</tr>
+<tr>
+<td><code>'ge' a b</code></td>
+<td><code>ge()</code></td>
+<td><a href="module-Eleven-Eval_Cmps.html#ge"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Cmps.html#ge"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Cmps.html#ge"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Ge"><code>Ge</code></a></td>
+</tr>
+<tr>
+<td><code>'lt' a b</code></td>
+<td><code>lt()</code></td>
+<td><a href="module-Eleven-Eval_Cmps.html#lt"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Cmps.html#lt"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Cmps.html#lt"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Lt"><code>Lt</code></a></td>
+</tr>
+<tr>
+<td><code>'le' a b</code></td>
+<td><code>le()</code></td>
+<td><a href="module-Eleven-Eval_Cmps.html#le"><span class="material-symbols-outlined">Ⓔ</span> <code>Boolean</code></a></td>
+<td><a href="module-Eleven-Check_Cmps.html#le"><span class="material-symbols-outlined">Ⓒ</span> <code>'bool'</code></a></td>
+<td><a href="module-Eleven-Code_Cmps.html#le"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine11.html#Le"><code>Le</code></a></td>
+</tr>
+<tr>
+<td><strong><code>[</code> node <code>]</code></strong></td>
+<td><strong>method</strong></td>
+<td><strong><a href="module-Eleven-Eval_Number.html"><code>Eval_Number</code></a><br><a href="../?mode=stack&amp;eg=11/03" title="11/03">03</a> <a href="../?mode=stack&amp;eg=11/05" title="11/05">05</a> <a href="../?mode=stack&amp;eg=11/06" title="11/06">06</a> <a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a></strong></td>
+<td><strong><a href="module-Eleven-Check_Number.html"><code>Check_Number</code></a><br><a href="../?mode=stack&amp;eg=11/07" title="11/07">07</a> <a href="../?mode=stack&amp;eg=11/08" title="11/08">08</a> <a href="../?mode=stack&amp;eg=11/09" title="11/09">09</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+<td><strong><a href="module-Eleven-Code_Number.html"><code>Code_Number</code></a><br><a href="../?mode=stack&amp;eg=11/10" title="11/10">10</a> <a href="../?mode=stack&amp;eg=11/11" title="11/11">11</a> <a href="../?mode=stack&amp;eg=11/12" title="11/12">12</a></strong></td>
+</tr>
+<tr>
+<td><code>'add' a b</code></td>
+<td><code>add()</code></td>
+<td><a href="module-Eleven-Eval_Number.html#add"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_Number.html#add"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_Number.html#add"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Add"><code>Add</code></a></td>
+</tr>
+<tr>
+<td><code>'subtract' a b</code></td>
+<td><code>subtract()</code></td>
+<td><a href="module-Eleven-Eval_Number.html#subtract"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_Number.html#subtract"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_Number.html#subtract"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Subtract"><code>Subtract</code></a></td>
+</tr>
+<tr>
+<td><code>'multiply' a b</code></td>
+<td><code>multiply()</code></td>
+<td><a href="module-Eleven-Eval_Number.html#multiply"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_Number.html#multiply"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_Number.html#multiply"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Multiply"><code>Multiply</code></a></td>
+</tr>
+<tr>
+<td><code>'divide' a b</code></td>
+<td><code>divide()</code></td>
+<td><a href="module-Eleven-Eval_Number.html#divide"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_Number.html#divide"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_Number.html#divide"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Divide"><code>Divide</code></a></td>
+</tr>
+<tr>
+<td><code>'minus' a</code></td>
+<td><code>minus()</code></td>
+<td><a href="module-Eleven-Eval_Number.html#minus"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_Number.html#minus"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_Number.html#minus"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Minus"><code>Minus</code></a></td>
+</tr>
+<tr>
+<td><code>'number' n</code></td>
+<td><code>number()</code></td>
+<td><a href="module-Eleven-Eval_Number.html#number"><span class="material-symbols-outlined">Ⓔ</span> <code>Number</code></a></td>
+<td><a href="module-Eleven-Check_Number.html#number"><span class="material-symbols-outlined">Ⓒ</span> <code>'number'</code></a></td>
+<td><a href="module-Eleven-Code_Number.html#number"><code><span class="material-symbols-outlined">Ⓖ</span></code></a> <a href="module-Six-Machine10.html#Push"><code>Push</code></a></td>
+</tr>
+</tbody>
+</table>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2023 Axel T. Schreiner<br>DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
+	
+		on Mon Oct 7th 2024
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+  // ats: tutorial t.o.c.
+  const tutorial = $('section.tutorial-section');
+  if (tutorial.length) {
+    const toc = $('<table/>').addClass('tutorial-toc');
+    toc.append( $('<tr/>').append( $('<td/>').append(
+      $('<ul/>').append(
+        tutorial.find('h2, h3').map(function () {
+          const h = $(this),
+            li = $('<li/>').append(
+              $('<a/>').text(h.text()).attr('href', '#'+(h.attr('id') ? h.attr('id') : 'main')));
+          return li.append(
+            $('<ul/>').append(
+              h.nextUntil('h2, h3', 'h4').map(function () {
+                const text = $(this).text();
+                if (!/^(Next|Prev)/.test(text))
+                  return $('<li/>').append(
+                    $('<a/>').text(text).attr('href', '#'+$(this).attr('id')));
+              }).get()
+            )
+          );
+        }).get()
+    ) ) ) );
+    tutorial.before(toc);
+  }
+  
+  /* ats: mark links in tutorials */
+  if ($('section.tutorial-section').size()) {
+    const a = $('a[href]'), 
+      global = a.filter('[href^="https:"]').addClass('to-other'),
+      local = a.not('[href^="https:"]').addClass('to-server');
+                       
+    global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
+    global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
+    
+    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="module-"]').toggleClass('to-server to-doc').
+      attr('title', 'documentation and source');                                                /* documentation -> source */
+    local.filter('[href^="../m"]').toggleClass('to-server to-methods').
+      attr('title', 'method browser');                                                          /* method browser */
+    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+      attr('title', 'example on practice page');                                                /* practice examples */   
+  }
+  
+  const uploadWithServer = (kind) => {
+    // create name
+    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
+      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+
+      // prefix server to all but a.to-book, fix book to xhtml
+      const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
+      if (kind == 'epub')
+        a.filter('.to-book[href^="tutorial-"]').each(function () {
+          $(this).attr('href', $(this).attr('href').replace(/\.html/, ".xhtml"));
+        });
+      a.not('[href^="https:"], [href^="http:"], .to-book').each(function () {
+        $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
+//        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
+      });
+
+      // build Form
+      const data = new FormData();
+      data.append('name', name);
+      data.append('html', doc.html());
+
+      // upload
+      const xhttp = new XMLHttpRequest();
+      xhttp.addEventListener("error", () => alert('upload error'));
+      xhttp.addEventListener("readystatechange", () => {
+        if (xhttp.readyState === 4) {
+          console.log(name, xhttp.status, xhttp.responseText);
+        }});
+      xhttp.open('POST', '../etc/server.php', true);
+      xhttp.send(data);
+    }
+  };
+  
+  // ats: rendered HTML w/out sunlight
+  uploadWithServer('epub');
+  
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+    
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+    
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : false,  //ats
+		enableDoclinks : false  //ats
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+  // ats: rendered HTML w/ sunlight
+  uploadWithServer('pdf');
+
+  // ats: scroll to parent of first [eExample..](..?..eg=nn/nn..)
+  { const m = /eg=[01][0-9]\/[012][0-9]/.exec(location.search);
+    if (m) {
+      const elt = $('a[href*="' + m[0] + '"]').                         // ? .. eg=nn/nn ..
+          not(function() { return ! /^[eE]/.test($(this).text()); }).   // link text starts with [eE]
+          first().parent().get(0),                                      // first one's parent
+      r = elt.getBoundingClientRect();                                  // position in document 
+      window.scrollTo(r.x, r.y - 100);  // need to scroll beyond navigation bar
+    }
+  }
+	  
+  } );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
