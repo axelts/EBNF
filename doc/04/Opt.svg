@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="-527 -255.5 73 22" width="73" height="22">
+  <defs/>
+  <g id="parser-04" fill-opacity="1" fill="none" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>parser-04</title>
+    <rect fill="white" x="-527" y="-255.5" width="73" height="22"/>
+    <g id="parser-04_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_38">
+        <path d="M -516.5 -255 L -464.5 -255 C -458.97715 -255 -454.5 -250.52285 -454.5 -245 L -454.5 -244 C -454.5 -238.47715 -458.97715 -234 -464.5 -234 L -516.5 -234 C -522.02285 -234 -526.5 -238.47715 -526.5 -244 L -526.5 -245 C -526.5 -250.52285 -522.02285 -255 -516.5 -255 Z" fill="#c0c0ff"/>
+        <path d="M -516.5 -255 L -464.5 -255 C -458.97715 -255 -454.5 -250.52285 -454.5 -245 L -454.5 -244 C -454.5 -238.47715 -458.97715 -234 -464.5 -234 L -516.5 -234 C -522.02285 -234 -526.5 -238.47715 -526.5 -244 L -526.5 -245 C -526.5 -250.52285 -522.02285 -255 -516.5 -255 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-521.5 -250.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="16.4" y="9">[ opt ]</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

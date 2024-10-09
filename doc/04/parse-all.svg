@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="-81.5 -45.5 347.75 508" width="347.75" height="508">
+  <defs/>
+  <g id="parser-04" fill-opacity="1" fill="none" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>parser-04</title>
+    <rect fill="white" x="-81.5" y="-45.5" width="347.75" height="508"/>
+    <g id="parser-04_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_398">
+        <g id="Graphic_201">
+          <path d="M 163.25 360 L 215.25 360 C 220.77285 360 225.25 364.47715 225.25 370 L 225.25 371 C 225.25 376.52285 220.77285 381 215.25 381 L 163.25 381 C 157.72715 381 153.25 376.52285 153.25 371 L 153.25 370 C 153.25 364.47715 157.72715 360 163.25 360 Z" fill="white"/>
+          <path d="M 163.25 360 L 215.25 360 C 220.77285 360 225.25 364.47715 225.25 370 L 225.25 371 C 225.25 376.52285 220.77285 381 215.25 381 L 163.25 381 C 157.72715 381 153.25 376.52285 153.25 371 L 153.25 370 C 153.25 364.47715 157.72715 360 163.25 360 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(158.25 364.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_200">
+          <path d="M 122.75 441 L 174.75 441 C 180.27285 441 184.75 445.47715 184.75 451 L 184.75 452 C 184.75 457.52285 180.27285 462 174.75 462 L 122.75 462 C 117.22715 462 112.75 457.52285 112.75 452 L 112.75 451 C 112.75 445.47715 117.22715 441 122.75 441 Z" fill="#40ffff"/>
+          <path d="M 122.75 441 L 174.75 441 C 180.27285 441 184.75 445.47715 184.75 451 L 184.75 452 C 184.75 457.52285 180.27285 462 174.75 462 L 122.75 462 C 117.22715 462 112.75 457.52285 112.75 452 L 112.75 451 C 112.75 445.47715 117.22715 441 122.75 441 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(117.75 445.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.24" y="9">lit: ‘–‘</tspan>
+          </text>
+        </g>
+        <g id="Graphic_199">
+          <path d="M 203.75 387 L 255.75 387 C 261.27285 387 265.75 391.47715 265.75 397 L 265.75 398 C 265.75 403.52285 261.27285 408 255.75 408 L 203.75 408 C 198.22715 408 193.75 403.52285 193.75 398 L 193.75 397 C 193.75 391.47715 198.22715 387 203.75 387 Z" fill="#40ffff"/>
+          <path d="M 203.75 387 L 255.75 387 C 261.27285 387 265.75 391.47715 265.75 397 L 265.75 398 C 265.75 403.52285 261.27285 408 255.75 408 L 203.75 408 C 198.22715 408 193.75 403.52285 193.75 398 L 193.75 397 C 193.75 391.47715 198.22715 387 203.75 387 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(198.75 391.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.11" y="9">Number:3</tspan>
+          </text>
+        </g>
+        <g id="Graphic_198">
+          <path d="M 122.75 414 L 174.75 414 C 180.27285 414 184.75 418.47715 184.75 424 L 184.75 425 C 184.75 430.52285 180.27285 435 174.75 435 L 122.75 435 C 117.22715 435 112.75 430.52285 112.75 425 L 112.75 424 C 112.75 418.47715 117.22715 414 122.75 414 Z" fill="white"/>
+          <path d="M 122.75 414 L 174.75 414 C 180.27285 414 184.75 418.47715 184.75 424 L 184.75 425 C 184.75 430.52285 180.27285 435 174.75 435 L 122.75 435 C 117.22715 435 112.75 430.52285 112.75 425 L 112.75 424 C 112.75 418.47715 117.22715 414 122.75 414 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(117.75 418.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_197">
+          <path d="M 122.75 387 L 174.75 387 C 180.27285 387 184.75 391.47715 184.75 397 L 184.75 398 C 184.75 403.52285 180.27285 408 174.75 408 L 122.75 408 C 117.22715 408 112.75 403.52285 112.75 398 L 112.75 397 C 112.75 391.47715 117.22715 387 122.75 387 Z" fill="white"/>
+          <path d="M 122.75 387 L 174.75 387 C 180.27285 387 184.75 391.47715 184.75 397 L 184.75 398 C 184.75 403.52285 180.27285 408 174.75 408 L 122.75 408 C 117.22715 408 112.75 403.52285 112.75 398 L 112.75 397 C 112.75 391.47715 117.22715 387 122.75 387 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(117.75 391.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="16.4" y="9">[ opt ]</tspan>
+          </text>
+        </g>
+        <g id="Graphic_194">
+          <path d="M 163.5 333 L 215.5 333 C 221.02285 333 225.5 337.47715 225.5 343 L 225.5 344 C 225.5 349.52285 221.02285 354 215.5 354 L 163.5 354 C 157.97715 354 153.5 349.52285 153.5 344 L 153.5 343 C 153.5 337.47715 157.97715 333 163.5 333 Z" fill="#ffc0c0"/>
+          <path d="M 163.5 333 L 215.5 333 C 221.02285 333 225.5 337.47715 225.5 343 L 225.5 344 C 225.5 349.52285 221.02285 354 215.5 354 L 163.5 354 C 157.97715 354 153.5 349.52285 153.5 344 L 153.5 343 C 153.5 337.47715 157.97715 333 163.5 333 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(158.5 337.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+          </text>
+        </g>
+        <g id="Graphic_193">
+          <title>Rectangle</title>
+          <path d="M 51 333 L 103 333 C 108.52285 333 113 337.47715 113 343 L 113 344 C 113 349.52285 108.52285 354 103 354 L 51 354 C 45.47715 354 41 349.52285 41 344 L 41 343 C 41 337.47715 45.47715 333 51 333 Z" fill="#40ffff"/>
+          <path d="M 51 333 L 103 333 C 108.52285 333 113 337.47715 113 343 L 113 344 C 113 349.52285 108.52285 354 103 354 L 51 354 C 45.47715 354 41 349.52285 41 344 L 41 343 C 41 337.47715 45.47715 333 51 333 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(46 337.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.235" y="9">lit: ‘+’</tspan>
+          </text>
+        </g>
+        <g id="Graphic_191">
+          <path d="M 107.25 279 L 159.25 279 C 164.77285 279 169.25 283.47715 169.25 289 L 169.25 290 C 169.25 295.52285 164.77285 300 159.25 300 L 107.25 300 C 101.72715 300 97.25 295.52285 97.25 290 L 97.25 289 C 97.25 283.47715 101.72715 279 107.25 279 Z" fill="#ffc0c0"/>
+          <path d="M 107.25 279 L 159.25 279 C 164.77285 279 169.25 283.47715 169.25 289 L 169.25 290 C 169.25 295.52285 164.77285 300 159.25 300 L 107.25 300 C 101.72715 300 97.25 295.52285 97.25 290 L 97.25 289 C 97.25 283.47715 101.72715 279 107.25 279 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(102.25 283.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.33" y="9">rule:more</tspan>
+          </text>
+        </g>
+        <g id="Graphic_190">
+          <path d="M 107.25 306 L 159.25 306 C 164.77285 306 169.25 310.47715 169.25 316 L 169.25 317 C 169.25 322.52285 164.77285 327 159.25 327 L 107.25 327 C 101.72715 327 97.25 322.52285 97.25 317 L 97.25 316 C 97.25 310.47715 101.72715 306 107.25 306 Z" fill="white"/>
+          <path d="M 107.25 306 L 159.25 306 C 164.77285 306 169.25 310.47715 169.25 316 L 169.25 317 C 169.25 322.52285 164.77285 327 159.25 327 L 107.25 327 C 101.72715 327 97.25 322.52285 97.25 317 L 97.25 316 C 97.25 310.47715 101.72715 306 107.25 306 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(102.25 310.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_187">
+          <path d="M 107 225 L 159 225 C 164.52285 225 169 229.47715 169 235 L 169 236 C 169 241.52285 164.52285 246 159 246 L 107 246 C 101.47715 246 97 241.52285 97 236 L 97 235 C 97 229.47715 101.47715 225 107 225 Z" fill="white"/>
+          <path d="M 107 225 L 159 225 C 164.52285 225 169 229.47715 169 235 L 169 236 C 169 241.52285 164.52285 246 159 246 L 107 246 C 101.47715 246 97 241.52285 97 236 L 97 235 C 97 229.47715 101.47715 225 107 225 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(102 229.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.03" y="9">{ some }</tspan>
+          </text>
+        </g>
+        <g id="Graphic_186">
+          <path d="M 107 252 L 159 252 C 164.52285 252 169 256.47715 169 262 L 169 263 C 169 268.52285 164.52285 273 159 273 L 107 273 C 101.47715 273 97 268.52285 97 263 L 97 262 C 97 256.47715 101.47715 252 107 252 Z" fill="white"/>
+          <path d="M 107 252 L 159 252 C 164.52285 252 169 256.47715 169 262 L 169 263 C 169 268.52285 164.52285 273 159 273 L 107 273 C 101.47715 273 97 268.52285 97 263 L 97 262 C 97 256.47715 101.47715 252 107 252 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(102 256.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_184">
+          <path d="M 26 225 L 78 225 C 83.52285 225 88 229.47715 88 235 L 88 236 C 88 241.52285 83.52285 246 78 246 L 26 246 C 20.477153 246 16 241.52285 16 236 L 16 235 C 16 229.47715 20.477153 225 26 225 Z" fill="white"/>
+          <path d="M 26 225 L 78 225 C 83.52285 225 88 229.47715 88 235 L 88 236 C 88 241.52285 83.52285 246 78 246 L 26 246 C 20.477153 246 16 241.52285 16 236 L 16 235 C 16 229.47715 20.477153 225 26 225 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(21 229.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="9.755" y="9">ref: term</tspan>
+          </text>
+        </g>
+        <g id="Graphic_182">
+          <path d="M 66.5 198 L 118.5 198 C 124.02285 198 128.5 202.47715 128.5 208 L 128.5 209 C 128.5 214.52285 124.02285 219 118.5 219 L 66.5 219 C 60.97715 219 56.5 214.52285 56.5 209 L 56.5 208 C 56.5 202.47715 60.97715 198 66.5 198 Z" fill="white"/>
+          <path d="M 66.5 198 L 118.5 198 C 124.02285 198 128.5 202.47715 128.5 208 L 128.5 209 C 128.5 214.52285 124.02285 219 118.5 219 L 66.5 219 C 60.97715 219 56.5 214.52285 56.5 209 L 56.5 208 C 56.5 202.47715 60.97715 198 66.5 198 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(61.5 202.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_181">
+          <path d="M 66.5 171 L 118.5 171 C 124.02285 171 128.5 175.47715 128.5 181 L 128.5 182 C 128.5 187.52285 124.02285 192 118.5 192 L 66.5 192 C 60.97715 192 56.5 187.52285 56.5 182 L 56.5 181 C 56.5 175.47715 60.97715 171 66.5 171 Z" fill="#ffc0c0"/>
+          <path d="M 66.5 171 L 118.5 171 C 124.02285 171 128.5 175.47715 128.5 181 L 128.5 182 C 128.5 187.52285 124.02285 192 118.5 192 L 66.5 192 C 60.97715 192 56.5 187.52285 56.5 182 L 56.5 181 C 56.5 175.47715 60.97715 171 66.5 171 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(61.5 175.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="8.35" y="9">rule: sum</tspan>
+          </text>
+        </g>
+        <g id="Graphic_224">
+          <path d="M 66.75 117 L 118.75 117 C 124.27285 117 128.75 121.47715 128.75 127 L 128.75 128 C 128.75 133.52285 124.27285 138 118.75 138 L 66.75 138 C 61.22715 138 56.75 133.52285 56.75 128 L 56.75 127 C 56.75 121.47715 61.22715 117 66.75 117 Z" fill="white"/>
+          <path d="M 66.75 117 L 118.75 117 C 124.27285 117 128.75 121.47715 128.75 127 L 128.75 128 C 128.75 133.52285 124.27285 138 118.75 138 L 66.75 138 C 61.22715 138 56.75 133.52285 56.75 128 L 56.75 127 C 56.75 121.47715 61.22715 117 66.75 117 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(61.75 121.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="6.74" y="9">rule: term</tspan>
+          </text>
+        </g>
+        <g id="Graphic_223">
+          <path d="M 66.5 144 L 118.5 144 C 124.02285 144 128.5 148.47715 128.5 154 L 128.5 155 C 128.5 160.52285 124.02285 165 118.5 165 L 66.5 165 C 60.97715 165 56.5 160.52285 56.5 155 L 56.5 154 C 56.5 148.47715 60.97715 144 66.5 144 Z" fill="white"/>
+          <path d="M 66.5 144 L 118.5 144 C 124.02285 144 128.5 148.47715 128.5 154 L 128.5 155 C 128.5 160.52285 124.02285 165 118.5 165 L 66.5 165 C 60.97715 165 56.5 160.52285 56.5 155 L 56.5 154 C 56.5 148.47715 60.97715 144 66.5 144 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(61.5 148.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_222">
+          <path d="M -14.5 171 L 37.5 171 C 43.02285 171 47.5 175.47715 47.5 181 L 47.5 182 C 47.5 187.52285 43.02285 192 37.5 192 L -14.5 192 C -20.022847 192 -24.5 187.52285 -24.5 182 L -24.5 181 C -24.5 175.47715 -20.022847 171 -14.5 171 Z" fill="#40ffff"/>
+          <path d="M -14.5 171 L 37.5 171 C 43.02285 171 47.5 175.47715 47.5 181 L 47.5 182 C 47.5 187.52285 43.02285 192 37.5 192 L -14.5 192 C -20.022847 192 -24.5 187.52285 -24.5 182 L -24.5 181 C -24.5 175.47715 -20.022847 171 -14.5 171 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-19.5 175.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.465" y="9">lit: ‘(‘</tspan>
+          </text>
+        </g>
+        <g id="Graphic_221">
+          <path d="M 147.5 171 L 199.5 171 C 205.02285 171 209.5 175.47715 209.5 181 L 209.5 182 C 209.5 187.52285 205.02285 192 199.5 192 L 147.5 192 C 141.97715 192 137.5 187.52285 137.5 182 L 137.5 181 C 137.5 175.47715 141.97715 171 147.5 171 Z" fill="#40ffff"/>
+          <path d="M 147.5 171 L 199.5 171 C 205.02285 171 209.5 175.47715 209.5 181 L 209.5 182 C 209.5 187.52285 205.02285 192 199.5 192 L 147.5 192 C 141.97715 192 137.5 187.52285 137.5 182 L 137.5 181 C 137.5 175.47715 141.97715 171 147.5 171 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(142.5 175.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.465" y="9">lit: ‘)‘</tspan>
+          </text>
+        </g>
+        <g id="Graphic_228">
+          <path d="M 26 279 L 78 279 C 83.52285 279 88 283.47715 88 289 L 88 290 C 88 295.52285 83.52285 300 78 300 L 26 300 C 20.477153 300 16 295.52285 16 290 L 16 289 C 16 283.47715 20.477153 279 26 279 Z" fill="#40ffff"/>
+          <path d="M 26 279 L 78 279 C 83.52285 279 88 283.47715 88 289 L 88 290 C 88 295.52285 83.52285 300 78 300 L 26 300 C 20.477153 300 16 295.52285 16 290 L 16 289 C 16 283.47715 20.477153 279 26 279 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(21 283.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.11" y="9">Number:2</tspan>
+          </text>
+        </g>
+        <g id="Graphic_227">
+          <path d="M 26 252 L 78 252 C 83.52285 252 88 256.47715 88 262 L 88 263 C 88 268.52285 83.52285 273 78 273 L 26 273 C 20.477153 273 16 268.52285 16 263 L 16 262 C 16 256.47715 20.477153 252 26 252 Z" fill="white"/>
+          <path d="M 26 252 L 78 252 C 83.52285 252 88 256.47715 88 262 L 88 263 C 88 268.52285 83.52285 273 78 273 L 26 273 C 20.477153 273 16 268.52285 16 263 L 16 262 C 16 256.47715 20.477153 252 26 252 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(21 256.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_226">
+          <path d="M 26 225 L 78 225 C 83.52285 225 88 229.47715 88 235 L 88 236 C 88 241.52285 83.52285 246 78 246 L 26 246 C 20.477153 246 16 241.52285 16 236 L 16 235 C 16 229.47715 20.477153 225 26 225 Z" fill="#ffc0c0"/>
+          <path d="M 26 225 L 78 225 C 83.52285 225 88 229.47715 88 235 L 88 236 C 88 241.52285 83.52285 246 78 246 L 26 246 C 20.477153 246 16 241.52285 16 236 L 16 235 C 16 229.47715 20.477153 225 26 225 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(21 229.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+          </text>
+        </g>
+        <g id="Graphic_248">
+          <path d="M 66.5 117 L 118.5 117 C 124.02285 117 128.5 121.47715 128.5 127 L 128.5 128 C 128.5 133.52285 124.02285 138 118.5 138 L 66.5 138 C 60.97715 138 56.5 133.52285 56.5 128 L 56.5 127 C 56.5 121.47715 60.97715 117 66.5 117 Z" fill="#ffc0c0"/>
+          <path d="M 66.5 117 L 118.5 117 C 124.02285 117 128.5 121.47715 128.5 127 L 128.5 128 C 128.5 133.52285 124.02285 138 118.5 138 L 66.5 138 C 60.97715 138 56.5 133.52285 56.5 128 L 56.5 127 C 56.5 121.47715 60.97715 117 66.5 117 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(61.5 121.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+          </text>
+        </g>
+        <g id="Graphic_247">
+          <path d="M -46 117 L 6 117 C 11.522847 117 16 121.47715 16 127 L 16 128 C 16 133.52285 11.522847 138 6 138 L -46 138 C -51.52285 138 -56 133.52285 -56 128 L -56 127 C -56 121.47715 -51.52285 117 -46 117 Z" fill="#40ffff"/>
+          <path d="M -46 117 L 6 117 C 11.522847 117 16 121.47715 16 127 L 16 128 C 16 133.52285 11.522847 138 6 138 L -46 138 C -51.52285 138 -56 133.52285 -56 128 L -56 127 C -56 121.47715 -51.52285 117 -46 117 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-51 121.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="19.19" y="9">lit: ‘-’</tspan>
+          </text>
+        </g>
+        <g id="Graphic_244">
+          <path d="M 10.25 90 L 62.25 90 C 67.77285 90 72.25 94.47715 72.25 100 L 72.25 101 C 72.25 106.52285 67.77285 111 62.25 111 L 10.25 111 C 4.7271525 111 .25 106.52285 .25 101 L .25 100 C .25 94.47715 4.7271525 90 10.25 90 Z" fill="white"/>
+          <path d="M 10.25 90 L 62.25 90 C 67.77285 90 72.25 94.47715 72.25 100 L 72.25 101 C 72.25 106.52285 67.77285 111 62.25 111 L 10.25 111 C 4.7271525 111 .25 106.52285 .25 101 L .25 100 C .25 94.47715 4.7271525 90 10.25 90 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(5.25 94.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Group_346">
+          <g id="Graphic_268">
+            <path d="M -71 63 L -19 63 C -13.477153 63 -9 67.47715 -9 73 L -9 74 C -9 79.52285 -13.477153 84 -19 84 L -71 84 C -76.52285 84 -81 79.52285 -81 74 L -81 73 C -81 67.47715 -76.52285 63 -71 63 Z" fill="#40ffff"/>
+            <path d="M -71 63 L -19 63 C -13.477153 63 -9 67.47715 -9 73 L -9 74 C -9 79.52285 -13.477153 84 -19 84 L -71 84 C -76.52285 84 -81 79.52285 -81 74 L -81 73 C -81 67.47715 -76.52285 63 -71 63 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-76 67.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.11" y="9">Number:1</tspan>
+            </text>
+          </g>
+          <g id="Graphic_267">
+            <path d="M -71 36 L -19 36 C -13.477153 36 -9 40.477153 -9 46 L -9 47 C -9 52.52285 -13.477153 57 -19 57 L -71 57 C -76.52285 57 -81 52.52285 -81 47 L -81 46 C -81 40.477153 -76.52285 36 -71 36 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-76 40.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Graphic_266">
+            <path d="M -71 9 L -19 9 C -13.477153 9 -9 13.477153 -9 19 L -9 20 C -9 25.522847 -13.477153 30 -19 30 L -71 30 C -76.52285 30 -81 25.522847 -81 20 L -81 19 C -81 13.477153 -76.52285 9 -71 9 Z" fill="#ffc0c0"/>
+            <path d="M -71 9 L -19 9 C -13.477153 9 -9 13.477153 -9 19 L -9 20 C -9 25.522847 -13.477153 30 -19 30 L -71 30 C -76.52285 30 -81 25.522847 -81 20 L -81 19 C -81 13.477153 -76.52285 9 -71 9 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-76 13.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+            </text>
+          </g>
+          <g id="Graphic_245">
+            <path d="M 10.25 63 L 62.25 63 C 67.77285 63 72.25 67.47715 72.25 73 L 72.25 74 C 72.25 79.52285 67.77285 84 62.25 84 L 10.25 84 C 4.7271525 84 .25 79.52285 .25 74 L .25 73 C .25 67.47715 4.7271525 63 10.25 63 Z" fill="#ffc0c0"/>
+            <path d="M 10.25 63 L 62.25 63 C 67.77285 63 72.25 67.47715 72.25 73 L 72.25 74 C 72.25 79.52285 67.77285 84 62.25 84 L 10.25 84 C 4.7271525 84 .25 79.52285 .25 74 L .25 73 C .25 67.47715 4.7271525 63 10.25 63 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(5.25 67.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.33" y="9">rule:more</tspan>
+            </text>
+          </g>
+          <g id="Graphic_264">
+            <path d="M 10 9 L 62 9 C 67.52285 9 72 13.477153 72 19 L 72 20 C 72 25.522847 67.52285 30 62 30 L 10 30 C 4.4771525 30 67635375e-23 25.522847 0 20 L 0 19 C 67635375e-23 13.477153 4.4771525 9 10 9 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(5 13.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.03" y="9">{ some }</tspan>
+            </text>
+          </g>
+          <g id="Graphic_263">
+            <path d="M 10 36 L 62 36 C 67.52285 36 72 40.477153 72 46 L 72 47 C 72 52.52285 67.52285 57 62 57 L 10 57 C 4.4771525 57 67635375e-23 52.52285 0 47 L 0 46 C 67635375e-23 40.477153 4.4771525 36 10 36 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(5 40.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Graphic_259">
+            <path d="M -30.5 -18 L 21.5 -18 C 27.022847 -18 31.5 -13.522847 31.5 -8 L 31.5 -7 C 31.5 -1.4771525 27.022847 3 21.5 3 L -30.5 3 C -36.022847 3 -40.5 -1.4771525 -40.5 -7 L -40.5 -8 C -40.5 -13.522847 -36.022847 -18 -30.5 -18 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-35.5 -13.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Graphic_258">
+            <path d="M -30.5 -45 L 21.5 -45 C 27.022847 -45 31.5 -40.522847 31.5 -35 L 31.5 -34 C 31.5 -28.477153 27.022847 -24 21.5 -24 L -30.5 -24 C -36.022847 -24 -40.5 -28.477153 -40.5 -34 L -40.5 -35 C -40.5 -40.522847 -36.022847 -45 -30.5 -45 Z" fill="#ffc0c0"/>
+            <path d="M -30.5 -45 L 21.5 -45 C 27.022847 -45 31.5 -40.522847 31.5 -35 L 31.5 -34 C 31.5 -28.477153 27.022847 -24 21.5 -24 L -30.5 -24 C -36.022847 -24 -40.5 -28.477153 -40.5 -34 L -40.5 -35 C -40.5 -40.522847 -36.022847 -45 -30.5 -45 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-35.5 -40.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="8.35" y="9">rule: sum</tspan>
+            </text>
+          </g>
+          <g id="Line_276">
+            <line x1="-4.5" y1="-24" x2="-4.5" y2="-18" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_277">
+            <line x1="-20.25" y1="3" x2="-29.25" y2="9" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_278">
+            <line x1="-45" y1="30" x2="-45" y2="36" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_279">
+            <line x1="-45" y1="57" x2="-45" y2="63" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_280">
+            <line x1="11.25" y1="3" x2="20.25" y2="9" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_281">
+            <line x1="36" y1="30" x2="36" y2="36" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_282">
+            <line x1="36.097222" y1="57" x2="36.152778" y2="63" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Line_283">
+          <line x1="36.25" y1="84" x2="36.25" y2="90" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_284">
+          <line x1="14.375" y1="111" x2="1.875" y2="117" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_285">
+          <line x1="58.125" y1="111" x2="70.625" y2="117" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_286">
+          <line x1="92.5" y1="138" x2="92.5" y2="144" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_287">
+          <line x1="62.94782" y1="164.35073" x2="41.05218" y2="171.64927" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_288">
+          <line x1="92.5" y1="165" x2="92.5" y2="171" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_289">
+          <line x1="122.05218" y1="164.35073" x2="143.94782" y2="171.64927" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_290">
+          <line x1="92.5" y1="192" x2="92.5" y2="198" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_292">
+          <line x1="76.75" y1="219" x2="67.75" y2="225" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_293">
+          <line x1="108.25" y1="219" x2="117.25" y2="225" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_296">
+          <line x1="133" y1="246" x2="133" y2="252" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_297">
+          <line x1="133.09722" y1="273" x2="133.15278" y2="279" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_298">
+          <line x1="133.25" y1="300" x2="133.25" y2="306" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_299">
+          <line x1="111.375" y1="327" x2="98.875" y2="333" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_300">
+          <line x1="155.125" y1="327" x2="167.625" y2="333" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_301">
+          <line x1="189.40278" y1="354" x2="189.34722" y2="360" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_302">
+          <line x1="173.5" y1="381" x2="164.5" y2="387" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_303">
+          <line x1="148.75" y1="408" x2="148.75" y2="414" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_304">
+          <line x1="148.75" y1="435" x2="148.75" y2="441" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_305">
+          <line x1="205" y1="381" x2="214" y2="387" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_306">
+          <line x1="52" y1="246" x2="52" y2="252" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_307">
+          <line x1="52" y1="273" x2="52" y2="279" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

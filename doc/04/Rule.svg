@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="-527 -147.5 73 22" width="73" height="22">
+  <defs/>
+  <g id="parser-04" fill-opacity="1" fill="none" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>parser-04</title>
+    <rect fill="white" x="-527" y="-147.5" width="73" height="22"/>
+    <g id="parser-04_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_30">
+        <path d="M -516.5 -147 L -464.5 -147 C -458.97715 -147 -454.5 -142.52285 -454.5 -137 L -454.5 -136 C -454.5 -130.47715 -458.97715 -126 -464.5 -126 L -516.5 -126 C -522.02285 -126 -526.5 -130.47715 -526.5 -136 L -526.5 -137 C -526.5 -142.52285 -522.02285 -147 -516.5 -147 Z" fill="#ffc0c0"/>
+        <path d="M -516.5 -147 L -464.5 -147 C -458.97715 -147 -454.5 -142.52285 -454.5 -137 L -454.5 -136 C -454.5 -130.47715 -458.97715 -126 -464.5 -126 L -516.5 -126 C -522.02285 -126 -526.5 -130.47715 -526.5 -136 L -526.5 -137 C -526.5 -142.52285 -522.02285 -147 -516.5 -147 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-521.5 -142.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="8.35" y="9">rule: sum</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

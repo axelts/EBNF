@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="-576.5 179.5 154.25 130" width="154.25" height="130">
+  <defs/>
+  <g id="parser-04" fill-opacity="1" fill="none" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>parser-04</title>
+    <rect fill="white" x="-576.5" y="179.5" width="154.25" height="130"/>
+    <g id="parser-04_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_382">
+        <g id="Graphic_397">
+          <path d="M -566 288 L -514 288 C -508.47715 288 -504 292.47715 -504 298 L -504 299 C -504 304.52285 -508.47715 309 -514 309 L -566 309 C -571.52285 309 -576 304.52285 -576 299 L -576 298 C -576 292.47715 -571.52285 288 -566 288 Z" fill="#40ffff"/>
+          <path d="M -566 288 L -514 288 C -508.47715 288 -504 292.47715 -504 298 L -504 299 C -504 304.52285 -508.47715 309 -514 309 L -566 309 C -571.52285 309 -576 304.52285 -576 299 L -576 298 C -576 292.47715 -571.52285 288 -566 288 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-571 292.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.11" y="9">Number:1</tspan>
+          </text>
+        </g>
+        <g id="Graphic_396">
+          <path d="M -566 261 L -514 261 C -508.47715 261 -504 265.47715 -504 271 L -504 272 C -504 277.52285 -508.47715 282 -514 282 L -566 282 C -571.52285 282 -576 277.52285 -576 272 L -576 271 C -576 265.47715 -571.52285 261 -566 261 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-571 265.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_395">
+          <path d="M -566 234 L -514 234 C -508.47715 234 -504 238.47715 -504 244 L -504 245 C -504 250.52285 -508.47715 255 -514 255 L -566 255 C -571.52285 255 -576 250.52285 -576 245 L -576 244 C -576 238.47715 -571.52285 234 -566 234 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-571 238.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+          </text>
+        </g>
+        <g id="Graphic_394">
+          <path d="M -484.75 288 L -432.75 288 C -427.22715 288 -422.75 292.47715 -422.75 298 L -422.75 299 C -422.75 304.52285 -427.22715 309 -432.75 309 L -484.75 309 C -490.27285 309 -494.75 304.52285 -494.75 299 L -494.75 298 C -494.75 292.47715 -490.27285 288 -484.75 288 Z" fill="#c0ffc0"/>
+          <path d="M -484.75 288 L -432.75 288 C -427.22715 288 -422.75 292.47715 -422.75 298 L -422.75 299 C -422.75 304.52285 -427.22715 309 -432.75 309 L -484.75 309 C -490.27285 309 -494.75 304.52285 -494.75 299 L -494.75 298 C -494.75 292.47715 -490.27285 288 -484.75 288 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-489.75 292.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="9.095" y="9">ref: more</tspan>
+          </text>
+        </g>
+        <g id="Graphic_393">
+          <path d="M -485 234 L -433 234 C -427.47715 234 -423 238.47715 -423 244 L -423 245 C -423 250.52285 -427.47715 255 -433 255 L -485 255 C -490.52285 255 -495 250.52285 -495 245 L -495 244 C -495 238.47715 -490.52285 234 -485 234 Z" fill="#ffc0ff"/>
+          <path d="M -485 234 L -433 234 C -427.47715 234 -423 238.47715 -423 244 L -423 245 C -423 250.52285 -427.47715 255 -433 255 L -485 255 C -490.52285 255 -495 250.52285 -495 245 L -495 244 C -495 238.47715 -490.52285 234 -485 234 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-490 238.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.03" y="9">{ some }</tspan>
+          </text>
+        </g>
+        <g id="Graphic_392">
+          <path d="M -485 261 L -433 261 C -427.47715 261 -423 265.47715 -423 271 L -423 272 C -423 277.52285 -427.47715 282 -433 282 L -485 282 C -490.52285 282 -495 277.52285 -495 272 L -495 271 C -495 265.47715 -490.52285 261 -485 261 Z" fill="#ffffc0"/>
+          <path d="M -485 261 L -433 261 C -427.47715 261 -423 265.47715 -423 271 L -423 272 C -423 277.52285 -427.47715 282 -433 282 L -485 282 C -490.52285 282 -495 277.52285 -495 272 L -495 271 C -495 265.47715 -490.52285 261 -485 261 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-490 265.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_391">
+          <path d="M -525.5 207 L -473.5 207 C -467.97715 207 -463.5 211.47715 -463.5 217 L -463.5 218 C -463.5 223.52285 -467.97715 228 -473.5 228 L -525.5 228 C -531.02285 228 -535.5 223.52285 -535.5 218 L -535.5 217 C -535.5 211.47715 -531.02285 207 -525.5 207 Z" fill="#ffffc0"/>
+          <path d="M -525.5 207 L -473.5 207 C -467.97715 207 -463.5 211.47715 -463.5 217 L -463.5 218 C -463.5 223.52285 -467.97715 228 -473.5 228 L -525.5 228 C -531.02285 228 -535.5 223.52285 -535.5 218 L -535.5 217 C -535.5 211.47715 -531.02285 207 -525.5 207 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-530.5 211.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+          </text>
+        </g>
+        <g id="Graphic_390">
+          <path d="M -525.5 180 L -473.5 180 C -467.97715 180 -463.5 184.47715 -463.5 190 L -463.5 191 C -463.5 196.52285 -467.97715 201 -473.5 201 L -525.5 201 C -531.02285 201 -535.5 196.52285 -535.5 191 L -535.5 190 C -535.5 184.47715 -531.02285 180 -525.5 180 Z" fill="#ffc0c0"/>
+          <path d="M -525.5 180 L -473.5 180 C -467.97715 180 -463.5 184.47715 -463.5 190 L -463.5 191 C -463.5 196.52285 -467.97715 201 -473.5 201 L -525.5 201 C -531.02285 201 -535.5 196.52285 -535.5 191 L -535.5 190 C -535.5 184.47715 -531.02285 180 -525.5 180 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(-530.5 184.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="8.35" y="9">rule: sum</tspan>
+          </text>
+        </g>
+        <g id="Line_389">
+          <line x1="-499.5" y1="201" x2="-499.5" y2="207" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_388">
+          <line x1="-515.25" y1="228" x2="-524.25" y2="234" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_387">
+          <line x1="-540" y1="255" x2="-540" y2="261" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_386">
+          <line x1="-540" y1="282" x2="-540" y2="288" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_385">
+          <line x1="-483.75" y1="228" x2="-474.75" y2="234" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_384">
+          <line x1="-459" y1="255" x2="-459" y2="261" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_383">
+          <line x1="-458.9028" y1="282" x2="-458.8472" y2="288" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

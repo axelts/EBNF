@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="-342.5 -127 145 94.5" width="145" height="94.5">
+  <defs/>
+  <g id="trees-10" fill-opacity="1" fill="none" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>trees-10</title>
+    <rect fill="white" x="-342.5" y="-127" width="145" height="94.5"/>
+    <g id="trees-10_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_33">
+        <path d="M -278 -126 L -262 -126 C -256.47715 -126 -252 -121.52285 -252 -116 L -252 -115 C -252 -109.47715 -256.47715 -105 -262 -105 L -278 -105 C -283.52285 -105 -288 -109.47715 -288 -115 L -288 -116 C -288 -121.52285 -283.52285 -126 -278 -126 Z" fill="white"/>
+        <path d="M -278 -126 L -262 -126 C -256.47715 -126 -252 -121.52285 -252 -116 L -252 -115 C -252 -109.47715 -256.47715 -105 -262 -105 L -278 -105 C -283.52285 -105 -288 -109.47715 -288 -115 L -288 -116 C -288 -121.52285 -283.52285 -126 -278 -126 Z" stroke="#00aad6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(-283 -122.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="12" fill="black" x="9.616" y="11">b</tspan>
+        </text>
+      </g>
+      <g id="Graphic_32">
+        <path d="M -305 -90 L -289 -90 C -283.47715 -90 -279 -85.52285 -279 -80 L -279 -79 C -279 -73.47715 -283.47715 -69 -289 -69 L -305 -69 C -310.52285 -69 -315 -73.47715 -315 -79 L -315 -80 C -315 -85.52285 -310.52285 -90 -305 -90 Z" fill="white"/>
+        <path d="M -305 -90 L -289 -90 C -283.47715 -90 -279 -85.52285 -279 -80 L -279 -79 C -279 -73.47715 -283.47715 -69 -289 -69 L -305 -69 C -310.52285 -69 -315 -73.47715 -315 -79 L -315 -80 C -315 -85.52285 -310.52285 -90 -305 -90 Z" stroke="#019fcb" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(-310 -86.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="12" fill="black" x="9.616" y="11">a</tspan>
+        </text>
+      </g>
+      <g id="Graphic_31">
+        <path d="M -278 -54 L -262 -54 C -256.47715 -54 -252 -49.52285 -252 -44 L -252 -43 C -252 -37.477153 -256.47715 -33 -262 -33 L -278 -33 C -283.52285 -33 -288 -37.477153 -288 -43 L -288 -44 C -288 -49.52285 -283.52285 -54 -278 -54 Z" fill="white"/>
+        <path d="M -278 -54 L -262 -54 C -256.47715 -54 -252 -49.52285 -252 -44 L -252 -43 C -252 -37.477153 -256.47715 -33 -262 -33 L -278 -33 C -283.52285 -33 -288 -37.477153 -288 -43 L -288 -44 C -288 -49.52285 -283.52285 -54 -278 -54 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-283 -50.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="12" fill="black" x="9.178" y="11">2</tspan>
+        </text>
+      </g>
+      <g id="Graphic_30">
+        <path d="M -332 -54 L -316 -54 C -310.47715 -54 -306 -49.52285 -306 -44 L -306 -43 C -306 -37.477153 -310.47715 -33 -316 -33 L -332 -33 C -337.52285 -33 -342 -37.477153 -342 -43 L -342 -44 C -342 -49.52285 -337.52285 -54 -332 -54 Z" fill="white"/>
+        <path d="M -332 -54 L -316 -54 C -310.47715 -54 -306 -49.52285 -306 -44 L -306 -43 C -306 -37.477153 -310.47715 -33 -316 -33 L -332 -33 C -337.52285 -33 -342 -37.477153 -342 -43 L -342 -44 C -342 -49.52285 -337.52285 -54 -332 -54 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-337 -50.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="12" fill="black" x="9.178" y="11">1</tspan>
+        </text>
+      </g>
+      <g id="Graphic_29">
+        <path d="M -224 -54 L -208 -54 C -202.47715 -54 -198 -49.52285 -198 -44 L -198 -43 C -198 -37.477153 -202.47715 -33 -208 -33 L -224 -33 C -229.52285 -33 -234 -37.477153 -234 -43 L -234 -44 C -234 -49.52285 -229.52285 -54 -224 -54 Z" fill="white"/>
+        <path d="M -224 -54 L -208 -54 C -202.47715 -54 -198 -49.52285 -198 -44 L -198 -43 C -198 -37.477153 -202.47715 -33 -208 -33 L -224 -33 C -229.52285 -33 -234 -37.477153 -234 -43 L -234 -44 C -234 -49.52285 -229.52285 -54 -224 -54 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-229 -50.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="12" fill="black" x="9.178" y="11">3</tspan>
+        </text>
+      </g>
+      <g id="Line_28">
+        <line x1="-278.61243" y1="-104.01676" x2="-288.38757" y2="-90.98324" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_27">
+        <line x1="-305.61243" y1="-68.01676" x2="-316.125" y2="-54" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_26">
+        <line x1="-261.38757" y1="-104.01676" x2="-223.875" y2="-54" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_25">
+        <line x1="-288.38757" y1="-68.01676" x2="-277.875" y2="-54" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

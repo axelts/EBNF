@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="-414.5 -126.5 152.3125 130"
+   width="152.3125"
+   height="130"
+   id="svg747"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs668" />
+  <g
+     id="trees-02"
+     stroke-dasharray="none"
+     fill="none"
+     stroke="none"
+     stroke-opacity="1"
+     fill-opacity="1">
+    <title
+       id="title670">trees-02</title>
+    <rect
+       fill="white"
+       x="-414.5"
+       y="-126.5"
+       width="152.3125"
+       height="130"
+       id="rect672" />
+    <g
+       id="trees-02_Layer_1">
+      <title
+         id="title674">Layer 1</title>
+      <g
+         id="Graphic_51">
+        <path
+           d="M -296 -54 L -272.6875 -54 C -267.16465 -54 -262.6875 -49.52285 -262.6875 -44 L -262.6875 -43 C -262.6875 -37.477153 -267.16465 -33 -272.6875 -33 L -296 -33 C -301.52285 -33 -306 -37.477153 -306 -43 L -306 -44 C -306 -49.52285 -301.52285 -54 -296 -54 Z"
+           fill="white"
+           id="path676" />
+        <path
+           d="M -296 -54 L -272.6875 -54 C -267.16465 -54 -262.6875 -49.52285 -262.6875 -44 L -262.6875 -43 C -262.6875 -37.477153 -267.16465 -33 -272.6875 -33 L -296 -33 C -301.52285 -33 -306 -37.477153 -306 -43 L -306 -44 C -306 -49.52285 -301.52285 -54 -296 -54 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path678" />
+        <text
+           transform="translate(-301 -50.5)"
+           fill="black"
+           id="text682"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="4.42225"
+             y="11"
+             id="tspan680">sum</tspan></text>
+      </g>
+      <g
+         id="Graphic_21">
+        <path
+           d="M -350 -126 L -326.6875 -126 C -321.16465 -126 -316.6875 -121.52285 -316.6875 -116 L -316.6875 -115 C -316.6875 -109.47715 -321.16465 -105 -326.6875 -105 L -350 -105 C -355.52285 -105 -360 -109.47715 -360 -115 L -360 -116 C -360 -121.52285 -355.52285 -126 -350 -126 Z"
+           fill="white"
+           id="path685" />
+        <path
+           d="M -350 -126 L -326.6875 -126 C -321.16465 -126 -316.6875 -121.52285 -316.6875 -116 L -316.6875 -115 C -316.6875 -109.47715 -321.16465 -105 -326.6875 -105 L -350 -105 C -355.52285 -105 -360 -109.47715 -360 -115 L -360 -116 C -360 -121.52285 -355.52285 -126 -350 -126 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path687" />
+        <text
+           transform="translate(-355 -122.5)"
+           fill="black"
+           id="text691"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="4.42225"
+             y="11"
+             id="tspan689">sum</tspan></text>
+      </g>
+      <g
+         id="Graphic_20">
+        <path
+           d="M -323 -90 L -299.6875 -90 C -294.16465 -90 -289.6875 -85.52285 -289.6875 -80 L -289.6875 -79 C -289.6875 -73.47715 -294.16465 -69 -299.6875 -69 L -323 -69 C -328.52285 -69 -333 -73.47715 -333 -79 L -333 -80 C -333 -85.52285 -328.52285 -90 -323 -90 Z"
+           fill="white"
+           id="path694" />
+        <path
+           d="M -323 -90 L -299.6875 -90 C -294.16465 -90 -289.6875 -85.52285 -289.6875 -80 L -289.6875 -79 C -289.6875 -73.47715 -294.16465 -69 -299.6875 -69 L -323 -69 C -328.52285 -69 -333 -73.47715 -333 -79 L -333 -80 C -333 -85.52285 -328.52285 -90 -323 -90 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path696" />
+        <text
+           transform="translate(-328 -86.5)"
+           fill="black"
+           id="text700"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="1.69825"
+             y="11"
+             id="tspan698">more</tspan></text>
+      </g>
+      <g
+         id="Graphic_18">
+        <path
+           d="M -350 -54 L -326.6875 -54 C -321.16465 -54 -316.6875 -49.52285 -316.6875 -44 L -316.6875 -43 C -316.6875 -37.477153 -321.16465 -33 -326.6875 -33 L -350 -33 C -355.52285 -33 -360 -37.477153 -360 -43 L -360 -44 C -360 -49.52285 -355.52285 -54 -350 -54 Z"
+           fill="white"
+           id="path703" />
+        <path
+           d="M -350 -54 L -326.6875 -54 C -321.16465 -54 -316.6875 -49.52285 -316.6875 -44 L -316.6875 -43 C -316.6875 -37.477153 -321.16465 -33 -326.6875 -33 L -350 -33 C -355.52285 -33 -360 -37.477153 -360 -43 L -360 -44 C -360 -49.52285 -355.52285 -54 -350 -54 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path705" />
+        <text
+           transform="translate(-355 -50.5)"
+           fill="black"
+           id="text709"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="13.65625"
+             y="11"
+             id="tspan707">+</tspan></text>
+      </g>
+      <g
+         id="Graphic_17">
+        <path
+           d="M -404 -54 L -380.6875 -54 C -375.16465 -54 -370.6875 -49.52285 -370.6875 -44 L -370.6875 -43 C -370.6875 -37.477153 -375.16465 -33 -380.6875 -33 L -404 -33 C -409.52285 -33 -414 -37.477153 -414 -43 L -414 -44 C -414 -49.52285 -409.52285 -54 -404 -54 Z"
+           fill="white"
+           id="path712" />
+        <path
+           d="M -404 -54 L -380.6875 -54 C -375.16465 -54 -370.6875 -49.52285 -370.6875 -44 L -370.6875 -43 C -370.6875 -37.477153 -375.16465 -33 -380.6875 -33 L -404 -33 C -409.52285 -33 -414 -37.477153 -414 -43 L -414 -44 C -414 -49.52285 -409.52285 -54 -404 -54 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path714" />
+        <text
+           transform="translate(-409 -50.5)"
+           fill="black"
+           id="text718"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="12.83425"
+             y="11"
+             id="tspan716">1</tspan></text>
+      </g>
+      <g
+         id="Line_16">
+        <line
+           x1="-330.46875"
+           y1="-105"
+           x2="-319.21875"
+           y2="-90"
+           stroke="#7f8080"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="line721" />
+      </g>
+      <g
+         id="Line_15">
+        <line
+           x1="-319.21875"
+           y1="-69"
+           x2="-330.46875"
+           y2="-54"
+           stroke="#7f8080"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="line724" />
+      </g>
+      <g
+         id="Line_14">
+        <line
+           x1="-346.21875"
+           y1="-105"
+           x2="-384.46875"
+           y2="-54"
+           stroke="#7f8080"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="line727" />
+      </g>
+      <g
+         id="Graphic_50">
+        <path
+           d="M -296 -18 L -272.6875 -18 C -267.16465 -18 -262.6875 -13.522847 -262.6875 -8 L -262.6875 -7 C -262.6875 -1.4771525 -267.16465 3 -272.6875 3 L -296 3 C -301.52285 3 -306 -1.4771525 -306 -7 L -306 -8 C -306 -13.522847 -301.52285 -18 -296 -18 Z"
+           fill="white"
+           id="path730" />
+        <path
+           d="M -296 -18 L -272.6875 -18 C -267.16465 -18 -262.6875 -13.522847 -262.6875 -8 L -262.6875 -7 C -262.6875 -1.4771525 -267.16465 3 -272.6875 3 L -296 3 C -301.52285 3 -306 -1.4771525 -306 -7 L -306 -8 C -306 -13.522847 -301.52285 -18 -296 -18 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path732" />
+        <text
+           transform="translate(-301 -14.5)"
+           fill="black"
+           id="text736"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="12.83425"
+             y="11"
+             id="tspan734">2</tspan></text>
+      </g>
+      <g
+         id="Line_49">
+        <line
+           x1="-284.34375"
+           y1="-33"
+           x2="-284.34375"
+           y2="-18"
+           stroke="#7f8080"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="line739" />
+      </g>
+      <g
+         id="Line_52">
+        <line
+           x1="-303.46875"
+           y1="-69"
+           x2="-292.21875"
+           y2="-54"
+           stroke="#7f8080"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="line742" />
+      </g>
+    </g>
+  </g>
+</svg>

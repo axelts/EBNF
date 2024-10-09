@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="251.5 17.5 106.40625 128.5" width="106.40625" height="128.5">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="#7f8080">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <g id="memory-07" stroke-opacity="1" stroke="none" stroke-dasharray="none" fill="none" fill-opacity="1">
+    <title>memory-07</title>
+    <rect fill="white" x="251.5" y="17.5" width="106.40625" height="128.5"/>
+    <g id="memory-07_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_22">
+        <rect x="284.83405" y="18" width="72" height="27" fill="#ffffc0"/>
+        <rect x="284.83405" y="18" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(289.83405 25.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="14.28" y="9">globals</tspan>
+        </text>
+      </g>
+      <g id="Graphic_20">
+        <rect x="284.83405" y="45" width="72" height="27" fill="#c0ffff"/>
+        <rect x="284.83405" y="45" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(289.83405 52.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.915" y="9">a: locals</tspan>
+        </text>
+      </g>
+      <g id="Graphic_19">
+        <rect x="284.83405" y="72" width="72" height="27" fill="#ffc0ff"/>
+        <rect x="284.83405" y="72" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(289.83405 79.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.915" y="9">b: locals</tspan>
+        </text>
+      </g>
+      <g id="Line_18">
+        <path d="M 284.83405 84.07107 C 273.2512 83.6007 263 82.84498 257.83405 81 C 247.3351 77.250375 253.3345 68.9994 257.83405 63 C 261.05228 58.70902 268.87547 54.417125 276.3627 50.125623" marker-end="url(#FilledArrow_Marker)" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_17">
+        <rect x="284.90625" y="99" width="72" height="27" fill="#c0ffff"/>
+        <rect x="284.90625" y="99" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(289.90625 106.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.915" y="9">a: locals</tspan>
+        </text>
+      </g>
+      <g id="Line_16">
+        <path d="M 284.90625 109.96465 C 273.2905 109.87451 263.00548 109.84694 257.83405 108 C 247.3351 104.25038 253.3345 94.49955 257.83405 90 C 261.06898 86.76507 268.95678 81.97872 276.4792 77.31436" marker-end="url(#FilledArrow_Marker)" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Group_188">
+        <g id="Graphic_190">
+          <rect x="284.90625" y="126" width="72" height="18" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(289.90625 129)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.14" y="9">stack</tspan>
+          </text>
+        </g>
+        <g id="Line_189">
+          <line x1="284.90625" y1="144" x2="356.90625" y2="144" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

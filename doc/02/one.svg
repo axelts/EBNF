@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="-576.5 -126.5 44.3125 58"
+   width="44.3125"
+   height="58"
+   id="svg40"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <g
+     id="trees-02"
+     stroke-dasharray="none"
+     fill="none"
+     stroke="none"
+     stroke-opacity="1"
+     fill-opacity="1">
+    <title
+       id="title11">trees-02</title>
+    <rect
+       fill="white"
+       x="-576.5"
+       y="-126.5"
+       width="44.3125"
+       height="58"
+       id="rect13" />
+    <g
+       id="trees-02_Layer_1">
+      <title
+         id="title15">Layer 1</title>
+      <g
+         id="Graphic_11">
+        <path
+           d="M -566 -126 L -542.6875 -126 C -537.16465 -126 -532.6875 -121.52285 -532.6875 -116 L -532.6875 -115 C -532.6875 -109.47715 -537.16465 -105 -542.6875 -105 L -566 -105 C -571.52285 -105 -576 -109.47715 -576 -115 L -576 -116 C -576 -121.52285 -571.52285 -126 -566 -126 Z"
+           fill="white"
+           id="path17" />
+        <path
+           d="M -566 -126 L -542.6875 -126 C -537.16465 -126 -532.6875 -121.52285 -532.6875 -116 L -532.6875 -115 C -532.6875 -109.47715 -537.16465 -105 -542.6875 -105 L -566 -105 C -571.52285 -105 -576 -109.47715 -576 -115 L -576 -116 C -576 -121.52285 -571.52285 -126 -566 -126 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path19" />
+        <text
+           transform="translate(-571 -122.5)"
+           fill="black"
+           id="text23"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="4.42225"
+             y="11"
+             id="tspan21">sum</tspan></text>
+      </g>
+      <g
+         id="Graphic_7">
+        <path
+           d="M -566 -90 L -542.6875 -90 C -537.16465 -90 -532.6875 -85.52285 -532.6875 -80 L -532.6875 -79 C -532.6875 -73.47715 -537.16465 -69 -542.6875 -69 L -566 -69 C -571.52285 -69 -576 -73.47715 -576 -79 L -576 -80 C -576 -85.52285 -571.52285 -90 -566 -90 Z"
+           fill="white"
+           id="path26" />
+        <path
+           d="M -566 -90 L -542.6875 -90 C -537.16465 -90 -532.6875 -85.52285 -532.6875 -80 L -532.6875 -79 C -532.6875 -73.47715 -537.16465 -69 -542.6875 -69 L -566 -69 C -571.52285 -69 -576 -73.47715 -576 -79 L -576 -80 C -576 -85.52285 -571.52285 -90 -566 -90 Z"
+           stroke="black"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="path28" />
+        <text
+           transform="translate(-571 -86.5)"
+           fill="black"
+           id="text32"><tspan
+             font-family="American Typewriter"
+             font-size="12"
+             fill="black"
+             x="12.83425"
+             y="11"
+             id="tspan30">1</tspan></text>
+      </g>
+      <g
+         id="Line_4">
+        <line
+           x1="-554.34375"
+           y1="-105"
+           x2="-554.34375"
+           y2="-90"
+           stroke="#7f8080"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           stroke-width="1"
+           id="line35" />
+      </g>
+    </g>
+  </g>
+</svg>

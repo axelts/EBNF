@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="449.5 305.5 73 55" width="73" height="55">
+  <defs/>
+  <g id="memory-08" stroke="none" stroke-opacity="1" fill="none" fill-opacity="1" stroke-dasharray="none">
+    <title>memory-08</title>
+    <rect fill="white" x="449.5" y="305.5" width="73" height="55"/>
+    <g id="memory-08_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_78">
+        <rect x="450" y="306" width="72" height="27" fill="#ffffc0"/>
+        <rect x="450" y="306" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(455 313.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="14.28" y="9">globals</tspan>
+        </text>
+      </g>
+      <g id="Graphic_76">
+        <rect x="450" y="333" width="72" height="27" fill="#c0ffc0"/>
+        <rect x="450" y="333" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(455 340.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.55" y="9">x: locals</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

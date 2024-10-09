@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="110.66595 17.5 106.33405 101.5" width="106.33405" height="101.5">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="#7f8080">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <g id="memory-07" stroke-opacity="1" stroke="none" stroke-dasharray="none" fill="none" fill-opacity="1">
+    <title>memory-07</title>
+    <rect fill="white" x="110.66595" y="17.5" width="106.33405" height="101.5"/>
+    <g id="memory-07_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_9">
+        <rect x="144" y="18" width="72" height="27" fill="#ffffc0"/>
+        <rect x="144" y="18" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(149 25.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="14.28" y="9">globals</tspan>
+        </text>
+      </g>
+      <g id="Graphic_10">
+        <rect x="144" y="45" width="72" height="27" fill="#c0ffff"/>
+        <rect x="144" y="45" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(149 52.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.915" y="9">a: locals</tspan>
+        </text>
+      </g>
+      <g id="Graphic_11">
+        <rect x="144" y="72" width="72" height="27" fill="#ffc0ff"/>
+        <rect x="144" y="72" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(149 79.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.915" y="9">b: locals</tspan>
+        </text>
+      </g>
+      <g id="Line_13">
+        <path d="M 144 84.07107 C 132.41716 83.6007 122.16594 82.84498 117 81 C 106.50105 77.250375 112.50045 68.9994 117 63 C 120.21823 58.70902 128.04143 54.417125 135.52865 50.125623" marker-end="url(#FilledArrow_Marker)" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Group_185">
+        <g id="Graphic_187">
+          <rect x="144" y="99" width="72" height="18" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(149 102)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.14" y="9">stack</tspan>
+          </text>
+        </g>
+        <g id="Line_186">
+          <line x1="144" y1="117" x2="216" y2="117" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="620.5 17.5 155.21238 128.5" width="155.21238" height="128.5">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="#7f8080">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker_2" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="#ffc0ff">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <g id="memory-08" stroke="none" stroke-opacity="1" fill="none" fill-opacity="1" stroke-dasharray="none">
+    <title>memory-08</title>
+    <rect fill="white" x="620.5" y="17.5" width="155.21238" height="128.5"/>
+    <g id="memory-08_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_204">
+        <title>parameter</title>
+        <g id="Graphic_118">
+          <rect x="653.83405" y="18" width="72" height="27" fill="#ffffc0"/>
+          <rect x="653.83405" y="18" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(658.83405 25.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="14.28" y="9">globals</tspan>
+          </text>
+        </g>
+        <g id="Graphic_116">
+          <rect x="653.83405" y="45" width="72" height="27" fill="#c0ffc0"/>
+          <rect x="653.83405" y="45" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(658.83405 52.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.55" y="9">x: locals</tspan>
+          </text>
+        </g>
+        <g id="Graphic_115">
+          <rect x="653.83405" y="72" width="72" height="27" fill="#c0ffff"/>
+          <rect x="653.83405" y="72" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(658.83405 79.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="12.095" y="9">z: locals</tspan>
+          </text>
+        </g>
+        <g id="Line_114">
+          <path d="M 653.83405 84.07107 C 642.2512 83.6007 632 82.84498 626.83405 81 C 616.3351 77.250375 622.3345 68.9994 626.83405 63 C 630.0523 58.70902 637.8755 54.417125 645.3627 50.125623" marker-end="url(#FilledArrow_Marker)" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Graphic_113">
+          <rect x="653.83405" y="99" width="72" height="27" fill="#ffc0ff"/>
+          <rect x="653.83405" y="99" width="72" height="27" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          <text transform="translate(658.83405 106.5)" fill="black">
+            <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.73" y="9">y: locals</tspan>
+          </text>
+        </g>
+        <g id="Line_112">
+          <path d="M 653.83405 109.96436 C 642.2512 109.87445 632 109.84498 626.83405 108 C 616.3351 104.25038 622.3345 94.49955 626.83405 90 C 630.069 86.76507 637.9568 81.97872 645.4792 77.31436" marker-end="url(#FilledArrow_Marker)" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_111">
+          <path d="M 725.83405 110.87509 C 734.5777 110.38976 742.2678 109.60921 747 108 C 758.0266 104.25038 758.9997 95.9994 756 90 C 753.6483 85.29656 741.9742 63.99697 732.704 52.12348" marker-end="url(#FilledArrow_Marker_2)" stroke="#ffc0ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_110">
+          <path d="M 725.83405 116.70767 C 737.9018 118.12089 748.9688 118.87964 756 117 C 770.0263 113.25038 778.49955 106.49835 774 90 C 770.004 75.34805 749.4435 48.86115 734.3861 26.3075" marker-end="url(#FilledArrow_Marker_2)" stroke="#ffc0ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_201">
+          <g id="Graphic_203">
+            <rect x="654" y="126" width="72" height="18" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(659 129)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="18.14" y="9">stack</tspan>
+            </text>
+          </g>
+          <g id="Line_202">
+            <line x1="654" y1="144" x2="726" y2="144" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

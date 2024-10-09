@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="-378.5 563.5 73 22" width="73" height="22">
+  <defs/>
+  <g id="grammar_as_tree" fill="none" stroke-opacity="1" stroke-dasharray="none" stroke="none" fill-opacity="1">
+    <title>04 grammar as tree</title>
+    <rect fill="white" x="-378.5" y="563.5" width="73" height="22"/>
+    <g id="grammar_as_tree_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_393">
+        <path d="M -368 564 L -316 564 C -310.47715 564 -306 568.47715 -306 574 L -306 575 C -306 580.52285 -310.47715 585 -316 585 L -368 585 C -373.52285 585 -378 580.52285 -378 575 L -378 574 C -378 568.47715 -373.52285 564 -368 564 Z" fill="#ffc0ff"/>
+        <path d="M -368 564 L -316 564 C -310.47715 564 -306 568.47715 -306 574 L -306 575 C -306 580.52285 -310.47715 585 -316 585 L -368 585 C -373.52285 585 -378 580.52285 -378 575 L -378 574 C -378 568.47715 -373.52285 564 -368 564 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(-373 568.5)" fill="black">
+          <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.03" y="9">{ some }</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

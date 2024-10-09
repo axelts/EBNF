@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="-603.5 341.5 210.9703 184" width="210.9703" height="184">
+  <defs/>
+  <g id="parser-04" fill-opacity="1" fill="none" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>parser-04</title>
+    <rect fill="white" x="-603.5" y="341.5" width="210.9703" height="184"/>
+    <g id="parser-04_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_372">
+        <g id="Group_347">
+          <g id="Graphic_362">
+            <path d="M -593 450 L -541 450 C -535.47715 450 -531 454.47715 -531 460 L -531 461 C -531 466.52285 -535.47715 471 -541 471 L -593 471 C -598.52285 471 -603 466.52285 -603 461 L -603 460 C -603 454.47715 -598.52285 450 -593 450 Z" fill="#40ffff"/>
+            <path d="M -593 450 L -541 450 C -535.47715 450 -531 454.47715 -531 460 L -531 461 C -531 466.52285 -535.47715 471 -541 471 L -593 471 C -598.52285 471 -603 466.52285 -603 461 L -603 460 C -603 454.47715 -598.52285 450 -593 450 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-598 454.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.11" y="9">Number:1</tspan>
+            </text>
+          </g>
+          <g id="Graphic_361">
+            <path d="M -593 423 L -541 423 C -535.47715 423 -531 427.47715 -531 433 L -531 434 C -531 439.52285 -535.47715 444 -541 444 L -593 444 C -598.52285 444 -603 439.52285 -603 434 L -603 433 C -603 427.47715 -598.52285 423 -593 423 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-598 427.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Graphic_360">
+            <path d="M -593 396 L -541 396 C -535.47715 396 -531 400.47715 -531 406 L -531 407 C -531 412.52285 -535.47715 417 -541 417 L -593 417 C -598.52285 417 -603 412.52285 -603 407 L -603 406 C -603 400.47715 -598.52285 396 -593 396 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-598 400.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+            </text>
+          </g>
+          <g id="Graphic_359">
+            <path d="M -511.75 450 L -459.75 450 C -454.22715 450 -449.75 454.47715 -449.75 460 L -449.75 461 C -449.75 466.52285 -454.22715 471 -459.75 471 L -511.75 471 C -517.27285 471 -521.75 466.52285 -521.75 461 L -521.75 460 C -521.75 454.47715 -517.27285 450 -511.75 450 Z" fill="#ffc0c0"/>
+            <path d="M -511.75 450 L -459.75 450 C -454.22715 450 -449.75 454.47715 -449.75 460 L -449.75 461 C -449.75 466.52285 -454.22715 471 -459.75 471 L -511.75 471 C -517.27285 471 -521.75 466.52285 -521.75 461 L -521.75 460 C -521.75 454.47715 -517.27285 450 -511.75 450 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-516.75 454.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="6.08" y="9">rule: more</tspan>
+            </text>
+          </g>
+          <g id="Graphic_358">
+            <path d="M -512 396 L -460 396 C -454.47715 396 -450 400.47715 -450 406 L -450 407 C -450 412.52285 -454.47715 417 -460 417 L -512 417 C -517.52285 417 -522 412.52285 -522 407 L -522 406 C -522 400.47715 -517.52285 396 -512 396 Z" fill="#ffc0ff"/>
+            <path d="M -512 396 L -460 396 C -454.47715 396 -450 400.47715 -450 406 L -450 407 C -450 412.52285 -454.47715 417 -460 417 L -512 417 C -517.52285 417 -522 412.52285 -522 407 L -522 406 C -522 400.47715 -517.52285 396 -512 396 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-517 400.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="11.03" y="9">{ some }</tspan>
+            </text>
+          </g>
+          <g id="Graphic_357">
+            <path d="M -512 423 L -460 423 C -454.47715 423 -450 427.47715 -450 433 L -450 434 C -450 439.52285 -454.47715 444 -460 444 L -512 444 C -517.52285 444 -522 439.52285 -522 434 L -522 433 C -522 427.47715 -517.52285 423 -512 423 Z" fill="#ffffc0"/>
+            <path d="M -512 423 L -460 423 C -454.47715 423 -450 427.47715 -450 433 L -450 434 C -450 439.52285 -454.47715 444 -460 444 L -512 444 C -517.52285 444 -522 439.52285 -522 434 L -522 433 C -522 427.47715 -517.52285 423 -512 423 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-517 427.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Graphic_356">
+            <path d="M -552.5 369 L -500.5 369 C -494.97715 369 -490.5 373.47715 -490.5 379 L -490.5 380 C -490.5 385.52285 -494.97715 390 -500.5 390 L -552.5 390 C -558.02285 390 -562.5 385.52285 -562.5 380 L -562.5 379 C -562.5 373.47715 -558.02285 369 -552.5 369 Z" fill="#ffffc0"/>
+            <path d="M -552.5 369 L -500.5 369 C -494.97715 369 -490.5 373.47715 -490.5 379 L -490.5 380 C -490.5 385.52285 -494.97715 390 -500.5 390 L -552.5 390 C -558.02285 390 -562.5 385.52285 -562.5 380 L -562.5 379 C -562.5 373.47715 -558.02285 369 -552.5 369 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-557.5 373.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Graphic_355">
+            <path d="M -552.5 342 L -500.5 342 C -494.97715 342 -490.5 346.47715 -490.5 352 L -490.5 353 C -490.5 358.52285 -494.97715 363 -500.5 363 L -552.5 363 C -558.02285 363 -562.5 358.52285 -562.5 353 L -562.5 352 C -562.5 346.47715 -558.02285 342 -552.5 342 Z" fill="#ffc0c0"/>
+            <path d="M -552.5 342 L -500.5 342 C -494.97715 342 -490.5 346.47715 -490.5 352 L -490.5 353 C -490.5 358.52285 -494.97715 363 -500.5 363 L -552.5 363 C -558.02285 363 -562.5 358.52285 -562.5 353 L -562.5 352 C -562.5 346.47715 -558.02285 342 -552.5 342 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-557.5 346.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="8.35" y="9">rule: sum</tspan>
+            </text>
+          </g>
+          <g id="Line_354">
+            <line x1="-526.5" y1="363" x2="-526.5" y2="369" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_353">
+            <line x1="-542.25" y1="390" x2="-551.25" y2="396" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_352">
+            <line x1="-567" y1="417" x2="-567" y2="423" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_351">
+            <line x1="-567" y1="444" x2="-567" y2="450" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_350">
+            <line x1="-510.75" y1="390" x2="-501.75" y2="396" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_349">
+            <line x1="-486" y1="417" x2="-486" y2="423" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_348">
+            <line x1="-485.9028" y1="444" x2="-485.8472" y2="450" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_364">
+          <g id="Graphic_371">
+            <path d="M -455.0297 504 L -403.0297 504 C -397.50686 504 -393.0297 508.47715 -393.0297 514 L -393.0297 515 C -393.0297 520.52285 -397.50686 525 -403.0297 525 L -455.0297 525 C -460.55255 525 -465.0297 520.52285 -465.0297 515 L -465.0297 514 C -465.0297 508.47715 -460.55255 504 -455.0297 504 Z" fill="#c0ffc0"/>
+            <path d="M -455.0297 504 L -403.0297 504 C -397.50686 504 -393.0297 508.47715 -393.0297 514 L -393.0297 515 C -393.0297 520.52285 -397.50686 525 -403.0297 525 L -455.0297 525 C -460.55255 525 -465.0297 520.52285 -465.0297 515 L -465.0297 514 C -465.0297 508.47715 -460.55255 504 -455.0297 504 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-460.0297 508.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="7.99" y="9">rule:term</tspan>
+            </text>
+          </g>
+          <g id="Graphic_370">
+            <path d="M -567.5297 504 L -515.5297 504 C -510.00686 504 -505.5297 508.47715 -505.5297 514 L -505.5297 515 C -505.5297 520.52285 -510.00686 525 -515.5297 525 L -567.5297 525 C -573.05255 525 -577.5297 520.52285 -577.5297 515 L -577.5297 514 C -577.5297 508.47715 -573.05255 504 -567.5297 504 Z" fill="#40ffff"/>
+            <path d="M -567.5297 504 L -515.5297 504 C -510.00686 504 -505.5297 508.47715 -505.5297 514 L -505.5297 515 C -505.5297 520.52285 -510.00686 525 -515.5297 525 L -567.5297 525 C -573.05255 525 -577.5297 520.52285 -577.5297 515 L -577.5297 514 C -577.5297 508.47715 -573.05255 504 -567.5297 504 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-572.5297 508.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="19.19" y="9">lit: ‘-’</tspan>
+            </text>
+          </g>
+          <g id="Graphic_368">
+            <path d="M -511.2797 477 L -459.2797 477 C -453.75686 477 -449.2797 481.47715 -449.2797 487 L -449.2797 488 C -449.2797 493.52285 -453.75686 498 -459.2797 498 L -511.2797 498 C -516.80255 498 -521.2797 493.52285 -521.2797 488 L -521.2797 487 C -521.2797 481.47715 -516.80255 477 -511.2797 477 Z" fill="#ffffc0"/>
+            <path d="M -511.2797 477 L -459.2797 477 C -453.75686 477 -449.2797 481.47715 -449.2797 487 L -449.2797 488 C -449.2797 493.52285 -453.75686 498 -459.2797 498 L -511.2797 498 C -516.80255 498 -521.2797 493.52285 -521.2797 488 L -521.2797 487 C -521.2797 481.47715 -516.80255 477 -511.2797 477 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            <text transform="translate(-516.2797 481.5)" fill="black">
+              <tspan font-family="American Typewriter" font-size="10" fill="black" x="23.08" y="9">seq</tspan>
+            </text>
+          </g>
+          <g id="Line_366">
+            <line x1="-507.1547" y1="498" x2="-519.6547" y2="504" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_365">
+            <line x1="-463.4047" y1="498" x2="-450.9047" y2="504" stroke="#7f8080" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
