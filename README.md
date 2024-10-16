@@ -5,7 +5,7 @@
 | [![](doc/layout.png)](doc/index.html)       | The Book
 | [![](doc/epub.png)](book.epub)              | e-Book
 | [![](doc/pdf.png)](book.pdf)                | PDF Book, thanks to [prince](https://www.princexml.com)
-| [![](doc/dir.png)](eg)                      | Examples
+| [![](doc/dir.png)](eg/index.html)           | Examples
 | [![](doc/comp.blue.png)](eg.html?mode=ebnf) | [The Practice Page](doc/tutorial-a-webpage.html)
 | [![](doc/comp.blue.png)](methods.html)      | [The Method Browser](doc/tutorial-c-compilers.html#the-method-browser-1)
   

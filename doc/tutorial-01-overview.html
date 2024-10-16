@@ -242,7 +242,7 @@ Empty sequences look like a glitch in these definitions but
 The previous definitions still work
 if a sentence is defined to consist of the leaves of a syntax tree
 with the exception of those leaves which are labeled with non-terminals.</p>
-<p>Next: <a href="tutorial-02-grammars.html">2. Writing Grammars</a></p>
+<h4 id="previous%3A-index-next%3A-%7B%40tutorial-02-grammars%7D">Previous: <a href="index.html">Index</a> Next: <a href="tutorial-02-grammars.html">2. Writing Grammars</a></h4>
 </article>
 
 </section>
@@ -332,7 +332,6 @@ $( function () {
   /* ats: mark links in tutorials */
   $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
-console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -340,7 +339,8 @@ console.log('decorating')
     global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
     global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
     
-    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="#"], [href^="tutorial-"], [href="index.html"]').
+      toggleClass('to-server to-book');                                                         /* book's text */      
     local.filter('[href^="module-"]').toggleClass('to-server to-doc').
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').

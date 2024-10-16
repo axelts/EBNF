@@ -197,7 +197,8 @@ where one can study how the implementation of a little programming language in t
 <li>and terminology is linked to definitions in <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia">Wikipedia</a>
 so that additional information is easily available — further references should be consulted from there.</li>
 </ul>
-<p>Altogether, the book contains over 1100 unique links.</p></article>
+<p>Altogether, the book contains over 1100 unique links.</p>
+<h4 id="previous%3A-book-cover-next%3A-%7B%40tutorial-01-overview%7D">Previous: <a href="../">Book Cover</a>  Next: <a href="tutorial-01-overview.html">1. Compiler Terminology</a></h4></article>
     </section>
 
 
@@ -295,7 +296,6 @@ $( function () {
   /* ats: mark links in tutorials */
   $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
-console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -303,7 +303,8 @@ console.log('decorating')
     global.filter('[href^="https://en.wikipedia.org"]').toggleClass('to-other to-wikipedia');   /* Wikipedia */
     global.filter('[href^="https://developer.mozilla.org"]').toggleClass('to-other to-mdn');    /* MDN documentation */
     
-    local.filter('[href^="#"], [href^="tutorial-"]').toggleClass('to-server to-book');          /* book's text */      
+    local.filter('[href^="#"], [href^="tutorial-"], [href="index.html"]').
+      toggleClass('to-server to-book');                                                         /* book's text */      
     local.filter('[href^="module-"]').toggleClass('to-server to-doc').
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
