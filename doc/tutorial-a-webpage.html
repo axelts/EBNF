@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -104,7 +103,7 @@ or executing a function produced by
 <a href="module-Base.html#~Action">action methods</a>.</p>
 <p>The model can be controlled by
 scripting with a <a href="https://nodejs.org/en" title="Node.js">Node.js</a> <a href="module-Script.html">program</a>
-or through the graphical interface in the <a href="../?mode=ebnf">Practice Page</a>.</p>
+or through the graphical interface in the <a href="../eg.html?mode=ebnf">Practice Page</a>.</p>
 <h3 id="scripting">Scripting</h3>
 <p><a href="script.js.html"><code>script.js</code></a> is a
 <a href="https://nodejs.org/en" title="Node.js">Node.js</a>
@@ -219,7 +218,7 @@ In the file each text is preceded by <code>%%</code> and one of the names
 <code>actions</code>, <code>grammar</code>, <code>output</code>, <code>program</code>, or <code>tokens</code>, enclosed in white space,
 to overwrite the corresponding global string.</p>
 <h2 id="graphical-user-interface">Graphical User Interface</h2>
-<p>The <a href="../?mode=ebnf">Practice Page</a> contains resizable text areas
+<p>The <a href="../eg.html?mode=ebnf">Practice Page</a> contains resizable text areas
 which contain grammar rules in the <span class='a-grammar'></span>,
 token definitions as object properties defined in JavaScript
 in the <span class='a-tokens'></span>,
@@ -428,7 +427,7 @@ are also available through global variables.</p>
 Errors are reported to the output area.
 Malicious content should be avoided...</p>
 <h3 id="examples-and-local-storage">Examples and Local Storage</h3>
-<p><a href="../eg">Many examples are available</a> and can be loaded into the <a href="../?mode=ebnf">Practice Page</a>
+<p><a href="../eg">Many examples are available</a> and can be loaded into the <a href="../eg.html?mode=ebnf">Practice Page</a>
 using a search string, e.g., from the following list:</p>
 <table>
 <thead>
@@ -439,75 +438,75 @@ using a search string, e.g., from the following list:</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../?eg=interpret"><code>?eg=interpret</code></a></td>
+<td><a href="../eg.html?eg=interpret"><code>?eg=interpret</code></a></td>
 <td><a href="tutorial-06-compile.html#immediate-evaluation">interpret arithmetic expressions with numbers.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=compile"><code>?eg=compile</code></a></td>
+<td><a href="../eg.html?eg=compile"><code>?eg=compile</code></a></td>
 <td><a href="tutorial-06-compile.html#functional-evaluation">compile arithmetic expressions into functions.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=postfix"><code>?eg=postfix</code></a></td>
+<td><a href="../eg.html?eg=postfix"><code>?eg=postfix</code></a></td>
 <td><a href="tutorial-06-compile.html#stack-evaluation">compile arithmetic expressions into postfix.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=stack"><code>?eg=stack</code></a></td>
+<td><a href="../eg.html?eg=stack"><code>?eg=stack</code></a></td>
 <td><a href="tutorial-06-compile.html#stack-evaluation">compile arithmetic expressions for a stack machine.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=little"><code>?eg=little</code></a></td>
+<td><a href="../eg.html?eg=little"><code>?eg=little</code></a></td>
 <td><a href="tutorial-06-compile.html#control-structures">compile a little language for a stack machine.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=little_fn"><code>?eg=little_fn</code></a></td>
+<td><a href="../eg.html?eg=little_fn"><code>?eg=little_fn</code></a></td>
 <td><a href="tutorial-06-compile.html#functional-programming">compile a little language into functions.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=typing"><code>?eg=typing</code></a></td>
+<td><a href="../eg.html?eg=typing"><code>?eg=typing</code></a></td>
 <td><a href="tutorial-07-features.html#type-checking-by-interpretation">compile a typed little language for a stack machine.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=recursion"><code>?eg=recursion</code></a></td>
+<td><a href="../eg.html?eg=recursion"><code>?eg=recursion</code></a></td>
 <td><a href="tutorial-07-features.html#functions">compile mutually recursive functions.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=functions"><code>?eg=functions</code></a></td>
+<td><a href="../eg.html?eg=functions"><code>?eg=functions</code></a></td>
 <td><a href="tutorial-07-features.html#local-variables">compile functions with parameters and local variables.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=scopes"><code>?eg=scopes</code></a></td>
+<td><a href="../eg.html?eg=scopes"><code>?eg=scopes</code></a></td>
 <td><a href="tutorial-07-features.html#block-scopes">compile block scopes.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=nesting"><code>?eg=nesting</code></a></td>
+<td><a href="../eg.html?eg=nesting"><code>?eg=nesting</code></a></td>
 <td><a href="tutorial-07-features.html#nested-functions">compile nested functions.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=first_glob"><code>?eg=first_glob</code></a></td>
+<td><a href="../eg.html?eg=first_glob"><code>?eg=first_glob</code></a></td>
 <td><a href="tutorial-08-functions.html#global-first-order-functions">compile global first-order functions.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=fn_parameter"><code>?eg=fn_parameter</code></a></td>
+<td><a href="../eg.html?eg=fn_parameter"><code>?eg=fn_parameter</code></a></td>
 <td><a href="tutorial-08-functions.html#functions-as-argument-values">compile nested functions as parameters.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=first"><code>?eg=first</code></a></td>
+<td><a href="../eg.html?eg=first"><code>?eg=first</code></a></td>
 <td><a href="tutorial-08-functions.html#nested-first-order-functions">compile first-order functions.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=curry"><code>?eg=curry</code></a></td>
+<td><a href="../eg.html?eg=curry"><code>?eg=curry</code></a></td>
 <td><a href="tutorial-08-functions.html#nested-first-order-functions">currying.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=compose"><code>?eg=compose</code></a></td>
+<td><a href="../eg.html?eg=compose"><code>?eg=compose</code></a></td>
 <td><a href="tutorial-08-functions.html#nested-first-order-functions">function composition.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=bootstrap"><code>?eg=bootstrap</code></a></td>
+<td><a href="../eg.html?eg=bootstrap"><code>?eg=bootstrap</code></a></td>
 <td><a href="tutorial-09-bootstrap.html#bootstrap-example">compile the EBNF parser generator.</a></td>
 </tr>
 <tr>
-<td><a href="../?eg=extend"><code>?eg=extend</code></a></td>
+<td><a href="../eg.html?eg=extend"><code>?eg=extend</code></a></td>
 <td><a href="tutorial-09-bootstrap.html#extending">extend EBNF notation.</a></td>
 </tr>
 </tbody>
@@ -516,7 +515,7 @@ using a search string, e.g., from the following list:</p>
 can select any file with an extension <code>.eg</code>
 <a href="../eg/">in the folder <code>eg</code></a> and subfolders,
 relative to the page. If the search fails
-the <a href="../?mode=ebnf">Practice Page</a> is reset and contains brief hints
+the <a href="../eg.html?mode=ebnf">Practice Page</a> is reset and contains brief hints
 as to the use of the different text areas.</p>
 <p>Additionally, the search string can contain a <code>mode=</code> parameter
 with the values <code>ebnf</code>, <code>stack</code>, or <code>bnf</code>
@@ -527,7 +526,7 @@ the key <code>EBNF/state</code> once the practice page loses visibility.</p>
 It is destroyed if the search string is invalid.</p>
 <p>Stored examples and local storage use the <a href="#file-format">file format described above</a>.</p>
 <h3 id="a-note-on-eval()">A Note on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a></h3>
-<p>The <a href="../?mode=ebnf">Practice Page</a> critically depends on the use of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a>
+<p>The <a href="../eg.html?mode=ebnf">Practice Page</a> critically depends on the use of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval()</code></a>
 and thus can fail if destructive text is entered into the text areas.</p>
 <p><code>tokens</code> and <code>actions</code> are compiled with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval" title="eval()"><code>eval?.()</code></a>.
 Interestingly, the executable <code>run</code> is not — because it is created
@@ -587,7 +586,7 @@ i.e., it needs no further compilation.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -633,7 +632,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -646,14 +647,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -718,9 +722,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

@@ -5,7 +5,7 @@
 
   @module GUI
   @author © 2023 Axel T. Schreiner <axel@schreiner-family.net>
-  @version 2024-02-13
+  @version 2024-10-10
 */
 
 import * as Practice from './practice.js';
@@ -13,9 +13,6 @@ import * as Practice from './practice.js';
 /** The _document ready_ event handler.
 */
 function browse () {
-  // redirect if there is no search
-  if (!location.search.length) { location = 'doc/index.html'; return; }
-  
   // reference: code to detect how the page was entered
   // const entries = performance.getEntriesByType("navigation");
   // entries.forEach((entry) => {

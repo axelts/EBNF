@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -123,7 +122,7 @@ and the value is a <a href="https://en.wikipedia.org/wiki/Regular_expression" ti
 which describes how the token is represented in the source program.</p>
 </li>
 </ul>
-<p>If the grammar in <a href="../?eg=02/10">example 2/10</a> is represented and checked by pressing
+<p>If the grammar in <a href="../eg.html?eg=02/10">example 2/10</a> is represented and checked by pressing
 <span class='c-new'></span> the output is a short description of the grammar:</p>
 <pre class="prettyprint source"><code>  0 sum: Number { '+' Number | '-' Number };
 
@@ -412,7 +411,7 @@ asterisks followed by a single character which is neither a slash nor an asteris
 Use the <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a>
 to see that, e.g., <code>/***/</code> is recognized but <code>/*/</code> is not.</p>
 <p>As far as possible,
-<a href="../?eg=03/01">example 3/01</a> contains all the pattern examples in this section.</p>
+<a href="../eg.html?eg=03/01">example 3/01</a> contains all the pattern examples in this section.</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar, and then</p>
@@ -499,7 +498,7 @@ find all matches of the pattern in the string.</p>
 <p>A capture group extracts a piece of input
 and classifies it in the resulting list by the group's position in the pattern
 — extraction and classification is what lexical analysis has to do.</p>
-<p><a href="../?eg=03/02">Example 3/02</a> creates the following pattern with four alternatives,
+<p><a href="../eg.html?eg=03/02">Example 3/02</a> creates the following pattern with four alternatives,
 each a capture group,
 namely white space, &quot;names&quot; (which include literals like <code>if</code>),
 &quot;numbers&quot;, and the operator <code>&lt;=</code>:</p>
@@ -560,7 +559,7 @@ in a map of literal values which take precedence over the token.</p>
 <p>In general, overlapping patterns can cause problems.
 It is not possible to check that the patterns are &quot;different&quot; enough
 when the <a href="module-Base-Scanner.html"><code>Scanner</code></a> is constructed
-but <a href="../?eg=03/01">example 3/01</a> and <a href="../?eg=03/02">example 3/02</a>
+but <a href="../eg.html?eg=03/01">example 3/01</a> and <a href="../eg.html?eg=03/02">example 3/02</a>
 show how a grammar and some input can be used to test lexical analysis thoroughly:</p>
 <ul>
 <li>
@@ -573,7 +572,7 @@ the input does not have to be a sentence.
 Press <span class='c-scan'></span> to see what tuples are found.</p>
 </li>
 </ul>
-<p><a href="../?eg=03/03">Example 3/03</a> illustrates that the token patterns may have to be ordered.
+<p><a href="../eg.html?eg=03/03">Example 3/03</a> illustrates that the token patterns may have to be ordered.
 Consider integer constants, represented as digit strings,
 and floating point constants, required to contain a decimal point:</p>
 <pre class="prettyprint source lang-none"><code>Int: /0|[1-9][0-9]*/,
@@ -597,7 +596,7 @@ lexical analysis will find three <code>Int</code> tokens and one illegal charact
 the token patterns are sorted by name
 before they are combined for
 the lexical analysis pattern.
-In <a href="../?eg=03/04">example 3/04</a> the token name is changed from <code>Real</code> to <code>Float</code>.</p>
+In <a href="../eg.html?eg=03/04">example 3/04</a> the token name is changed from <code>Real</code> to <code>Float</code>.</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to prepare the grammar, and</p>
@@ -671,7 +670,7 @@ If this map exists, it is consulted during <a href="module-Base-Scanner.html#sca
 as described above.
 Additionally, the literal value is dropped from the lexical analysis pattern
 because it would not match anything on its own.</p>
-<p><a href="../?eg=03/05">Example 3/05</a> shows that things can go really wrong
+<p><a href="../eg.html?eg=03/05">Example 3/05</a> shows that things can go really wrong
 if a token pattern <em>partially</em> overlaps a literal.
 Patterns for &quot;numbers&quot; and alphabetic &quot;names&quot; would both overlap the
 literal <code>'Formula1'</code>.</p>
@@ -679,7 +678,7 @@ literal <code>'Formula1'</code>.</p>
 but the <a href="module-EBNF-Grammar.html#scanner"><code>scanner()</code></a> method has an optional parameter
 so that the pattern pieces can be sorted explicitly.
 The parameter can be used in a JavaScript program;
-<a href="../?eg=03/05">example 3/05</a> would be corrected as follows:</p>
+<a href="../eg.html?eg=03/05">example 3/05</a> would be corrected as follows:</p>
 <pre class="prettyprint source"><code>import * as EBNF from 'modules/ebnf.js';
 const EBNF = await import(&quot;./ebnf.js&quot;);
 const grammar = &quot; examples: Name | Number | 'Formula1'; &quot;,
@@ -757,7 +756,7 @@ so that the input part can be reported correctly.</p>
 <p>The <a href="https://regex101.com" title="Regular Expression Tester">Regular Expressions 101 website</a> is great for testing.</p>
 </li>
 <li>
-<p><a href="../?eg=03/01">Example 3/01</a> contains many patterns for terminals used in
+<p><a href="../eg.html?eg=03/01">Example 3/01</a> contains many patterns for terminals used in
 programming languages. A few of these are too general to be used in the example...</p>
 </li>
 </ul>
@@ -803,7 +802,7 @@ programming languages. A few of these are too general to be used in the example.
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -849,7 +848,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -862,14 +863,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -934,9 +938,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

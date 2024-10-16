@@ -1,3 +1,5 @@
+// scripting for the "changes" pages
+
 $(() => {
   function handler (s) {
     return function () {

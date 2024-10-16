@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -124,7 +123,7 @@ These arrays have a property <code>.id</code> with a unique value for tracing;
 <p>To enable <a href="tutorial-a-webpage.html">single step execution</a> the interpreters return <code>memory</code>
 with a property <code>.continue</code> indicating if the program is suspended (<code>true</code>)
 or has terminated (<code>false</code>).</p>
-<h3 id="example-6%2F10%3A-arithmetic-expressions"><a href="../?eg=06/10">Example 6/10</a>: <a href="tutorial-06-compile.html#stack-evaluation">Arithmetic Expressions</a></h3>
+<h3 id="example-6%2F10%3A-arithmetic-expressions"><a href="../eg.html?eg=06/10">Example 6/10</a>: <a href="tutorial-06-compile.html#stack-evaluation">Arithmetic Expressions</a></h3>
 <table>
 <thead>
 <tr>
@@ -156,7 +155,7 @@ Puts (memory)                  // stack: ... val -> ... | puts(val)
 Store (a)            // stack: ... val -> ... val  | memory[a]: val
 Subtract (memory)                      // stack: ... a b -> ... a-b
 </code></pre>
-<h3 id="example-6%2F11%3A-control-structures"><a href="../?eg=06/11">Example 6/11</a>: <a href="tutorial-06-compile.html#control-structures">Control Structures</a></h3>
+<h3 id="example-6%2F11%3A-control-structures"><a href="../eg.html?eg=06/11">Example 6/11</a>: <a href="tutorial-06-compile.html#control-structures">Control Structures</a></h3>
 <table>
 <thead>
 <tr>
@@ -190,7 +189,7 @@ Lt (memory)                          // stack: ... a b -> ... a &lt; b
 Ne (memory)                         // stack: ... a b -> ... a != b
 Print (n)                                // stack: ... n*val -> ...
 </code></pre>
-<h3 id="example-7%2F04%3A-functions"><a href="../?eg=07/04">Example 7/04</a>: <a href="tutorial-07-features.html#functions">Functions</a></h3>
+<h3 id="example-7%2F04%3A-functions"><a href="../eg.html?eg=07/04">Example 7/04</a>: <a href="tutorial-07-features.html#functions">Functions</a></h3>
 <table>
 <thead>
 <tr>
@@ -239,7 +238,7 @@ Return (memory)
 // stack: ... x old-pc result -> ... result old-pc result
 ReturnValue (memory)   
 </code></pre>
-<h3 id="example-7%2F06%3A-local-variables"><a id='local-variables'></a><a href="../?eg=07/06">Example 7/06</a>: <a href="tutorial-07-features.html#local-variables">Local Variables</a></h3>
+<h3 id="example-7%2F06%3A-local-variables"><a id='local-variables'></a><a href="../eg.html?eg=07/06">Example 7/06</a>: <a href="tutorial-07-features.html#local-variables">Local Variables</a></h3>
 <table>
 <thead>
 <tr>
@@ -306,7 +305,7 @@ LoadFP (addr)
 // stack: ... val -> ... val | frame[addr]: val
 StoreFP (addr)
 </code></pre>
-<h3 id="example-7%2F13%3A-nested-functions"><a id='nested-functions'></a><a href="../?eg=07/13">Example 7/13</a>: <a href="tutorial-07-features.html#nested-functions">Nested Functions</a></h3>
+<h3 id="example-7%2F13%3A-nested-functions"><a id='nested-functions'></a><a href="../eg.html?eg=07/13">Example 7/13</a>: <a href="tutorial-07-features.html#nested-functions">Nested Functions</a></h3>
 <table>
 <thead>
 <tr>
@@ -389,7 +388,7 @@ LoadDP (addr, depth)
 // stack: ... val -> ... val | frame[depth][addr]: val
 StoreDP (addr, depth)
 </code></pre>
-<h3 id="example-8%2F01%3A-global-first-order-functions"><a href="../?eg=08/01">Example 8/01</a>: <a href="tutorial-08-functions.html#global-first-order-functions">Global first-order Functions</a></h3>
+<h3 id="example-8%2F01%3A-global-first-order-functions"><a href="../eg.html?eg=08/01">Example 8/01</a>: <a href="tutorial-08-functions.html#global-first-order-functions">Global first-order Functions</a></h3>
 <p>Same memory layout as <a href="#local-variables">Local Variables</a> above.</p>
 <p><a href="module-Eight-Machine01.html">mix-in <code>Eight.Machine01()</code></a></p>
 <pre class="prettyprint source"><code>// stack: ... addr -> ... old-pc | pc: addr`
@@ -397,7 +396,7 @@ CallValue (memory)
 // stack: ... x-len n*val -> ... n*val x-len`
 Rotate (n, len = 1)  
 </code></pre>
-<h3 id="example-8%2F08%3A-functions-as-argument-values"><a id='functions-as-argument-values'></a><a href="../?eg=08/08">Example 8/08</a>: <a href="tutorial-08-functions.html#functions-as-argument-values">Functions as Argument Values</a></h3>
+<h3 id="example-8%2F08%3A-functions-as-argument-values"><a id='functions-as-argument-values'></a><a href="../eg.html?eg=08/08">Example 8/08</a>: <a href="tutorial-08-functions.html#functions-as-argument-values">Functions as Argument Values</a></h3>
 <p>Same memory layout as <a href="#nested-functions">Nested Functions</a> above.</p>
 <p>This machine requires <em>two</em> slots to represent a function value:
 display pointer followed by function start address.
@@ -415,7 +414,7 @@ Exit (args)
 // stack: ... -> ... dp`
 PushDP (memory)  
 </code></pre>
-<h3 id="example-8%2F14%3A-nested-first-order-functions"><a href="../?eg=08/14">Example 8/14</a>: <a href="tutorial-08-functions.html#nested-first-order-functions">Nested first-order Functions</a></h3>
+<h3 id="example-8%2F14%3A-nested-first-order-functions"><a href="../eg.html?eg=08/14">Example 8/14</a>: <a href="tutorial-08-functions.html#nested-first-order-functions">Nested first-order Functions</a></h3>
 <p>This machine manages frames dynamically:
 frames are separate arrays subject to JavaScript's garbage collection.</p>
 <p>This machine requires <em>two</em> slots to represent a function value:
@@ -504,20 +503,20 @@ PushFP (memory)
 // stack: ... val -> ... val | frame[depth][addr]: val`
 StoreGC (addr, depth)  
 </code></pre>
-<h3 id="example-11%2F10%3A-compiling-arithmetic-expressions"><a href="../?mode=stack&amp;eg=11/10">Example 11/10</a>: <a href="tutorial-11-trees.html#compiling-arithmetic-expressions">Compiling Arithmetic Expressions</a></h3>
+<h3 id="example-11%2F10%3A-compiling-arithmetic-expressions"><a href="../eg.html?mode=stack&amp;eg=11/10">Example 11/10</a>: <a href="tutorial-11-trees.html#compiling-arithmetic-expressions">Compiling Arithmetic Expressions</a></h3>
 <p>This mix-in for code generation extends <a href="module-Six-Machine10.html"><code>Six.Machine10</code></a> with a <code>Power</code> instruction
 to support exponentiation.</p>
 <p><a href="module-Eleven-Code_Number.html">mix-in <code>Eleven.Code_Number()</code></a></p>
 <pre class="prettyprint source"><code>Power (memory)                        // stack: ... a b -> ... a**b
 </code></pre>
-<h3 id="example-11%2F11%3A-compiling-a-little-language"><a href="../?mode=stack&amp;eg=11/11">Example 11/11</a>: <a href="tutorial-11-trees.html#compiling-a-little-language">Compiling a Little Language</a></h3>
+<h3 id="example-11%2F11%3A-compiling-a-little-language"><a href="../eg.html?mode=stack&amp;eg=11/11">Example 11/11</a>: <a href="tutorial-11-trees.html#compiling-a-little-language">Compiling a Little Language</a></h3>
 <p>This mix-in for code generation extends <a href="module-Six-Machine11.html"><code>Six.Machine11</code></a> with a <code>Bnzero</code> instruction
 to optimize code generation for <code>while</code> loops.
 It requires <a href="module-Eleven-Symbols.html"><code>Eleven.Symbols</code></a>.</p>
 <p><a href="module-Eleven-Code_Stmts.html">mix-in <code>Eleven.Code_Stmts()</code></a></p>
 <pre class="prettyprint source"><code>Bnzero (a)                  // stack: ... bool -> ... | pc: bool? a
 </code></pre>
-<h3 id="example-11%2F12%3A-compiling-a-typed-little-language"><a href="../?mode=stack&amp;eg=11/12">Example 11/12</a>: <a href="tutorial-11-trees.html#compiling-a-typed-little-language">Compiling a Typed Little Language</a></h3>
+<h3 id="example-11%2F12%3A-compiling-a-typed-little-language"><a href="../eg.html?mode=stack&amp;eg=11/12">Example 11/12</a>: <a href="tutorial-11-trees.html#compiling-a-typed-little-language">Compiling a Typed Little Language</a></h3>
 <p>These mix-ins for code generation extend <a href="module-Six-Machine11.html"><code>Six.Machine11</code></a> with instructions
 to support code generation for Boolean and string values and conversions.</p>
 <p><a href="module-Eleven-Code_Bool.html">mix-in <code>Eleven.Code_Bool()</code></a></p>
@@ -574,7 +573,7 @@ InputString ('prompt', 'default')       // stack: ... -> ... string
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -620,7 +619,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -633,14 +634,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -705,9 +709,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

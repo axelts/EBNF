@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -118,7 +117,7 @@ it is collected and recognition moves on.</li>
 <li>Braces are entered and iterated as long as the lookahead fits.</li>
 <li>Eventually the start rule has to be completed.</li>
 </ul>
-<p>As an aside, <a href="../?eg=02/05">example 2/05</a> illustrated that
+<p>As an aside, <a href="../eg.html?eg=02/05">example 2/05</a> illustrated that
 this algorithm cannot handle left recursion in grammar rules.</p>
 <p>This chapter discusses a stack-based parser
 to replace the <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent"><em>recursive descent</em></a> algorithm.
@@ -150,7 +149,7 @@ and the stack just contains a value corresponding to the start rule of the gramm
 Success!</p>
 <p>This looks like the obvious algorithm — but the problem is to recognize that
 <em>the top values on the stack fit a rule of the grammar</em>.</p>
-<p><a href="../?eg=10/01&amp;mode=bnf">Example 10/01</a> shows how this might be accomplished:</p>
+<p><a href="../eg.html?eg=10/01&amp;mode=bnf">Example 10/01</a> shows how this might be accomplished:</p>
 <ul>
 <li>The very first button should show <span class='t-mode bnf'></span>.
 If not, click it until it does.</li>
@@ -215,7 +214,7 @@ Here is the complete transition diagram:</p>
 <div>
   <img style='display: block; margin: 1em auto' src='10/lr1-3.svg' alt='lr1'>
 </div>
-<p>States and transitions for <a href="../?eg=10/01&amp;mode=bnf">example 10/01</a> can be viewed:</p>
+<p>States and transitions for <a href="../eg.html?eg=10/01&amp;mode=bnf">example 10/01</a> can be viewed:</p>
 <ul>
 <li>The very first button should show <span class='t-mode bnf'></span>.
 If not, click it until it does.</li>
@@ -249,7 +248,7 @@ thus avoiding the complications of trial and error.</p>
 <p><a id='catch'></a>There has to be a catch — not every grammar will result
 in this kind of a transition diagram.
 The catch will show up once <a href="#constructing-the-state-table">the state table is constructed</a>
-but <a href="../?eg=04/04">example 4/04</a>
+but <a href="../eg.html?eg=04/04">example 4/04</a>
 which was <a href="tutorial-04-parser.html#ambiguity-revisited">discussed previously</a>
 provides a quick preview:</p>
 <ul>
@@ -284,7 +283,7 @@ are used to represent the rules.</p>
 <p>A <a href="module-BNF.html">BNF</a> <a href="module-BNF-Grammar.html"><code>Grammar</code></a> object can be constructed from
 a string with rules expressed in BNF notation using the kind of bootstrap technique
 described in <a href="tutorial-09-bootstrap.html">chapter nine</a>
-which is demonstrated in <a href="../?eg=10/02&amp;mode=bnf">example 10/02 for BNF</a>:</p>
+which is demonstrated in <a href="../eg.html?eg=10/02&amp;mode=bnf">example 10/02 for BNF</a>:</p>
 <ul>
 <li>The very first button should show <span class='t-mode bnf'></span>.
 If not, click it until it does.</li>
@@ -331,7 +330,7 @@ each of which contains a piece of the input string, the line number in the input
 <a href="module-BNF.html">BNF</a> <a href="module-BNF-Rule.html"><code>Lit</code></a> or <a href="module-BNF-Token.html"><code>Token</code></a> object
 representing the piece of the input.</p>
 <ul>
-<li>In <a href="../?eg=10/01&amp;mode=bnf">Example 10/01</a>
+<li>In <a href="../eg.html?eg=10/01&amp;mode=bnf">Example 10/01</a>
 the very first button should show <span class='t-mode bnf'></span>.
 If not, click it until it does.</li>
 <li>Press <span class='c-new'></span> to represent and check the grammar.</li>
@@ -353,7 +352,7 @@ a <a href="module-Base-Tuple.html"><code>Tuple</code></a> containing <code>null<
 <a href="module-BNF-Rule.html"><code>Lit</code></a> or <a href="module-BNF-Token.html"><code>Token</code></a> object.
 This kind of <a href="module-Base-Tuple.html"><code>Tuple</code></a> will cause an error during recognition.</p>
 <ul>
-<li>In <a href="../?eg=10/01&amp;mode=bnf">Example 10/01</a>
+<li>In <a href="../eg.html?eg=10/01&amp;mode=bnf">Example 10/01</a>
 the very first button should show <span class='t-mode bnf'></span>.
 If not, click it until it does.</li>
 <li>Press <span class='c-new'></span> to represent and check the grammar.</li>
@@ -645,7 +644,7 @@ as discussed in the <a href="#constructing-the-state-table">previous section</a>
 <p>This is called a <em>shift/reduce conflict</em> and makes the grammar unsuitable for stack-based parsing, too.
 In this case the stopgap measure is to prefer the <code>shift</code> message.</p>
 <h4 id="a-shift%2Freduce-conflict"><a id='shift-reduce-conflict'></a> A <em>shift/reduce</em> Conflict</h4>
-<p><a href="../?mode=bnf&amp;eg=10/03">Example 10/03</a> shows that
+<p><a href="../eg.html?mode=bnf&amp;eg=10/03">Example 10/03</a> shows that
 preferring the <code>shift</code> action can be desirable,
 for example to resolve the classic <em>dangling <code>else</code></em> problem
 in favor of the innermost <code>if</code> statement.</p>
@@ -685,7 +684,7 @@ and check on the conflict.</li>
 i.e., to <code>shift</code> rather than to <code>reduce</code>,
 can often be accepted.
 However, reduce/reduce conflicts are usually more serious and need to be investigated carefully.</p>
-<p><a href="../?mode=bnf&amp;eg=10/04">Example 10/04</a>
+<p><a href="../eg.html?mode=bnf&amp;eg=10/04">Example 10/04</a>
 contains a grammar, hugely simplified,
 where an <code>expression</code> is based on a <code>condition</code> or arithmetic
 and where a <code>condition</code> is based on a comparison or arithmetic:</p>
@@ -730,7 +729,7 @@ and, therefore, more grammars which are suitable for LR(1) parsing.</p>
 <p>The LL(1) grammar for <a href="tutorial-06-compile.html#immediate-evaluation">interpreting arithmetic expressions</a>
 written in EBNF was a bit cumbersome.
 Operator associativity had to be implemented in the semantic actions, not in the grammar itself.</p>
-<p><a href="../?eg=10/05&amp;mode=stack">Example 10/05</a> contains a more convenient grammar:</p>
+<p><a href="../eg.html?eg=10/05&amp;mode=stack">Example 10/05</a> contains a more convenient grammar:</p>
 <pre class="prettyprint source"><code>sum:      product | add | subtract;
 add:      sum '+' product;
 subtract: sum '-' product;
@@ -772,7 +771,7 @@ actions for immediate evaluation with this grammar are very intuitive, for examp
 <p>Here is an expression which produces <code>2</code> as a result:</p>
 <pre class="prettyprint source"><code> 1 + 2*3 - 45/(1 + 2**3**2 / 4**3)
 </code></pre>
-<p>The grammar in <a href="../?eg=10/05&amp;mode=stack">example 10/05</a> uses EBNF notation
+<p>The grammar in <a href="../eg.html?eg=10/05&amp;mode=stack">example 10/05</a> uses EBNF notation
 — because <code>|</code> is used to separate alternatives —
 but the grammar is left recursive and has to be processed using the stack-based parser:</p>
 <ul>
@@ -791,7 +790,7 @@ and each action just extracts and returns the appropriate value.</p>
 <code>add</code>, <code>subtract</code>, etc., each, receive two values, separated by an operator,
 perform immediate evaluation, and return the result.</p>
 <p>None of the actions has to deal with associativity or precedence.</p>
-<p>Yet another grammar for arithmetic expressions, in <a href="../?eg=10/06&amp;mode=stack">example 10/06</a>,
+<p>Yet another grammar for arithmetic expressions, in <a href="../eg.html?eg=10/06&amp;mode=stack">example 10/06</a>,
 is as short as it can get</p>
 <pre class="prettyprint source"><code>expr:     add | subtract | multiply | divide | power
           | '(' expr ')' | number;
@@ -810,7 +809,7 @@ If not, click it until it does.</li>
 <li>Unfortunately, there are 25 shift/reduce conflicts...</li>
 </ul>
 <p>Following <a href="https://en.wikipedia.org/wiki/Yacc" title="yacc">yacc</a>,
-precedence and associativity are specified in <a href="../?eg=10/07&amp;mode=stack">example 10/07</a>
+precedence and associativity are specified in <a href="../eg.html?eg=10/07&amp;mode=stack">example 10/07</a>
 as a sequence of precedence levels preceding the grammar rules:</p>
 <pre class="prettyprint source"><code>%left '+' '-';
 %left '*' '/';
@@ -823,7 +822,7 @@ expr:     add | subtract | multiply | divide | power
 Each level statement contains one or more terminal symbols.
 Terminal symbols in the same level statement have the same precedence and associativity.
 A precedence level can also start with <code>%nonassoc</code> to suppress associativity, e.g., for comparison operators.</p>
-<p>The grammar rules remain unchanged for <a href="../?eg=10/07">example 10/07</a>
+<p>The grammar rules remain unchanged for <a href="../eg.html?eg=10/07">example 10/07</a>
 but the precedences make no sense in the context of recursive descent:</p>
 <ul>
 <li>The very first button should show <span class='t-mode'></span>. If not, click it until it does.</li>
@@ -899,7 +898,7 @@ there should be a <code>shift</code> if the last terminal is right-associative.<
 but they are a natural way to implement arithmetic.
 It is usually a good idea to check the state table before and after
 adding precedence information to make sure the precedences have the intended effect.</p>
-<p><a href="../?eg=10/08&amp;mode=bnf">Example 10/08</a> is a &quot;dangling else&quot; without a visible conflict:</p>
+<p><a href="../eg.html?eg=10/08&amp;mode=bnf">Example 10/08</a> is a &quot;dangling else&quot; without a visible conflict:</p>
 <pre class="prettyprint source"><code>%right 'else';
 
 statement: 'if' Number statement %prec 'else';
@@ -948,7 +947,7 @@ because each BNF rule can only contain one symbol sequence.
 This suggests that a <code>%prec</code> clause
 can only apply to a symbol sequence in EBNF,
 i.e., to one (of perhaps several) alternatives.</p>
-<p><a href="../?eg=10/09&amp;mode=stack">Example 10/09</a> is a small but useful example
+<p><a href="../eg.html?eg=10/09&amp;mode=stack">Example 10/09</a> is a small but useful example
 which shows how to add a unary minus to the arithmetic example
 <a href="#precedence-and-associativity">discussed above</a>:</p>
 <pre class="prettyprint source"><code>%left '-';
@@ -971,7 +970,7 @@ Without a precedence level the grammar is ambiguous.
 <code>%left</code> defines associativity for binary minus and settles the conflicts;
 replacing <code>%left</code> by <code>%right</code> would cause a chain of subtractions to be evaluated right to left.
 Unary minus only &quot;fits&quot; the grammar at an implicitly higher precedence.</p>
-<p><a href="../?eg=10/10&amp;mode=stack">Example 10/10</a> adds another precedence level
+<p><a href="../eg.html?eg=10/10&amp;mode=stack">Example 10/10</a> adds another precedence level
 and a <code>%prec</code> clause to the EBNF grammar:</p>
 <pre class="prettyprint source"><code>%right Number;
 %left '-';
@@ -997,7 +996,7 @@ but both require the stack-based parser because of the precedence levels.</p>
 <p>The <code>%prec</code> clause is not applied to an EBNF rule —
 which can have several alternatives —
 but to a symbol sequence such as <code>'-'</code> <code>expr</code>.
-<a href="../?eg=10/11&amp;mode=stack">Example 10/11</a> takes this to an extreme:</p>
+<a href="../eg.html?eg=10/11&amp;mode=stack">Example 10/11</a> takes this to an extreme:</p>
 <pre class="prettyprint source"><code>%right Number;
 %left '-';
 
@@ -1290,7 +1289,7 @@ Success!</p>
 <h3 id="translating-ebnf">Translating EBNF</h3>
 <p>The <a href="module-BNF-Parser.html#build"><code>build()</code></a> method
 seems to produce nested lists just like the recursive descent parser does.
-However, <a href="../?eg=10/12&amp;mode=bnf">example 10/12</a> shows that there is a problem:</p>
+However, <a href="../eg.html?eg=10/12&amp;mode=bnf">example 10/12</a> shows that there is a problem:</p>
 <ul>
 <li>The very first button should show <span class='t-mode bnf'></span>.
 If not, click it until it does.</li>
@@ -1326,7 +1325,7 @@ Rule 1 returns a list containing the list with the first sequence ever
 and rule 2 creates yet another — outermost — list whenever another sequence is found.
 The <a href="module-Base.html#~Action"><code>Action</code></a> method for <code>some</code> would have to count arguments to know
 which of the two rules for <code>some</code> is reduced in order to process it's arguments correctly.</p>
-<p>The EBNF grammar in <a href="../?eg=10/13">example 10/13</a></p>
+<p>The EBNF grammar in <a href="../eg.html?eg=10/13">example 10/13</a></p>
 <pre class="prettyprint source"><code>some: { 'a' [ 'b' ] 'c' };
 </code></pre>
 <p>accepts the same input with two sequences shown above
@@ -1353,14 +1352,14 @@ produces the same result.</li>
 EBNF uses <code>|</code> to separate alternatives and insists on unique non-terminals as rule names.
 Additionally, EBNF uses brackets for optional alternatives
 and braces for alternatives which can be repeated.</p>
-<p>The EBNF rule in <a href="../?eg=10/13">example 10/13</a>
+<p>The EBNF rule in <a href="../eg.html?eg=10/13">example 10/13</a>
 produces a list for the selected alternative.
 The braces produce a list containing one inner list
 for each alternative that was recognized.
 The brackets produce <code>null</code> or a list for the recognized alternative.</p>
 <p>The two examples together hint at the translation from EBNF to BNF
 which the factory method <a href="module-BNF-Grammar.html#.fromEBNF"><code>BNF.Grammar.fromEBNF()</code></a> implements.
-<a href="../?eg=10/14&amp;mode=stack">Example 10/14</a> combines the two grammars and (almost) allows direct comparison
+<a href="../eg.html?eg=10/14&amp;mode=stack">Example 10/14</a> combines the two grammars and (almost) allows direct comparison
 between automatic and manual translation:</p>
 <pre class="prettyprint source"><code>cases: ebnf bnf;
 
@@ -1382,7 +1381,7 @@ the <code>ebnf5</code> rule to express the sequence itself (line 8)
 — i.e., the single alternative enclosed by the braces in the <code>ebnf</code> rule —
 and the <code>ebnf6</code> rules (line 10) to express the optional <code>b</code>
 — i.e., the enclosed alternative and the brackets in the <code>ebnf</code> rule.</p>
-<p>Preparing the grammar in <a href="../?eg=10/14&amp;mode=stack">Example 10/14</a> shows (more or less)
+<p>Preparing the grammar in <a href="../eg.html?eg=10/14&amp;mode=stack">Example 10/14</a> shows (more or less)
 that the manual translation
 agrees with the translation performed for the stack-based parser:</p>
 <ul>
@@ -1597,7 +1596,7 @@ and either the new state expects <code>$error</code> or the new state is popped,
 The algorithm could be modified to be less chatty and perhaps require more than one
 successful <code>shift</code> message, i.e., accepting more than one input symbol,
 before normal processing is resumed.</p>
-<p><a href="../?eg=10/15&amp;mode=bnf">Example 10/15</a> implements error recovery for a <code>sentence</code>
+<p><a href="../eg.html?eg=10/15&amp;mode=bnf">Example 10/15</a> implements error recovery for a <code>sentence</code>
 consisting of a list of one or more copies of the letter <code>a</code>:</p>
 <pre class="prettyprint source"><code>sentence: some;
 sentence: $error;
@@ -1688,12 +1687,12 @@ statement lists in a program, argument lists in a function call, etc.</li>
 <li>preferably not at the end of a rule because that is more likely to cause conflicts.</li>
 <li>non-empty lists  (<em>some</em>) require two <code>$error</code> symbols:
 one for a problem at the beginning of the list,
-and one for a problem at the current end of the list — see <a href="../?eg=10/15&amp;mode=bnf">example 10/15</a>.</li>
+and one for a problem at the current end of the list — see <a href="../eg.html?eg=10/15&amp;mode=bnf">example 10/15</a>.</li>
 <li>possibly empty lists (<em>many</em>) require an <code>$error</code> symbol in the empty branch —
 if this causes bad conflicts the symbol could be added to the places where the possibly
 empty list is referenced.</li>
 </ul>
-<p><a href="../?eg=10/16&amp;mode=bnf">Example 10/16</a> is a blueprint for typical constructs:</p>
+<p><a href="../eg.html?eg=10/16&amp;mode=bnf">Example 10/16</a> is a blueprint for typical constructs:</p>
 <pre class="prettyprint source"><code>example: ;
 example: example 'many' many ';';
 example: example 'some' some ';';
@@ -1764,7 +1763,7 @@ list l, P, l;
 list l, Q, l,;
 </code></pre>
 <p>The output shows that <code>list</code> is still reduced eleven times.</p>
-<p><a href="../?eg=10/16&amp;mode=bnf">Example 10/16</a> contains the grammar and the input shown above.
+<p><a href="../eg.html?eg=10/16&amp;mode=bnf">Example 10/16</a> contains the grammar and the input shown above.
 It is instructive to compare input and error messages:</p>
 <ul>
 <li>The very first button should show <span class='t-mode bnf'></span>.
@@ -1783,7 +1782,7 @@ so that the token is used in the grammar and recognized by the scanner and</li>
 <li>press <span class='c-new'></span> and <span class='c-parse'></span>
 to see the discard messages.</li>
 </ul>
-<p><a href="../?eg=10/17&amp;mode=bnf">Example 10/17</a> contains the same grammar and input as before
+<p><a href="../eg.html?eg=10/17&amp;mode=bnf">Example 10/17</a> contains the same grammar and input as before
 and adds the following actions to record the numbers of the rules which are reduced:</p>
 <pre class="prettyprint source"><code>class Actions {
   example (example, tag, rules) {
@@ -1870,7 +1869,7 @@ If not, click it until it does.</li>
 <li>toggle <span class='t-noargs'></span> to suppress messages about mismatched argument counts, and</li>
 <li>press <span class='c-parse'></span> to see the raw result data — how often is each rule used?</li>
 </ul>
-<p><a href="../?eg=10/18&amp;mode=bnf">Example 10/18</a> can be used
+<p><a href="../eg.html?eg=10/18&amp;mode=bnf">Example 10/18</a> can be used
 to analyze some interactions of error recovery strategies.
 The idea is to recognize one or more <code>a</code> followed by one or more <code>b</code>.
 Each can be done with and without error recovery:</p>
@@ -1916,15 +1915,15 @@ and repeat the experiments for the different recovery strategies.</li>
 <li>How many <code>a</code> or <code>b</code> are ever passed to an action, if any?</li>
 </ul>
 <h4 id="error-recovery-for-ebnf">Error recovery for EBNF</h4>
-<p><a href="../?eg=10/19">Example 10/19</a> recognizes all sentences but one
-which <a href="../?eg=10/16&amp;mode=bnf">example 10/16</a> recognizes:</p>
+<p><a href="../eg.html?eg=10/19">Example 10/19</a> recognizes all sentences but one
+which <a href="../eg.html?eg=10/16&amp;mode=bnf">example 10/16</a> recognizes:</p>
 <pre class="prettyprint source"><code>examples: { example };
 example: many | some | list | $error;
 many: 'many' [{ 'm' }] ';';
 some: 'some' { 's' } ';';
 list: 'list' 'l' { ',' 'l' } ';';
 </code></pre>
-<p>Which &quot;sentence&quot; for <a href="../?eg=10/16&amp;mode=bnf">example 10/16</a> is no longer acceptable?</p>
+<p>Which &quot;sentence&quot; for <a href="../eg.html?eg=10/16&amp;mode=bnf">example 10/16</a> is no longer acceptable?</p>
 <p>A simple action can show the list that each <code>example</code> recognizes:</p>
 <pre class="prettyprint source"><code>class Actions {
   example (e) { puts('example', g.dump(e)); }
@@ -2176,7 +2175,7 @@ especially, when EBNF is translated into BNF to construct a more powerful parser
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -2222,7 +2221,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -2235,14 +2236,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -2307,9 +2311,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

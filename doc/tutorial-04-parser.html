@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -224,7 +223,7 @@ and only after the optional part of the sequence is skipped.</p>
 </div>
 <p>We are on our way to building the syntax tree
 which will prove that the input is a sentence.
-The process can be viewed in <a href="../?eg=04/01">example 4/01</a>:</p>
+The process can be viewed in <a href="../eg.html?eg=04/01">example 4/01</a>:</p>
 <ul>
 <li>
 <p>Prepare the grammar by pressing <span class='c-new'></span>
@@ -458,7 +457,7 @@ to move on to the next tuple.</p>
 <a href="module-EBNF-Alt.html#parse"><code>Alt</code></a> and <a href="module-EBNF-Seq.html#parse"><code>Seq</code></a> perform
 some traffic control and <a href="module-EBNF-Node.html#parse">literals and tokens</a>
 nudge the scanner when they are reached.</p>
-<p>The process can be observed in detail in <a href="../?eg=04/01">example 4/01</a>:</p>
+<p>The process can be observed in detail in <a href="../eg.html?eg=04/01">example 4/01</a>:</p>
 <ul>
 <li>
 <p>represent and check the grammar by pressing <span class='c-new'></span>.</p>
@@ -520,7 +519,7 @@ contains a <a href="module-EBNF-Set.html"><code>Set</code></a>, called <code>exp
 one of which the object wants to see as next tuple — the <em>lookahead</em> —
 when the object's <code>parse()</code> method is called.
 This can be seen in the output above and
-demonstrated in <a href="../?eg=04/01">example 4/01</a> as suggested above.</p>
+demonstrated in <a href="../eg.html?eg=04/01">example 4/01</a> as suggested above.</p>
 <p>Initially, the function created by the <a href="module-EBNF-Grammar.html#parser"><code>parser()</code></a> method
 sets the first lookahead up,
 and once the shared <a href="module-EBNF-Node.html#parse"><code>parse()</code></a> method
@@ -642,7 +641,7 @@ inherit from <a href="module-EBNF-Alt.html"><code>Alt</code></a>.</p>
 there is nothing to do.
 <a href="module-EBNF-Opt.html"><code>Opt</code></a> and <a href="module-EBNF-Some.html"><code>Some</code></a>
 again inherit from <a href="module-EBNF-Alt.html"><code>Alt</code></a>.</p>
-<p>The effects of <code>shallow()</code> and <code>deep()</code> can be seen in <a href="../?eg=04/01">example 4/01</a>:</p>
+<p>The effects of <code>shallow()</code> and <code>deep()</code> can be seen in <a href="../eg.html?eg=04/01">example 4/01</a>:</p>
 <ul>
 <li>Toggle <span class='t-shallow'></span>
 or <span class='t-deep'></span>
@@ -751,7 +750,7 @@ Later, when <code>sum</code> needs <code>term</code> in line 25,
 policy of calling a <code>parse()</code> method only if the callee expects
 the next input symbol.</p>
 <p>Unfortunately, this is not the whole story as
-<a href="../?eg=04/02">example 4/02</a>
+<a href="../eg.html?eg=04/02">example 4/02</a>
 demonstrates.
 Here, the grammar has a new start rule <code>sums</code>
 which should allow input to consist of more than one
@@ -842,7 +841,7 @@ with two or three top-level <code>rule:sum</code> nodes.</p>
 a typical issue when two arithmetic expressions with signed numbers
 can follow each other.
 It is easy to repair,
-check out <a href="../?eg=04/03">example 4/03</a>.</p>
+check out <a href="../eg.html?eg=04/03">example 4/03</a>.</p>
 <p><span class='c-new'></span>
 will complain about ambiguities —
 unless <span class='t-greedy'></span>
@@ -867,7 +866,7 @@ and blind trust in the closest <code>expect</code> set is not advisable.</p>
 <p>How do we check for these ambiguities?</p>
 <p>Overlapping <code>expect</code> sets among alternative sequences are easy to find,
 but the other cases involve two successive items in a sequence.
-Unfortunately, already in <a href="../?eg=04/02">example 4/02</a> of multiple sums</p>
+Unfortunately, already in <a href="../eg.html?eg=04/02">example 4/02</a> of multiple sums</p>
 <pre class="prettyprint source"><code>sums: { sum };
 sum: term [{ more }];
 more: '+' term | '-' term;
@@ -985,7 +984,7 @@ own <code>expect</code> set must be the same.</p>
 <h3 id="ambiguity-revisited">Ambiguity Revisited</h3>
 <p>An ambiguous grammar might still be useful —
 as long as it recognizes only what is intended.
-<a href="../?eg=04/04">Example 4/04</a> illustrates an <code>if</code> statement:</p>
+<a href="../eg.html?eg=04/04">Example 4/04</a> illustrates an <code>if</code> statement:</p>
 <pre class="prettyprint source"><code>stmt: Text | if;
 if: 'if' Text 'then' stmt [ 'else' stmt ] 'fi';
 </code></pre>
@@ -1008,7 +1007,7 @@ fi
 <p>and shows that <code>else</code> <code>d</code> is recognized as part of the inner <code>if</code> statement.</p>
 <p>It turns out that this is due to the fact
 that in the grammar above <code>'if'</code> and <code>'fi'</code> are balanced.</p>
-<p><a href="../?eg=04/05">Example 4/05</a> illustrates a more typical <code>if</code> statement without <code>fi</code>:</p>
+<p><a href="../eg.html?eg=04/05">Example 4/05</a> illustrates a more typical <code>if</code> statement without <code>fi</code>:</p>
 <pre class="prettyprint source"><code>if a then
   if b then c
   else d
@@ -1147,7 +1146,7 @@ are distributed as methods of the classes involved in representing grammar rules
 <p>The job of each method is quite small but the methods call each other
 recursively across the classes and the return values get more and more
 complicated.
-<a href="../?eg=04/01">Example 4/01</a>
+<a href="../eg.html?eg=04/01">Example 4/01</a>
 illustrates how instructive it is to see method calls and return values.</p>
 <ul>
 <li>
@@ -1229,7 +1228,7 @@ for the essential algorithms of syntax analysis.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -1275,7 +1274,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -1288,14 +1289,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -1360,9 +1364,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

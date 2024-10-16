@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -139,7 +138,7 @@ some:    '{' alt '}';
 </code></pre>
 <p>To begin with,
 the above is just another grammar which can be studied in
-<a href="../?eg=09/01">example 9/01</a>.</p>
+<a href="../eg.html?eg=09/01">example 9/01</a>.</p>
 <ul>
 <li>As usual, press <span class='c-new'></span>
 to represent and check the grammar and see that there are no issues — the grammars' grammar is <a href="https://en.wikipedia.org/wiki/LL_parser">LL(1)</a>.</li>
@@ -183,7 +182,7 @@ and backslashes escaped by backslashes, and <code>Token</code> are alphanumeric.
 The <span class='a-tokens'></span> references
 <a href="module-EBNF-Grammar.html#.terminals"><code>Grammar.terminals</code></a>,
 another static ingredient of the <a href="module-EBNF-Grammar.html"><code>Grammar</code></a> class.</p>
-<p>This suggests two experiments. In <a href="../?eg=09/01">example 9/01</a>:</p>
+<p>This suggests two experiments. In <a href="../eg.html?eg=09/01">example 9/01</a>:</p>
 <ul>
 <li>Press <span class='c-new'></span>
 to represent and check the grammars' grammar for use.</li>
@@ -206,7 +205,7 @@ some    is \{ alt \} end
 <p>The grammars' grammar would not recognize the above as a sentence —
 literals are just backslash-escaped single characters,
 rules are not marked up with colons and semicolons, etc.</p>
-<p>However, you can check in <a href="../?eg=09/02">example 9/02</a>
+<p>However, you can check in <a href="../eg.html?eg=09/02">example 9/02</a>
 that it just takes minor tweaks to literals and token definitions
 for the grammars' grammar to recognize the above as a sentence:</p>
 <ul>
@@ -218,7 +217,7 @@ to see that the above is a sentence for the tweaked grammars' grammar.</li>
 <h3 id="representing-the-grammars'-grammar"><a id='representing'></a>Representing the Grammars' Grammar</h3>
 <p>The examples suggest that there are different ways to spell grammar rules —
 there might even be extensions to the notation used so far.
-<a href="../?eg=09/03">Example 9/03</a> contains:</p>
+<a href="../eg.html?eg=09/03">Example 9/03</a> contains:</p>
 <pre class="prettyprint source"><code>seq:    { lit | ref | opt | some | parens };
 parens: '(' alt ')';
 </code></pre>
@@ -466,7 +465,7 @@ Their rules, too, can be augmented with actions to implement translations.</p>
 </li>
 </ul>
 <h3 id="bootstrap-example">Bootstrap Example</h3>
-<p><a href="../?eg=09/04">Example 9/04</a> demonstrates that
+<p><a href="../eg.html?eg=09/04">Example 9/04</a> demonstrates that
 the grammars' grammar can recognize and represent itself.</p>
 <pre class="prettyprint source"><code>class Actions extends EBNF.Actions {  // modify top-level action
   static count = 0;                   // count created grammars
@@ -512,7 +511,7 @@ because the grammar keeps representing itself.</li>
 <p>The grammars' grammar can represent itself.
 Therefore, it is possible to extend the grammars' grammar,
 i.e., to modify or extend the notation in which we have been writing grammars.
-<a href="../?eg=09/05">Example 9/05</a> tries to add parentheses
+<a href="../eg.html?eg=09/05">Example 9/05</a> tries to add parentheses
 to the notation <a href="#representing">as discussed earlier</a>, so that alternatives
 can be embedded into sequences.</p>
 <p>The extended grammar's grammar is in the <span class='a-grammar'></span>.
@@ -555,7 +554,7 @@ checking that there are no other descendants is a semantic issue.
 The semantic check is part of the <a href="module-EBNF-Seq.html"><code>Seq</code></a> constructor.</p>
 <p>A rule reference is allowed in a sequence,
 and a rule contains alternatives.
-<a href="../?eg=09/06">Example 9/06</a>, the next attempt, tries to add a hidden rule:</p>
+<a href="../eg.html?eg=09/06">Example 9/06</a>, the next attempt, tries to add a hidden rule:</p>
 <pre class="prettyprint source"><code>// parens: '(' alt ')';
 parens (lp, alt, rp) {   // returns reference to auxiliary rule
   const uniq = this.g.nt();              // unique non-terminal
@@ -581,7 +580,7 @@ by the time we reach the new action which creates the hidden rule.
 This action happens to create the first <a href="module-EBNF-Rule.html"><code>Rule</code></a> object ever
 which becomes the start rule, rather than <code>sum</code>.</p>
 <p>Third time is a charm:
-the action for <code>parens</code> in <a href="../?eg=09/07">example 9/07</a> is more careful
+the action for <code>parens</code> in <a href="../eg.html?eg=09/07">example 9/07</a> is more careful
 and moves the new rule to the end of the list of rules (lines 2, 8, and 14 below):</p>
 <pre class="prettyprint source"><code>class Actions extends EBNF.Actions {
   #hidden = [];
@@ -656,7 +655,7 @@ for many iterations — but it will eventually reach the limits of the practice 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -702,7 +701,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -715,14 +716,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -787,9 +791,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -106,97 +105,99 @@
 
 
     <section class="readme-section">
-        <article><h1 id="interactive-introduction-to-compiler-construction">Interactive Introduction to<br> Compiler Construction</h1>
-<table>
-<thead>
-<tr>
-<th>links</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="tutorial-00-preface.html"><img src="layout.png" alt=""></a></td>
-<td>The Book</td>
-</tr>
-<tr>
-<td><a href="../book.epub"><img src="epub.png" alt=""></a></td>
-<td>e-Book</td>
-</tr>
-<tr>
-<td><a href="../book.pdf"><img src="pdf.png" alt=""></a></td>
-<td>PDF Book, thanks to <a href="https://www.princexml.com">prince</a></td>
-</tr>
-<tr>
-<td><a href="../eg"><img src="dir.png" alt=""></a></td>
-<td>Examples</td>
-</tr>
-<tr>
-<td><a href="../?mode=ebnf"><img src="comp.blue.png" alt=""></a></td>
-<td><a href="tutorial-a-webpage.html">The Practice Page</a></td>
-</tr>
-<tr>
-<td><a href="../methods.html"><img src="comp.blue.png" alt=""></a></td>
-<td><a href="tutorial-c-compilers.html#the-method-browser-1">The Method Browser</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="sources-and-documentation">Sources and Documentation</h2>
-<table>
-<thead>
-<tr>
-<th>source</th>
-<th>documentation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="ebnf.js.html"><code>ebnf.js</code></a></td>
-<td><a href="module-EBNF.html">LL(1) Parser Generator</a></td>
-</tr>
-<tr>
-<td><a href="bnf.js.html"><code>bnf.js</code></a></td>
-<td><a href="module-BNF.html">SLR(1) Parser Generator</a></td>
-</tr>
-<tr>
-<td><a href="base.js.html"><code>base.js</code></a></td>
-<td><a href="module-Base.html">Common Code</a></td>
-</tr>
-<tr>
-<td><a href="practice.js.html"><code>practice.js</code></a></td>
-<td><a href="module-Practice.html">Model for Practice Page</a></td>
-</tr>
-<tr>
-<td><a href="index.js.html"><code>index.js</code></a></td>
-<td><a href="module-GUI.html">Graphical User Interface for the Model</a></td>
-</tr>
-<tr>
-<td><a href="script.js.html"><code>script.js</code></a></td>
-<td><a href="module-Script.html">Scripting the Model</a></td>
-</tr>
-<tr>
-<td><a href="06.js.html"><code>06.js</code></a></td>
-<td><a href="module-Six.html">6. Compiling Little Languages</a></td>
-</tr>
-<tr>
-<td><a href="07.js.html"><code>07.js</code></a></td>
-<td><a href="module-Seven.html">7. Language Features</a></td>
-</tr>
-<tr>
-<td><a href="08.js.html"><code>08.js</code></a></td>
-<td><a href="module-Eight.html">8. Functions as Values</a></td>
-</tr>
-<tr>
-<td><a href="10.js.html"><code>10.js</code></a></td>
-<td><a href="module-Ten.html">10. Recognition Revisited</a></td>
-</tr>
-<tr>
-<td><a href="11.js.html"><code>11.js</code></a></td>
-<td><a href="module-Eleven.html">11. Compiling Revisited</a></td>
-</tr>
-</tbody>
-</table>
-<p>Syntax highlighting is produced using <a href="https://sunlightjs.com">Sunlight</a>.</p></article>
+        <article><h1 id="interactive-introduction-to-compiler-construction">Interactive Introduction to Compiler Construction</h1>
+<p>This book is a short introduction to compiler construction
+using JavaScript as the implementation language,
+<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" title="Recursive Descent">recursive descent parsing</a> with the <a href="module-EBNF.html">EBNF</a> parser generator
+and <a href="https://en.wikipedia.org/wiki/Simple_LR_parser" title="Simple LR parser">SLR(1)</a> parsing with <a href="module-BNF.html">BNF</a> as case studies for tools,
+and a little programming language with several extensions as working example.
+Here are the chapters:</p>
+<h4 id="%7B%40tutorial-01-overview%7D"><a href="tutorial-01-overview.html">1. Compiler Terminology</a></h4>
+<p>What's in a Compiler? <br>
+What's in a Parser Generator?</p>
+<h4 id="%7B%40tutorial-02-grammars%7D"><a href="tutorial-02-grammars.html">2. Writing Grammars</a></h4>
+<p>What's in a Rule? <br>
+A Language for Rules <br>
+<a href="tutorial-02-grammars.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-03-scanner%7D"><a href="tutorial-03-scanner.html">3. Scanning Input</a></h4>
+<p>Terminals, Tokens, and Literals <br>
+Taking Input Apart <br>
+<a href="tutorial-03-scanner.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-04-parser%7D"><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></h4>
+<p>What's in a Sentence? <br>
+Check Before You Call! <br>
+<a href="tutorial-04-parser.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-05-lists%7D"><a href="tutorial-05-lists.html">5. Translating Sentences</a></h4>
+<p>What's in a Parse Tree? <br>
+What's with the Brackets? <br>
+<a href="tutorial-05-lists.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-06-compile%7D"><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></h4>
+<p>Interpret Now, Compile for Later <br>
+Functions and a Stack Machine <br>
+<a href="tutorial-06-compile.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-07-features%7D"><a href="tutorial-07-features.html">7. Language Features</a></h4>
+<p>Type Checking <br>
+Functions, Scopes, and Nesting <br>
+<a href="tutorial-07-features.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-08-functions%7D"><a href="tutorial-08-functions.html">8. Functions as Values</a></h4>
+<p>First-Order Functions <br>
+Stack versus Closure <br>
+<a href="tutorial-08-functions.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-09-bootstrap%7D"><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></h4>
+<p>What's in a Parser Generator? <br>
+<a href="module-EBNF-Grammar.html"><code>Grammar</code></a> (De-)Constructed <br>
+<a href="tutorial-09-bootstrap.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-10-bottom-up%7D"><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></h4>
+<p>Try (Almost) Everything? <br>
+Conflicts and Errors <br>
+<a href="tutorial-10-bottom-up.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-11-trees%7D"><a href="tutorial-11-trees.html">11. Compiling Revisited</a></h4>
+<p>What's in a Tree? <br>
+What's with a Tree? <br>
+<a href="tutorial-11-trees.html#quick-summary">Summary</a></p>
+<h4 id="%7B%40tutorial-a-webpage%7D"><a href="tutorial-a-webpage.html">A: The Practice Page</a></h4>
+<p>The Model <br>
+Scripting and Buttons Explained</p>
+<h4 id="%7B%40tutorial-b-machine%7D"><a href="tutorial-b-machine.html">B: The Stack Machine</a></h4>
+<p>Machine Architecture <br>
+Instructions</p>
+<h4 id="%7B%40tutorial-c-compilers%7D"><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></h4>
+<p>The Method Browser <br>
+Rules and Actions <br>
+Symbol Table</p>
+<h4 id="%7B%40tutorial-d-kit%7D"><a href="tutorial-d-kit.html">D: The Compiler Kit</a></h4>
+<p>Tree Builders <br>
+Visitors</p>
+<h4 id="references">References</h4>
+<p>All references are links.
+<a href="tutorial-01-overview.html">Undecorated links</a> are references within the book itself.
+<a href="../">Decorated links</a> reference the book's website:</p>
+<ul>
+<li>
+<p><a href="../eg.html?eg=02/01">Examples</a> are linked to the practice page
+where they are automatically loaded to be executed, studied, changed, and executed again.</p>
+</li>
+<li>
+<p><a href="module-Seven.html">Classes and methods developed in the examples</a> are linked to their documentation,
+to the documentation for classes and methods
+of the <a href="module-EBNF.html">EBNF</a> and <a href="module-BNF.html">BNF</a> parser generators developed in the book,
+and to the <a href="module-Practice.html">documentation for scripting the practice page</a>.
+Documentation in turn links to the appropriate files and lines with the syntax-colored source code.</p>
+</li>
+<li>
+<p><a href="../methods.html">Some links</a>, mostly in <a href="tutorial-08-functions.html">chapter eight</a>,
+reference the <a href="tutorial-c-compilers.html#the-method-browser-1">method browser</a>
+where one can study how the implementation of a little programming language in this book evolves.</p>
+</li>
+</ul>
+<p>Other <a href="https://www.w3.org/WWW/" title="World Wide Web">decorated links</a> reference the <a href="https://www.w3.org/WWW/" title="World Wide Web">World Wide Web</a>:</p>
+<ul>
+<li>For JavaScript information, links point to the excellent <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="Mozilla Web Documentation">MDN Web Docs</a>,</li>
+<li>a few links point to specific web pages, such as the <a href="https://web.archive.org/web/20070916144913/https://wp.netscape.com/newsref/pr/newsrelease67.html" title="JavaScript announcement">original announcement of JavaScript</a>,</li>
+<li>and terminology is linked to definitions in <a href="https://en.wikipedia.org/wiki/Main_Page" title="Wikipedia">Wikipedia</a>
+so that additional information is easily available — further references should be consulted from there.</li>
+</ul>
+<p>Altogether, the book contains over 1100 unique links.</p></article>
     </section>
 
 
@@ -246,7 +247,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -292,7 +293,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -305,14 +308,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -377,9 +383,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

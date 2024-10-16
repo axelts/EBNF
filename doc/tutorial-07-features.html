@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -134,7 +133,7 @@ so that they can select the most efficient machine instructions for implementati
 This requires either explicitly declaring or implicitly deducing
 the data types which variables may store,
 and flagging every operation which does not use compatible data types.</p>
-<p><a href="../?eg=07/01">Example 7/01</a> shows
+<p><a href="../eg.html?eg=07/01">Example 7/01</a> shows
 that strong type checking can be accomplished with a restrictive grammar
 where type mismatches will be reported as syntax errors.</p>
 <ul>
@@ -186,8 +185,8 @@ i.e., usually there is only one token for variable names</p>
 by actions which interpret declarations.</p>
 <p>Numbers can be converted to strings;
 therefore, this little language requires all variables to be strings.
-<a href="../?eg=07/01">Example 7/01</a> more or less duplicates the rules
-for <code>cmp</code> and <code>sum</code> from <a href="../?eg=06/12">example 6/12</a>
+<a href="../eg.html?eg=07/01">Example 7/01</a> more or less duplicates the rules
+for <code>cmp</code> and <code>sum</code> from <a href="../eg.html?eg=06/12">example 6/12</a>
 to separate string and number operations
 and fuse comparisons and terms:</p>
 <pre class="prettyprint source"><code>cmp: sum rel | stringSum stringRel;
@@ -218,7 +217,7 @@ the literal <code>number</code> as a cast operation (line 3)
 and a (numerical) <code>term</code> similarly can be converted to a string (line 10).</p>
 <p>A <code>stringSum</code> allows concatenation using one or more <code>stringTerm</code> (line 9);
 there is no explicit operator to mark this operation.</p>
-<p><a href="../?eg=07/01">Example 7/01</a> still implements <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's Algorithm</a>:</p>
+<p><a href="../eg.html?eg=07/01">Example 7/01</a> still implements <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's Algorithm</a>:</p>
 <pre class="prettyprint source"><code>x = input 'x' '36'; y = input 'y' '       54';
 while x &lt;> y do
   if x > y then 
@@ -254,8 +253,8 @@ that strong typing will not necessarily catch serious flaws in a program.
 It should also be noted that this syntactic approach to type checking
 requires that there are few types
 and that operations are well separated.</p>
-<p>The actions from <a href="../?eg=06/12">Example 6/12</a>
-can be extended in <a href="../?eg=07/01">example 7/01</a> to compile
+<p>The actions from <a href="../eg.html?eg=06/12">Example 6/12</a>
+can be extended in <a href="../eg.html?eg=07/01">example 7/01</a> to compile
 this little language into JavaScript functions:</p>
 <pre class="prettyprint source"><code>class TCheck01 extends Six.Functions12 {
   // ...
@@ -334,7 +333,7 @@ with types taking the place of values.
 <a href="tutorial-06-compile.html#immediate-evaluation">Chapter six</a>
 showed how to implement interpretation, i.e., immediate evaluation at compile time —
 at least for arithmetic expressions without variables.</p>
-<p><a href="../?eg=07/02">Example 7/02</a>
+<p><a href="../eg.html?eg=07/02">Example 7/02</a>
 shows how to interpret types while translating a program
 into JavaScript functions.
 Variables have to be declared before use
@@ -377,7 +376,7 @@ actions immediately interpret types similar to values
 while generating and returning JavaScript functions to the parent rules and actions.
 The new action class is mostly concerned with type interpretation.
 Almost all function generation is inherited from
-<a href="../?eg=06/12">example 6/12</a> and <a href="../?eg=07/01">example 7/01</a>.
+<a href="../eg.html?eg=06/12">example 6/12</a> and <a href="../eg.html?eg=07/01">example 7/01</a>.
 <code>TCheck02</code> first defines some infrastructure:</p>
 <pre class="prettyprint source"><code>class TCheck02 extends Seven.TCheck01 {
   /** For error messages */
@@ -562,7 +561,7 @@ If the type is not <code>'string'</code> already an implicit conversion is appli
 Finally, the resulting list of functions is reversed again (line 10)
 just before delegation to <code>print()</code> in the superclass (line 11)
 to generate code for the actual print operation.</p>
-<p>Essential for type checking in <a href="../?eg=07/02">example 7/02</a> is that
+<p>Essential for type checking in <a href="../eg.html?eg=07/02">example 7/02</a> is that
 variables have to be declared before they are used.
 The rule for <code>prog</code> is revised to include declarations before statements (line 1 below).
 The action has to be overwritten to send the function
@@ -583,7 +582,7 @@ generated for <code>stmts</code> to the superclass (line 2):</p>
 </code></pre>
 <p>Each name in each declaration is checked to catch duplicate declarations (line 8 above)
 and it's type is recorded in the symbol table (line 10).</p>
-<p>In <a href="../?eg=07/02">example 7/02</a></p>
+<p>In <a href="../eg.html?eg=07/02">example 7/02</a></p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar.</p>
@@ -621,7 +620,7 @@ Error reporting through the parser counts errors and reports them at the end of 
 <p>It is also quite apparent that implementing semantic analysis
 points out design choices that were made for the little language.
 They may be a matter of taste, but they can surprise or annoy users endlessly...</p>
-<p><a href="../?eg=07/03">Example 7/03</a>
+<p><a href="../eg.html?eg=07/03">Example 7/03</a>
 uses the same compiler <a href="module-Seven-TCheck02.html"><code>Seven.TCheck02</code></a>
 and contains statements with a number of semantic errors.</p>
 <ul>
@@ -652,7 +651,7 @@ i.e., functions in JavaScript to which the source language functions can be mapp
 or on branch instructions which capture return information.
 This section looks at an implementation of functions without parameters
 for the stack machine.</p>
-<p><a href="../?eg=07/04">Example 7/04</a> contains two mutually recursive functions
+<p><a href="../eg.html?eg=07/04">Example 7/04</a> contains two mutually recursive functions
 which together implement <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> without an explicit loop:</p>
 <pre class="prettyprint source"><code>var x, y;
 function fa;
@@ -1094,7 +1093,7 @@ to signal that code generation has left the body of the function (line 5).</p>
 <p>All actions for functions and their consequences are in place.
 Expressions can be retained from the
 previous (untyped) version of the little language,
-i.e., from <a href="../?eg=06/11">example 6/11</a>.
+i.e., from <a href="../eg.html?eg=06/11">example 6/11</a>.
 The <code>prog</code> action performs some final cleanup
 and generates the stack machine:</p>
 <pre class="prettyprint source"><code>  // prog: [ vars ] funs;
@@ -1149,7 +1148,7 @@ and returns the start address of the instructions.</p>
 </code></pre>
 <p>Tracing was introduced <a href="tutorial-06-compile.html#control-structures">in chapter six</a>.
 Check out how a function is called and how it returns a result in
-<a href="../?eg=07/04">example 7/04</a>:</p>
+<a href="../eg.html?eg=07/04">example 7/04</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar,</p>
@@ -1169,7 +1168,7 @@ or <code>trace</code> <code>=</code> <code>input</code> to turn tracing off and 
 to trace everything.</p>
 </li>
 </ul>
-<p><a href="../?eg=07/05">Example 7/05</a> demonstrates 13 semantic errors:</p>
+<p><a href="../eg.html?eg=07/05">Example 7/05</a> demonstrates 13 semantic errors:</p>
 <pre class="prettyprint source"><code>  var a, a;
   function undefined;
   function a;
@@ -1234,7 +1233,7 @@ this is why a <code>return</code> inside a function body is coded as a branch to
 because the values exist once for each level of recursion
 and the names refer to the latest activation of each function.</p>
 <p>Rather than just stacking a return address and a result value slot
-as <a href="../?eg=07/04">in example 7/04</a>,
+as <a href="../eg.html?eg=07/04">in example 7/04</a>,
 now frames, also called <a href="https://en.wikipedia.org/wiki/Call_stack" title="activation record">activation records</a>, have to be stacked
 which additionally contain argument values and local variables:</p>
 <div class='diagram'>
@@ -1313,7 +1312,7 @@ the following:</p>
 </tbody>
 </table>
 <p>The <a href="module-Seven-Machine04_Memory.html"><code>Memory</code></a> class
-from <a href="../?eg=07/04">example 7/04</a>
+from <a href="../eg.html?eg=07/04">example 7/04</a>
 is extended with a <em>frame pointer</em> register, represented as a property <code>.fp</code> (line 4 below), and
 <code>toString()</code> is overwritten to display the stack as a sequence of frames:</p>
 <pre class="prettyprint source"><code>class Machine06 extends Seven.Machine04 {
@@ -1450,7 +1449,7 @@ so that functions can have local variables in addition to parameters.</p>
 perceived convenience vs. the wish to prevent errors due to
 scope violations.</p>
 <p>The little language in
-<a href="../?eg=07/06">example 7/06</a>
+<a href="../eg.html?eg=07/06">example 7/06</a>
 requires strict &quot;declare before use&quot;
 and uses global and local declarations:</p>
 <pre class="prettyprint source"><code>prog: [ vars ] funs;
@@ -1492,7 +1491,7 @@ and argument values agree
 and that a forward declaration of a function
 specifies as many parameters — irrespective of the actual names —
 as the function definition.</p>
-<p><a href="../?eg=07/07">Example 7/07</a>
+<p><a href="../eg.html?eg=07/07">Example 7/07</a>
 contains all semantic errors:</p>
 <pre class="prettyprint source"><code>var f, dup, dup;
 function undefined ();
@@ -1786,7 +1785,7 @@ the action for <code>symbol</code> finds a description
 but the action for <code>store</code> will not receive it as a parameter.
 Similarly,
 the action for <code>args</code> seems to have no access to the description of the function to be called.</p>
-<p><a id='context'></a><a href="../?eg=05/10">Example 5/10</a> demonstrated that action methods
+<p><a id='context'></a><a href="../eg.html?eg=05/10">Example 5/10</a> demonstrated that action methods
 should use the actions class as context to communicate with each other,
 i.e., <code>symbol</code> needs to put the description somewhere into <code>this</code> so that
 <code>store</code> and <code>args</code> — one of which is called later — can access it.</p>
@@ -1939,7 +1938,7 @@ here in the order in which they will happen:</p>
 <p>It turns out that there is only one new action:
 <a href="module-Seven-Parameters06.html#parms"><code>parms()</code></a> calls <a href="module-Seven-Parameters06.html#funct"><code>funct.setParms()</code></a>
 to record the number of parameters and layout the function's frame.</p>
-<p>Tracing in <a href="../?eg=07/06">example 7/06</a> confirms the order:</p>
+<p>Tracing in <a href="../eg.html?eg=07/06">example 7/06</a> confirms the order:</p>
 <ul>
 <li>Enter only <code>function</code> <code>main(a)</code> <code>begin</code> <code>var</code> <code>b;</code> <code>print</code> <code>1</code> <code>end;</code> into the <span class='a-program'></span>.</li>
 <li>Press <span class='c-new'></span> to represent and check the grammar,</li>
@@ -1966,14 +1965,14 @@ funs: { fun };
 <p>The actions remain unchanged, too.
 At the top level, <a href="module-Seven-Parameters06.html#funct"><code>funct</code></a> is <code>null</code>;
 therefore <a href="module-Seven-Parameters06.html#_dcl"><code>_dcl()</code></a> defines the variable names in the global symbol table.</p>
-<p><a href="../?eg=07/08">Example 7/08</a>
-contains mutually recursive functions just as in <a href="../?eg=07/04">example 7/04</a>,
+<p><a href="../eg.html?eg=07/08">Example 7/08</a>
+contains mutually recursive functions just as in <a href="../eg.html?eg=07/04">example 7/04</a>,
 but this time one version of Euclid's algorithm takes advantage of function parameters.</p>
 <h4 id="tracing">Tracing</h4>
 <p>It is often useful to see how the frames are laid out,
 and what they contain when the program executes,
 as well as the machine instructions before and during execution.</p>
-<p>In <a href="../?eg=07/06">example 7/06</a>:</p>
+<p>In <a href="../eg.html?eg=07/06">example 7/06</a>:</p>
 <ul>
 <li>Add <code>var trace;</code> before the definition of <code>euclid</code> in the
 <span class='a-program'></span> to define the global variable.</li>
@@ -2036,7 +2035,7 @@ the result value <code>18</code> is left on the stack (line 11),
 is assigned as result of <code>main()</code> and popped (lines 12 and 13),
 <code>main()</code> exits and leaves <code>18</code> on top of the stack (lines 14 and 15),
 ready to be printed.</p>
-<p><a href="../?eg=07/08">Example 7/08</a> contains several functions and, therefore,
+<p><a href="../eg.html?eg=07/08">Example 7/08</a> contains several functions and, therefore,
 has a much more interesting trace...</p>
 <h3 id="block-scopes">Block Scopes</h3>
 <p>In this section the <a href="#local-variables">little language with local variables</a>
@@ -2051,7 +2050,7 @@ hide global variables and function names.
 The scope where a name is visible is either the enclosing function or the entire program.</p>
 <p>Languages like JavaScript also have block scopes, i.e., a name is visible only within the
 block which contains the definition.
-In <a href="../?eg=07/09">example 7/09</a>
+In <a href="../eg.html?eg=07/09">example 7/09</a>
 some variables are declared before use
 and can be <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowed</a> within blocks:</p>
 <pre class="prettyprint source"><code>var trace;
@@ -2172,7 +2171,7 @@ is set to <code>4</code> and printed again.</p>
 <p>Back in the scope for local variables of <code>main()</code> the parameter <code>x</code> is still <code>2</code> and is printed as such (line 7).</p>
 <p>Deeply nested in the second inner block the result of <code>main()</code> was set to 99 (line 5)
 and that is printed by the startup code.</p>
-<p><a href="../?eg=07/09">Example 7/09</a> demonstrates <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>:
+<p><a href="../eg.html?eg=07/09">Example 7/09</a> demonstrates <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>:
 there are exactly two memory slots for various versions of <code>x</code>.
 The inner two declarations for <code>x</code> are in parallel blocks;
 therefore, the two <code>x</code> share one memory slot.</p>
@@ -2209,7 +2208,7 @@ therefore they share offset <code>5</code> in the frame for <code>main()</code> 
 <ul>
 <li>What changes if the order of <code>d</code> and <code>x</code> is interchanged in program line 6?</li>
 </ul>
-<p><a href="../?eg=07/10">Example 7/10</a>
+<p><a href="../eg.html?eg=07/10">Example 7/10</a>
 has more names, more functions, several frames, and more scopes:</p>
 <pre class="prettyprint source"><code>var a, b, c;
 function f (x);
@@ -2337,7 +2336,7 @@ stack starts at 5
 0
 0:[ 0 2 3 0 ]
 </code></pre>
-<p><a href="../?eg=07/11">Example 7/11 </a> contains a recursive version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> with a global <code>trace</code>
+<p><a href="../eg.html?eg=07/11">Example 7/11 </a> contains a recursive version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> with a global <code>trace</code>
 and a rather risky use of nested blocks.</p>
 <pre class="prettyprint source"><code>var trace;
 function euclid (x,y) begin
@@ -2652,7 +2651,7 @@ new stack machine and action methods can be seen
 <p>Nested function definitions provide another level of scopes and <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>,
 e.g., to hide details and instrumentation of an algorithm
 from the actual use of the algorithm.
-Consider <a href="../?eg=07/12">example 7/12</a>:</p>
+Consider <a href="../eg.html?eg=07/12">example 7/12</a>:</p>
 <pre class="prettyprint source"><code>function factorial (n) begin
   var f, calls;
   function factorial (n) begin
@@ -2846,8 +2845,8 @@ which the caller can, and it cannot access the caller itself,</p>
 which points to the current frame — is pushed onto the new display.</p>
 </li>
 </ul>
-<p>This section explains how nested functions are implemented in <a href="../?eg=07/12">example 7/12</a>
-on top of the block scopes implemented in <a href="../?eg=07/09">example 7/09</a>.</p>
+<p>This section explains how nested functions are implemented in <a href="../eg.html?eg=07/12">example 7/12</a>
+on top of the block scopes implemented in <a href="../eg.html?eg=07/09">example 7/09</a>.</p>
 <h4 id="grammar-modifications-3">Grammar Modifications</h4>
 <p>The grammar has to be modified so that function definitions can be nested:</p>
 <pre class="prettyprint source"><code>block: begin body 'end';
@@ -3223,7 +3222,7 @@ and a <code>catch</code> clause converts the <code>throw</code> into a <code>ret
 It is only prudent to rethrow any errors caught in this construction (line 13).
 Finally, an error is reported if the name cannot be found and a report was requested (lines 16 and 17).</p>
 <h4 id="examples">Examples</h4>
-<p><a href="../?eg=07/13">Example 7/13</a> shows a function which uses an inner helper function
+<p><a href="../eg.html?eg=07/13">Example 7/13</a> shows a function which uses an inner helper function
 to compute the factorial for non-negative numbers.
 There is significant <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>:</p>
 <ul>
@@ -3234,13 +3233,13 @@ There is significant <a href="https://en.wikipedia.org/wiki/Variable_shadowing" 
 <p>Trace execution to see which variable is accessed using the display and when.</p>
 </li>
 </ul>
-<p><a href="../?eg=07/14">Example 7/14</a> is yet another variant of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>
+<p><a href="../eg.html?eg=07/14">Example 7/14</a> is yet another variant of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>
 with a helper function which returns zero for invalid arguments.
 Again, there is  <a href="https://en.wikipedia.org/wiki/Variable_shadowing" title="shadowing">shadowing</a>.</p>
-<p><a href="../?eg=07/15">Example 7/15</a> is the variant of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>
-with mutually recursive functions studied in <a href="../?eg=07/08">example 7/08</a>,
+<p><a href="../eg.html?eg=07/15">Example 7/15</a> is the variant of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a>
+with mutually recursive functions studied in <a href="../eg.html?eg=07/08">example 7/08</a>,
 modified to take advantage of nested functions.</p>
-<p><a href="../?eg=07/16">Example 7/16</a> is a variant of <a href="../?eg=07/10">example 7/10</a>
+<p><a href="../eg.html?eg=07/16">Example 7/16</a> is a variant of <a href="../eg.html?eg=07/10">example 7/10</a>
 where some functions are nested.</p>
 <ul>
 <li>
@@ -3260,7 +3259,7 @@ where some functions are nested.</p>
 <ul>
 <li>Delete the first assignment to <code>c</code> and explain the difference in output.</li>
 </ul>
-<p><a href="../?eg=07/17">Example 7/17</a> is a puzzle with nested functions.</p>
+<p><a href="../eg.html?eg=07/17">Example 7/17</a> is a puzzle with nested functions.</p>
 <ul>
 <li>Explain the output — and then add a variable definition to obtain the expected output:
 <table>
@@ -3283,7 +3282,7 @@ where some functions are nested.</p>
 </table>
 </li>
 </ul>
-<p><a href="../?eg=07/18">Example 7/18</a> demonstrates that inner functions can set
+<p><a href="../eg.html?eg=07/18">Example 7/18</a> demonstrates that inner functions can set
 the result of outer functions which they are nested into (line 4 below) — function names
 do act as assign-only variables:</p>
 <pre class="prettyprint source"><code>function main () begin
@@ -3297,7 +3296,7 @@ do act as assign-only variables:</p>
   print a(5)
 end;
 </code></pre>
-<p>Finally, <a href="../?eg=07/19">example 7/19</a> is another collection of semantic errors:</p>
+<p>Finally, <a href="../eg.html?eg=07/19">example 7/19</a> is another collection of semantic errors:</p>
 <pre class="prettyprint source"><code>function main ();
 function a ();
 function a (dup, dup) begin var dup; dup = 1 end;
@@ -3415,7 +3414,7 @@ and the action of the parent rule deletes.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -3461,7 +3460,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -3474,14 +3475,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -3546,9 +3550,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

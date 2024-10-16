@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -126,7 +125,7 @@ but it is ignored outside of terminals.</p>
 <p>It should be noted that a list of such rules implicitly defines everything there is to know about a grammar:
 terminals and their representations in the input, non-terminals, rules, and the start symbol,
 by convention the non-terminal at left in the first rule — here it is <code>sum</code>.</p>
-<p><a href="../?eg=02/01">Example 2/01</a> illustrates that this grammar can be used to recognize a sentence:</p>
+<p><a href="../eg.html?eg=02/01">Example 2/01</a> illustrates that this grammar can be used to recognize a sentence:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar, and then</p>
@@ -186,7 +185,7 @@ which consists of one or more of the digits from <code>0</code> to <code>9</code
 <p>describes all sums of two integer numbers such as</p>
 <pre class="prettyprint source"><code>12 + 345
 </code></pre>
-<p><a href="../?eg=02/02">Example 2/02</a> contains the new rule in the <span class='a-grammar'></span>
+<p><a href="../eg.html?eg=02/02">Example 2/02</a> contains the new rule in the <span class='a-grammar'></span>
 and the definition of <code>Number</code> as a property with the token name
 and a (non-anchored) regular expression as the value in the <span class='a-tokens'></span>:</p>
 <ul>
@@ -223,7 +222,7 @@ For alternatives, we collect all pairs with the same non-terminal at left and wr
 </code></pre>
 <p>We require that a <em>rule name</em>, i.e., the non-terminal at left, is unique,
 and we use  <code>|</code> to concatenate separate alternative sequences for the right-hand side.</p>
-<p><a href="../?eg=02/03">Example 2/03</a> illustrates that the grammar above has a problem:</p>
+<p><a href="../eg.html?eg=02/03">Example 2/03</a> illustrates that the grammar above has a problem:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar
@@ -250,7 +249,7 @@ that actually confirms that an input is a sentence.</p>
 <p>Therefore, we require that we must be able to select the appropriate alternative
 just by looking at the very next input — this is known as <em>one symbol lookahead</em>
 and it means that we will never back up in the input.</p>
-<p><a href="../?eg=02/04">Example 2/04</a> shows a change to the grammar
+<p><a href="../eg.html?eg=02/04">Example 2/04</a> shows a change to the grammar
 to circumvent the problem:</p>
 <ul>
 <li>
@@ -274,7 +273,7 @@ While this works it is not exactly user-friendly...</p>
 <p><a href="tutorial-10-bottom-up.html">Chapter ten</a> will show a less intuitive way
 to get from grammars
 to recognition which makes the grammar in
-<a href="../?eg=02/03&amp;mode=stack">example 2/03</a> perform as intended
+<a href="../eg.html?eg=02/03&amp;mode=stack">example 2/03</a> perform as intended
 — still without backing up:</p>
 <ul>
 <li>
@@ -317,7 +316,7 @@ which can be a single <code>Number</code>, or more...</p>
 However, the particular rule above violates the principle
 that one symbol lookahead should be sufficient to select the successful alternative,
 i.e., two alternatives should not start with the same terminal —
-this was already illustrated in <a href="../?eg=02/03">example 2/03</a>.</p>
+this was already illustrated in <a href="../eg.html?eg=02/03">example 2/03</a>.</p>
 <p>The following rule seems to look better:</p>
 <pre class="prettyprint source"><code>b: Number | b '+' Number;
 </code></pre>
@@ -332,7 +331,7 @@ with as many numbers as we choose:</p>
 to append as many plus signs with numbers as we want.</p>
 </li>
 </ul>
-<p>However, <a href="../?eg=02/05">example 2/05</a> which contains both rules, <code>a</code> and <code>b</code>,
+<p>However, <a href="../eg.html?eg=02/05">example 2/05</a> which contains both rules, <code>a</code> and <code>b</code>,
 shows that there might still be problems:</p>
 <ul>
 <li>
@@ -350,7 +349,7 @@ see another error message: <code>a</code> has ambiguous alternatives.</p>
 is <a href="https://en.wikipedia.org/wiki/Left_recursion" title="left recursion">left-recursive</a> if the non-terminal at left
 appears first in the sequence at right,
 either directly, or even when tracing through other ordered pairs.</p>
-<p><a href="../?eg=02/06">Example 2/06</a> contains a small change to <code>b</code>
+<p><a href="../eg.html?eg=02/06">Example 2/06</a> contains a small change to <code>b</code>
 to illustrate that left recursion can involve several rules:</p>
 <ul>
 <li>Press <span class='c-new'></span> to try to represent the grammar
@@ -367,7 +366,7 @@ it looks like a <code>sum</code> is a <code>b</code> is a
 <p>It all depends on the approach used to interpret the grammar.
 The technique explained in <a href="tutorial-10-bottom-up.html">chapter ten</a>
 can deal with left recursion.
-Try <a href="../?eg=02/06&amp;mode=stack">example 2/06</a> again:</p>
+Try <a href="../eg.html?eg=02/06&amp;mode=stack">example 2/06</a> again:</p>
 <ul>
 <li>
 <p>The very first button should show <span class='t-mode stack'></span>.
@@ -400,7 +399,7 @@ more: '+' sum;
 <p>We use brackets to indicate that part of an alternative is optional
 and we forbid empty alternatives — including those which only consist
 of optional parts...</p>
-<p>Work with this grammar in <a href="../?eg=02/07">example 2/07</a>
+<p>Work with this grammar in <a href="../eg.html?eg=02/07">example 2/07</a>
 to see that we can finally have any number of numbers in a sum:</p>
 <ul>
 <li>
@@ -430,7 +429,7 @@ with syntax trees such as the following:</p>
 <p>If these trees were interpreted to perform arithmetic
 they would compute the sums from right to left, i.e.,
 right recursion in the grammar results in right-associative trees.
-This is suggested by the brackets in the output from <a href="../?eg=02/07">example 2/07</a>:</p>
+This is suggested by the brackets in the output from <a href="../eg.html?eg=02/07">example 2/07</a>:</p>
 <pre class="prettyprint source"><code>[ '12' [ [ '+' [ '345' [ [ '+' [ '6789' null ] ] ] ] ] ] ]
 </code></pre>
 <p>Deeper nesting occurs at right.</p>
@@ -449,8 +448,8 @@ subtract: '-' sum;
 </code></pre>
 <p>In <a href="tutorial-06-compile.html">chapter six</a>
 this last version will turn out to be the most useful.</p>
-<p>For now, you can experiment with the first variant in <a href="../?eg=02/08">example 2/08</a>
-and the second variant in <a href="../?eg=02/09">example 2/09</a>.
+<p>For now, you can experiment with the first variant in <a href="../eg.html?eg=02/08">example 2/08</a>
+and the second variant in <a href="../eg.html?eg=02/09">example 2/09</a>.
 Either one accepts arbitrary sums and differences and even produces
 the same set of brackets, numbers, and operators:</p>
 <pre class="prettyprint source"><code>[ '12' [ [ '-' [ '345' [ [ '+' [ '6789' null ] ] ] ] ] ] ]
@@ -507,11 +506,11 @@ here is another way to define a grammar:</p>
 <p>Unlike other <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form" title="Extended BNF">extensions to BNF</a>,
 this book uses braces to enclose alternatives which must occur <em>one or more</em> times,
 i.e., a sum conforming to this grammar contains at least two numbers.</p>
-<p>Check out <a href="../?eg=02/10">example 2/10</a>
+<p>Check out <a href="../eg.html?eg=02/10">example 2/10</a>
 and compare the output</p>
 <pre class="prettyprint source"><code>[ '12' [ [ '-' '345' ] [ '+' '6789' ] ] ]
 </code></pre>
-<p>to the output of <a href="../?eg=02/08">example 2/08</a> and <a href="../?eg=02/09">example 2/09</a> shown before:</p>
+<p>to the output of <a href="../eg.html?eg=02/08">example 2/08</a> and <a href="../eg.html?eg=02/09">example 2/09</a> shown before:</p>
 <pre class="prettyprint source"><code>[ '12' [ [ '-' [ '345' [ [ '+' [ '6789' null ] ] ] ] ] ] ]
 </code></pre>
 <p>Iteration makes for simpler looking output —
@@ -534,12 +533,12 @@ therefore, when brackets directly contain braces, together, they indicate someth
 appear zero or more times:</p>
 <pre class="prettyprint source"><code>sum: Number [{ '+' Number | '-' Number }];
 </code></pre>
-<p>Check out <a href="../?eg=02/11">example 2/11</a> and, in particular,
+<p>Check out <a href="../eg.html?eg=02/11">example 2/11</a> and, in particular,
 confirm that single numbers are recognized
 and compare the output for <code>1</code> <code>+</code> <code>2</code></p>
 <pre class="prettyprint source"><code>[ '1' [ [ [ '+' '2' ] ] ] ]
 </code></pre>
-<p>to the output for the same sum in <a href="../?eg=02/10">example 2/10</a>:</p>
+<p>to the output for the same sum in <a href="../eg.html?eg=02/10">example 2/10</a>:</p>
 <pre class="prettyprint source"><code>[ '1' [ [ '+' '2' ] ] ]
 </code></pre>
 <p>We will return to this in <a href="tutorial-05-lists.html">chapter five</a>.</p>
@@ -602,7 +601,7 @@ a set of alternatives which can appear <em>many</em> times, i.e., zero or more t
 </li>
 </ul>
 <h3 id="recursion-revisited">Recursion Revisited</h3>
-<p><a href="../?eg=02/12">Example 2/12</a> contains a fairly comprehensive grammar
+<p><a href="../eg.html?eg=02/12">Example 2/12</a> contains a fairly comprehensive grammar
 describing a comma-separated list of expressions,
 with the typical arithmetic operators and parentheses:</p>
 <pre class="prettyprint source"><code>list: sum [{ ',' sum }];
@@ -622,7 +621,7 @@ to any depth.</p>
 and thus <code>term</code> in sequence,
 and they can contain balanced parentheses,
 but the grammar does not permit unbalanced parentheses in a sentence.</p>
-<p><a href="../?eg=02/13">Example 2/13</a> contains a grammar describing typical list constructs:</p>
+<p><a href="../eg.html?eg=02/13">Example 2/13</a> contains a grammar describing typical list constructs:</p>
 <pre class="prettyprint source"><code>terminated: { [ separated ] ';' }; 
 separated:  element [{ ',' element }];
 element:    Number | enclosed;
@@ -653,8 +652,8 @@ which are <code>separated</code> by single commas.</p>
 </code></pre>
 <p>even if the output looks much messier than the sentence itself.</p>
 <h3 id="tokens-revisited">Tokens Revisited</h3>
-<p>As a final example in this chapter, <a href="../?eg=02/14">example 2/14</a> contains
-the grammar from <a href="../?eg=02/12">example 2/12</a>,
+<p>As a final example in this chapter, <a href="../eg.html?eg=02/14">example 2/14</a> contains
+the grammar from <a href="../eg.html?eg=02/12">example 2/12</a>,
 with one more rule added to
 define <code>Number</code> right in the grammar
 from single digit literals:</p>
@@ -664,7 +663,7 @@ Number: { '0' | '1' | '2' | '3' | '4'
 </code></pre>
 <p>This suggests that we might not need tokens,
 i.e., names for classes of input such as numbers or names.</p>
-<p>However, <a href="../?eg=02/14">example 2/14</a> demonstrates
+<p>However, <a href="../eg.html?eg=02/14">example 2/14</a> demonstrates
 that the result is not quite the same.
 As we shall see in the <a href="tutorial-03-scanner.html">next chapter</a>,
 our recognition process usually ignores white space in the input.
@@ -721,7 +720,7 @@ and we will use these in recognizing literals anyhow.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -767,7 +766,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -780,14 +781,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -852,9 +856,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

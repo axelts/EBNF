@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -96,7 +95,7 @@
 <h4 id="functions-and-a-stack-machine">Functions and a Stack Machine</h4>
 <hr>
 <p><a href="tutorial-02-grammars.html">Chapter two</a> discussed how to write grammars
-and <a href="../?eg=02/12">example 2/12</a> presented a typical grammar for a comma-separated list
+and <a href="../eg.html?eg=02/12">example 2/12</a> presented a typical grammar for a comma-separated list
 of arithmetic expressions:</p>
 <pre class="prettyprint source"><code>list: sum [{ ',' sum }];
 sum: product [{ '+' product | '-' product }];
@@ -129,7 +128,7 @@ because they provide hooks for actions.
 For example, there is no point in letting syntax analysis distinguish
 addition and subtraction, only to have to check for <code>+</code> or <code>-</code> a second time
 when it comes to evaluation.
-<a href="../?eg=06/01">Example 6/01</a>
+<a href="../eg.html?eg=06/01">Example 6/01</a>
 recognizes the same list of arithmetic expressions:</p>
 <ul>
 <li>
@@ -139,7 +138,7 @@ recognizes the same list of arithmetic expressions:</p>
 <p>press <span class='c-parse'></span> to perform syntax analysis;</p>
 </li>
 <li>
-<p>compare to the original grammar in <a href="../?eg=02/12">example 2/12</a>
+<p>compare to the original grammar in <a href="../eg.html?eg=02/12">example 2/12</a>
 to see that the additional rules result in more deeply nested lists.</p>
 </li>
 </ul>
@@ -182,7 +181,7 @@ This results in obvious actions for the last three rules:</p>
 }
 </code></pre>
 <p>Because of the placeholder for <code>sum</code> (line 5)
-very simple expressions can already be tested in <a href="../?eg=06/02">example 6/02</a>:</p>
+very simple expressions can already be tested in <a href="../eg.html?eg=06/02">example 6/02</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar and</p>
@@ -242,7 +241,7 @@ If there are no functions, the first <code>signed</code> value is the result.
 Otherwise the callback function (line 10) is applied from left to right
 and each time applies a multiplication or division to the previous product,
 starting with <code>signed</code>.</p>
-<p>Again, it might be a good idea to try this stage in <a href="../?eg=06/03">example 6/03</a>:</p>
+<p>Again, it might be a good idea to try this stage in <a href="../eg.html?eg=06/03">example 6/03</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar and</p>
@@ -259,7 +258,7 @@ to see how the values are computed.
 Where do the <em>two</em> lines of output <code>12</code> and <code>NaN</code> come from?
 Which action has to be repaired?</li>
 </ul>
-<p>Check out the complete immediate expression evaluation in <a href="../?eg=06/04">example 6/04</a>.
+<p>Check out the complete immediate expression evaluation in <a href="../eg.html?eg=06/04">example 6/04</a>.
 Addition and subtraction use the same pattern as multiplication and division:</p>
 <pre class="prettyprint source"><code>class Eval04 extends Six.Eval03 {
   /** `list: sum [{ ',' sum }];` */
@@ -296,7 +295,7 @@ that the <em>entire</em> evaluation could be delayed —
 every action returns a function,
 the result is stored as an &quot;executable&quot;
 and can be evaluated (executed) several times over.
-This is more useful if simple variables are added to the grammar in <a href="../?eg=06/05">example 6/05</a>.</p>
+This is more useful if simple variables are added to the grammar in <a href="../eg.html?eg=06/05">example 6/05</a>.</p>
 <p>There has to be a token for names:</p>
 <pre class="prettyprint source"><code>Name: /[a-z]+/
 </code></pre>
@@ -346,7 +345,7 @@ Therefore, the rule for <code>sum</code> is modified
 as shown in the comment (line 9 above).</p>
 <p>The action for <code>sum</code> defers to the superclass for simple sums (line 12)
 or it creates <code>memory</code> if needed (line 13) and performs the assignment (line 14).</p>
-<p>Check this stage out <a href="../?eg=06/05">in example 6/05</a>:</p>
+<p>Check this stage out <a href="../eg.html?eg=06/05">in example 6/05</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar and</p>
@@ -371,7 +370,7 @@ which returns it to be shown in the output area.</p>
 <p>If every action returns a function rather than a value
 we can execute the top-level function more than once.
 This is interesting if there is input during execution;
-therefore, <a href="../?eg=06/06">example 6/06</a> adds <code>input</code>
+therefore, <a href="../eg.html?eg=06/06">example 6/06</a> adds <code>input</code>
 as a &quot;reserved&quot; variable name, optionally with a default value:</p>
 <pre class="prettyprint source"><code>term: input | number | name | '(' sum ')';
 input: 'input' [ Number ];
@@ -422,7 +421,7 @@ whatever the descendant's action returns, i.e.,
 if <code>sum</code> is the start rule the actions can be inherited and
 one simple expression such as <code>input</code> will be compiled into
 a JavaScript function.</p>
-<p>Again, it might be a good idea to try this stage <a href="../?eg=06/06">in example 6/06</a>:</p>
+<p>Again, it might be a good idea to try this stage <a href="../eg.html?eg=06/06">in example 6/06</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar and</p>
@@ -444,7 +443,7 @@ memory => name in memory ? memory[name] : 0
 > run()
 memory is not an Object. (evaluating 'name in memory')
 </code></pre>
-<p><a href="../?eg=06/07">Example 6/07</a> converts the remaining actions so that they return functions.
+<p><a href="../eg.html?eg=06/07">Example 6/07</a> converts the remaining actions so that they return functions.
 The action for <code>signed</code> is patterned after those for <code>term</code> and <code>name</code>:</p>
 <pre class="prettyprint source"><code>class Functions07 extends Six.Functions06 {
   // ...
@@ -532,7 +531,7 @@ The executable creates <code>memory</code> (line 5),
 uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" title="map()"><code>map()</code></a> to produce an array of results,
 and uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="...">spread syntax</a> to display it on one line,
 i.e., with a single call to <code>puts()</code> (line 6).</p>
-<p>Try the functional expression compiler <a href="../?eg=06/07">in example 6/07</a>:</p>
+<p>Try the functional expression compiler <a href="../eg.html?eg=06/07">in example 6/07</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar and</p>
@@ -551,9 +550,9 @@ y + ((let y = 2) + 1) / (x - 2) + y
 <h3 id="stack-evaluation">Stack Evaluation</h3>
 <p>In this section arithmetic expressions
 are compiled into code for a <a href="https://en.wikipedia.org/wiki/Stack_machine" title="stack machine">stack machine</a>.</p>
-<p><a href="../?eg=06/08">Example 6/08</a>
+<p><a href="../eg.html?eg=06/08">Example 6/08</a>
 contains new actions for the single expression grammar
-from <a href="../?eg=06/06">example 6/06</a>
+from <a href="../eg.html?eg=06/06">example 6/06</a>
 which simply output the operation to be performed:</p>
 <pre class="prettyprint source"><code>class Postfix08 {
   // sum: product [{ add | subtract }];
@@ -614,9 +613,9 @@ This notation can be viewed as machine language for a <a href="https://en.wikipe
 </ul>
 <p>The example suggests that syntax analysis with a grammar should make it near trivial
 to produce stack machine code to evaluate an arithmetic expression.</p>
-<p><a href="../?eg=06/09">Example 6/09</a> shows how to generate &quot;code&quot;
+<p><a href="../eg.html?eg=06/09">Example 6/09</a> shows how to generate &quot;code&quot;
 and simulate a stack machine in JavaScript.
-The grammar from <a href="../?eg=06/07">example 6/07</a> can be used
+The grammar from <a href="../eg.html?eg=06/07">example 6/07</a> can be used
 but the start rule has to be modified to avoid
 collecting all results of <code>sum</code> on the stack:</p>
 <pre class="prettyprint source"><code>list: stmt [{ ';' stmt }];
@@ -742,7 +741,7 @@ and creates a machine instruction to push the value of the variable onto the sta
 The machine instruction has to add the top two values on the stack
 and replace them by the single result value —
 a simple job for the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" title="splice()"><code>splice()</code></a> method.</p>
-<p>Just as in <a href="../?eg=06/08">example 6/08</a>
+<p>Just as in <a href="../eg.html?eg=06/08">example 6/08</a>
 there are no actions for <code>term</code> and <code>product</code>
 because their results are already on the stack,
 but <code>sum</code> has to implement the embedded assignment, if any:</p>
@@ -806,7 +805,7 @@ stack starts at 2
 </code></pre>
 <p>The output shows the machine instruction functions but not the variable addresses
 because the functions use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" title="closure">closure</a> to capture the addresses computed by <code>_alloc()</code>.
-Try out <a href="../?eg=06/09">example 6/09</a>:</p>
+Try out <a href="../eg.html?eg=06/09">example 6/09</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar,</p>
@@ -823,7 +822,7 @@ from JavaScript functions to strings,
 i.e., the output shows the actual JavaScript functions
 which simulate what hardware instructions would do to <code>memory[]</code>.
 As such, the output is precise but a bit hard to read.</p>
-<p><a href="../?eg=06/10">Example 6/10</a> is a slightly modified version of <a href="../?eg=06/09">example 6/09</a>
+<p><a href="../eg.html?eg=06/10">Example 6/10</a> is a slightly modified version of <a href="../eg.html?eg=06/09">example 6/09</a>
 which makes the generated machine instructions easier to read.
 The following output, again for <code>a - - b</code>,
 still consists of JavaScript functions converted to strings,
@@ -1053,10 +1052,10 @@ traced if tracing was set up (line 16).</p>
 a property is set to indicate if more steps could be executed (line 18)
 and <code>memory[]</code> is returned.</p>
 <p>These modifications do not change the basic behavior of the stack machine,
-i.e., arithmetic expressions <a href="../?eg=06/09">from example 6/09</a>
+i.e., arithmetic expressions <a href="../eg.html?eg=06/09">from example 6/09</a>
 — but for embedded assignment —
 can be part of a little language that has control structures.</p>
-<p><a href="../?eg=06/11">Example 6/11</a> uses <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> to compute the
+<p><a href="../eg.html?eg=06/11">Example 6/11</a> uses <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's algorithm</a> to compute the
 greatest common divisor of two numbers with a trace of one of the subtractions:</p>
 <pre class="prettyprint source"><code>x = input 36; y = input 54;
 while x &lt;> y do
@@ -1082,7 +1081,7 @@ reply <code>36</code> and <code>54</code> to the requests for input, and see the
 18
 [ 18 18 ]
 </code></pre>
-<p>The program requires that the grammar <a href="../?eg=06/09">from example 6/09</a>
+<p>The program requires that the grammar <a href="../eg.html?eg=06/09">from example 6/09</a>
 is extended to support control structures:</p>
 <pre class="prettyprint source"><code>prog:     stmts;
 stmts:    stmt [{ ';' stmt }];
@@ -1105,7 +1104,7 @@ This avoids a possible ambiguity between an expression and an assignment:
 without <code>let</code> both can start with a variable name.</p>
 <p>This grammar for control structures uses terminating literals
 to avoid ambiguity issues like the <a href="https://en.wikipedia.org/wiki/Dangling_else" title="dangling else"><em>dangling else</em></a> problem
-presented <a href="../?eg=04/05">in example 4/05</a>.
+presented <a href="../eg.html?eg=04/05">in example 4/05</a>.
 Some control structure literals such as <code>'while'</code> have been turned into simple rules
 so that actions can be attached — this is discussed below.</p>
 <p>Conditions could be about as complex as arithmetic expressions;
@@ -1166,7 +1165,7 @@ the rules <code>rel</code> and <code>cmp</code> require no actions.</p>
   sums (sum, many) { return 1 + (many ? many[0].length : 0); }
 </code></pre>
 <p>The machine instructions <code>Store</code> and <code>Pop</code> were already defined in <code>Machine10</code>,
-i.e., <a href="../?eg=06/10">in example 6/10</a>.
+i.e., <a href="../eg.html?eg=06/10">in example 6/10</a>.
 The <code>assign</code> action generates them to copy the top value on the stack
 into the memory location for the variable (line 3 above)
 and to clear the stack at the end of the statement (line 4).</p>
@@ -1340,7 +1339,7 @@ and provides tracing if a variable <code>trace</code> is in the program:</p>
 the generated code and variable addresses are shown (lines 6 to 10).
 The <code>run()</code> method of <code>Machine11</code> <a href="#run">discussed earlier</a>
 is called (line 12) to create the stack machine.</p>
-<p>In <a href="../?eg=06/11">example 6/11</a></p>
+<p>In <a href="../eg.html?eg=06/11">example 6/11</a></p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar,</p>
@@ -1403,7 +1402,7 @@ However, the little language can still be used to crash the practice page —
 just program an infinite loop and don't step execution...</p>
 <h3 id="functional-programming">Functional Programming</h3>
 <p>Fans of functional programming — especially in JavaScript —
-should enjoy <a href="../?eg=06/12">example 6/12</a>,
+should enjoy <a href="../eg.html?eg=06/12">example 6/12</a>,
 the implementation of the little language in the style of the functional evaluation
 of arithmetic expressions <a href="#functional-evaluation">as discussed previously</a>.
 Functional programming can be very elegant,
@@ -1411,13 +1410,13 @@ but — unlike the stack machine &quot;instructions&quot; —
 functions created by composition cannot be decomposed for display.
 At least, <span class='t-actions'></span> can be toggled
 to see what functions the actions create.</p>
-<p>The grammar is almost the same as in <a href="../?eg=06/11">example 6/11</a> —
+<p>The grammar is almost the same as in <a href="../eg.html?eg=06/11">example 6/11</a> —
 the extra rules for the keywords in <code>loop</code> and <code>select</code> are not needed:</p>
 <pre class="prettyprint source"><code>  loop:     'while' cmp 'do' stmts 'od';
   select:   'if' cmp 'then' stmts [ 'else' stmts ] 'fi';
 </code></pre>
 <p>The actions for <code>sum</code> and all the other rules for arithmetic expressions
-remain unchanged from <a href="../?eg=06/07">example 6/07</a> discussed <a href="#functional-evaluation">previously</a>.</p>
+remain unchanged from <a href="../eg.html?eg=06/07">example 6/07</a> discussed <a href="#functional-evaluation">previously</a>.</p>
 <p>Comparisons are implemented just like <code>add</code>, and they return functions
 which compute the right operand and still need a function to compute the left operand value
 (lines 9 to 11 below):</p>
@@ -1505,7 +1504,7 @@ to create <code>memory</code> in a parameter-less executable:</p>
 <pre class="prettyprint source"><code>  /** `prog: stmts;` returns executable */
   prog (stmts) { return () => stmts({ }); }
 </code></pre>
-<p>Check out <a href="../?eg=06/12">example 6/12</a>:</p>
+<p>Check out <a href="../eg.html?eg=06/12">example 6/12</a>:</p>
 <ul>
 <li>
 <p>Press <span class='c-new'></span> to represent and check the grammar and</p>
@@ -1599,7 +1598,7 @@ cannot be displayed as text.</p>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -1645,7 +1644,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -1658,14 +1659,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -1730,9 +1734,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );

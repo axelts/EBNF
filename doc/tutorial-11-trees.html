@@ -18,8 +18,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html"><img class="branding-logo" src="rhinoceros.png"
-		alt="logo"/>EBNF</a>
+		<a class="navbar-brand" href="index.html">The Book</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -51,9 +50,9 @@
 			</li>
 			
 			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Book<b class="caret"></b></a>
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">The Chapters<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="tutorial-00-preface.html">Overview</a></li><li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
+					<li><a href="tutorial-01-overview.html">1. Compiler Terminology</a></li><li><a href="tutorial-02-grammars.html">2. Writing Grammars</a></li><li><a href="tutorial-03-scanner.html">3. Scanning Input</a></li><li><a href="tutorial-04-parser.html">4. Recognizing Sentences</a></li><li><a href="tutorial-05-lists.html">5. Translating Sentences</a></li><li><a href="tutorial-06-compile.html">6. Compiling Little Languages</a></li><li><a href="tutorial-07-features.html">7. Language Features</a></li><li><a href="tutorial-08-functions.html">8. Functions as Values</a></li><li><a href="tutorial-09-bootstrap.html">9. Compiling Grammars</a></li><li><a href="tutorial-10-bottom-up.html">10. Recognition Revisited</a></li><li><a href="tutorial-11-trees.html">11. Compiling Revisited</a></li><li><a href="tutorial-a-webpage.html">A: The Practice Page</a></li><li><a href="tutorial-b-machine.html">B: The Stack Machine</a></li><li><a href="tutorial-c-compilers.html">C: The One-Pass Compilers</a></li><li><a href="tutorial-d-kit.html">D: The Compiler Kit</a></li>
 				</ul>
 			</li>
 			
@@ -184,7 +183,7 @@ The first element of each array is a tag, represented as a string with lower-cas
 The remaining elements are values and, in particular,
 further nodes represented as arrays.</p>
 <h4 id="using-recursive-descent">Using Recursive Descent</h4>
-<p><a href="../?eg=11/01">Example 11/01</a> shows that it is relatively easy to create a
+<p><a href="../eg.html?eg=11/01">Example 11/01</a> shows that it is relatively easy to create a
 tree for a list of arithmetic expressions.</p>
 <ul>
 <li>The very first button should show <span class='t-mode'></span>.
@@ -248,7 +247,7 @@ the superclass <a href="module-Eleven-Build.html"><code>Build</code></a>
 and the mix-in <a href="module-Eleven-Build_RD.html"><code>Build_RD()</code></a>
 result in the subclass which
 should be handed to the <a href="module-EBNF-Parser.html#parse"><code>parse()</code></a> method.</p>
-<p><a href="../?eg=11/01">Example 11/01</a> uses the trick
+<p><a href="../eg.html?eg=11/01">Example 11/01</a> uses the trick
 introduced <a href="tutorial-06-compile.html#stack-evaluation">in chapter six</a> to accomplish this:</p>
 <pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
   class Build { ... }
@@ -273,7 +272,7 @@ and repeat the steps.</li>
 <p>The LL(1) grammar for arithmetic expressions has to use iterations
 and nested rules so that the resulting tree reflects
 the expected associativities and precedences.
-Instead, <a href="../?mode=stack&amp;eg=11/02">example 11/02</a> uses explicit precedences
+Instead, <a href="../eg.html?mode=stack&amp;eg=11/02">example 11/02</a> uses explicit precedences
 and an ambiguous, very recursive grammar:</p>
 <pre class="prettyprint source"><code>%left '+' '-';
 %left '*' '/';
@@ -290,7 +289,7 @@ power:    expr '**' expr;
 minus:    '-' expr %prec Number;
 number:   Number;
 </code></pre>
-<p>In <a href="../?mode=stack&amp;eg=11/02">example 11/02</a></p>
+<p>In <a href="../eg.html?mode=stack&amp;eg=11/02">example 11/02</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -310,7 +309,7 @@ hugely simplifies the class actions for building, e.g.,</p>
     ... 
 };
 </code></pre>
-<p>The anonymous function pattern can be reused from the <a href="../?eg=11/01">previous example</a>:</p>
+<p>The anonymous function pattern can be reused from the <a href="../eg.html?eg=11/01">previous example</a>:</p>
 <pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
   const Build_Number = superclass => class extends superclass {
     ...
@@ -324,7 +323,7 @@ if the grammar is changed, only the corresponding <a href="https://en.wikipedia.
 has to be adapted. Build actions very closely match their rules.</p>
 <p>In spite of different parsers,
 different grammars, and different actions,
-both examples, <a href="../?eg=11/01">11/01</a> and <a href="../?mode=stack&amp;eg=11/02">11/02</a>,
+both examples, <a href="../eg.html?eg=11/01">11/01</a> and <a href="../eg.html?mode=stack&amp;eg=11/02">11/02</a>,
 build the same trees for sentences which are recognized by both grammars.
 This means that code for further processing of the trees can be shared.</p>
 <h3 id="visiting-a-tree">Visiting a Tree</h3>
@@ -333,7 +332,7 @@ evaluation, type-checking, code-generation, etc., to data structures such as a t
 constructed by the action methods described in the <a href="#building-a-tree">previous section</a>.
 Visitors can be used to <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" title="separation of concerns">separate concerns</a> in a way
 very similar to the interplay between grammar rules and actions.</p>
-<p><a href="../?mode=stack&amp;eg=11/03">Example 11/03</a> implements expression evaluation using a visitor.
+<p><a href="../eg.html?mode=stack&amp;eg=11/03">Example 11/03</a> implements expression evaluation using a visitor.
 <a href="module-Eleven-Visit.html"><code>Visit</code></a> is the base class for visitors:</p>
 <pre class="prettyprint source"><code>class Visit {
   trace = false;      // RegExp selects tags to display
@@ -539,7 +538,7 @@ each incoming tree is checked and visited,
 and each resulting tree is shown if requested (lines 11 to 15).
 The last (or possibly only) visitor is created,
 the last tree is checked, and the visitor, tree, and trace pattern are returned (lines 19 to 21).</p>
-<p>In <a href="../?mode=stack&amp;eg=11/03">example 11/03</a></p>
+<p>In <a href="../eg.html?mode=stack&amp;eg=11/03">example 11/03</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -556,7 +555,7 @@ followed by the result of interpreting the expression.</li>
 <a href="module-Eleven-Main.html"><code>Main()</code></a> near the end of the <span class='a-actions'></span> to trace interpretation.</li>
 </ul>
 <h4 id="representing-a-little-language">Representing a Little Language</h4>
-<p><a href="../?mode=stack&amp;eg=11/04">Example 11/04</a> adds variable names, comparisons,
+<p><a href="../eg.html?mode=stack&amp;eg=11/04">Example 11/04</a> adds variable names, comparisons,
 control structures, and a few other statements to the grammar:</p>
 <pre class="prettyprint source"><code>%nonassoc '=' '&lt;>' '>' '>=' '&lt;' '&lt;=';
 %left     '+' '-';
@@ -670,7 +669,7 @@ print x
       [ 'assign' 'y' [ 'subtract' [ 'name' 'y' ] [ 'name' 'x' ] ] ] ] ]
   [ 'print' [ 'name' 'x' ] ] ]
 </code></pre>
-<p><a href="../?mode=stack&amp;eg=11/04">In example 11/04</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/04">In example 11/04</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -683,7 +682,7 @@ How does the tree change and what would be the consequence for evaluation?</li>
 <a href="module-Eleven-Main.html"><code>Eleven.Main()</code></a> to provide the action.</li>
 </ul>
 <h4 id="interpreting-a-little-language">Interpreting a Little Language</h4>
-<p><a href="../?mode=stack&amp;eg=11/05">Example 11/05</a> reuses
+<p><a href="../eg.html?mode=stack&amp;eg=11/05">Example 11/05</a> reuses
 <a href="module-Eleven-Main.html"><code>Eleven.Main()</code></a> for the top-level rules
 and the classes and <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a> discussed so far for the build actions
 and to interpret arithmetic expressions.
@@ -802,7 +801,7 @@ and the value is computed by a visit to the subtree and stored in the descriptio
 Note that the evaluation order of the implementation language
 might play a role:
 should the name be defined and initialized before or after the value to be assigned is computed?</p>
-<p><a href="../?mode=stack&amp;eg=11/05">In example 11/05</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/05">In example 11/05</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -821,7 +820,7 @@ recompile, and execute.</li>
 <h3 id="rewriting-a-tree">Rewriting a Tree</h3>
 <p>A visitor can copy a tree or modify it in place, e.g., when type checking a program.
 <a href="tutorial-07-features.html#type-checking-by-interpretation">In chapter seven</a> it was
-demonstrated <a href="../?eg=07/02">in example 7/02</a>
+demonstrated <a href="../eg.html?eg=07/02">in example 7/02</a>
 that <a href="https://en.wikipedia.org/wiki/Type_system#Type_checking" title="type checking">type checking</a> is very similar to evaluation, with types
 replacing actual values.
 Result types are propagated from the leaves of the tree
@@ -834,7 +833,7 @@ Mismatches can be reported as errors or corrected by applying implicit conversio
 are pushed to the leaves of the tree,
 pruned for literals, and act as constraints on variables.</p>
 <h4 id="typed-expressions">Typed Expressions</h4>
-<p><a href="../?mode=stack&amp;eg=11/06">Example 11/06</a> implements evaluation for expressions
+<p><a href="../eg.html?mode=stack&amp;eg=11/06">Example 11/06</a> implements evaluation for expressions
 which include <code>bool</code>, <code>number</code>, and <code>string</code> values.
 The grammar is extended with the typical operations:</p>
 <pre class="prettyprint source"><code>%left     'or';
@@ -1029,7 +1028,7 @@ This method relies on conversions provided by the implementation language JavaSc
                              Eleven.Eval_Number(Eleven.Visit))))));
 }) ()
 </code></pre>
-<p><a href="../?mode=stack&amp;eg=11/06">In example 11/06</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/06">In example 11/06</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -1055,10 +1054,10 @@ so that unexpected argument types can be detected during compilation.</p>
 that operations will only be applied to the type of values for which they are intended.
 It has a choice of silently inserting suitable <code>cast</code> operations
 or reporting errors to prevent execution.</p>
-<p><a href="../?mode=stack&amp;eg=11/07">Example 11/07</a> implements type checking for typed expressions
+<p><a href="../eg.html?mode=stack&amp;eg=11/07">Example 11/07</a> implements type checking for typed expressions
 and inserts implicit conversions so that, e.g., the evaluation methods in
 <a href="module-Eleven-Eval_Bool.html"><code>Eval_Bool()</code></a> will only receive Boolean values
-and the error message seen <a href="../?mode=stack&amp;eg=11/06">in example 11/06</a>
+and the error message seen <a href="../eg.html?mode=stack&amp;eg=11/06">in example 11/06</a>
 is no longer triggered.
 The semantics of the typed expressions
 deliberately are defined to be different from the implementation language JavaScript,
@@ -1066,7 +1065,7 @@ e.g., comparisons happen in the type of the left operand,
 they do not prefer the type 'number'.</p>
 <p>The grammar for typed expressions,
 builder,
-and interpreter remain unchanged <a href="../?mode=stack&amp;eg=11/06">from example 11/06</a>.
+and interpreter remain unchanged <a href="../eg.html?mode=stack&amp;eg=11/06">from example 11/06</a>.
 Type checking is implemented as a new visitor
 based on a new set of <a href="https://en.wikipedia.org/wiki/Mixin" title="Mixin definition">mix-ins</a>.
 This visitor is applied after building and before interpretation,
@@ -1095,7 +1094,7 @@ i.e., the <span class='a-actions'></span> has the following structure:</p>
                              Eleven.Eval_Number(Eleven.Visit))))));
 }) ()
 </code></pre>
-<p><a href="../?mode=stack&amp;eg=11/07">In example 11/07</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/07">In example 11/07</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -1262,14 +1261,14 @@ const Check_Cast = superclass => class extends superclass {
 <p>The subtree has to be visited but the node is marked with the explicit type (line 6 above)
 — silently assuming that any kind of conversion is supported.</p>
 <h4 id="checking-a-typed-little-language">Checking a Typed Little Language</h4>
-<p><a href="../?mode=stack&amp;eg=11/08">Example 11/08</a> implements type checking for the little language
-introduced <a href="../?mode=stack&amp;eg=11/05">in example 11/05</a>.
+<p><a href="../eg.html?mode=stack&amp;eg=11/08">Example 11/08</a> implements type checking for the little language
+introduced <a href="../eg.html?mode=stack&amp;eg=11/05">in example 11/05</a>.
 Variables have to be declared,
 assignments and <code>input</code> statements have to respect the types,
 <code>print</code> statements require strings,
 conditions should return Boolean values,
 and expressions include the Boolean, string, and cast operations
-introduced <a href="../?mode=stack&amp;eg=11/06">in example 11/06</a>.</p>
+introduced <a href="../eg.html?mode=stack&amp;eg=11/06">in example 11/06</a>.</p>
 <p>The grammars of the previous examples are merged
 and there is a small change at the top level to handle declarations:</p>
 <pre class="prettyprint source"><code>run:      main;
@@ -1440,7 +1439,7 @@ and uses <a href="module-Eleven-Main.html"><code>Main()</code></a> to create the
                                      Eleven.Check_Number(Eleven.Check))))))))));
 }) ()
 </code></pre>
-<p><a href="../?mode=stack&amp;eg=11/08">Example 11/08</a>
+<p><a href="../eg.html?mode=stack&amp;eg=11/08">Example 11/08</a>
 contains a (rather contrived) typed version of <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm" title="Euclid's algorithm">Euclid's Algorithm</a>:</p>
 <pre class="prettyprint source"><code>x = input 'x' '36'; y = input 'y' '54'; string x; number y;
 eq = x = y; bool eq;
@@ -1505,7 +1504,7 @@ after it was modified by the type checker:</li>
 <li>Change the variables' types to see how that changes what casts are inserted.</li>
 </ul>
 <h4 id="interpreting-a-typed-little-language">Interpreting a Typed Little Language</h4>
-<p><a href="../?mode=stack&amp;eg=11/09">Example 11/09</a> adds the necessary methods
+<p><a href="../eg.html?mode=stack&amp;eg=11/09">Example 11/09</a> adds the necessary methods
 to interpret the typed version of the little language.
 The <span class='a-actions'></span> creates the new interpreter and uses
 <a href="module-Eleven-Main.html"><code>Main()</code></a> to create a new <code>main</code> action
@@ -1542,7 +1541,7 @@ which will return the interpreter as a function:</p>
                                      Eleven.Eval_Number(Eleven.Visit))))))))));
 }) ()
 </code></pre>
-<p>Most of the interpreter was developed <a href="../?mode=stack&amp;eg=11/05">in example 11/05</a>
+<p>Most of the interpreter was developed <a href="../eg.html?mode=stack&amp;eg=11/05">in example 11/05</a>
 <a href="#interpreting-a-little-language">above</a>.
 Type checking adds <code>'block'</code> and <code>'dcl'</code> nodes.
 Therefore, just two visitor methods have to be added to the interpreter:</p>
@@ -1573,7 +1572,7 @@ i.e., duplicate variables would have been detected before
 and <a href="module-Eleven-Main.html"><code>Main()</code></a> does not continue
 from one visitor to the next if errors are reported.
 Variables are initialized to &quot;zero&quot;, but the value is type-specific (line 10).</p>
-<p><a href="../?mode=stack&amp;eg=11/09">In example 11/09</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/09">In example 11/09</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -1604,8 +1603,8 @@ which in JavaScript converts anything to a string.</li>
 <h3 id="generating-code">Generating Code</h3>
 <p>Code generation for a stack machine using action methods was introduced
 starting in <a href="tutorial-06-compile.html">chapter six</a> with examples
-<a href="../?eg=06/09">6/09</a> and <a href="../?eg=06/10">6/10</a> for arithmetic expressions
-and <a href="../?eg=06/11">example 6/11</a> for control structures.
+<a href="../eg.html?eg=06/09">6/09</a> and <a href="../eg.html?eg=06/10">6/10</a> for arithmetic expressions
+and <a href="../eg.html?eg=06/11">example 6/11</a> for control structures.
 If a program is represented as a tree
 code generators are visitors
 which can apply some code optimization.
@@ -1613,7 +1612,7 @@ The stack machines can be reused and extended
 with new instructions, e.g., for exponentiation or
 to operate on strings and Boolean values.</p>
 <h4 id="compiling-arithmetic-expressions">Compiling Arithmetic Expressions</h4>
-<p><a href="../?mode=stack&amp;eg=11/10">Example 11/10</a> implements code generation for trees of arithmetic expressions
+<p><a href="../eg.html?mode=stack&amp;eg=11/10">Example 11/10</a> implements code generation for trees of arithmetic expressions
 which include exponentiation.
 <a href="module-Eleven-Code.html"><code>Code</code></a> is the base class for code generators.
 It extends <a href="module-Eleven-Visit.html"><code>Visit</code></a> and manages stack machines.
@@ -1730,8 +1729,8 @@ expr:     add | subtract | multiply | divide | power
 </code></pre>
 <p>The precedence table,
 <code>expr</code>,
-and the remaining rules are unchanged from <a href="../?mode=stack&amp;eg=11/02">from example 11/02</a>.</p>
-<p><a href="../?mode=stack&amp;eg=11/10">In example 11/10</a></p>
+and the remaining rules are unchanged from <a href="../eg.html?mode=stack&amp;eg=11/02">from example 11/02</a>.</p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/10">In example 11/10</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -1757,12 +1756,12 @@ i.e., display the successive last addresses and then dump code memory.</li>
 [ -10 ]
 </code></pre>
 <h4 id="compiling-a-little-language">Compiling a Little Language</h4>
-<p><a href="../?mode=stack&amp;eg=11/11">Example 11/11</a> extends code generation to
+<p><a href="../eg.html?mode=stack&amp;eg=11/11">Example 11/11</a> extends code generation to
 comparisons,
 variables,
 constrol structures,
 and a few other statements.
-It reuses the grammar and build actions <a href="../?mode=stack&amp;eg=11/04">from example 11/04</a>.
+It reuses the grammar and build actions <a href="../eg.html?mode=stack&amp;eg=11/04">from example 11/04</a>.
 The <span class='a-actions'></span> contains the compiler for a little language:</p>
 <pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
   // mix-in to generate stack machine code for comparisons
@@ -1902,7 +1901,7 @@ The comments above indicate with symbolic labels such as <code>a:</code>, <code>
 how convenient this is to generate the branch instructions
 for control structures.</p>
 <p><a href="module-Eleven-Code_Stmts.html#select"><code>select()</code></a>
-generates the same code <a href="../?eg=06/11">as example 6/11</a>
+generates the same code <a href="../eg.html?eg=06/11">as example 6/11</a>
 but the tree representation collects branch address management into a single method
 rather than having to distribute it over a number of rules and actions.</p>
 <pre class="prettyprint source"><code>  // [ 'loop' expr stmt ]
@@ -1923,9 +1922,9 @@ control to the condition.
 The conditional <a href="module-Eleven-Code_Stmts.html#Instructions"><code>Bnzero</code></a> instruction
 follows the condition (line 7) and transfers control each time back to the loop body.</p>
 <p>If the condition is false initially it takes two branch instruction cycles
-(rather than one <a href="../?eg=06/11">in example 6/11</a>) to bypass the loop,
+(rather than one <a href="../eg.html?eg=06/11">in example 6/11</a>) to bypass the loop,
 but once the loop takes place almost half the branch instruction cycles are saved!</p>
-<p><a href="../?mode=stack&amp;eg=11/11">In example 11/11</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/11">In example 11/11</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -1965,11 +1964,11 @@ i.e., display the successive last addresses and then dump code memory.</li>
   ...
 </code></pre>
 <h4 id="compiling-a-typed-little-language">Compiling a Typed Little Language</h4>
-<p><a href="../?mode=stack&amp;eg=11/12">Example 11/12</a>
+<p><a href="../eg.html?mode=stack&amp;eg=11/12">Example 11/12</a>
 reuses the grammar,
 tree building actions,
-and type checker <a href="../?mode=stack&amp;eg=11/08">from example 11/08</a>
-and extends stack machine and code generation <a href="../?mode=stack&amp;eg=11/11">from example 11/11</a>
+and type checker <a href="../eg.html?mode=stack&amp;eg=11/08">from example 11/08</a>
+and extends stack machine and code generation <a href="../eg.html?mode=stack&amp;eg=11/11">from example 11/11</a>
 to produce the last compiler in this book.
 The <span class='a-actions'></span> contains the compiler for a typed little language:</p>
 <pre class="prettyprint source"><code>(() => {  // define and immediately use an anonymous function
@@ -2238,7 +2237,7 @@ and calls <a href="module-Eleven-Symbols.html#_alloc"><code>_alloc()</code></a> 
 This will allocate a memory slot for new names if there is no type checking.
 Memory is initialized to zero, but variables of other types are initialized
 to <code>false</code> and empty strings, respectively (lines 12 and 13).</p>
-<p><a href="../?mode=stack&amp;eg=11/12">In example 11/12</a></p>
+<p><a href="../eg.html?mode=stack&amp;eg=11/12">In example 11/12</a></p>
 <ul>
 <li>the very first button should show <span class='t-mode stack'></span>.
 If not, click it until it does.</li>
@@ -2271,7 +2270,7 @@ Greatest common divisor: 18
 <p>From that point on until the end of execution the types of the variables' memory cells
 don't change anymore.</p>
 <h4 id="and-more...">And More...</h4>
-<p><a href="../?mode=stack&amp;eg=11/12">In example 11/12</a>
+<p><a href="../eg.html?mode=stack&amp;eg=11/12">In example 11/12</a>
 the nonsensical program</p>
 <pre class="prettyprint source"><code>if not trace or false then print 'ok' fi; bool trace
 </code></pre>
@@ -2401,7 +2400,7 @@ however, creating a flexible and comprehensive architecture is still a challenge
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a>
 	
-		on Mon Oct 7th 2024
+		on Wed Oct 16th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -2447,7 +2446,9 @@ $( function () {
   }
   
   /* ats: mark links in tutorials */
+  $('section.readme-section').toggleClass('readme-section tutorial-section');                   /* README is part of book */
   if ($('section.tutorial-section').size()) {
+console.log('decorating')
     const a = $('a[href]'), 
       global = a.filter('[href^="https:"]').addClass('to-other'),
       local = a.not('[href^="https:"]').addClass('to-server');
@@ -2460,14 +2461,17 @@ $( function () {
       attr('title', 'documentation and source');                                                /* documentation -> source */
     local.filter('[href^="../m"]').toggleClass('to-server to-methods').
       attr('title', 'method browser');                                                          /* method browser */
-    local.filter('[href^="../?e"], [href^="../?m"]').toggleClass('to-server to-eg').
+    local.filter('[href^="../eg.html?"], [href^="../?m"]').toggleClass('to-server to-eg').
       attr('title', 'example on practice page');                                                /* practice examples */   
   }
   
   const uploadWithServer = (kind) => {
-    // create name
-    if (location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname)) {
-      const name = 'html-' + kind + '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '');
+    // README or tutorial
+    const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
+    if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
+      // create name
+      const name = 'html-' + kind +
+        (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
       // prefix server to all but a.to-book, fix book to xhtml
       const doc = $('.tutorial-section').clone(), a = doc.find('a[href]');
@@ -2532,9 +2536,9 @@ $( function () {
 		enableDoclinks : false  //ats
 	} );
 
-	$.catchAnchorLinks( {
-        navbarOffset: 10
-	} );
+  $.catchAnchorLinks( {
+          navbarOffset: 10
+  } );
 	$( "#toc" ).toc( {
 		anchorName  : function ( i, heading, prefix ) {
 			return $( heading ).attr( "id" ) || ( prefix + i );
