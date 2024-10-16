@@ -639,10 +639,11 @@ $( function () {
   }
   
   const uploadWithServer = (kind) => {
-    // README or tutorial
+    // tutorial: true if tutorial-nn-title.html, false if README
     const tutorial = location.hostname == 'localhost' && /\/doc\/tutorial-/.test(location.pathname);
     if (tutorial || location.hostname == 'localhost' && /\/doc\/index.html/.test(location.pathname)) {
-      // create name
+      
+      // name: html-kind/tutorial-nn-title.html (for upload)
       const name = 'html-' + kind +
         (tutorial ? '/tutorial-' + location.pathname.replace(/^.*\/tutorial-/, '') : '/tutorial-00-preface.html');
 
@@ -656,6 +657,18 @@ $( function () {
         $(this).attr('href', 'http://localhost/~axel/EBNF/doc/' + $(this).attr('href')); 
 //        $(this).attr('href', 'https://schreiner-family.net/book/doc/' + $(this).attr('href')); 
       });
+      
+      // README: prefix header h2 Overview and remove h1
+      if (!tutorial) {
+        doc.find('h1').remove();
+        doc.prepend(
+          $('<header/>').append(
+            "\n",
+            $('<h2/>').text('Overview'),
+            "\n"
+          )
+        );
+      }
 
       // build Form
       const data = new FormData();
